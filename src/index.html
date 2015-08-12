@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>carbono</title>
+
+
+    <!-- semantic-ui stylesheet -->
+    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">
+
+    <!-- my styles -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <link rel="import" href="elements/header/header.html">
+    <link rel="import" href="elements/structure/structure.html">
+    <link rel="import" href="elements/workspace/workspace.html">
+  </head>
+  <body>
+
+    <div id="container">
+
+      <carbo-header></carbo-header>
+
+      <carbo-structure>
+
+        <left-panel>
+          left panel
+        </left-panel>
+
+        <center>
+          <carbo-workspace></carbo-workspace>
+        </center>
+
+        <right-panel>
+          right panel
+        </right-panel>
+
+      </carbo-structure>
+    </div>
+
+
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<dom-module id="carbo-workspace">
+  <style type="text/css">
+    :host {
+      display: flex;
+      flex-direction: row;
+
+      background-color: #EDEDED;
+    }
+
+    carbo-canvas {
+      flex-basis: 0;
+      flex-grow: 1;
+    }
+
+    #box {
+      flex-basis: 0;
+      max-width: 224px;
+      min-width: 224px;
+
+      background-color: darkred;
+    }
+
+
+  </style>
+
+  <template>
+    <carbo-canvas></carbo-canvas>
+
+    <div id="box" class="area">
+      box
+    </div>
+  </template>
+
+  <script>
+    (function () {
+
+      Polymer({
+        is: 'carbo-workspace'
+      })
+    })();
+  </script>
+
+</dom-module>

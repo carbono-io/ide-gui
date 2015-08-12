@@ -1,0 +1,40 @@
+@import './less/variables.less';
+
+
+body {
+
+
+  overflow: blue;
+
+  #container {
+
+
+    min-width: 1024px;
+
+    min-height: 768px;
+    display: flex;
+    height: 100%;
+
+    flex-direction: column;
+
+    > carbo-header {
+      background-color: @mediumgrey;
+
+      color: @darkgrey;
+
+
+      flex-basis: 7 * @base-size;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+
+    > carbo-structure {
+
+      flex: 1;
+
+      background-color: magenta;
+    }
+  }
+}
+
+
