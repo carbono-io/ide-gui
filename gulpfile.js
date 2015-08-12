@@ -13,8 +13,10 @@ var $           = require('gulp-load-plugins')();
 var SRC_DIR      = './src';
 var DIST_DIR     = './dist';
 
-// Compile less task
-gulp.task('less', function () {
+/**
+ * Task for less.
+ */
+function _less() {
 
   // Message to be prepended to all .css files generated via less
   var message = [
@@ -29,7 +31,9 @@ gulp.task('less', function () {
     '!' + SRC_DIR + '/bower_components/**/*',
   ];
 
-  gulp.src(LESS_DIR)
+  return gulp.src(LESS_DIR)
+    .pipe($.changed(SRC_DIR, { extension: '.css' }))
+    .pipe($.duration('Compiling .less files'))
     .pipe($.less())
     .on('error', $.notify.onError({
       title: 'Less compiling error',
@@ -45,13 +49,14 @@ gulp.task('less', function () {
     // Put files at source dir in order to use them for vulcanization
     .pipe(gulp.dest(SRC_DIR))
     .pipe(gulp.dest(DIST_DIR))
-    .pipe($.size({title: 'less'}));
-});
+    .pipe($.size({ title: 'less' }));
+}
 
-// Vulcanize imports
-gulp.task('vulcanize', ['less'], function () {
-
-  gulp.src(SRC_DIR + '/elements/elements.html')
+/**
+ * Function for vulcanize task
+ */
+function _vulcanize() {
+  return gulp.src(SRC_DIR + '/elements/elements.html')
     .pipe($.vulcanize({
       stripComments: true,
       inlineCss: true,
@@ -59,9 +64,11 @@ gulp.task('vulcanize', ['less'], function () {
     }))
     .pipe(gulp.dest(DIST_DIR + '/elements'))
     .pipe($.size({title: 'vulcanize'}));
-});
+}
 
-// Distribute
+// Register tasks
+gulp.task('less', _less);
+gulp.task('vulcanize', ['less'], _vulcanize);
 gulp.task('distribute', ['vulcanize'], function () {
 
 });
@@ -69,21 +76,23 @@ gulp.task('distribute', ['vulcanize'], function () {
 // Develop task
 gulp.task('develop', function () {
 
-  var watchFiles = [
-    'src/assets/css/index.css',
-    'src/elements/**/*.html',
-    'src/index.html',
-  ];
-
   browserSync({
     port: 3000,
     server: {
       baseDir: './src',
     },
-    files: watchFiles,
     open: true,
   });
 
   // Watch files for changes
-  gulp.watch(['./src/**/*.less', '!./src/bower_components'], ['less']);
+  // Using gulp-watch plugin because the default gulp.watch method does
+  // not watch for newly added files. Porbably must revise soon.
+  // http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
+  $.watch(['./src/**/*.less', '!./src/bower_components'], _less);
+  $.watch([
+    './src/elements/**/*.css',
+    './src/elements/**/*.html',
+    './src/index.html',
+    './src/index.css',
+  ], browserSync.reload);
 });

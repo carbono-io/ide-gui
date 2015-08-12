@@ -2,40 +2,8 @@
 
 <dom-module id="carbo-structure">
 
-  <style type="text/css">
-
-    :host {
-      background-color: #EDEDED;
-
-      display: flex;
-      flex-direction: row;
-    }
-
-    .panel {
-      max-width: 296px;
-
-      min-width: 224px;
-
-      flex-basis: 0;
-    }
-
-    #left-panel {
-      background-color: red;
-
-      flex-grow: 1;
-    }
-
-    #center {
-      background-color: white;
-      flex-grow: 2;
-    }
-
-    #right-panel {
-      background-color: blue;
-      flex-grow: 1;
-    }
-  </style>
-
+  <link rel="import" type="css" href="structure.css">
+  
   <template>
 
     <div id="left-panel" class="panel">
