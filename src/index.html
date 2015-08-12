@@ -4,7 +4,7 @@
 
 
     <!-- semantic-ui stylesheet -->
-    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">
+<!--    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">-->
 
     <!-- my styles -->
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -12,13 +12,154 @@
     <link rel="import" href="elements/header/header.html">
     <link rel="import" href="elements/structure/structure.html">
     <link rel="import" href="elements/workspace/workspace.html">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    
+    <!-- Source Sans Pro Font -->
+    <link href="https://www.google.com/fonts#UsePlace:use/Collection:Source+Sans+Pro:400,700,300">
+ 
+    
+    <!-- webcomponents lite -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    
+    
+    
+    
   </head>
   <body>
 
     <div id="container">
+      
+      
+      
+      <div id="carbo-header-container">
+        <div id="carbo-header">
+          <div id="header-left">
+            <span>Nome do app</span>
 
-      <carbo-header></carbo-header>
+            <span>Nome da seção</span>
+          </div>
+          <div id="header-center">
+            <nav id="header-nav">
+              <div>
+                <i class="material-icons">face</i>
+                <span>DEFINIÇÃO</span>
+              </div>
+              <div>
+                <i class="material-icons">dns</i>
+                <span>LAYOUT</span>
+              </div>
+              <div>
+                <i class="material-icons">face</i>
+                <span>AÇÕES</span>
+              </div>
+              <div>
+                <i class="material-icons">face</i>
+                <span>DADOS</span>
+              </div>
+              <div>
+                <i class="material-icons">face</i>
+                <span>PUBLICAÇÃO</span>
+              </div>
+            </nav>
+          </div>
+          <div id="header-right">r</div>
+        </div>
+        <div id="carbo-header-panel">
+            
+          <div class="carbo-section">
+            <div class="carbo-section-header">Seção 1</div>
+            
+            <div class="carbo-section-contents">
+              
+              <div class="carbo-section-screen-container">
+                <div class="carbo-section-screen"></div>
+                <div class="carbo-section-screen-caption">Tela 1</div>
+              </div>
 
+              <div class="carbo-section-screen-container">
+                <div class="carbo-section-screen"></div>
+                <div class="carbo-section-screen-caption">Tela 2</div>
+              </div>
+
+              <div class="carbo-section-screen-container">
+                <div class="carbo-section-screen"></div>
+                <div class="carbo-section-screen-caption">Tela 3</div>
+                
+              </div> 
+            </div>
+          </div>
+          <div class="carbo-section-divider"></div>
+          
+          <div class="carbo-section">
+            <div class="carbo-section-header">Seção 1</div>
+            
+            <div class="carbo-section-contents">
+              
+              <div class="carbo-section-screen-container">
+                <div class="carbo-section-screen"></div>
+                <div class="carbo-section-screen-caption">Tela 1</div>
+              </div>
+
+              <div class="carbo-section-screen-container">
+                <div class="carbo-section-screen"></div>
+                <div class="carbo-section-screen-caption">Tela 2</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="carbo-section-divider"></div>
+          
+          <div class="carbo-section">
+            <div class="carbo-section-header">Seção 1</div>
+            
+            <div class="carbo-section-contents">
+              <div class="carbo-section-screen-container">
+                <div class="carbo-section-screen"></div>
+                <div class="carbo-section-screen-caption">Tela 2</div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      
+      <div id="carbo-body">
+        
+        <div id="left-panel">
+          <img src="img/phone.png">
+        </div>
+        
+        <div id="canvas-container">
+          
+          
+          <div id="canvas-control">
+            <iframe id="canvas" src="http://localhost:3000/test-resources/app/"></iframe>
+            <div id="control">zoom</div>
+          </div>
+
+        </div>
+        
+        <div id="box">
+          <img src="img/phone.png">
+
+        </div>
+        
+        <div id="right-panel">
+          <img src="img/phone.png">
+        </div>
+
+      
+      </div>
+      
+      
+      
+
+<!--
       <carbo-structure>
 
         <left-panel>
@@ -26,6 +167,14 @@
         </left-panel>
 
         <center>
+          
+          <div id="center">
+            centro
+            
+            <img id="phone" src="img/phone.png">
+            
+          </div>
+          
           <carbo-workspace></carbo-workspace>
         </center>
 
@@ -34,8 +183,9 @@
         </right-panel>
 
       </carbo-structure>
+-->
     </div>
 
-
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>

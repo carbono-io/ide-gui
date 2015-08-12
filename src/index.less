@@ -1,39 +1,325 @@
-@import './less/variables.less';
+@import './bower_components/lesshat/build/lesshat.less';
+@import './less/material-icons.less';
 
+@import './less/variables.less';
+@import './less/reset.less';
+
+// local variables
+@panel-width: 224px;
+
+@header-height: 7 * @base-size;
+
+// the base width of the phone frame
+@phone-frame-width: 300px;
+
+// proportion of phone Nexus 5
+// without buttons bar and status bar 
+@phone-proportion: 568/360;
 
 body {
-
-
-  overflow: blue;
-
+  
+  background-color: darken(@background-color, 5%);
+  font-family: "source sans pro", sans-serif;
+  // its display should be flex
+  // the direction of content is 'column'
+  // which means that the main axis is y
+//  display: flex;
+//  flex-direction: column;
+  
+  /**
+   * Sets the height and width of the whole application.
+   * (html/body is temperamental)
+   */
   #container {
-
-
-    min-width: 1024px;
-
-    min-height: 768px;
-    display: flex;
+    // let position be relative so that 
+    // carbo-body may calculate it's
+    // top, bottom left and right 
+    // relative to the container instead of the window.
+    position: relative;
+    
     height: 100%;
 
-    flex-direction: column;
+    min-width: @min-screen-width;
+    min-height: @min-application-height;
+    
+    // container should occupy full height of its parent
+//    flex-grow: 1;
+    
+    // its display should be flex
+    // the direction of content is 'column'
+    // which means that the main axis is y
+//    display: flex;
+//    flex-direction: column;
+    // items should occupy the whole width
+//    align-items: stretch;
+    
+    #carbo-header-container {
+      position: fixed;
+      z-index: 1;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      
+      #carbo-header {
+        // let position be relative so that 
+        // we can put a z-index on it
+        position: relative;
+        z-index: 1;
 
-    > carbo-header {
-      background-color: @mediumgrey;
+        padding-left: 2 * @base-size;
+        padding-right: 2 * @base-size;
 
-      color: @darkgrey;
+        height: @header-height;
 
+        background-color: @mediumgrey;
 
-      flex-basis: 7 * @base-size;
-      flex-grow: 0;
-      flex-shrink: 0;
+        color: @darkgrey;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #header-left {
+          font-size: @font-size-5;
+          background-color: floralwhite;
+
+          width: 30%;
+        }
+
+        #header-center {
+
+          #header-nav {
+            display: flex;
+            flex-direction: row;
+
+            > div {          
+              font-size: @font-size-2;
+
+              font-family: helvetica;
+
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+
+              height: @header-height;
+              width: @header-height + (3 * @base-size);
+
+              transition: all ease 0.3s;
+
+              .material-icons {
+                margin-bottom: @base-size / 2;
+              }
+
+              &:hover {
+                cursor: pointer;
+                background-color: @grey;
+                color: @white;
+              }
+            }
+          }
+        }
+
+        #header-right {
+          background-color: cyan;
+
+          width: 30%;
+        }
+      }
+      
+      #carbo-header-panel {
+
+        // let position be relative so that 
+        // we can put a z-index on it
+        // its z-index should be lower
+        // than the #carbo-header's
+        position: relative;
+        z-index: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+
+        background-color: @white;
+        opacity: 0;
+
+        .transition(transform 0.3s ease, opacity 0.2s ease);
+        
+        .translateY(-100%);
+        
+        &.active {
+          .translateY(0);
+
+          opacity: 1;
+        }
+        
+        .carbo-section {
+          background-color: @white;
+          padding-left: 2 * @base-size;
+          padding-top: 3 * @base-size;
+          padding-bottom: 3 * @base-size;
+          
+          .carbo-section-header {
+            height: 2 * @base-size;
+            font-size: @font-size-4;
+            margin-bottom: @base-size;
+          }
+
+          
+          .carbo-section-contents {
+            display: flex;
+            flex-direction: row;
+          }
+          
+          .carbo-section-screen-container {
+            margin-right: 2 * @base-size;
+            
+            .carbo-section-screen {
+              background-color: @white;
+              width: @phone-frame-width/ 3;
+              height: @phone-proportion * @phone-frame-width/ 3;
+            
+            }
+            
+            .carbo-section-screen-caption {
+              font-size: @font-size-3;
+              margin-top: @base-size;
+              height: 2 * @base-size;
+            }
+
+          }
+        
+        }
+        
+        .carbo-section-divider {
+          background-color: @white;
+          width: 2 * @base-size + 1;
+        }
+        
+        
+      }
+      
     }
 
-    > carbo-structure {
 
-      flex: 1;
+    
+    /**
+     * Contains the panel body of the application
+     */
+    #carbo-body {
+      // the body of the application should occupy
+      // all the available height of the window
+      // body.height = window.height - header.height
+      position: absolute;
+      top: @header-height;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      
+      // it has display flex using row (x is the main axis)
+      display: flex;
+      flex-direction: row;
+      // the items within should be distributed with spaces
+      justify-content: space-between;
+      // the items should occupy all the height of the application body
+      align-items: stretch;
 
-      background-color: magenta;
+      background-color: @background-color;
+      
+      // to be removed!!!!!!!!
+      > div {
+//        background-color: red;
+        
+        overflow: scroll;
+      }
+      
+      #left-panel {
+        background-color: @white;
+        width: @panel-width;
+        
+        // no growing nor shrinking
+        flex-grow: 0;
+        flex-shrink: 0;
+        
+        margin-right: @base-size;
+        
+        > img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      
+      #canvas-container {
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+        
+        margin-top: 2 * @base-size;
+        margin-bottom: 2 * @base-size;
+        margin-left: @base-size;
+        margin-right: @base-size;
+        
+        // this container should occupy all space left
+        flex-grow: 1;
+        
+        #canvas-control {
+          
+        
+          #canvas {
+            height: @phone-proportion * @phone-frame-width;
+            width: @phone-frame-width;
+
+            border: 3px solid @lightgrey;
+          }
+          
+          #control {
+            border-top: 1px solid @darkgrey;
+            margin-top: @base-size;
+            padding-top: @base-size;
+            width: 100%;
+            
+            color: @darkgrey;
+          }
+        }
+      }
+      
+      #box {
+        width: @panel-width;
+        
+        // no growing nor shrinking
+        flex-grow: 0;
+        flex-shrink: 0;
+        
+        margin-top: 2 * @base-size;
+        margin-bottom: 2 * @base-size;
+        margin-left: @base-size;
+        margin-right: @base-size;
+        
+        background-color: @white;
+      }
+      
+      #right-panel {
+        
+        // no growing nor shrinking
+        flex-grow: 0;
+        flex-shrink: 0;
+        
+        margin-left: @base-size;
+        
+        background-color: @white;
+        width: @panel-width;
+        > img {
+          height: 120%;
+          width: 100%;
+        }
+      }
+      
     }
+
   }
 }
 

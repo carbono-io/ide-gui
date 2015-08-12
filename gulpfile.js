@@ -32,7 +32,7 @@ function _less() {
   ];
 
   return gulp.src(LESS_DIR)
-    .pipe($.changed(SRC_DIR, { extension: '.css' }))
+    // .pipe($.changed(SRC_DIR, { extension: '.css' }))
     .pipe($.duration('Compiling .less files'))
     .pipe($.less())
     .on('error', $.notify.onError({
@@ -43,6 +43,10 @@ function _less() {
       // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
       // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
       icon: path.join(__dirname, 'logo.png'),
+    }))
+    .pipe($.autoprefixer({
+      browsers: ['last 2 version'],
+      cascade: false
     }))
     .pipe($.minifyCss())
     .pipe($.header(message))
