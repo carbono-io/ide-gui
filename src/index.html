@@ -23,6 +23,9 @@
     
     <!-- webcomponents lite -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+      
+      
+    <link rel="import" href="elements/routing.html">
     
     
     
@@ -43,10 +46,10 @@
           </div>
           <div id="header-center">
             <nav id="header-nav">
-              <div>
+              <a data-route="users" href="/users">
                 <i class="material-icons">local_offer</i>
                 <span>DEFINIÇÃO</span>
-              </div>
+              </a>
               <div>
                 <i class="material-icons">brush</i>
                 <span>LAYOUT</span>
@@ -161,7 +164,7 @@
           
           <div id="canvas-control">
             <!-- <iframe id="canvas" src="bower_components/polymer-starter-kit/app/index.html"></iframe> -->
-            <iframe id="canvas" src="test-resources/app/index.html"></iframe>
+<!--            <iframe id="canvas" src="test-resources/app/index.html"></iframe>-->
             <div id="control">zoom</div>
           </div>
 
