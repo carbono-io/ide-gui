@@ -17,7 +17,9 @@
     "polymer": "~1.0.9",
     "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.3",
     "paper-styles": "PolymerElements/paper-styles#~1.0.11",
-    "lesshat": "~3.0.2"
+    "lesshat": "~3.0.2",
+    "paper-tabs": "https://github.com/PolymerElements/paper-tabs.git#~1.0.1",
+    "paper-input": "PolymerElements/paper-input#~1.0.11"
   },
   "devDependencies": {
     "polymer-starter-kit": "https://github.com/PolymerElements/polymer-starter-kit.git#~1.0.3"
