@@ -9,3 +9,6 @@
 
 # all css files from src
 /src/**/*.css
+
+# Test resources bower_components
+/src/test-resources/app/bower_components
