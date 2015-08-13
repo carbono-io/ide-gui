@@ -20,6 +20,8 @@ body {
   
   background-color: darken(@background-color, 5%);
   font-family: "source sans pro", sans-serif;
+  font-size: 12px;
+  color: @darkgrey;
   // its display should be flex
   // the direction of content is 'column'
   // which means that the main axis is y
@@ -320,10 +322,49 @@ body {
         flex-shrink: 0;
         
         margin-right: @base-size;
-        
-        > img {
-          height: 100%;
-          width: 100%;
+        border-right: solid 1px @mediumgrey;
+
+        .box-panel {
+          height: 50%;
+          overflow: auto;
+        }
+      }
+
+      // header style of all panels and boxes
+      .box-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: @base-size;
+        height: 2 * @base-size;
+        background-color: @lightgrey;
+        border-bottom: 1px solid @mediumgrey;
+
+        .item {
+          align-self: center;
+        }
+
+        i {
+          font-size: 18px;
+        }
+
+        .icon-name {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          align-self: baseline;
+            span {
+            padding-left: @base-size;
+            }
+        }
+
+        .menu {
+          &:hover {
+          cursor: pointer;
+        }
         }
       }
       
@@ -350,7 +391,7 @@ body {
             height: @phone-proportion * @phone-frame-width;
             width: @phone-frame-width;
 
-            border: 3px solid @lightgrey;
+            border: 3px solid @mediumgrey;
           }
           
           #control {
@@ -386,16 +427,16 @@ body {
         flex-shrink: 0;
         
         margin-left: @base-size;
+        border-left: solid 1px @mediumgrey;
         
         background-color: @white;
         width: @panel-width;
-        > img {
-          height: 120%;
-          width: 100%;
-        }
       }
-      
     }
+
+    .has-shadow {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      }
 
   }
 }
