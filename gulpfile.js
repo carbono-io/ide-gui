@@ -46,7 +46,7 @@ function _less() {
     }))
     .pipe($.autoprefixer({
       browsers: ['last 2 version'],
-      cascade: false
+      cascade: false,
     }))
     .pipe($.minifyCss())
     .pipe($.header(message))
@@ -91,7 +91,8 @@ gulp.task('develop', function () {
   // Watch files for changes
   // Using gulp-watch plugin because the default gulp.watch method does
   // not watch for newly added files. Porbably must revise soon.
-  // http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
+  // http://stackoverflow.com/questions/22391527/
+  // gulps-gulp-watch-not-triggered-for-new-or-deleted-files
   $.watch(['./src/**/*.less', '!./src/bower_components'], _less);
   $.watch([
     './src/elements/**/*.css',

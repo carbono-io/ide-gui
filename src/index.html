@@ -27,20 +27,39 @@
       
     <link rel="import" href="elements/routing.html">
     
-    
+      <!-- Polymer components -->
+      <link rel="import" href="bower_components/iron-pages/iron-pages.html">
     
     
   </head>
   <body>
 
-    <div id="container">
+      <!-- create a root for Polymer data binding -->
+      <template id="carbo" is="dom-bind">
+          
+          
+          <!-- pages for navigation -->
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+              
+              
+              <div data-route="admin">
+                admin
+              </div>
+          
+          
+          
+      
+      
+      
+
+    <div data-route="builder" id="container">
       
       
       
       <div id="carbo-header-container">
         <div id="carbo-header">
           <div id="header-left">
-            <span>Nome do app</span>
+            <span>Nome do app: <span>{{ app }}</span></span>
 
             <span>Nome da seção</span>
           </div>
@@ -164,7 +183,6 @@
           
           <div id="canvas-control">
             <!-- <iframe id="canvas" src="bower_components/polymer-starter-kit/app/index.html"></iframe> -->
-<!--            <iframe id="canvas" src="test-resources/app/index.html"></iframe>-->
             <div id="control">zoom</div>
           </div>
 
@@ -211,6 +229,12 @@
       </carbo-structure>
 -->
     </div>
+              
+              </iron-pages>
+                <!-- end of the pages container -->
+          
+          </template>
+        <!-- end of root Polymer binding object (carbo) -->
 
     <script type="text/javascript" src="index.js"></script>
   </body>
