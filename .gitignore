@@ -8,7 +8,9 @@
 /dist/
 
 # all css files from src
-/src/**/*.css
+/src/index.css
+/src/less/**/*.css
+/src/elements/**/*.css
 
 # Test resources bower_components
 /src/test-resources/app/bower_components
