@@ -70,11 +70,11 @@
                 <span>DEFINIÇÃO</span>
               </a>
               <div>
-                <i class="material-icons">brush</i>
+                <i class="material-icons">palette</i>
                 <span>LAYOUT</span>
               </div>
               <div>
-                <i class="material-icons">face</i>
+                <i class="material-icons">flash_on</i>
                 <span>AÇÕES</span>
               </div>
               <div>
@@ -82,14 +82,14 @@
                 <span>DADOS</span>
               </div>
               <div>
-                <i class="material-icons">face</i>
+                <i class="material-icons">send</i>
                 <span>PUBLICAÇÃO</span>
               </div>
             </nav>
           </div>
           <div id="header-right">r</div>
         </div>
-        <div id="carbo-header-panel">
+        <div id="carbo-header-panel" class="has-shadow">
             
           <div class="carbo-section">
             <div class="carbo-section-header">SEÇÃO 1</div>
@@ -132,7 +132,7 @@
           <div class="carbo-section-divider"></div>
           
           <div class="carbo-section">
-            <div class="carbo-section-header">SEÇÃO 1</div>
+            <div class="carbo-section-header">SEÇÃO 2</div>
             
             <div class="carbo-section-contents">
               
@@ -155,7 +155,7 @@
           <div class="carbo-section-divider"></div>
           
           <div class="carbo-section">
-            <div class="carbo-section-header">SEÇÃO 1</div>
+            <div class="carbo-section-header">SEÇÃO 3</div>
             
             <div class="carbo-section-contents">
               <div class="carbo-section-screen-container">
@@ -175,7 +175,32 @@
       <div id="carbo-body">
         
         <div id="left-panel">
-          <img src="img/mocks/left.png">
+          <div id="box-components" class="box-panel">
+            <div class="box-header">
+              <div class="icon-name">
+                <i class="material-icons">widgets</i>
+                <span>COMPONENTES</span>
+              </div>
+              <div class="menu">
+                <i class="material-icons">add</i>
+                <i class="material-icons">more_vert</i>
+              </div>
+            </div>
+            <div class="box-content">
+                blablablab labla bla blabla blablablablab labla bla blabla blablablablab labla bla blabla blablablablab labla bla blabla blablablablab labla bla blabla 
+            </div>
+          </div>
+          <div id="box-configure" class="box-panel">
+            <div class="box-header">
+              <div class="icon-name">
+                <i class="material-icons">settings</i>
+                <span>CONFIGURAÇÕES</span>
+              </div>
+              <div class="menu">
+                <i class="material-icons">more_vert</i>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div id="canvas-container">
@@ -183,18 +208,45 @@
           
           <div id="canvas-control">
             <!-- <iframe id="canvas" src="bower_components/polymer-starter-kit/app/index.html"></iframe> -->
+            <iframe id="canvas" class="has-shadow" src="test-resources/app/index.html"></iframe>
             <div id="control">zoom</div>
           </div>
 
         </div>
         
-        <div id="box">
-          <img src="img/mocks/box.png">
+        <div id="box" class="has-shadow">
+          
+          <div class="box-header">
+            <div class="icon-name">
+              <i class="material-icons">add</i>
+              <span>ADICIONAR COMPONENTE</span>
+            </div>
+            <div class="menu">
+              <i class="material-icons">close</i>
+            </div>
+          </div>
+          <div class="box-content">
+            <paper-tabs selected="0">
+              <paper-tab>TAB 1</paper-tab>
+              <paper-tab>TAB 2</paper-tab>
+              <paper-tab>TAB 3</paper-tab>
+            </paper-tabs>
+          </div>
 
         </div>
         
         <div id="right-panel">
-          <img src="img/mocks/right.png">
+          <div id="box-configure" class="box-panel">
+            <div class="box-header">
+              <div class="icon-name">
+                <i class="material-icons">brush</i>
+                <span>ESTILO</span>
+              </div>
+              <div class="menu">
+                <i class="material-icons">more_vert</i>
+              </div>
+            </div>
+          </div>
         </div>
 
       
