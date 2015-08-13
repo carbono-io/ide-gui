@@ -5,7 +5,7 @@
     
     carbo.app = 'teste';
     
-    carbo.route = 'admin';
+    carbo.route = 'start';
     
     
     window.addEventListener('WebComponentsReady', function () {

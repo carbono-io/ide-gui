@@ -1,5 +1,26 @@
 <script src="../bower_components/page/page.js"></script>
+<script src="../bower_components/socket.io-client/socket.io.js"></script>
 <script>
+    
+    function createNewProject(callback) {
+        
+        // mock
+        setTimeout(function () {
+            
+            callback({
+                projectId: '340987612301',
+                containerId: 'lalala',
+                host: '192.168.99.100',
+                ports: {
+                    '8000': '32772'
+                },
+                
+                // MOCKKKK
+                projectUrl: 'http://localhost:8000/resources/marked/src/index.html',
+            });
+        }, 2000);
+    }
+    
     window.addEventListener('WebComponentsReady', function() {
       
         console.log('routing started')
@@ -8,25 +29,27 @@
         // client-side router inspired by the Express router
         // More info: https://visionmedia.github.io/page.js/
         page('/', function () {
-//            app.route = 'home';
+            carbo.route = 'start';
         });
-
-        page('/users', function () {
+        
+        page('/lab/:projectId', function (data) {
+            carbo.route = 'lab'; 
+            carbo.projectId = data.params.projectId;
+        });
+        
+        page('/new', function () {
+            carbo.route = 'loading';
             
-            console.log('route:/users');
-            
-//            app.route = 'users';
+            createNewProject(function (project) {
+                
+                carbo.project = project;
+                
+                
+                
+                page('/lab/' + project.projectId);
+            });
         });
-
-        page('/users/:name', function (data) {
-//            app.route = 'user-info';
-//            app.params = data.params;
-        });
-
-        page('/contact', function () {
-//            app.route = 'contact';
-        });
-
+    
         // add #! before urls
         page({
             hashbang: false

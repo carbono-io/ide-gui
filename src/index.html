@@ -42,8 +42,12 @@
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
               
               
-              <div data-route="admin">
-                admin
+              <div data-route="start" id="start">
+                <button><a href="/new">Criar nova aplicacao</a></button>
+              </div>
+              
+              <div data-route="loading" id="loading">
+                <div>loading ...</div>
               </div>
           
           
@@ -52,7 +56,7 @@
       
       
 
-    <div data-route="builder" id="container">
+    <div data-route="lab" id="container">
       
       
       
@@ -208,7 +212,7 @@
           
           <div id="canvas-control">
             <!-- <iframe id="canvas" src="bower_components/polymer-starter-kit/app/index.html"></iframe> -->
-            <iframe id="canvas" class="has-shadow" src="test-resources/app/index.html"></iframe>
+            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
             <div id="control">zoom</div>
           </div>
 
