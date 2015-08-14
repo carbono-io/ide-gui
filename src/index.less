@@ -129,9 +129,24 @@ body {
         align-items: center;
 
         #header-left {
-          font-size: @font-size-5;
+            font-size: @font-size-5;
+            width: 30%;
+            display:flex;
+            flex-direction: row;
+            align-items:center;
 
-          width: 30%;
+
+
+            #header-left-section {
+                display:flex;
+                flex-direction: row;
+                align-items:center;
+                font-weight: @bold;
+
+                    &:hover {
+                    cursor: pointer;
+                    }
+            }
         }
 
         #header-center {
@@ -155,6 +170,8 @@ body {
 
               .material-icons {
                 margin-bottom: @base-size / 2;
+                font-size: @font-size-6;
+
               }
 
               &:hover {
@@ -168,8 +185,47 @@ body {
 
         #header-right {
 
-          width: 30%;
+            font-size: @font-size-3;
+            width: 30%;
+            display:flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            i {
+                font-size: @font-size-6;
+
+                &:hover {
+                cursor: pointer;
+              }
+
+            }
+
+            #header-right-preview {
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-right: @base-size*2;
+
+                &:hover {
+                cursor: pointer;
+              }
+
+                i {
+                    font-size: @font-size-6;
+                }
+
+                .play-circle-outline {
+                    padding-right: @base-size;
+                }
+
+
+
+
+            }
         }
+
+
       }
       
       #carbo-header-panel {
@@ -313,8 +369,7 @@ body {
           background-color: @white;
           width: 2 * @base-size + 1;
         }
-        
-        
+
       }
       
     }
@@ -424,8 +479,9 @@ body {
         flex-grow: 1;
         
         #canvas-control {
-          
         
+
+
           #canvas {
             height: @phone-proportion * @phone-frame-width;
             width: @phone-frame-width;
