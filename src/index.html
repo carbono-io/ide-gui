@@ -240,7 +240,8 @@
 
                 <style is="custom-style">
             paper-checkbox {
-                padding: 16px 0;
+                display: block;
+                padding: 8px 0;
                 font-size: 12px;
                 font-family: "source sans pro";
                 --default-primary-color: #6D6D6D;
@@ -248,18 +249,24 @@
                 --secondary-text-color: #D2D2D2;
                 }
             paper-dropdown-menu {
-                padding: 16px 0;
+                padding: 0;
                 font-size: 12px;
                 font-family: "source sans pro";
-                 --default-primary-color: #6D6D6D;
+                --default-primary-color: #6D6D6D;
                 --primary-text-color: #6D6D6D;
                 --secondary-text-color: #D2D2D2;
+                --paper-menu-button {
+                    padding: 0;
                 }
-            }
+                }
+
 
           </style>
 
-                <paper-dropdown-menu label="Your favourite pastry">
+
+
+
+                <paper-dropdown-menu label="Your favourite pastry" no-animations="true">
                   <paper-menu class="dropdown-content">
                     <paper-item>Croissant</paper-item>
                     <paper-item>Donut</paper-item>
@@ -268,7 +275,15 @@
                   </paper-menu>
                 </paper-dropdown-menu>
 
-                <paper-checkbox>label</paper-checkbox>
+                <paper-checkbox>label 1</paper-checkbox>
+                <paper-checkbox>label 2</paper-checkbox>
+                <paper-checkbox>label 3</paper-checkbox>
+                <paper-checkbox>label 4</paper-checkbox>
+
+                <paper-input-container>
+                  <label>Your name</label>
+                  <input is="iron-input">
+                </paper-input-container>
 
 
             </div>
