@@ -20,7 +20,7 @@
 
             if (headerPanelStatus === 'inactive') {
                 headerPanelStatus = 'active';
-                headerPanel.className = 'active';
+                headerPanel.className = 'has-shadow active';
             } else {
                 headerPanelStatus = 'inactive';
                 headerPanel.className = '';
