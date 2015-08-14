@@ -10,13 +10,13 @@
     
     window.addEventListener('WebComponentsReady', function () {
         
-        var headerLeft = document.getElementById('header-left');
+        var headerLeftSection = document.getElementById('header-left-section');
         var headerPanel = document.getElementById('carbo-header-panel');
 
 
         var headerPanelStatus = 'inactive';
 
-        headerLeft.addEventListener('click', function () {
+        headerLeftSection.addEventListener('click', function () {
 
             if (headerPanelStatus === 'inactive') {
                 headerPanelStatus = 'active';
