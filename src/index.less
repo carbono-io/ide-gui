@@ -257,9 +257,7 @@ body {
         
         .carbo-section {
           background-color: @white;
-          padding-left: 2 * @base-size;
-          padding-top: 3 * @base-size;
-          padding-bottom: 3 * @base-size;
+          padding: 3 * @base-size 2 * @base-size;
 
           .transition(background-color ease 0.5s);
 
@@ -283,7 +281,20 @@ body {
           }
           
           .carbo-section-screen-container {
-            margin-right: 2 * @base-size;
+            margin-top: 0;
+            margin-right: @base-size;
+            margin-bottom: 0;
+            margin-left: @base-size;
+
+              &:first-child {
+                  margin-left: 0;
+              }
+
+              &:last-child {
+                  margin-right: 0;
+              }
+
+
             
             .carbo-section-screen {
               background-color: @white;
@@ -352,7 +363,12 @@ body {
 
               .material-icons {
                 color: @grey;
+                  &:hover {
+                    color: @darkgrey;
+                  }
               }
+
+
 
               .button-caption {
                 text-align: center;
