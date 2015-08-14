@@ -1,5 +1,5 @@
 @import './bower_components/lesshat/build/lesshat.less';
-@import './less/material-icons.less';
+//@import './less/material-icons.less';
 
 @import './less/variables.less';
 @import './less/reset.less';
@@ -19,8 +19,8 @@
 body {
   
   background-color: darken(@background-color, 5%);
-  font-family: "source sans pro", sans-serif;
-  font-size: 12px;
+  font-family: @font-family;
+  font-size: @font-size-3;
   color: @darkgrey;
   // its display should be flex
   // the direction of content is 'column'
@@ -35,6 +35,31 @@ body {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        
+        #new-button {
+            display: block;
+            height: 50px;
+            width: 50px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            text-decoration: none;
+            color: @darkgrey;
+            background-color: @grey;
+            
+            .transition(background-color ease 0.3s, color ease 0.3s);
+            
+            &:hover {
+                color: @lightgrey;
+                background-color: @darkgrey;
+            }
+            
+            .material-icons {
+                width: 0;
+            }
+        }
     }
     
     #loading {
@@ -118,8 +143,6 @@ body {
 
             > div {          
               font-size: @font-size-2;
-
-              font-family: helvetica;
 
               display: flex;
               flex-direction: column;
@@ -364,7 +387,7 @@ body {
         }
 
         i {
-          font-size: 18px;
+          font-size: @font-size-6;
         }
 
         .icon-name {
@@ -412,12 +435,23 @@ body {
           }
           
           #control {
-            border-top: 1px solid @darkgrey;
-            margin-top: @base-size;
+            border-top: 1px solid @grey;
+            margin-top: 2 * @base-size;
             padding-top: @base-size;
             width: 100%;
             
-            color: @darkgrey;
+            color: @grey;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            #control-screen {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-content;
+            }
           }
         }
       }
@@ -435,6 +469,52 @@ body {
         margin-right: @base-size;
         
         background-color: @white;
+
+        .box-header {
+        border-bottom: none;
+        }
+
+        .box-content {
+          #prefix {
+            i {
+              color: @mediumgrey;
+            }
+          }
+
+        }
+
+        .tab {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: start;
+          align-items: flex-start;
+
+          .component {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+
+            text-align: center;
+            padding: 2 * @base-size;
+            // background-color: red;
+            width: 10 * @base-size;
+            height: 10 * @base-size;
+
+            &:hover{
+              background-color: @mediumgrey;
+            }
+
+            i {
+              font-size: 42px;
+              margin-bottom: @base-size;
+            }
+          }
+
+        }
+
+        
       }
       
       #right-panel {
@@ -456,6 +536,7 @@ body {
       }
 
   }
+
 }
 
 

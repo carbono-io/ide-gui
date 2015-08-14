@@ -15,21 +15,26 @@
     
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
     
     
     <!-- Source Sans Pro Font -->
-    <link href="https://www.google.com/fonts#UsePlace:use/Collection:Source+Sans+Pro:400,700,300">
- 
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'> 
     
     <!-- webcomponents lite -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
       
       
     <link rel="import" href="elements/routing.html">
-    
+      
+    <!-- paper-tabs of polymer-->
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+
+        <!-- paper-input of polymer-->
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+      
       <!-- Polymer components -->
       <link rel="import" href="bower_components/iron-pages/iron-pages.html">
-    
     
   </head>
   <body>
@@ -43,7 +48,11 @@
               
               
               <div data-route="start" id="start">
-                <button><a href="/new">Criar nova aplicacao</a></button>
+                <a id="new-button" href="/new">
+                    <i class="material-icons">
+                        mode edit
+                    </i>
+                </a>
               </div>
               
               <div data-route="loading" id="loading">
@@ -69,10 +78,10 @@
           </div>
           <div id="header-center">
             <nav id="header-nav">
-              <a data-route="users" href="/users">
+              <div data-route="users" href="/users">
                 <i class="material-icons">local_offer</i>
                 <span>DEFINIÇÃO</span>
-              </a>
+              </div>
               <div>
                 <i class="material-icons">palette</i>
                 <span>LAYOUT</span>
@@ -211,9 +220,18 @@
           
           
           <div id="canvas-control">
-            <!-- <iframe id="canvas" src="bower_components/polymer-starter-kit/app/index.html"></iframe> -->
             <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
-            <div id="control">zoom</div>
+            <div id="control">
+              <div id="control-zoom">
+                zoom
+              </div>
+              <div id="control-screen">
+                <i class="material-icons">keyboard_arrow_left</i>
+                <span>|</span>
+                <i class="material-icons">keyboard_arrow_right</i>
+              </div>
+
+            </div>
           </div>
 
         </div>
@@ -223,18 +241,94 @@
           <div class="box-header">
             <div class="icon-name">
               <i class="material-icons">add</i>
-              <span>ADICIONAR COMPONENTE</span>
+              <span>ADICIONAR COMPONENTES</span>
             </div>
             <div class="menu">
               <i class="material-icons">close</i>
             </div>
           </div>
+
+
+
+          <style is="custom-style">
+            paper-tabs {
+              --paper-tabs-selection-bar-color: #6D6D6D;
+              height: 32px;
+              border-bottom: 1px solid #D2D2D2;
+              font-family: "Source Sans Pro";
+              font-size: 12px;
+            }
+            paper-tab {
+              --paper-tab:{
+                background-color: #F2F2F2;
+                color: #6D6D6D;
+              };
+            }
+            paper-input-container {
+              padding: 16px 0;
+
+              --paper-input-container-color: #D2D2D2;
+              --paper-input-container-underline {
+                background-color: #D2D2D2;};
+              --paper-input-container-underline-focus {
+                background-color: #6D6D6D;};
+              --paper-input-container-input {
+                line-height: 32px;
+                font-size: 12px;
+              
+              }
+
+            }
+
+          </style>
+
           <div class="box-content">
-            <paper-tabs selected="0">
-              <paper-tab>TAB 1</paper-tab>
-              <paper-tab>TAB 2</paper-tab>
-              <paper-tab>TAB 3</paper-tab>
+            <paper-tabs selected="0" noink="false">
+              <paper-tab>Básicos</paper-tab>
+              <paper-tab>Avançados</paper-tab>
             </paper-tabs>
+
+            
+
+
+            <paper-input-container no-label-float="true">
+              <div prefix id="prefix"><i class="material-icons">search</i></div>
+              <label>Total</label>
+              <input is="iron-input">
+            </paper-input-container>
+
+            <div id="tabs-content">
+              <div class="tab">
+                <div class="component">
+                  <div class="component-icon">
+                    <i class="material-icons">input</i>
+                  </div>
+                  <div class="component-label">
+                    Formulário
+                  </div>
+                </div>
+
+                <div class="component">
+                  <div class="component-icon">
+                    <i class="material-icons">input</i>
+                  </div>
+                  <div class="component-label">
+                    Formulário mais comprido
+                  </div>
+                </div>
+
+                <div class="component">
+                  <div class="component-icon">
+                    <i class="material-icons">input</i>
+                  </div>
+                  <div class="component-label">
+                    Formulário bem mais comprido
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
         </div>
