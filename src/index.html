@@ -30,11 +30,17 @@
     <!-- paper-tabs of polymer-->
     <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
 
-        <!-- paper-input of polymer-->
+    <!-- paper-input of polymer-->
     <link rel="import" href="bower_components/paper-input/paper-input.html">
       
-      <!-- Polymer components -->
-      <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+    <!-- paper-checkbox of polymer-->
+    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
+    <!-- paper-dropbown-menu of polymer-->
+    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+
+    <!-- Polymer components -->
+    <link rel="import" href="bower_components/iron-pages/iron-pages.html">
     
   </head>
   <body>
@@ -215,7 +221,41 @@
               </div>
             </div>
             <div class="box-content">
-                <img src="img/mocks/panelesq_02.png" style="width:224px;">
+<!--                <img src="img/mocks/panelesq_02.png" style="width:224px;">-->
+
+                <style is="custom-style">
+            paper-checkbox {
+                padding: 16px 0;
+                font-size: 12px;
+                font-family: "source sans pro";
+                --default-primary-color: #6D6D6D;
+                --primary-text-color: #6D6D6D;
+                --secondary-text-color: #D2D2D2;
+                }
+            paper-dropdown-menu {
+                padding: 16px 0;
+                font-size: 12px;
+                font-family: "source sans pro";
+                 --default-primary-color: #6D6D6D;
+                --primary-text-color: #6D6D6D;
+                --secondary-text-color: #D2D2D2;
+                }
+            }
+
+          </style>
+
+                <paper-dropdown-menu label="Your favourite pastry">
+                  <paper-menu class="dropdown-content">
+                    <paper-item>Croissant</paper-item>
+                    <paper-item>Donut</paper-item>
+                    <paper-item>Financier</paper-item>
+                    <paper-item>Madeleine</paper-item>
+                  </paper-menu>
+                </paper-dropdown-menu>
+
+                <paper-checkbox>label</paper-checkbox>
+
+
             </div>
           </div>
         </div>
@@ -255,6 +295,9 @@
 
 
           <style is="custom-style">
+            --default-primary-color: #6D6D6D;
+            --primary-text-color: #6D6D6D;
+            --secondary-text-color: #D2D2D2;
             paper-tabs {
               --paper-tabs-selection-bar-color: #6D6D6D;
               height: 32px;
