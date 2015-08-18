@@ -436,21 +436,60 @@ body {
         .box-panel {
           height: 50%;
           overflow: auto;
+
+            // remover
+            position: relative;
         }
 
 
-            .components-item {
+          .component {
+
+//              hr {
+//                position: absolute;
+//                width:100%;
+//                left:0;
+//                margin:0;
+//              }
+              .hoverer {
+                position: absolute;
+                  z-index: 1;
+                width:100%;
+                  height: 5 * @base-size;
+                left:0;
+                margin:0;
+                .translateY(-100%);
+
+
+               border-bottom: solid 1px @mediumgrey;
+              box-sizing:border-box;
+
+                &:hover, &.active {
+
+                    background-color: @mediumgrey;
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+
+                }
+
+
+              }
+
+              .component-itself {
+
+                  position: relative;
+                  z-index: 2;
 
                 display:flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
 
-                box-sizing:border-box;
+
                 height: 5 * @base-size;
-                border-bottom: solid 1px @mediumgrey;
-                padding-left: 3 * @base-size;
+
+                padding-left: @base-size;
                 padding-right: @base-size;
+
 
                 .material-icons {
                     font-size: @font-size-6;
@@ -466,6 +505,12 @@ body {
                         margin-right: @base-size/2;
                     }
 
+                    .arrow {
+                        font-size: @font-size-5;
+                        margin-right: 0;
+                        padding-left: - @base-size;
+                    }
+
                 }
 
                 .item-menu {
@@ -473,62 +518,74 @@ body {
                 }
 
                 &:hover, &.active {
-                    background-color: @mediumgrey;
-                    cursor: pointer;
-                    transition: all ease 0.3s;
+
+                     cursor: pointer;
+
 
                     .item-menu {
                         display:flex;
                     }
 
-                }
+                    &+.hoverer {
+                    background-color: @mediumgrey;
+                    transition: all ease 0.3s;
+                    cursor: pointer;
 
 
-            }
 
-
-            .components-group {
-
-                .components-item {
-
-                    padding-left: 4 * @base-size;
-
-                    &.group-father {
-                          padding-left:@base-size;
-
-                      .arrow {
-                            font-size: @font-size-5;
-                            margin-right: 0;
-                      }
 
                     }
 
                 }
 
-                &.open {
-                  .components-item {
-                    display:flex;
-                  }
 
-                }
-
-                &.closed {
-
-                  .components-item {
-                        display:none;
-
-                      &.group-father {
-                          display:flex;
-
-                          .arrow {
-                              transform: rotate(-90deg);
-                          }
-
-                      }
-                  }
 
               }
-        }
+
+              .component-children-container {
+                padding-left: @base-size * 2;
+              }
+          }
+
+
+//
+//            .components-group {
+//
+//                .components-item {
+//
+//                    padding-left: 4 * @base-size;
+//
+//                    &.group-father {
+//                          padding-left:@base-size;
+//
+//                      .arrow {
+//                            font-size: @font-size-5;
+//                            margin-right: 0;
+//                      }
+//
+//                    }
+//
+//                }
+//
+//
+//
+//                &.closed {
+//
+//                  .components-item {
+//                        display:none;
+//
+//                      &.group-father {
+//                          display:flex;
+//
+//                          .arrow {
+//                              .rotate(-90deg);
+//                          }
+//
+//                      }
+//                  }
+//
+//              }
+//        }
 
 
 
