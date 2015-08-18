@@ -438,53 +438,101 @@ body {
           overflow: auto;
         }
 
-          .components-family{
 
-
-              .components-item {
-                box-sizing:border-box;
-                height: 5 * @base-size;
-                border-bottom: solid 1px @mediumgrey;
-                padding-left: @base-size *2;
+            .components-item {
 
                 display:flex;
                 flex-direction: row;
                 align-items: center;
+                justify-content: space-between;
+
+                box-sizing:border-box;
+                height: 5 * @base-size;
+                border-bottom: solid 1px @mediumgrey;
+                padding-left: 3 * @base-size;
+                padding-right: @base-size;
 
                 .material-icons {
-                    font-size: @font-size-5;
-                }
-
-                &:hover{
-                    background-color: @mediumgrey;
-                    cursor: pointer;
-                    transition: all ease 0.3s;
-                }
-
+                    font-size: @font-size-6;
+                 }
 
                 .item-id {
                     display:flex;
                     flex-direction: row;
                     align-items: center;
+                    justify-content: flex-start;
 
                     .material-icons {
-                    margin-right: @base-size/2;
-                    font-size: @font-size-6;
-                    }
-
-                    &:nth-child(1) {
-                    margin-left:@base-size*2;
+                        margin-right: @base-size/2;
                     }
 
                 }
 
-                &:nth-child(1) {
-                    padding-left:@base-size;
+                .item-menu {
+                    display:none;
+                }
+
+                &:hover, &.active {
+                    background-color: @mediumgrey;
+                    cursor: pointer;
+                    transition: all ease 0.3s;
+
+                    .item-menu {
+                        display:flex;
+                    }
+
                 }
 
 
             }
+
+
+            .components-group {
+
+                .components-item {
+
+                    padding-left: 4 * @base-size;
+
+                    &.group-father {
+                          padding-left:@base-size;
+
+                      .arrow {
+                            font-size: @font-size-5;
+                            margin-right: 0;
+                      }
+
+                    }
+
+                }
+
+                &.open {
+                  .components-item {
+                    display:flex;
+                  }
+
+                }
+
+                &.closed {
+
+                  .components-item {
+                        display:none;
+
+                      &.group-father {
+                          display:flex;
+
+                          .arrow {
+                              transform: rotate(-90deg);
+                          }
+
+                      }
+                  }
+
+              }
         }
+
+
+
+
 
       }
 
