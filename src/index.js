@@ -25,6 +25,9 @@
 
 
 
+
+
+
         headerLeftSection.addEventListener('click', function () {
 
             if (headerPanelStatus === 'inactive') {
