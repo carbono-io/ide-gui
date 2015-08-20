@@ -30,12 +30,12 @@
             if (headerPanelStatus === 'inactive') {
                 headerPanelStatus = 'active';
                 headerPanel.className = 'has-shadow active';
-                closeHeaderPanel.style.display = 'block';
+                closeHeaderPanel.className = 'active';
                 closeHeaderPanel.style.height = windowHeight;
             } else {
                 headerPanelStatus = 'inactive';
                 headerPanel.className = '';
-                closeHeaderPanel.style.display = 'none';
+                closeHeaderPanel.className = '';
             }
 
         });
@@ -43,7 +43,7 @@
         closeHeaderPanel.addEventListener('click', function () {
         headerPanelStatus = 'inactive';
         headerPanel.className = '';
-        closeHeaderPanel.style.display = 'none';
+        closeHeaderPanel.className = '';
 
         });
 
