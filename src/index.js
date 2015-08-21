@@ -45,8 +45,14 @@
     };
 
     var menu = {
-        title: 'Menu',
-        icon: 'backup'
+//        title: 'Menu',
+//        icon: 'backup',
+        items: [
+            { icon: 'backup', title: 'menu 1' },
+            { icon: 'close', title: 'menu 2' },
+            { icon: 'backup', title: 'menu 3' },
+            { icon: 'backup', title: 'menu 4' }
+        ]
     };
 
 
