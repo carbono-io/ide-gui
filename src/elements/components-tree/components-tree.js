@@ -3,6 +3,7 @@
 var CarboComponentsTree = Polymer({
     is: 'carbo-components-tree',
 });
+// TODO: setup event listeners
 
 // listeners: {
 //     'banner.tap': 'handleBannerTap'

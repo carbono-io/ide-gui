@@ -6,6 +6,8 @@ var path        = require('path');
 // External dependencies
 var gulp        = require('gulp');
 var browserSync = require('browser-sync');
+var guppy       = require('git-guppy')(gulp);
+
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
 
@@ -17,6 +19,11 @@ var JS_DIR = [
     SRC_DIR + '/**/*.js',
     '!' + SRC_DIR + '/bower_components/**/*',
     'gulpfile.js',
+];
+
+var LESS_DIR = [
+    SRC_DIR + '/**/*.less',
+    '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
 /**
@@ -31,11 +38,6 @@ function _less() {
         ' | All modifications to it will be lost, mercilessly! |',
         ' -----------------------------------------------------*/\n\n',
     ].join('\n');
-
-    var LESS_DIR = [
-        SRC_DIR + '/**/*.less',
-        '!' + SRC_DIR + '/bower_components/**/*',
-    ];
 
     return gulp.src(LESS_DIR)
         // .pipe($.changed(SRC_DIR, { extension: '.css' }))
@@ -153,3 +155,15 @@ gulp.task('jsdoc', function () {
         .pipe($.jsdoc.parser(infos, name))
         .pipe(gulp.dest('./docs'))
 });
+
+gulp.task('todo', function () {
+    gulp.src(JS_DIR.concat(LESS_DIR))
+        .pipe($.todo({
+            reporter: 'markdown',
+        }))
+        .pipe(gulp.dest('./'));
+});
+
+// Git-hook tasks
+gulp.task('post-merge', ['less']);
+gulp.task('pre-commit', ['jshint'])
