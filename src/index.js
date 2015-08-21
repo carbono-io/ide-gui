@@ -6,10 +6,10 @@
     carbo.app = 'teste';
     
     carbo.route = 'start';
-
     var header = {
         name: 'header',
     };
+    
     var tabNav = {
         name: 'tabNav',
         children: [
@@ -19,7 +19,7 @@
             { name: 'tab-4-button' }
         ]
     };
-
+    
     var tabBody = {
         name: 'tabBody',
         children: [
@@ -29,11 +29,12 @@
             { name: 'tab-4' },
         ]
     };
+    
     var content = {
         name: 'content',
         children: [tabNav, tabBody]
     };
-
+    
     var footer = {
         name: 'footer'
     };

@@ -17,7 +17,7 @@
 @phone-proportion: 568/360;
 
 body {
-
+	
 	background-color: darken(@background-color, 5%);
 	font-family: @font-family;
 	font-size: @font-size-3;
@@ -27,41 +27,41 @@ body {
 	// which means that the main axis is y
 //  display: flex;
 //  flex-direction: column;
-
+		
 		#start {
 				height: 100%;
-
+				
 				display: flex;
 				flex-direction: row;
 				justify-content: space-around;
 				align-items: center;
-
+				
 				#new-button {
 						display: block;
 						height: 50px;
 						width: 50px;
-
+						
 						display: flex;
 						justify-content: center;
 						align-items: center;
-
+						
 						text-decoration: none;
 						color: @darkgrey;
 						background-color: @grey;
-
+						
 						.transition(background-color ease 0.3s, color ease 0.3s);
-
+						
 						&:hover {
 								color: @lightgrey;
 								background-color: @darkgrey;
 						}
-
+						
 						.material-icons {
 								width: 0;
 						}
 				}
 		}
-
+		
 		#loading {
 				height: 100%;
 				display: flex;
@@ -69,26 +69,26 @@ body {
 				justify-content: space-around;
 				align-items: center;
 		}
-
+	
 	/**
 	 * Sets the height and width of the whole application.
 	 * (html/body is temperamental)
 	 */
 	#container {
-		// let position be relative so that
+		// let position be relative so that 
 		// carbo-body may calculate it's
-		// top, bottom left and right
+		// top, bottom left and right 
 		// relative to the container instead of the window.
 		position: relative;
-
+		
 		height: 100%;
 
 		min-width: @min-screen-width;
 		min-height: @min-application-height;
-
+		
 		// container should occupy full height of its parent
 //    flex-grow: 1;
-
+		
 		// its display should be flex
 		// the direction of content is 'column'
 		// which means that the main axis is y
@@ -96,7 +96,7 @@ body {
 //    flex-direction: column;
 		// items should occupy the whole width
 //    align-items: stretch;
-
+		
 		#carbo-header-container {
 			position: fixed;
 			z-index: 2;
@@ -104,13 +104,13 @@ body {
 			left: 0px;
 			right: 0px;
 
-			// let its height be 0
+			// let its height be 0 
 			// so that it does not cover clicks on other
 			// portions of the screen
 			height: 0px;
-
+			
 			#carbo-header {
-				// let position be relative so that
+				// let position be relative so that 
 				// we can put a z-index on it
 				position: relative;
 				z-index: 2;
@@ -155,7 +155,7 @@ body {
 						display: flex;
 						flex-direction: row;
 
-						> div {
+						> div {          
 							font-size: @font-size-2;
 
 							display: flex;
@@ -227,10 +227,10 @@ body {
 
 
 			}
-
+			
 			#carbo-header-panel {
 
-				// let position be relative so that
+				// let position be relative so that 
 				// we can put a z-index on it
 				// its z-index should be lower
 				// than the #carbo-header's
@@ -246,15 +246,15 @@ body {
 				opacity: 0;
 
 				.transition(transform 0.3s ease, opacity 0.2s ease);
-
+				
 				.translateY(-100%);
-
+				
 				&.active {
 					.translateY(0);
 
 					opacity: 1;
 				}
-
+				
 				.carbo-section {
 					background-color: @white;
 					padding: 3 * @base-size 2 * @base-size;
@@ -267,19 +267,19 @@ body {
 
 
 					}
-
+					
 					.carbo-section-header {
 						height: 2 * @base-size;
 						font-size: @font-size-4;
 						margin-bottom: @base-size;
 					}
 
-
+					
 					.carbo-section-contents {
 						display: flex;
 						flex-direction: row;
 					}
-
+					
 					.carbo-section-screen-container {
 						margin-top: 0;
 						margin-right: @base-size;
@@ -295,7 +295,7 @@ body {
 							}
 
 
-
+						
 						.carbo-section-screen {
 							background-color: @white;
 							width: @phone-frame-width/ 3;
@@ -339,9 +339,9 @@ body {
 							 * REMOVER PELO AMOR DE DEUS
 							 * REMOVER PELO AMOR DE DEUS
 							 */
-
+						
 						}
-
+						
 						.carbo-section-screen-caption {
 							font-size: @font-size-3;
 							margin-top: @base-size;
@@ -379,9 +379,9 @@ body {
 						}
 
 					}
-
+				
 				}
-
+				
 				.carbo-section-divider {
 					background-color: @white;
 					width: 2 * @base-size + 1;
@@ -405,11 +405,11 @@ body {
 								opacity: 0.9;
 						}
 				}
-
+			
 		}
 
 
-
+		
 		/**
 		 * Contains the panel body of the application
 		 */
@@ -422,7 +422,7 @@ body {
 			bottom: 0px;
 			left: 0px;
 			right: 0px;
-
+			
 			// it has display flex using row (x is the main axis)
 			display: flex;
 			flex-direction: row;
@@ -432,22 +432,22 @@ body {
 			align-items: stretch;
 
 			background-color: @background-color;
-
+			
 			// to be removed!!!!!!!!
 			> div {
 //        background-color: red;
-
+				
 			overflow: auto;
 			}
-
+			
 			#left-panel {
 				background-color: @white;
 				width: @panel-width;
-
+				
 				// no growing nor shrinking
 				flex-grow: 0;
 				flex-shrink: 0;
-
+				
 				margin-right: @base-size;
 				border-right: solid 1px @mediumgrey;
 
@@ -561,25 +561,25 @@ body {
 				}
 				}
 
-
+			
 			#canvas-container {
-
+				
 				display: flex;
 				flex-direction: row;
 				justify-content: center;
 				align-items: center;
-
-
+				
+				
 				margin-top: 2 * @base-size;
 				margin-bottom: 2 * @base-size;
 				margin-left: @base-size;
 				margin-right: @base-size;
-
+				
 				// this container should occupy all space left
 				flex-grow: 1;
-
+				
 				#canvas-control {
-
+				
 
 
 					#canvas {
@@ -588,13 +588,13 @@ body {
 
 						border: 3px solid @mediumgrey;
 					}
-
+					
 					#control {
 						border-top: 1px solid @grey;
 						margin-top: 2 * @base-size;
 						padding-top: @base-size;
 						width: 100%;
-
+						
 						color: @grey;
 
 						display: flex;
@@ -610,19 +610,19 @@ body {
 					}
 				}
 			}
-
+			
 			#box {
 				width: @panel-width;
-
+				
 				// no growing nor shrinking
 				flex-grow: 0;
 				flex-shrink: 0;
-
+				
 				margin-top: 2 * @base-size;
 				margin-bottom: 2 * @base-size;
 				margin-left: @base-size;
 				margin-right: @base-size;
-
+				
 				background-color: @white;
 
 				.box-header {
@@ -738,18 +738,18 @@ body {
 
 
 
-
+				
 			}
-
+			
 			#right-panel {
-
+				
 				// no growing nor shrinking
 				flex-grow: 0;
 				flex-shrink: 0;
-
+				
 				margin-left: @base-size;
 				border-left: solid 1px @mediumgrey;
-
+				
 				background-color: @white;
 				width: @panel-width;
 			}

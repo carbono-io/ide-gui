@@ -8,7 +8,11 @@
     "expr"          : true,
     "latedef"       : true,
     "noarg"         : true,
+<<<<<<< HEAD
     "strict"        : true,
+=======
+    "strict"        : true,        
+>>>>>>> origin/feature/JRD-95-inserir-form
     "undef"         : true,
     "unused"        : true,
     "nocomma"       : true,
