@@ -14,3 +14,9 @@
 
 # Test resources bower_components
 /src/test-resources/app/bower_components
+
+# Temporary files
+/tmp
+
+# Generated documentation
+/docs

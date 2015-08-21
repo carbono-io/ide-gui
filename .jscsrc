@@ -1,10 +1,5 @@
 {
-  "excludeFiles": ["node_modules/**", "src/!(bar|foo)"],
-  "jsDoc": {
-    "checkAnnotations": "closurecompiler",
-    "checkTypes": "strictNativeCase",
-    "enforceExistence": "exceptExports"
-  },
+  "excludeFiles": ["node_modules/**"],
   "disallowKeywords": ["with"],
   "disallowKeywordsOnNewLine": ["else"],
   "disallowMixedSpacesAndTabs": true,
@@ -58,10 +53,12 @@
   "requireTrailingComma": {
     "ignoreSingleLine": true
   },
-//  {
-//    "ignoreSingleLine": true
-//  },
-  "validateIndentation": 2,
+  "validateIndentation": 4,
   "validateLineBreaks": "LF",
-  "validateQuoteMarks": "'"  
+  "validateQuoteMarks": "'",
+  "jsDoc": {
+    "checkAnnotations": "jsdoc3",
+    "checkTypes": "strictNativeCase" //,
+//    "enforceExistence": "exceptExports"
+  }
 }
