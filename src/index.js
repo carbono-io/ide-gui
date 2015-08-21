@@ -8,6 +8,49 @@
     carbo.route = 'start';
     
     
+    
+    var header = {
+        name: 'header',
+    };
+    
+    var tabNav = {
+        name: 'tabNav',
+        children: [
+            { name: 'tab-1-button' },
+            { name: 'tab-2-button' },
+            { name: 'tab-3-button' },
+            { name: 'tab-4-button' }
+        ]
+    };
+    
+    var tabBody = {
+        name: 'tabBody',
+        children: [
+            { name: 'tab-1', children: [header, { name: 'content', children: [header] }] },
+            { name: 'tab-2' },
+            { name: 'tab-3' },
+            { name: 'tab-4' },
+        ]
+    };
+    
+    var content = {
+        name: 'content',
+        children: [tabNav, tabBody]
+    };
+    
+    var footer = {
+        name: 'footer'
+    };
+    
+    var body = {
+        name: 'body',
+        children: [header, content, footer]
+    };
+    
+    carbo.AAAAAA = body;
+    
+    
+    
     window.addEventListener('WebComponentsReady', function () {
         
         var headerLeftSection = document.getElementById('header-left-section');

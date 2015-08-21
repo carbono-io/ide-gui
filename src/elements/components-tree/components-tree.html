@@ -1,0 +1,76 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="carbo-components-tree">
+    
+    <link rel="import" type="css" href="components-tree.css">
+    
+
+    <template>
+        <!--componente start-->
+        <div class="component" id="component">
+            <div class="component-itself" id="banner">
+                <div class="item-id">
+                    <i class="material-icons arrow" id="arrow">keyboard_arrow_down</i>
+                    <i class="material-icons">crop_7_5</i>
+                    <span>{{ component.name }}</span>
+                </div>
+                <div class="item-menu">
+                    <i class="material-icons">more_vert</i>
+                </div>
+            </div>
+            <div class="hoverer"></div>
+
+            <div class="component-children-container" id="component-children-container">
+                
+                <template is="dom-repeat" items="{{ component.children }}">
+                    <carbo-components-tree component="{{ item }}"></carbo-components-tree>
+                </template>
+                
+            </div>
+        </div>
+        <!--componente end-->
+    </template>
+
+    
+    <script>
+        
+        var CarboComponentsTree = Polymer({
+            is: 'carbo-components-tree', 
+        });
+    </script>
+
+</dom-module>
+
+
+
+            <!--
+
+            listeners: {
+                'banner.tap': 'handleBannerTap'
+            },
+
+            handleBannerTap: function handleBannerTap(e) {
+                
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (this.isOpen) {
+                    this.$.component.className += ' closed';
+                    this.isOpen = false;
+                } else {
+                    this.$.component.className = this.$.component.className.replace('closed', '');
+                    this.isOpen = true;
+                }
+            },
+            
+            properties: {
+                component: {
+                    type: Object,
+                    notify: true,
+                },
+                isOpen: {
+                    type: Boolean,
+                    default: true,
+                    notify: true,
+                }
+            },-->

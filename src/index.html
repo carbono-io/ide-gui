@@ -3,6 +3,16 @@
     <title>carbono</title>
 
 
+    <!-- webcomponents lite -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<!--
+<script>
+    window.Polymer = window.Polymer || {};
+    window.Polymer.dom = 'shadow';
+  </script>
+      
+-->
+      
     <!-- semantic-ui stylesheet -->
 <!--    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">-->
 
@@ -21,8 +31,6 @@
     <!-- Source Sans Pro Font -->
       <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'> 
     
-    <!-- webcomponents lite -->
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
       
       
     <link rel="import" href="elements/routing.html">
@@ -47,6 +55,10 @@
 
     <!-- Polymer components -->
     <link rel="import" href="bower_components/paper-item/paper-item.html">
+      
+      
+    <!-- carbo polymer components -->
+    <link rel="import" href="elements/components-tree/components-tree.html">
 
   </head>
   <body>
@@ -299,116 +311,8 @@
                 </div>
 -->
 
-                <!--componente start-->
-                <div class="component">
-                    <div class="component-itself">
-                        <div class="item-id">
-                            <i class="material-icons arrow">keyboard_arrow_down</i>
-                            <i class="material-icons">crop_7_5</i>
-                            <span>Header2</span>
-                        </div>
-                        <div class="item-menu">
-                            <i class="material-icons">more_vert</i>
-                        </div>
-                    </div>
-                    <div class="hoverer"></div>
-
-                    <div class="component-children-container">
-
-                    </div>
-                </div>
-                <!--componente end-->
-                <!--componente start-->
-                <div class="component">
-                    <div class="component-itself">
-
-                        <div class="item-id">
-                            <i class="material-icons arrow">keyboard_arrow_down</i>
-                            <i class="material-icons">crop_7_5</i>
-                            <span>Header1</span>
-                        </div>
-                        <div class="item-menu">
-                            <i class="material-icons">more_vert</i>
-                        </div>
-                    </div>
-                    <div class="hoverer"></div>
-                    <div class="component-children-container">
-                        <!--componente start-->
-                        <div class="component">
-                            <div class="component-itself">
-                                <div class="item-id">
-                                    <i class="material-icons arrow">keyboard_arrow_down</i>
-                                    <i class="material-icons">crop_7_5</i>
-                                    <span>Header1.1</span>
-                                </div>
-                                <div class="item-menu">
-                                    <i class="material-icons">more_vert</i>
-                                </div>
-                            </div>
-                            <div class="hoverer"></div>
-                            <div class="component-children-container">
-                                <!--componente start-->
-                                <div class="component">
-                                    <div class="component-itself">
-                                        <div class="item-id">
-                                            <i class="material-icons arrow">keyboard_arrow_down</i>
-                                            <i class="material-icons">crop_7_5</i>
-                                            <span>Header1.1.1</span>
-                                        </div>
-                                        <div class="item-menu">
-                                            <i class="material-icons">more_vert</i>
-                                        </div>
-                                    </div>
-                                    <div class="hoverer"></div>
-                                    <div class="component-children-container">
-                                    </div>
-<!--                                    <hr>-->
-                                </div>
-                                <!--componente end-->
-                                <!--componente start-->
-                                <div class="component">
-                                    <div class="component-itself">
-                                        <div class="item-id">
-                                            <i class="material-icons arrow">keyboard_arrow_down</i>
-                                            <i class="material-icons">crop_7_5</i>
-                                            <span>Header1.1.2</span>
-                                        </div>
-                                        <div class="item-menu">
-                                            <i class="material-icons">more_vert</i>
-                                        </div>
-                                    </div>
-                                    <div class="hoverer"></div>
-
-                                    <div class="component-children-container">
-
-                                    </div>
-                                </div>
-                                <!--componente end-->
-                            </div>
-                        </div>
-                        <!--componente end-->
-                        <!--componente start-->
-                        <div class="component">
-                            <div class="component-itself">
-                                <div class="item-id">
-                                    <i class="material-icons arrow">keyboard_arrow_down</i>
-                                    <i class="material-icons">crop_7_5</i>
-                                    <span>Header1.2</span>
-                                </div>
-                                <div class="item-menu">
-                                    <i class="material-icons">more_vert</i>
-                                </div>
-                            </div>
-                            <div class="hoverer"></div>
-                            <div class="component-children-container">
-
-                            </div>
-                        </div>
-                        <!--componente end-->
-                    </div>
-
-                </div>
-                <!--componente end-->
+              
+              <carbo-components-tree component="{{AAAAAA}}"></carbo-components-tree>
 
 
             </div>
