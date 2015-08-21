@@ -6,10 +6,13 @@ var path        = require('path');
 // External dependencies
 var gulp        = require('gulp');
 var browserSync = require('browser-sync');
-var guppy       = require('git-guppy')(gulp);
+var guppy       = require('git-guppy');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
+
+// Let guppy integrate with gulp
+guppy(gulp);
 
 // Constants
 var SRC_DIR      = './src';
@@ -23,6 +26,11 @@ var JS_DIR = [
 
 var LESS_DIR = [
     SRC_DIR + '/**/*.less',
+    '!' + SRC_DIR + '/bower_components/**/*',
+];
+
+var HTML_DIR = [
+    SRC_DIR + '/**/*.html',
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
@@ -92,6 +100,16 @@ gulp.task('beautify-html', function () {
         .pipe(gulp.dest('./tmp'));
 });
 
+
+function _todo() {
+    gulp.src(JS_DIR.concat(LESS_DIR))
+        .pipe($.todo({
+            reporter: 'markdown',
+        }))
+        .pipe(gulp.dest('./'));
+}
+gulp.task('todo', _todo);
+
 // Develop task
 gulp.task('develop', function () {
 
@@ -108,19 +126,17 @@ gulp.task('develop', function () {
     // not watch for newly added files. Porbably must revise soon.
     // http://stackoverflow.com/questions/22391527/
     // gulps-gulp-watch-not-triggered-for-new-or-deleted-files
-    $.watch(['./src/**/*.less', '!./src/bower_components'], _less);
-    $.watch([
-        './src/elements/**/*.css',
-        './src/elements/**/*.html',
-        './src/index.html',
-        './src/index.css',
-    ], browserSync.reload);
+    $.watch(LESS_DIR, _less);
+    $.watch(JS_DIR.concat(LESS_DIR).concat(HTML_DIR), function () {
+        browserSync.reload();
+        _todo();
+    });
 });
 
 
-gulp.task('jshint', function () {
+function _jshint() {
 
-    gulp.src(JS_DIR)
+    return gulp.src(JS_DIR)
         .pipe($.jshint('.jshintrc'))
         .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.jshint.reporter('fail'))
@@ -133,7 +149,8 @@ gulp.task('jshint', function () {
             // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
             icon: path.join(__dirname, 'logo.png'),
         }));
-});
+}
+gulp.task('jshint', _jshint);
 
 gulp.task('jscs', function () {
 
@@ -152,18 +169,10 @@ gulp.task('jscs', function () {
 
 gulp.task('jsdoc', function () {
     gulp.src(JS_DIR)
-        .pipe($.jsdoc.parser(infos, name))
-        .pipe(gulp.dest('./docs'))
-});
-
-gulp.task('todo', function () {
-    gulp.src(JS_DIR.concat(LESS_DIR))
-        .pipe($.todo({
-            reporter: 'markdown',
-        }))
-        .pipe(gulp.dest('./'));
+        .pipe($.jsdoc.parser())
+        .pipe($.jsdoc.generator('./docs'));
 });
 
 // Git-hook tasks
 gulp.task('post-merge', ['less']);
-gulp.task('pre-commit', ['jshint'])
+gulp.task('pre-commit', _jshint);
