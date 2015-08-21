@@ -21,52 +21,13 @@
                     <span>{{ title }}</span>
                 </div>
                 <div class="menu">
-<!--
+
                     <paper-menu-button>
                         <paper-icon-button icon="more-vert" class="dropdown-trigger"></paper-icon-button>
                         <paper-menu class="dropdown-content">
-                                <paper-item>boxMenu="{{ boxMenu }}"</paper-item>
-                                <paper-item>{{ boxMenu2 }}</paper-item>
+                                <paper-item>{{ menu }}</paper-item>
                         </paper-menu>
                     </paper-menu-button>
--->
-
-
-
-
-
-
-
-                        <paper-menu-button>
-                        <paper-icon-button icon="more-vert" class="dropdown-trigger"></paper-icon-button>
-                            <paper-menu class="dropdown-content">
-                                <template is="dom-repeat" items="{{ menuitem }}">
-                                    <paper-item>menu="{{ item }}"</paper-item>
-                                    <paper-item menu="{{ item }}"></paper-item>
-                                </template>
-                            </paper-menu>
-                        </paper-menu-button>
-
-
-
-
-<!--
-                    <paper-menu-button>
-                        <paper-icon-button icon="more-vert" class="dropdown-trigger"></paper-icon-button>
-                        <paper-menu class="dropdown-content" is="dom-repeat" items="{{ menu }}">
-                                <paper-item>{{ item }}</paper-item>
-                                <paper-item menu="{{ item }}"></paper-item>
-                        </paper-menu>
-                    </paper-menu-button>
--->
-
-<!--
-                <template is="dom-repeat" items="{{ component.children }}">
-                    <carbo-components-tree component="{{ item }}"></carbo-components-tree>
-                </template>
--->
-
-
 
                 </div>
             </div>
