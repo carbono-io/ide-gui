@@ -44,7 +44,16 @@
         children: [header, content, footer]
     };
 
+    var menu = {
+        title: 'Menu',
+        icon: 'backup'
+    };
+
+
+
     carbo.AAAAAA = body;
+
+    carbo.boxmenuitem = menu;
 
     window.addEventListener('WebComponentsReady', function () {
         
