@@ -172,12 +172,3 @@ gulp.task('jsdoc', function () {
         .pipe($.jsdoc.parser())
         .pipe($.jsdoc.generator('./docs'));
 });
-
-// Git-hook tasks
-<<<<<<< HEAD
-//gulp.task('post-merge', ['less']);
-//gulp.task('pre-commit', _jshint);
-=======
-gulp.task('post-merge', ['less']);
-gulp.task('pre-commit', _jshint);
->>>>>>> origin/feature/JRD-95-inserir-form
