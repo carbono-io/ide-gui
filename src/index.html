@@ -1,18 +1,19 @@
 <html>
-  <head>
+
+<head>
     <title>carbono</title>
 
 
     <!-- webcomponents lite -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-<script>
-    window.Polymer = window.Polymer || {};
-    window.Polymer.dom = 'shadow';
-  </script>
-      
-      
+    <script>
+        window.Polymer = window.Polymer || {};
+        window.Polymer.dom = 'shadow';
+    </script>
+
+
     <!-- semantic-ui stylesheet -->
-<!--    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">-->
 
     <!-- my styles -->
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -20,25 +21,25 @@
     <link rel="import" href="elements/header/header.html">
     <link rel="import" href="elements/structure/structure.html">
     <link rel="import" href="elements/workspace/workspace.html">
-    
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      
-    
-    
+
+
+
     <!-- Source Sans Pro Font -->
-      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'> 
-    
-      
-      
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
+
+
+
     <link rel="import" href="elements/routing.html">
-      
+
     <!-- paper-tabs of polymer-->
     <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
 
     <!-- paper-input of polymer-->
     <link rel="import" href="bower_components/paper-input/paper-input.html">
-      
+
     <!-- paper-checkbox of polymer-->
     <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
 
@@ -47,227 +48,231 @@
 
     <!-- Polymer components -->
     <link rel="import" href="bower_components/iron-pages/iron-pages.html">
-    
+
     <!-- Polymer components -->
     <link rel="import" href="bower_components/paper-menu/paper-menu.html">
 
     <!-- Polymer components -->
     <link rel="import" href="bower_components/paper-item/paper-item.html">
-      
-      
+
+
     <!-- carbo polymer components -->
     <link rel="import" href="elements/components-tree/components-tree.html">
 
-  </head>
-  <body>
+</head>
 
-      <!-- create a root for Polymer data binding -->
-      <template id="carbo" is="dom-bind">
-          
-          
-          <!-- pages for navigation -->
-          <iron-pages attr-for-selected="data-route" selected="{{route}}">
-              
-              
-              <div data-route="start" id="start">
+<body>
+
+    <!-- create a root for Polymer data binding -->
+    <template id="carbo" is="dom-bind">
+
+
+        <!-- pages for navigation -->
+        <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+
+            <div data-route="start" id="start">
                 <a id="new-button" href="/new">
                     <i class="material-icons">
                         mode edit
                     </i>
                 </a>
-              </div>
-              
-              <div data-route="loading" id="loading">
-                <div>loading ...</div>
-              </div>
-          
-          
-          
-      
-      
-      
-
-    <div data-route="lab" id="container">
-      
-      
-      
-      <div id="carbo-header-container">
-        <div id="carbo-header">
-          <div id="header-left">
-            <span>App <span>{{ app }}</span></span>
-            <i class="material-icons">keyboard_arrow_right</i>
-            <div id="header-left-section">
-                <span>Seção 1</span>
-                <i class="material-icons">arrow_drop_down</i>
             </div>
-          </div>
-          <div id="header-center">
-            <nav id="header-nav">
-<!--
+
+            <div data-route="loading" id="loading">
+                <div>loading ...</div>
+            </div>
+
+
+
+
+
+
+
+            <div data-route="lab" id="container">
+
+
+
+                <div id="carbo-header-container">
+                    <div id="carbo-header">
+                        <div id="header-left">
+                            <span>App <span>{{ app }}</span></span>
+                            <i class="material-icons">keyboard_arrow_right</i>
+                            <div id="header-left-section">
+                                <span>Seção 1</span>
+                                <i class="material-icons">arrow_drop_down</i>
+                            </div>
+                        </div>
+                        <div id="header-center">
+                            <nav id="header-nav">
+                                <!--
               <div data-route="users" href="/users">
                 <i class="material-icons">flag</i>
                 <span>DEFINIÇÃO</span>
               </div>
 -->
-              <div>
-                <i class="material-icons">palette</i>
-                <span>ESTILO</span>
-              </div>
-              <div>
-                <i class="material-icons">layers</i>
-                <span>DADOS</span>
-              </div>
-                <div>
-                <i class="material-icons">flash_on</i>
-                <span>AÇÕES</span>
-              </div>
+                                <div>
+                                    <i class="material-icons">palette</i>
+                                    <span>ESTILO</span>
+                                </div>
+                                <div>
+                                    <i class="material-icons">layers</i>
+                                    <span>DADOS</span>
+                                </div>
+                                <div>
+                                    <i class="material-icons">flash_on</i>
+                                    <span>AÇÕES</span>
+                                </div>
 
-              <div>
-                <i class="material-icons">publish</i>
+                                <div>
+                                    <i class="material-icons">publish</i>
 
-                  <span>PUBLICAÇÃO</span>
-              </div>
-            </nav>
-          </div>
-            <div id="header-right">
-                <div id="header-right-preview">
-                    <i class="material-icons play-circle-outline">play_circle_outline</i>
-                    <span>Preview</span>
-                    <i class="material-icons">arrow_drop_down</i>
+                                    <span>PUBLICAÇÃO</span>
+                                </div>
+                            </nav>
+                        </div>
+                        <div id="header-right">
+                            <div id="header-right-preview">
+                                <i class="material-icons play-circle-outline">play_circle_outline</i>
+                                <span>Preview</span>
+                                <i class="material-icons">arrow_drop_down</i>
+                            </div>
+                            <div>
+                                <i class="material-icons">settings</i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="carbo-header-panel" class="has-shadow">
+
+                        <div class="carbo-section">
+                            <div class="carbo-section-header">SEÇÃO 1</div>
+
+                            <div class="carbo-section-contents">
+
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen">
+                                        <div class="fake-fake-fake-fake-fake-app-header">Título tela 1</div>
+                                    </div>
+                                    <div class="carbo-section-screen-caption">Tela 1</div>
+                                </div>
+
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen">
+                                        <div class="fake-fake-fake-fake-fake-app-header">Título tela 2</div>
+                                    </div>
+                                    <div class="carbo-section-screen-caption">Tela 2</div>
+                                </div>
+
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen">
+                                        <div class="fake-fake-fake-fake-fake-app-header">Título tela 3</div>
+                                    </div>
+                                    <div class="carbo-section-screen-caption">Tela 3</div>
+
+                                </div>
+
+
+                                <!-- add screen -->
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen-add-button">
+                                        <i class="material-icons add-screen-button">add_circle</i>
+                                        <div class="button-caption">adicionar tela
+                                            <br>nesta seção</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="carbo-section-divider"></div>
+
+                        <div class="carbo-section">
+                            <div class="carbo-section-header">SEÇÃO 2</div>
+
+                            <div class="carbo-section-contents">
+
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen">
+                                        <div class="fake-fake-fake-fake-fake-app-header">Título tela 4</div>
+                                    </div>
+                                    <div class="carbo-section-screen-caption">Tela 4</div>
+                                </div>
+
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen">
+                                        <div class="fake-fake-fake-fake-fake-app-header">Título tela 5</div>
+                                    </div>
+                                    <div class="carbo-section-screen-caption">Tela 5</div>
+                                </div>
+
+                                <!-- add screen -->
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen-add-button">
+                                        <i class="material-icons add-screen-button" id="botao-lu">add_circle</i>
+                                        <div class="button-caption">adicionar tela
+                                            <br>nesta seção</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="carbo-section-divider"></div>
+
+                        <div class="carbo-section">
+                            <div class="carbo-section-header">SEÇÃO 3</div>
+
+                            <div class="carbo-section-contents">
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen">
+                                        <div class="fake-fake-fake-fake-fake-app-header">Título tela 6</div>
+                                    </div>
+                                    <div class="carbo-section-screen-caption">Tela 6</div>
+                                </div>
+
+                                <!-- add screen -->
+                                <div class="carbo-section-screen-container">
+                                    <div class="carbo-section-screen-add-button">
+                                        <i class="material-icons">add_circle</i>
+                                        <div class="button-caption">adicionar tela
+                                            <br>nesta seção</div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id="close-header-panel">
+                        layer
+                    </div>
+
+
+
                 </div>
-                <div>
-                    <i class="material-icons">settings</i>
-                </div>
-            </div>
-        </div>
 
-        <div id="carbo-header-panel" class="has-shadow">
-            
-          <div class="carbo-section">
-            <div class="carbo-section-header">SEÇÃO 1</div>
-            
-            <div class="carbo-section-contents">
-              
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen">
-                  <div class="fake-fake-fake-fake-fake-app-header">Título tela 1</div>
-                </div>
-                <div class="carbo-section-screen-caption">Tela 1</div>
-              </div>
+                <div id="carbo-body">
 
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen">
-                  <div class="fake-fake-fake-fake-fake-app-header">Título tela 2</div>
-                </div>
-                <div class="carbo-section-screen-caption">Tela 2</div>
-              </div>
-
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen">
-                  <div class="fake-fake-fake-fake-fake-app-header">Título tela 3</div>
-                </div>
-                <div class="carbo-section-screen-caption">Tela 3</div>
-                
-              </div>
-
-
-              <!-- add screen -->
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen-add-button">
-                  <i class="material-icons add-screen-button">add_circle</i>
-                  <div class="button-caption">adicionar tela<br>nesta seção</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="carbo-section-divider"></div>
-          
-          <div class="carbo-section">
-            <div class="carbo-section-header">SEÇÃO 2</div>
-            
-            <div class="carbo-section-contents">
-              
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen">
-                  <div class="fake-fake-fake-fake-fake-app-header">Título tela 4</div>
-                </div>
-                <div class="carbo-section-screen-caption">Tela 4</div>
-              </div>
-
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen">
-                  <div class="fake-fake-fake-fake-fake-app-header">Título tela 5</div>
-                </div>
-                <div class="carbo-section-screen-caption">Tela 5</div>
-              </div>
-
-                <!-- add screen -->
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen-add-button">
-                  <i class="material-icons add-screen-button" id="botao-lu">add_circle</i>
-                  <div class="button-caption">adicionar tela<br>nesta seção</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="carbo-section-divider"></div>
-          
-          <div class="carbo-section">
-            <div class="carbo-section-header">SEÇÃO 3</div>
-            
-            <div class="carbo-section-contents">
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen">
-                  <div class="fake-fake-fake-fake-fake-app-header">Título tela 6</div>
-                </div>
-                <div class="carbo-section-screen-caption">Tela 6</div>
-              </div>
-
-                <!-- add screen -->
-              <div class="carbo-section-screen-container">
-                <div class="carbo-section-screen-add-button">
-                  <i class="material-icons">add_circle</i>
-                  <div class="button-caption">adicionar tela<br>nesta seção</div>
-                </div>
-              </div>
-
-
-              </div>
-          </div>
-
-        </div>
-
-
-          <div id="close-header-panel">
-            layer
-        </div>
-
-
-
-      </div>
-      
-      <div id="carbo-body">
-        
-        <div id="left-panel">
-          <div id="box-components" class="box-panel">
-            <div class="box-header">
-              <div class="icon-name">
-                <i class="material-icons">widgets</i>
-                <span>COMPONENTES</span>
-              </div>
-              <div class="menu">
-<!--            Ícone + retirado do painel de componentes
+                    <div id="left-panel">
+                        <div id="box-components" class="box-panel">
+                            <div class="box-header">
+                                <div class="icon-name">
+                                    <i class="material-icons">widgets</i>
+                                    <span>COMPONENTES</span>
+                                </div>
+                                <div class="menu">
+                                    <!--            Ícone + retirado do painel de componentes
                 <i class="material-icons">add</i>-->
-                <i class="material-icons">more_vert</i>
-              </div>
-            </div>
-            <div class="box-content">
+                                    <i class="material-icons">more_vert</i>
+                                </div>
+                            </div>
+                            <div class="box-content">
 
-<!--
+                                <!--
                 <div class="components-group open">
                     <div class="components-item">
                         <div class="item-id">
@@ -309,246 +314,245 @@
                 </div>
 -->
 
-              
-              <carbo-components-tree component="{{AAAAAA}}"></carbo-components-tree>
+
+                                <carbo-components-tree component="{{AAAAAA}}"></carbo-components-tree>
 
 
-            </div>
-          </div>
-          <div id="box-configure" class="box-panel">
-            <div class="box-header">
-              <div class="icon-name">
-                <i class="material-icons">settings</i>
-                <span>CONFIGURAÇÕES</span>
-              </div>
-              <div class="menu">
-                <i class="material-icons">more_vert</i>
-              </div>
-            </div>
-            <div class="box-content">
-<!--                <img src="img/mocks/panelesq_02.png" style="width:224px;">-->
+                            </div>
+                        </div>
+                        <div id="box-configure" class="box-panel">
+                            <div class="box-header">
+                                <div class="icon-name">
+                                    <i class="material-icons">settings</i>
+                                    <span>CONFIGURAÇÕES</span>
+                                </div>
+                                <div class="menu">
+                                    <i class="material-icons">more_vert</i>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <!--                <img src="img/mocks/panelesq_02.png" style="width:224px;">-->
 
-                <style is="custom-style">
-            paper-checkbox {
-                display: block;
-                padding: 8px 0;
-                font-size: 12px;
-                font-family: "source sans pro";
-                --default-primary-color: #6D6D6D;
-                --primary-text-color: #6D6D6D;
-                --secondary-text-color: #D2D2D2;
-                }
-            paper-dropdown-menu {
-                padding: 0;
-                font-size: 12px;
-                font-family: "source sans pro";
-                --default-primary-color: #6D6D6D;
-                --primary-text-color: #6D6D6D;
-                --secondary-text-color: #D2D2D2;
-                --paper-menu-button {
-                    padding: 0;
-                }
-                }
-
-
-          </style>
-
-
-
-
-                <paper-dropdown-menu label="Your favourite pastry" no-animations="true">
-                  <paper-menu class="dropdown-content">
-                    <paper-item>Croissant</paper-item>
-                    <paper-item>Donut</paper-item>
-                    <paper-item>Financier</paper-item>
-                    <paper-item>Madeleine</paper-item>
-                  </paper-menu>
-                </paper-dropdown-menu>
-
-                <paper-checkbox>label 1</paper-checkbox>
-                <paper-checkbox>label 2</paper-checkbox>
-                <paper-checkbox>label 3</paper-checkbox>
-                <paper-checkbox>label 4</paper-checkbox>
-
-                <paper-input-container>
-                  <label>Your name</label>
-                  <input is="iron-input">
-                </paper-input-container>
-
-
-            </div>
-          </div>
-        </div>
-        
-        <div id="canvas-container">
-          
-          
-          <div id="canvas-control">
-            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
-            <div id="control">
-              <div id="control-zoom">
-                zoom
-              </div>
-              <div id="control-screen">
-                <i class="material-icons">keyboard_arrow_left</i>
-                <span>|</span>
-                <i class="material-icons">keyboard_arrow_right</i>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-        
-        <div id="box" class="has-shadow">
-          
-          <div class="box-header">
-            <div class="icon-name">
-              <i class="material-icons">add</i>
-              <span>ADICIONAR COMPONENTES</span>
-            </div>
-            <div class="menu">
-              <i class="material-icons">close</i>
-            </div>
-          </div>
+                                <style is="custom-style">
+                                    paper-checkbox {
+                                        display: block;
+                                        padding: 8px 0;
+                                        font-size: 12px;
+                                        font-family: "source sans pro";
+                                        --default-primary-color: #6D6D6D;
+                                        --primary-text-color: #6D6D6D;
+                                        --secondary-text-color: #D2D2D2;
+                                    }
+                                    
+                                    paper-dropdown-menu {
+                                        padding: 0;
+                                        font-size: 12px;
+                                        font-family: "source sans pro";
+                                        --default-primary-color: #6D6D6D;
+                                        --primary-text-color: #6D6D6D;
+                                        --secondary-text-color: #D2D2D2;
+                                        --paper-menu-button {
+                                            padding: 0;
+                                        }
+                                    }
+                                </style>
 
 
 
-          <style is="custom-style">
-            --default-primary-color: #6D6D6D;
-            --primary-text-color: #6D6D6D;
-            --secondary-text-color: #D2D2D2;
-            paper-tabs {
-              --paper-tabs-selection-bar-color: #6D6D6D;
-              height: 32px;
-              border-bottom: 1px solid #D2D2D2;
-              box-sizing: border-box;
-              font-family: "Source Sans Pro";
-              font-size: 12px;
-            }
-            paper-tab {
-              --paper-tab:{
-                background-color: #F2F2F2;
-                color: #6D6D6D;
-              };
-            }
-            paper-input-container {
-                padding: 16px 0;
-                font-size: 12px;
-                font-family: "source sans pro";
-                --default-primary-color: #6D6D6D;
-                --primary-text-color: #6D6D6D;
-                --secondary-text-color: #D2D2D2;
 
-                --paper-input-container-input {
-                    line-height: 32px;
-                    font-size: 12px;
+                                <paper-dropdown-menu label="Your favourite pastry" no-animations="true">
+                                    <paper-menu class="dropdown-content">
+                                        <paper-item>Croissant</paper-item>
+                                        <paper-item>Donut</paper-item>
+                                        <paper-item>Financier</paper-item>
+                                        <paper-item>Madeleine</paper-item>
+                                    </paper-menu>
+                                </paper-dropdown-menu>
 
-                }
-                --paper-input-container-label {
-                    font-size: 12px;
-                }
-            }
+                                <paper-checkbox>label 1</paper-checkbox>
+                                <paper-checkbox>label 2</paper-checkbox>
+                                <paper-checkbox>label 3</paper-checkbox>
+                                <paper-checkbox>label 4</paper-checkbox>
 
-          </style>
-
-          <div class="box-content">
-            <paper-tabs selected="0" noink="false">
-              <paper-tab>Básicos</paper-tab>
-              <paper-tab>Avançados</paper-tab>
-            </paper-tabs>
-
-            
+                                <paper-input-container>
+                                    <label>Your name</label>
+                                    <input is="iron-input">
+                                </paper-input-container>
 
 
-            <paper-input-container no-label-float="true">
-              <div prefix id="prefix"><i class="material-icons">search</i></div>
-              <label>Buscar elementos</label>
-              <input is="iron-input" id="input">
-            </paper-input-container>
-
-            <div id="tabs-content">
-              <div class="tab">
-                <div class="component">
-                  <div class="component-icon">
-                    <i class="material-icons">assignment</i>
-                  </div>
-                  <div class="component-label">
-                    Formulário
-                  </div>
-                    <div class="component-preview-on-hover">
-                        <div class="component-preview-container has-shadow-2">
-                          <div class="title">Preview</div>
-                          <div class="preview-screen"></div>
-                          <div class="screen-caption">Título da página</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="component">
-                  <div class="component-icon">
-                    <i class="material-icons">view_agenda</i>
-                  </div>
-                  <div class="component-label">
-                    Galeria mais comprido
-                  </div>
-                    <div class="component-preview-on-hover">
-                        <div class="component-preview-container has-shadow-2">
-                          <div class="title">Preview</div>
-                          <div class="preview-screen"></div>
-                          <div class="screen-caption">Título da página</div>
+                    <div id="canvas-container">
+
+
+                        <div id="canvas-control">
+                            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
+                            <div id="control">
+                                <div id="control-zoom">
+                                    zoom
+                                </div>
+                                <div id="control-screen">
+                                    <i class="material-icons">keyboard_arrow_left</i>
+                                    <span>|</span>
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="box" class="has-shadow">
+
+                        <div class="box-header">
+                            <div class="icon-name">
+                                <i class="material-icons">add</i>
+                                <span>ADICIONAR COMPONENTES</span>
+                            </div>
+                            <div class="menu">
+                                <i class="material-icons">close</i>
+                            </div>
+                        </div>
+
+
+
+                        <style is="custom-style">
+                            --default-primary-color: #6D6D6D;
+                            --primary-text-color: #6D6D6D;
+                            --secondary-text-color: #D2D2D2;
+                            paper-tabs {
+                                --paper-tabs-selection-bar-color: #6D6D6D;
+                                height: 32px;
+                                border-bottom: 1px solid #D2D2D2;
+                                box-sizing: border-box;
+                                font-family: "Source Sans Pro";
+                                font-size: 12px;
+                            }
+                            
+                            paper-tab {
+                                --paper-tab: {
+                                    background-color: #F2F2F2;
+                                    color: #6D6D6D;
+                                }
+                                ;
+                            }
+                            
+                            paper-input-container {
+                                padding: 16px 0;
+                                font-size: 12px;
+                                font-family: "source sans pro";
+                                --default-primary-color: #6D6D6D;
+                                --primary-text-color: #6D6D6D;
+                                --secondary-text-color: #D2D2D2;
+                                --paper-input-container-input {
+                                    line-height: 32px;
+                                    font-size: 12px;
+                                }
+                                --paper-input-container-label {
+                                    font-size: 12px;
+                                }
+                            }
+                        </style>
+
+                        <div class="box-content">
+                            <paper-tabs selected="0" noink="false">
+                                <paper-tab>Básicos</paper-tab>
+                                <paper-tab>Avançados</paper-tab>
+                            </paper-tabs>
+
+
+
+
+                            <paper-input-container no-label-float="true">
+                                <div prefix id="prefix"><i class="material-icons">search</i></div>
+                                <label>Buscar elementos</label>
+                                <input is="iron-input" id="input">
+                            </paper-input-container>
+
+                            <div id="tabs-content">
+                                <div class="tab">
+                                    <div class="component">
+                                        <div class="component-icon">
+                                            <i class="material-icons">assignment</i>
+                                        </div>
+                                        <div class="component-label">
+                                            Formulário
+                                        </div>
+                                        <div class="component-preview-on-hover">
+                                            <div class="component-preview-container has-shadow-2">
+                                                <div class="title">Preview</div>
+                                                <div class="preview-screen"></div>
+                                                <div class="screen-caption">Título da página</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="component">
+                                        <div class="component-icon">
+                                            <i class="material-icons">view_agenda</i>
+                                        </div>
+                                        <div class="component-label">
+                                            Galeria mais comprido
+                                        </div>
+                                        <div class="component-preview-on-hover">
+                                            <div class="component-preview-container has-shadow-2">
+                                                <div class="title">Preview</div>
+                                                <div class="preview-screen"></div>
+                                                <div class="screen-caption">Título da página</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="component">
+                                        <div class="component-icon">
+                                            <i class="material-icons">insert_chart</i>
+                                        </div>
+                                        <div class="component-label">
+                                            Gráfico
+                                        </div>
+                                        <div class="component-preview-on-hover">
+                                            <div class="component-preview-container has-shadow-2">
+                                                <div class="title">Preview</div>
+                                                <div class="preview-screen"></div>
+                                                <div class="screen-caption">Título da página</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="right-panel">
+                        <div id="box-configure" class="box-panel">
+                            <div class="box-header">
+                                <div class="icon-name">
+                                    <i class="material-icons">brush</i>
+                                    <span>ESTILO</span>
+                                </div>
+                                <div class="menu">
+                                    <i class="material-icons">more_vert</i>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <img src="img/mocks/paneldir_01.png" style="width:224px;">
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
 
 
-                <div class="component">
-                  <div class="component-icon">
-                    <i class="material-icons">insert_chart</i>
-                  </div>
-                  <div class="component-label">
-                    Gráfico
-                  </div>
-                     <div class="component-preview-on-hover">
-                    <div class="component-preview-container has-shadow-2">
-                      <div class="title">Preview</div>
-                      <div class="preview-screen"></div>
-                      <div class="screen-caption">Título da página</div>
-                    </div>
-                </div>
-                </div>
-              </div>
 
-            </div>
 
-          </div>
-
-        </div>
-        
-        <div id="right-panel">
-          <div id="box-configure" class="box-panel">
-            <div class="box-header">
-              <div class="icon-name">
-                <i class="material-icons">brush</i>
-                <span>ESTILO</span>
-              </div>
-              <div class="menu">
-                <i class="material-icons">more_vert</i>
-              </div>
-            </div>
-            <div class="box-content">
-                <img src="img/mocks/paneldir_01.png" style="width:224px;">
-            </div>
-          </div>
-        </div>
-
-      
-      </div>
-      
-      
-      
-
-<!--
+                <!--
       <carbo-structure>
 
         <left-panel>
@@ -573,14 +577,15 @@
 
       </carbo-structure>
 -->
-    </div>
-              
-              </iron-pages>
-                <!-- end of the pages container -->
-          
-          </template>
-        <!-- end of root Polymer binding object (carbo) -->
+            </div>
+
+        </iron-pages>
+        <!-- end of the pages container -->
+
+    </template>
+    <!-- end of root Polymer binding object (carbo) -->
 
     <script type="text/javascript" src="index.js"></script>
-  </body>
+</body>
+
 </html>
