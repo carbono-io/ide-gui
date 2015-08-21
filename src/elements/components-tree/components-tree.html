@@ -2,9 +2,7 @@
 <!-- TODO: import iron-icons -->
 
 <dom-module id="carbo-components-tree">
-
     <link rel="import" type="css" href="components-tree.css">
-
     <template>
         <!--componente start-->
         <div class="component" id="component">
@@ -21,16 +19,13 @@
             <div class="hoverer"></div>
 
             <div class="component-children-container" id="component-children-container">
-
                 <template is="dom-repeat" items="{{ component.children }}">
                     <carbo-components-tree component="{{ item }}"></carbo-components-tree>
                 </template>
-
             </div>
         </div>
         <!--componente end-->
     </template>
-
     <script src="components-tree.js"></script>
 
 </dom-module>

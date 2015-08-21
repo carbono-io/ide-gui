@@ -6,13 +6,10 @@
     carbo.app = 'teste';
     
     carbo.route = 'start';
-    
-    
 
     var header = {
         name: 'header',
     };
-
     var tabNav = {
         name: 'tabNav',
         children: [
@@ -32,7 +29,6 @@
             { name: 'tab-4' },
         ]
     };
-
     var content = {
         name: 'content',
         children: [tabNav, tabBody]
@@ -48,8 +44,6 @@
     };
 
     carbo.AAAAAA = body;
-
-
 
     window.addEventListener('WebComponentsReady', function () {
         

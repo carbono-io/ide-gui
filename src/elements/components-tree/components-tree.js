@@ -10,10 +10,8 @@ var CarboComponentsTree = Polymer({
 // },
 
 // handleBannerTap: function handleBannerTap(e) {
-
 //     e.preventDefault();
 //     e.stopPropagation();
-
 //     if (this.isOpen) {
 //         this.$.component.className += ' closed';
 //         this.isOpen = false;
