@@ -102,7 +102,7 @@ gulp.task('beautify-html', function () {
 
 
 function _todo() {
-    gulp.src(JS_DIR.concat(LESS_DIR))
+    gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
         .pipe($.todo({
             reporter: 'markdown',
         }))
