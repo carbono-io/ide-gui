@@ -64,7 +64,7 @@ function _less() {
             browsers: ['last 2 version'],
             cascade: false,
         }))
-        .pipe($.minifyCss())
+//        .pipe($.minifyCss())
         .pipe($.header(message))
         // Put files at source dir in order to use them for vulcanization
         .pipe(gulp.dest(SRC_DIR))

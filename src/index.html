@@ -6,12 +6,10 @@
 
     <!-- webcomponents lite -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-<!--
     <script>
         window.Polymer = window.Polymer || {};
         window.Polymer.dom = 'shadow';
     </script>
--->
 
 
     <!-- semantic-ui stylesheet -->
@@ -261,78 +259,15 @@
                 <div id="carbo-body">
 
                     <div id="left-panel">
-                        <div id="box-components" class="box-panel">
-                            <div class="box-header">
-                                <div class="icon-name">
-                                    <i class="material-icons">widgets</i>
-                                    <span>COMPONENTES</span>
-                                </div>
-                                <div class="menu">
-                                    <!--            Ícone + retirado do painel de componentes
-                <i class="material-icons">add</i>-->
-                                    <i class="material-icons">more_vert</i>
-                                </div>
-                            </div>
+                        <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
                             <div class="box-content">
-
-                                <!--
-                <div class="components-group open">
-                    <div class="components-item">
-                        <div class="item-id">
-                            <i class="material-icons">crop_7_5</i>
-                            <span>Header</span>
-                        </div>
-                        <div class="item-menu">
-                            <i class="material-icons">more_vert</i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="components-group open">
-
-                    <div class="components-item group-father">
-                        <div class="item-id">
-                            <i class="material-icons arrow">keyboard_arrow_down</i>
-                            <i class="material-icons">crop_portrait</i>
-                            <span>Tela 1</span>
-                        </div>
-                        <div class="item-menu">
-                            <i class="material-icons">more_vert</i>
-                        </div>
-
-                    </div>
-
-                    <div class="components-item">
-                        <div class="item-id">
-                            <i class="material-icons">format_bold</i>
-                            <span>Título tela 1</span>
-                        </div>
-
-                        <div class="item-menu">
-                            <i class="material-icons">more_vert</i>
-                        </div>
-                    </div>
-
-
-                </div>
--->
-
-
                                 <carbo-components-tree component="{{AAAAAA}}"></carbo-components-tree>
+                            </div>
+                        </carbo-panel>
 
 
-                            </div>
-                        </div>
-                        <div id="box-configure" class="box-panel">
-                            <div class="box-header">
-                                <div class="icon-name">
-                                    <i class="material-icons">settings</i>
-                                    <span>CONFIGURAÇÕES</span>
-                                </div>
-                                <div class="menu">
-                                    <i class="material-icons">more_vert</i>
-                                </div>
-                            </div>
+
+                        <carbo-panel title="Configurações" icon="settings" menu="{{ boxmenuitem }}">
                             <div class="box-content">
                                 <!--                <img src="img/mocks/panelesq_02.png" style="width:224px;">-->
 
@@ -382,9 +317,8 @@
                                     <input is="iron-input">
                                 </paper-input-container>
 
-
                             </div>
-                        </div>
+                        </carbo-panel>
                     </div>
 
                     <div id="canvas-container">
@@ -540,60 +474,8 @@
                             </div>
                         </carbo-panel>
 
-
-
-<!--                                <carbo-components-tree component="{{AAAAAA}}"></carbo-components-tree>-->
-
-
-<!--
-                        <div id="box-configure" class="box-panel">
-                            <div class="box-header">
-                                <div class="icon-name">
-                                    <i class="material-icons">brush</i>
-                                    <span>ESTILO</span>
-                                </div>
-                                <div class="menu">
-                                    <i class="material-icons">more_vert</i>
-                                </div>
-                            </div>
-                            <div class="box-content">
-                                <img src="img/mocks/paneldir_01.png" style="width:224px;">
-                            </div>
-                        </div>
--->
                     </div>
-
-
                 </div>
-
-
-
-
-                <!--
-      <carbo-structure>
-
-        <left-panel>
-          left panel
-        </left-panel>
-
-        <center>
-          
-          <div id="center">
-            centro
-            
-            <img id="phone" src="img/phone.png">
-            
-          </div>
-          
-          <carbo-workspace></carbo-workspace>
-        </center>
-
-        <right-panel>
-          right panel
-        </right-panel>
-
-      </carbo-structure>
--->
             </div>
 
         </iron-pages>

@@ -2,7 +2,69 @@
 'use strict';
 var CarboComponentsTree = Polymer({
     is: 'carbo-components-tree',
+    ready: function(){
+        var componentItself = this.$$('#component-itself');
+        console.log(componentItself);
+        var componentContext = this;
+        componentItself.addEventListener('click', function(event){
+            console.log('clicaram em mim!');
+            console.log(event);
+            var currentClass = componentContext.$$('#component').className;
+            if (currentClass == 'closed'){
+                componentContext.$$('#component').className = '';
+            } else {
+                componentContext.$$('#component').className = 'closed';
+            }
+        });
+    },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // TODO: setup event listeners
 
 // listeners: {
