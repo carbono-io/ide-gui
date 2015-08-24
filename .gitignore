@@ -3,6 +3,7 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /src/bower_components/
 /node_modules/
+npm-debug.log
 
 # all files from dist version
 /dist/

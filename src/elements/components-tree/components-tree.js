@@ -6,17 +6,41 @@ var CarboComponentsTree = Polymer({
         var componentItself = this.$$('#component-itself');
         console.log(componentItself);
         var componentContext = this;
+
+        var isClosed = !this.closed;
+
+        if (isClosed) {
+            console.log('open')
+            Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
+            isClosed = false;
+        } else {
+            console.log('close')
+            Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
+            isClosed = true;
+        }
+
         componentItself.addEventListener('click', function(event){
-            console.log('clicaram em mim!');
-            console.log(event);
-            var currentClass = componentContext.$$('#component').className;
-            if (currentClass == 'closed'){
-                componentContext.$$('#component').className = '';
+
+            if (isClosed) {
+                console.log('open')
+                Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
+                isClosed = false;
             } else {
-                componentContext.$$('#component').className = 'closed';
+                console.log('close')
+                Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
+                isClosed = true;
             }
+
+
+            // componentContext.updateStyles();
         });
     },
+
+    properties: {
+
+        closed: Boolean,
+
+    }
 });
 
 

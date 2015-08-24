@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "polymer-starter-kit": "https://github.com/PolymerElements/polymer-starter-kit.git#~1.0.3"
+  },
+  "maquina": {
+    "cruder": "12321"
   }
 }
