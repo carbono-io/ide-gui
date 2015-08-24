@@ -44,6 +44,8 @@
         children: [header, content, footer]
     };
 
+
+
     var menu = {
 //        title: 'Menu',
 //        icon: 'backup',
@@ -55,11 +57,31 @@
         ]
     };
 
+    var components = [
+        {
+            title: "Formulário",
+            icon: "assignment"
+        },
+        {
+            title: "Galeria",
+            icon: "view-agenda"
+        },
+        {
+            title: "Gráfico",
+            icon: "editor:insert-chart"
+        }
+
+    ]
+
 
 
     carbo.AAAAAA = body;
 
     carbo.boxmenuitem = menu;
+
+    carbo.paletteComponents = components;
+
+
 
     window.addEventListener('WebComponentsReady', function () {
         

@@ -35,10 +35,12 @@
         }
 
 
-        i {
-            font-size: 42px;
+        iron-icon {
+            width: 42px;
+            height: 42px;
             margin-bottom: @base-size;
         }
+
 
         .component-label {
             height: 30px; //2 * line-height (15px)
@@ -87,12 +89,32 @@
 
         }
     }
+}
 
-    .has-shadow {
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.has-shadow {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
-    .has-shadow-2 {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+.has-shadow-2 {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+#prefix {
+        i {
+        color: @mediumgrey;
+
+        //font-size of icons: 18px
+        font-size: @font-size-6;
+        line-height: 24px;
+                padding: 0 @base-size;
+        }
     }
+
+label {
+        font-size: @font-size-3;
+}
+
+#input {
+        font-size: @font-size-3;
 }
 
