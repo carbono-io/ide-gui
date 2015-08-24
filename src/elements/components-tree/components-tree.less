@@ -11,11 +11,14 @@
             .rotate(-90deg);
         }
         #component-children-container {
-            height: 0;
-            overflow: hidden;
-            transition: all 0.5s ease;
+            max-height: 0;
+//          overflow: hidden;
+
+
             carbo-components-tree {
-                display: none;
+                visibility: hidden;
+                transition: visibility 0s linear 0.2s;
+
             }
         }
     }
@@ -23,10 +26,18 @@
 
 #component-children-container {
     padding-left: @base-size * 2;
-    overflow: hidden;
-    height: auto;
-    transition: height ease 0.3s;
+    overflow-y: hidden;
+    max-height: 800px;
+    transition: max-height 0.2s ease;
+
+//  -webkit-transition: height 1s;
+
+    carbo-components-tree {
+        transition: visibility 0s linear 0s;
+        visibility: visible;
+    }
 }
+
 
 // TODO: documentation of hoverer
 #hoverer {
