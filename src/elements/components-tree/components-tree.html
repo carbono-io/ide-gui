@@ -1,6 +1,20 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <!-- TODO: import iron-icons -->
 
+<!--polymer - iron icon - essencial para todos os ícones funcionarem-->
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<!--polymer - sets - sets especícos de ícones - necessário para utilizar ícones destes sets -->
+<link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/image-icons.html">
+
+
+
+
+<!--<iron-icon icon="xxx"></iron-icon>-->
+
+
+
 <dom-module id="carbo-components-tree">
     <link rel="import" type="css" href="components-tree.css">
     <template>
@@ -8,12 +22,13 @@
         <div id="component">
             <div id="component-itself">
                 <div class="item-id">
-                    <i class="material-icons" id="arrow">keyboard_arrow_down</i>
-                    <i class="material-icons">crop_7_5</i>
+                    <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
+                    <iron-icon icon="image:crop-7-5"></iron-icon>
                     <span>{{ component.name }}</span>
+
                 </div>
                 <div class="item-menu">
-                    <i class="material-icons">more_vert</i>
+                    <iron-icon icon="more-vert"></iron-icon>
                 </div>
             </div>
             <div id="hoverer"></div>
