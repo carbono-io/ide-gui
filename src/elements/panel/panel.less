@@ -1,6 +1,13 @@
 @import '../../less/variables.less';
 @import '../../bower_components/lesshat/build/lesshat.less';
 :host {
+
+    iron-icon {
+                    width: 18px;
+                    height: 18px;
+				}
+
+
     // TODO: change class names
     .box-header {
 				display: flex;
@@ -37,6 +44,17 @@
                     height: 18px;
 				}
 
+                paper-menu-button {
+                    padding: 0;
+                }
+
+
+                paper-icon-button {
+                    margin-right: -8px;
+                    --iron-icon-height: 18px;
+                    --iron-icon-width: 18px;
+                }
+
 				.menu {
 						display: flex;
 						flex-direction: row;
@@ -48,6 +66,5 @@
 						}
 				}
 			}
-
 
 }

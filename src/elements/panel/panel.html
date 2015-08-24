@@ -10,8 +10,11 @@
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
 
 
+
+
 <!--id deve ter um '-' no meio do nome, para não dar conflitos nos web compnnetns-->
 <dom-module id="carbo-panel">
+
     <link  rel="import" type="css" href="panel.css">
     <template>
         <div id="box-configure" class="box-panel">
@@ -23,7 +26,10 @@
                 <div class="menu">
 
                     <paper-menu-button>
-                        <paper-icon-button icon="more-vert" class="dropdown-trigger"></paper-icon-button>
+
+                        <paper-icon-button icon="more-vert" id="icon-style" class="dropdown-trigger"></paper-icon-button>
+
+
                         <paper-menu class="dropdown-content">
                             <template is="dom-repeat" items="{{ menu.items }}">
                                 <paper-item><iron-icon icon="{{ item.icon }}"></iron-icon>{{ item.title }}</paper-item>
