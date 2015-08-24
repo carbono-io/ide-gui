@@ -3,6 +3,8 @@
 
 
 :host {
+//encontrar uma solução para issoo!!!!!!!!! ainda está identando.
+    position: relative;
 
 }
 
@@ -32,8 +34,6 @@
     max-height: 800px;
     transition: max-height 0.2s ease;
 
-//  -webkit-transition: height 1s;
-
     carbo-components-tree {
         transition: visibility 0s linear 0s;
         visibility: visible;
@@ -61,7 +61,7 @@
 }
 
 #component-itself {
-    position: relative;
+    position:relative;
     z-index: 4;
     display: flex;
     flex-direction: row;
@@ -70,26 +70,43 @@
     height: 5 * @base-size;
     padding-left: @base-size;
     padding-right: @base-size;
-    .material-icons {
-        font-size: @font-size-6;
-    }
+
     .item-id {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        .material-icons {
-            margin-right: @base-size/2;
-        }
+
         #arrow {
-            font-size: @font-size-5;
+            width: 16px;
+            height: 16px;
             margin-right: 0;
-            padding-left: - @base-size;
+            padding-left: - 8;
             transition: all 0.3s ease;
         }
+
+        iron-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: @base-size/2;
+
+        }
+
     }
+
     .item-menu {
         display: none;
+
+        paper-menu-button {
+            padding: 0;
+        }
+
+        paper-icon-button {
+            margin-right: -8px;
+            --iron-icon-height: 18px;
+            --iron-icon-width: 18px;
+        }
+
     }
     &:hover, &.active {
         cursor: pointer;
