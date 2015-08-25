@@ -1,7 +1,6 @@
 @import '../../less/variables.less';
 @import '../../bower_components/lesshat/build/lesshat.less';
 :host {
-
 }
 
 .tab {
@@ -24,14 +23,14 @@
 
         &:hover{
             background-color: @mediumgrey;
-                cursor: pointer;
-                transition: background-color ease 0.3s;
+            cursor: pointer;
+            transition: background-color ease 0.3s;
 
-                &>.component-preview-on-hover {
-                    visibility: visible;
-                    opacity: 1;
-                    transition-delay:0.5s;
-                }
+            &>.component-preview-on-hover {
+                visibility: visible;
+                opacity: 1;
+                transition-delay:0.5s;
+            }
         }
 
 
@@ -45,48 +44,6 @@
         .component-label {
             height: 30px; //2 * line-height (15px)
             overflow: hidden;
-        }
-    }
-    .component-preview-on-hover {
-
-        visibility: hidden;
-        opacity: 0;
-        position: absolute;
-        .translate(-(2 * @base-size), 2 * @base-size);
-        transition: visibility ease 0.3s, opacity 0.5s ease;
-
-        .component-preview-container {
-
-            padding-top: 3 * @base-size;
-            padding-right: 3 * @base-size;
-            padding-bottom: 3 * @base-size;
-            padding-left: 3 * @base-size;
-
-            background-color: @white;
-            text-align: left;
-
-
-            .title {
-                font-size: @font-size-4;
-                margin-bottom: @base-size;
-            }
-
-            .preview-screen {
-//                        height: 45 * @base-size;
-//                        width: 28 * @base-size;
-
-                background-color: @white;
-                width: @phone-frame-width/ 1.5;
-                height: @phone-proportion * @phone-frame-width/ 1.5;
-                border: solid 1px @mediumgrey;
-                box-sizing: border-box; //consider border on height size
-
-            }
-            .screen-caption {
-                margin-top: @base-size;
-            }
-
-
         }
     }
 }
@@ -106,15 +63,65 @@
         //font-size of icons: 18px
         font-size: @font-size-6;
         line-height: 24px;
-                padding: 0 @base-size;
+        padding: 0 @base-size;
         }
     }
 
-label {
+iron-icon {
+        width: 18px;
+        height: 18px;
+        }
+
+
+// continuar a ver isso depois!!!
+    #label-style {
         font-size: @font-size-3;
-}
+    }
+
+
 
 #input {
         font-size: @font-size-3;
+}
+
+
+
+#preview {
+    visibility: visible;
+    opacity: 1;
+    position: fixed;
+//    .translate(-(2 * @base-size), 2 * @base-size);
+    transition: visibility ease 0.3s, opacity 0.5s ease;
+
+    .component-preview-container {
+
+        padding-top: 3 * @base-size;
+        padding-right: 3 * @base-size;
+        padding-bottom: 3 * @base-size;
+        padding-left: 3 * @base-size;
+
+        background-color: @white;
+        text-align: left;
+
+
+        .title {
+            font-size: @font-size-4;
+            margin-bottom: @base-size;
+        }
+
+        .preview-screen {
+            background-color: @white;
+            width: @phone-frame-width/ 1.5;
+            height: @phone-proportion * @phone-frame-width/ 1.5;
+            border: solid 1px @mediumgrey;
+            box-sizing: border-box; //consider border on height size
+
+        }
+        .screen-caption {
+            margin-top: @base-size;
+        }
+
+
+    }
 }
 
