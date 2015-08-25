@@ -20,8 +20,11 @@
     <link rel="stylesheet" type="text/css" href="index.css">
 
     <link rel="import" href="elements/header/header.html">
+    <link rel="import" href="elements/body/body.html">
+<!--
     <link rel="import" href="elements/structure/structure.html">
     <link rel="import" href="elements/workspace/workspace.html">
+-->
 
 <!--
 
@@ -39,7 +42,7 @@
     <link rel="import" href="elements/routing.html">
 
     <!-- paper-tabs of polymer-->
-    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+<!--    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">-->
 
     <!-- paper-input of polymer-->
 <!--    <link rel="import" href="bower_components/paper-input/paper-input.html">-->
@@ -51,7 +54,7 @@
 <!--    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">-->
 
     <!-- Polymer components -->
-<!--    <link rel="import" href="bower_components/iron-pages/iron-pages.html">-->
+    <link rel="import" href="bower_components/iron-pages/iron-pages.html">
 
     <!-- Polymer components -->
 <!--    <link rel="import" href="bower_components/paper-menu/paper-menu.html">-->
@@ -61,10 +64,12 @@
 
 
     <!-- carbo polymer components -->
+<!--
     <link rel="import" href="elements/components-tree/components-tree.html">
     <link rel="import" href="elements/panel/panel.html">
     <link rel="import" href="elements/components-palette/components-palette.html">
     <link rel="import" href="elements/component-settings/component-settings.html">
+-->
 
 
 </head>
@@ -92,18 +97,12 @@
             </div>
 
 
-
-
-
             <div data-route="lab" id="container">
 
                 <carbo-header sections="{{appsections}}"> </carbo-header>
-
-                <div id="carbo-body">
-
-                    <div id="left-panel">
-
-                        <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
+                <carbo-body>
+                    <left>
+                          <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
                             <div class="box-content">
                                 <carbo-components-tree component="{{AAAAAA}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
                             </div>
@@ -121,116 +120,13 @@
 
 
                         </carbo-panel>
-                    </div>
+                    </left>
 
-                    <div id="canvas-container">
+                    <workspace></workspace>
+                    <box></box>
+                    <right></right>
+                </carbo-body>
 
-
-                        <div id="canvas-control">
-                            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
-                            <div id="control">
-                                <div id="control-zoom">
-                                    zoom
-                                </div>
-                                <div id="control-screen">
-                                    <i class="material-icons">keyboard_arrow_left</i>
-                                    <span>|</span>
-                                    <i class="material-icons">keyboard_arrow_right</i>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div id="box" class="has-shadow">
-
-                        <div class="box-header">
-                            <div class="icon-name">
-                                <i class="material-icons">add</i>
-                                <span>ADICIONAR COMPONENTES</span>
-                            </div>
-                            <div class="menu">
-                                <i class="material-icons">close</i>
-                            </div>
-                        </div>
-
-
-
-<!--
-                        <style is="custom-style">
-
-                            --default-primary-color: #6D6D6D;
-                            --primary-text-color: #6D6D6D;
-                            --secondary-text-color: #D2D2D2;
-                            paper-tabs {
-                                --paper-tabs-selection-bar-color: #6D6D6D;
-                                height: 32px;
-                                border-bottom: 1px solid #D2D2D2;
-                                box-sizing: border-box;
-                                font-family: "Source Sans Pro";
-                                font-size: 12px;
-                            }
-
-                            paper-tab {
-                                --paper-tab {
-                                    background-color: #F2F2F2;
-                                    color: #6D6D6D;
-                                }
-                            }
-
-                            paper-input-container {
-                                padding: 16px 0;
-                                font-size: 12px;
-                                font-family: "source sans pro";
-                                --default-primary-color: #6D6D6D;
-                                --primary-text-color: #6D6D6D;
-                                --secondary-text-color: #D2D2D2;
-                                --paper-input-container-input {
-                                    line-height: 32px;
-                                    font-size: 12px;
-                                }
-                                --paper-input-container-label {
-                                    font-size: 12px;
-                                }
-                            }
-
-                        </style>
--->
-
-                        <div class="box-content">
-<!--
-                            <paper-tabs selected="0" noink="false">
-                                <paper-tab>Básicos</paper-tab>
-                                <paper-tab>Avançados</paper-tab>
-                            </paper-tabs>
-
-
-
-
-                            <paper-input-container no-label-float="true">
-                                <div prefix id="prefix"><i class="material-icons">search</i></div>
-                                <label>Buscar elementos</label>
-                                <input is="iron-input" id="input">
-                            </paper-input-container>
--->
-                            <carbo-components-palette components="{{ paletteComponents }}"></carbo-components-palette>
-
-                        </div>
-
-                    </div>
-
-                    <div id="right-panel">
-
-                        <carbo-panel title="Estilo" icon="image:palette" menu="{{ boxmenuitem }}">
-                            <div class="box-content">
-                                <carbo-components-tree component="{{componentscategories}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
-
-                            </div>
-                        </carbo-panel>
-
-                    </div>
-                </div>
             </div>
 
         </iron-pages>
