@@ -1,0 +1,108 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<!-- paper-input of polymer-->
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+<!-- paper-checkbox of polymer-->
+<link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
+<!-- paper-dropbown-menu of polymer-->
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+
+<!-- paper-menu of polymer -->
+<link rel="import" href="bower_components/paper-menu/paper-menu.html">
+
+<!-- paper-item of polymer -->
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+
+<!--polymer - iron icon - essencial para todos os ícones funcionarem-->
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<!--polymer - iron icon - essencial para todos os ícones funcionarem-->
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+
+
+<dom-module id="carbo-component-settings">
+
+    <link rel="import" type="css" href="component-settings.css">
+
+<template>
+
+    <paper-dropdown-menu label="Your favourite pastry" no-animations="true">
+        <paper-menu class="dropdown-content">
+            <paper-item>Croissant</paper-item>
+            <paper-item>Donut</paper-item>
+            <paper-item>Financier</paper-item>
+            <paper-item>Madeleine</paper-item>
+        </paper-menu>
+    </paper-dropdown-menu>
+
+    <paper-checkbox id="checkbox">oioioi</paper-checkbox>
+
+    <paper-input-container>
+        <label>Your name</label>
+        <input is="iron-input">
+    </paper-input-container>
+
+
+</template>
+
+
+
+
+<script type= "text/javascript">
+    Polymer({
+        is: 'carbo-component-settings',
+
+    })
+</script>
+
+<!--
+    <script type="text/javascript">
+        Polymer({
+            is: 'test-hello',
+            properties: {
+                who: {
+                    // Tipo da propriedade
+                    type: String,
+
+                    // Se nao vier nada em 'who', esse vai ser o valor padrão
+                    value: 'valor default',
+
+                    // Notify true significa que o valor da
+                    // propriedade vai ficar sendo atualizado constantemente
+                    notify: true,
+                }
+            },
+
+            handleClick: function (event) {
+
+                // event.currentTarget é o elemento que
+                // tem o evento registrado
+                var currentTarget = event.currentTarget;
+
+                // Precisa usar "this.set('caminho.para.a.propriedade', 'valor')"
+                // para trocar no html dinamicamente
+                this.set('who', 'clicaram na pessoa e troquei o nome dela');
+            },
+
+            handleMouseover: function (event) {
+                // Toggle class
+                //                        classe   true/false  elemento
+                this.toggleClass('active', true      , this.$.ola);
+            },
+
+            handleMouseout: function (event) {
+                // Toggle class
+                //                        classe   true/false  elemento
+                this.toggleClass('active', false     , this.$.ola);
+            }
+        });
+    </script>
+-->
+
+
+
+
+</dom-module>

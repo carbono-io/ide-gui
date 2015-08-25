@@ -73,11 +73,35 @@
 
     ]
 
+    var section1 = {
+        title: 'SEÇÃO 1',
+        screens: [
+        { title: 'Tela 1' },
+        { title: 'Tela 2' }
+        ]
+    }
+
+    var section2 = {
+        title: 'SEÇÃO 2',
+        screens: [
+        { title: 'Tela 1' },
+        { title: 'Tela 2' },
+        { title: 'Tela 3' }
+        ]
+    }
+
+    var sections = {
+
+        items: [section1, section2]
+    }
+
 
 
     carbo.AAAAAA = body;
 
     carbo.boxmenuitem = menu;
+
+    carbo.appsections = sections;
 
     carbo.paletteComponents = components;
 
