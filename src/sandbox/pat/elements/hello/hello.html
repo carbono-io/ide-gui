@@ -1,0 +1,56 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<dom-module id="test-hello">
+
+    <link rel="import" type="css" href="hello.css">
+
+    <template>
+        <div on-mouseover="handleMouseover" on-mouseout="handleMouseout">
+            <span id="ola">olá, </span>
+            <span id="pessoa" on-click="handleClick">{{ who }}</span>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        Polymer({
+            is: 'test-hello',
+            properties: {
+                who: {
+                    // Tipo da propriedade
+                    type: String,
+
+                    // Se nao vier nada em 'who', esse vai ser o valor padrão
+                    value: 'valor default',
+
+                    // Notify true significa que o valor da
+                    // propriedade vai ficar sendo atualizado constantemente
+                    notify: true,
+                }
+            },
+
+            handleClick: function (event) {
+
+                // event.currentTarget é o elemento que
+                // tem o evento registrado
+                var currentTarget = event.currentTarget;
+
+                // Precisa usar "this.set('caminho.para.a.propriedade', 'valor')"
+                // para trocar no html dinamicamente
+                this.set('who', 'clicaram na pessoa e troquei o nome dela');
+            },
+
+            handleMouseover: function (event) {
+                // Toggle class
+                //                        classe   true/false  elemento
+                this.toggleClass('active', true      , this.$.ola);
+            },
+
+            handleMouseout: function (event) {
+                // Toggle class
+                //                        classe   true/false  elemento
+                this.toggleClass('active', false     , this.$.ola);
+            }
+        });
+    </script>
+
+</dom-module>

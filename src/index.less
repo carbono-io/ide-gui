@@ -85,316 +85,316 @@ body {
 		// items should occupy the whole width
 //    align-items: stretch;
 		
-		#carbo-header-container {
-			position: fixed;
-			z-index: 2;
-			top: 0px;
-			left: 0px;
-			right: 0px;
-
-			// let its height be 0 
-			// so that it does not cover clicks on other
-			// portions of the screen
-			height: 0px;
-			
-			#carbo-header {
-				// let position be relative so that 
-				// we can put a z-index on it
-				position: relative;
-				z-index: 2;
-
-				padding-left: 2 * @base-size;
-				padding-right: 2 * @base-size;
-
-				height: @header-height;
-
-				background-color: @mediumgrey;
-
-				color: @darkgrey;
-
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-
-				#header-left {
-						font-size: @font-size-5;
-						width: 30%;
-						display:flex;
-						flex-direction: row;
-						align-items:center;
-
-
-
-						#header-left-section {
-								display:flex;
-								flex-direction: row;
-								align-items:center;
-								font-weight: @bold;
-
-										&:hover {
-										cursor: pointer;
-										}
-						}
-				}
-
-				#header-center {
-
-					#header-nav {
-						display: flex;
-						flex-direction: row;
-
-						> div {          
-							font-size: @font-size-2;
-
-							display: flex;
-							flex-direction: column;
-							align-items: center;
-							justify-content: center;
-
-							height: @header-height;
-							width: @header-height + (3 * @base-size);
-
-							transition: all ease 0.3s;
-
-							.material-icons {
-								margin-bottom: @base-size / 2;
-								font-size: @font-size-6;
-
-							}
-
-							&:hover {
-								cursor: pointer;
-								background-color: @grey;
-								color: @white;
-							}
-						}
-					}
-				}
-
-				#header-right {
-
-						font-size: @font-size-3;
-						width: 30%;
-						display:flex;
-						flex-direction: row;
-						justify-content: flex-end;
-
-						i {
-								font-size: @font-size-6;
-
-								&:hover {
-								cursor: pointer;
-							}
-
-						}
-
-						#header-right-preview {
-
-								display: flex;
-								flex-direction: row;
-								align-items: center;
-								margin-right: @base-size*2;
-
-								&:hover {
-								cursor: pointer;
-							}
-
-								i {
-										font-size: @font-size-6;
-								}
-
-								.play-circle-outline {
-										padding-right: @base-size;
-								}
-
-
-
-
-						}
-				}
-
-
-			}
-			
-			#carbo-header-panel {
-
-				// let position be relative so that 
-				// we can put a z-index on it
-				// its z-index should be lower
-				// than the #carbo-header's
-				position: relative;
-				z-index: 1;
-
-				display: flex;
-				flex-direction: row;
-				justify-content: flex-start;
-				align-items: stretch;
-
-				background-color: @white;
-				opacity: 0;
-
-				.transition(transform 0.3s ease, opacity 0.2s ease);
-				
-				.translateY(-100%);
-				
-				&.active {
-					.translateY(0);
-
-					opacity: 1;
-				}
-				
-				.carbo-section {
-					background-color: @white;
-					padding: 3 * @base-size 2 * @base-size;
-
-					.transition(background-color ease 0.5s);
-
-					&:hover {
-						background-color: @lightgrey;
-						cursor: pointer;
-
-
-					}
-					
-					.carbo-section-header {
-						height: 2 * @base-size;
-						font-size: @font-size-4;
-						margin-bottom: @base-size;
-					}
-
-					
-					.carbo-section-contents {
-						display: flex;
-						flex-direction: row;
-					}
-					
-					.carbo-section-screen-container {
-						margin-top: 0;
-						margin-right: @base-size;
-						margin-bottom: 0;
-						margin-left: @base-size;
-
-							&:first-child {
-									margin-left: 0;
-							}
-
-							&:last-child {
-									margin-right: 0;
-							}
-
-
-						
-						.carbo-section-screen {
-							background-color: @white;
-							width: @phone-frame-width/ 3;
-							height: @phone-proportion * @phone-frame-width/ 3;
-							border: solid 1px @mediumgrey;
-							box-sizing: border-box; //consider border on height size
-
-							.transition(border ease 0.5s);
-
-							&:hover {
-								border-color: @darkgrey;
-								cursor: pointer;
-							}
-
-
-							/**
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 */
-							.fake-fake-fake-fake-fake-app-header {
-								background-color: @lightgrey;
-
-								font-size: @font-size-2;
-
-								font-weight: @regular;
-
-								text-align: center;
-
-								padding-top: 3px;
-								padding-bottom: 3px;
-							}
-							/**
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 * REMOVER PELO AMOR DE DEUS
-							 */
-						
-						}
-						
-						.carbo-section-screen-caption {
-							font-size: @font-size-3;
-							margin-top: @base-size;
-							height: 2 * @base-size;
-						}
-
-
-
-						// The button for adding screens
-						.carbo-section-screen-add-button {
-							background-color: @lightgrey;
-							width: @phone-frame-width/ 3;
-							height: @phone-proportion * @phone-frame-width/ 3;
-							border: solid 1px @mediumgrey;
-
-							display: flex;
-							flex-direction: column;
-							justify-content: center;
-							align-items: center;
-
-							.material-icons {
-								color: @grey;
-									&:hover {
-										color: @darkgrey;
-									}
-							}
-
-
-
-							.button-caption {
-								text-align: center;
-								font-size: @font-size-2;
-								color: @grey;
-							}
-						}
-
-					}
-				
-				}
-				
-				.carbo-section-divider {
-					background-color: @white;
-					width: 2 * @base-size + 1;
-				}
-
-			}
-
-				#close-header-panel{
-						background-color: @mediumgrey;
-						opacity: 0;
-						visibility: hidden;
-						position: absolute;
-						z-index: 0;
-						top: 0;
-						width: 100%;
-						transition: all 0.3s ease;
-						transition-delay: 0;
-
-						&.active {
-								visibility: visible;
-								opacity: 0.9;
-						}
-				}
-			
-		}
+//		#carbo-header-container {
+//			position: fixed;
+//			z-index: 2;
+//			top: 0px;
+//			left: 0px;
+//			right: 0px;
+//
+//			// let its height be 0
+//			// so that it does not cover clicks on other
+//			// portions of the screen
+//			height: 0px;
+//
+//			#carbo-header {
+//				// let position be relative so that
+//				// we can put a z-index on it
+//				position: relative;
+//				z-index: 2;
+//
+//				padding-left: 2 * @base-size;
+//				padding-right: 2 * @base-size;
+//
+//				height: @header-height;
+//
+//				background-color: @mediumgrey;
+//
+//				color: @darkgrey;
+//
+//				display: flex;
+//				justify-content: space-between;
+//				align-items: center;
+//
+//				#header-left {
+//						font-size: @font-size-5;
+//						width: 30%;
+//						display:flex;
+//						flex-direction: row;
+//						align-items:center;
+//
+//
+//
+//						#header-left-section {
+//								display:flex;
+//								flex-direction: row;
+//								align-items:center;
+//								font-weight: @bold;
+//
+//										&:hover {
+//										cursor: pointer;
+//										}
+//						}
+//				}
+//
+//				#header-center {
+//
+//					#header-nav {
+//						display: flex;
+//						flex-direction: row;
+//
+//						> div {
+//							font-size: @font-size-2;
+//
+//							display: flex;
+//							flex-direction: column;
+//							align-items: center;
+//							justify-content: center;
+//
+//							height: @header-height;
+//							width: @header-height + (3 * @base-size);
+//
+//							transition: all ease 0.3s;
+//
+//							.material-icons {
+//								margin-bottom: @base-size / 2;
+//								font-size: @font-size-6;
+//
+//							}
+//
+//							&:hover {
+//								cursor: pointer;
+//								background-color: @grey;
+//								color: @white;
+//							}
+//						}
+//					}
+//				}
+//
+//				#header-right {
+//
+//						font-size: @font-size-3;
+//						width: 30%;
+//						display:flex;
+//						flex-direction: row;
+//						justify-content: flex-end;
+//
+//						i {
+//								font-size: @font-size-6;
+//
+//								&:hover {
+//								cursor: pointer;
+//							}
+//
+//						}
+//
+//						#header-right-preview {
+//
+//								display: flex;
+//								flex-direction: row;
+//								align-items: center;
+//								margin-right: @base-size*2;
+//
+//								&:hover {
+//								cursor: pointer;
+//							}
+//
+//								i {
+//										font-size: @font-size-6;
+//								}
+//
+//								.play-circle-outline {
+//										padding-right: @base-size;
+//								}
+//
+//
+//
+//
+//						}
+//				}
+//
+//
+//			}
+//
+//			#carbo-header-panel {
+//
+//				// let position be relative so that
+//				// we can put a z-index on it
+//				// its z-index should be lower
+//				// than the #carbo-header's
+//				position: relative;
+//				z-index: 1;
+//
+//				display: flex;
+//				flex-direction: row;
+//				justify-content: flex-start;
+//				align-items: stretch;
+//
+//				background-color: @white;
+//				opacity: 0;
+//
+//				.transition(transform 0.3s ease, opacity 0.2s ease);
+//
+//				.translateY(-100%);
+//
+//				&.active {
+//					.translateY(0);
+//
+//					opacity: 1;
+//				}
+//
+//				.carbo-section {
+//					background-color: @white;
+//					padding: 3 * @base-size 2 * @base-size;
+//
+//					.transition(background-color ease 0.5s);
+//
+//					&:hover {
+//						background-color: @lightgrey;
+//						cursor: pointer;
+//
+//
+//					}
+//
+//					.carbo-section-header {
+//						height: 2 * @base-size;
+//						font-size: @font-size-4;
+//						margin-bottom: @base-size;
+//					}
+//
+//
+//					.carbo-section-contents {
+//						display: flex;
+//						flex-direction: row;
+//					}
+//
+//					.carbo-section-screen-container {
+//						margin-top: 0;
+//						margin-right: @base-size;
+//						margin-bottom: 0;
+//						margin-left: @base-size;
+//
+//							&:first-child {
+//									margin-left: 0;
+//							}
+//
+//							&:last-child {
+//									margin-right: 0;
+//							}
+//
+//
+//
+//						.carbo-section-screen {
+//							background-color: @white;
+//							width: @phone-frame-width/ 3;
+//							height: @phone-proportion * @phone-frame-width/ 3;
+//							border: solid 1px @mediumgrey;
+//							box-sizing: border-box; //consider border on height size
+//
+//							.transition(border ease 0.5s);
+//
+//							&:hover {
+//								border-color: @darkgrey;
+//								cursor: pointer;
+//							}
+//
+//
+//							/**
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 */
+//							.fake-fake-fake-fake-fake-app-header {
+//								background-color: @lightgrey;
+//
+//								font-size: @font-size-2;
+//
+//								font-weight: @regular;
+//
+//								text-align: center;
+//
+//								padding-top: 3px;
+//								padding-bottom: 3px;
+//							}
+//							/**
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 * REMOVER PELO AMOR DE DEUS
+//							 */
+//
+//						}
+//
+//						.carbo-section-screen-caption {
+//							font-size: @font-size-3;
+//							margin-top: @base-size;
+//							height: 2 * @base-size;
+//						}
+//
+//
+//
+//						// The button for adding screens
+//						.carbo-section-screen-add-button {
+//							background-color: @lightgrey;
+//							width: @phone-frame-width/ 3;
+//							height: @phone-proportion * @phone-frame-width/ 3;
+//							border: solid 1px @mediumgrey;
+//
+//							display: flex;
+//							flex-direction: column;
+//							justify-content: center;
+//							align-items: center;
+//
+//							.material-icons {
+//								color: @grey;
+//									&:hover {
+//										color: @darkgrey;
+//									}
+//							}
+//
+//
+//
+//							.button-caption {
+//								text-align: center;
+//								font-size: @font-size-2;
+//								color: @grey;
+//							}
+//						}
+//
+//					}
+//
+//				}
+//
+//				.carbo-section-divider {
+//					background-color: @white;
+//					width: 2 * @base-size + 1;
+//				}
+//
+//			}
+//
+//				#close-header-panel{
+//						background-color: @mediumgrey;
+//						opacity: 0;
+//						visibility: hidden;
+//						position: absolute;
+//						z-index: 0;
+//						top: 0;
+//						width: 100%;
+//						transition: all 0.3s ease;
+//						transition-delay: 0;
+//
+//						&.active {
+//								visibility: visible;
+//								opacity: 0.9;
+//						}
+//				}
+//
+//		}
 
 
 		
@@ -439,57 +439,13 @@ body {
 				margin-right: @base-size;
 				border-right: solid 1px @mediumgrey;
 
-				.box-panel {
-					height: 50%;
-					overflow: auto;
-
-						// remover
-						position: relative;
-				}
-
-
-
-
-
+//				.box-panel {
+//					height: 50%;
+//					overflow: auto;
 //
-//            .components-group {
-//
-//                .components-item {
-//
-//                    padding-left: 4 * @base-size;
-//
-//                    &.group-father {
-//                          padding-left:@base-size;
-//
-//                      .arrow {
-//                            font-size: @font-size-5;
-//                            margin-right: 0;
-//                      }
-//
-//                    }
-//
-//                }
-//
-//
-//
-//                &.closed {
-//
-//                  .components-item {
-//                        display:none;
-//
-//                      &.group-father {
-//                          display:flex;
-//
-//                          .arrow {
-//                              .rotate(-90deg);
-//                          }
-//
-//                      }
-//                  }
-//
-//              }
-//        }
-
+//						// remover
+//						position: relative;
+//				}
 
 
 
