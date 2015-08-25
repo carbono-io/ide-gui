@@ -5,22 +5,11 @@ FROM node:0.10.39
 # which now is the home directory of the ide user.
 RUN mkdir /src && \
     groupadd -r ide -g 433 && \
-    useradd -u 431 -r -g ide -d /src -c "IDE user" ide
-
-# When bower is run, it asks if you wanna send
-# statistics to them. This breaks up all the automation
-# flow. So by exporting an environment variable called
-# CI, bower won't ask about statistics again.
-ENV CI true
+    useradd -u 431 -r -g ide -d /src -c "IDE user" ide && \
+    chown -R ide:ide /src
 
 WORKDIR /src
 ADD . /src
-RUN npm install && \
-	npm install -g gulp && \
-	npm install -g bower && \
-	chown -R ide:ide /src
-
+RUN npm install -g gulp
 USER ide
-RUN bower install
-
 EXPOSE 3000
