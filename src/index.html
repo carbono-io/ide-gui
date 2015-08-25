@@ -23,8 +23,11 @@
     <link rel="import" href="elements/structure/structure.html">
     <link rel="import" href="elements/workspace/workspace.html">
 
-    <!-- Material Icons -->
+<!--
+
+     Material Icons
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+-->
 
 
 
@@ -39,28 +42,30 @@
     <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
 
     <!-- paper-input of polymer-->
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
+<!--    <link rel="import" href="bower_components/paper-input/paper-input.html">-->
 
     <!-- paper-checkbox of polymer-->
-    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+<!--    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">-->
 
     <!-- paper-dropbown-menu of polymer-->
-    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<!--    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">-->
 
     <!-- Polymer components -->
-    <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+<!--    <link rel="import" href="bower_components/iron-pages/iron-pages.html">-->
 
     <!-- Polymer components -->
-    <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+<!--    <link rel="import" href="bower_components/paper-menu/paper-menu.html">-->
 
     <!-- Polymer components -->
-    <link rel="import" href="bower_components/paper-item/paper-item.html">
+<!--    <link rel="import" href="bower_components/paper-item/paper-item.html">-->
 
 
     <!-- carbo polymer components -->
     <link rel="import" href="elements/components-tree/components-tree.html">
     <link rel="import" href="elements/panel/panel.html">
     <link rel="import" href="elements/components-palette/components-palette.html">
+    <link rel="import" href="elements/component-settings/component-settings.html">
+
 
 </head>
 
@@ -92,73 +97,29 @@
 
             <div data-route="lab" id="container">
 
-                <carbo-header>
-                </carbo-header>
+                <carbo-header sections="{{appsections}}"> </carbo-header>
 
                 <div id="carbo-body">
 
                     <div id="left-panel">
+
                         <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
                             <div class="box-content">
                                 <carbo-components-tree component="{{AAAAAA}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
-
-
                             </div>
                         </carbo-panel>
 
-
-
                         <carbo-panel title="Configurações" icon="settings" menu="{{ boxmenuitem }}">
                             <div class="box-content">
-                                <!--                <img src="img/mocks/panelesq_02.png" style="width:224px;">-->
 
-                                <style is="custom-style">
-                                    paper-checkbox {
-                                        display: block;
-                                        padding: 8px 0;
-                                        font-size: 12px;
-                                        font-family: "source sans pro";
-                                        --default-primary-color: #6D6D6D;
-                                        --primary-text-color: #6D6D6D;
-                                        --secondary-text-color: #D2D2D2;
-                                    }
-                                    
-                                    paper-dropdown-menu {
-                                        padding: 0;
-                                        font-size: 12px;
-                                        font-family: "source sans pro";
-                                        --default-primary-color: #6D6D6D;
-                                        --primary-text-color: #6D6D6D;
-                                        --secondary-text-color: #D2D2D2;
-                                        --paper-menu-button {
-                                            padding: 0;
-                                        }
-                                    }
-                                </style>
-
-
-
-
-                                <paper-dropdown-menu label="Your favourite pastry" no-animations="true">
-                                    <paper-menu class="dropdown-content">
-                                        <paper-item>Croissant</paper-item>
-                                        <paper-item>Donut</paper-item>
-                                        <paper-item>Financier</paper-item>
-                                        <paper-item>Madeleine</paper-item>
-                                    </paper-menu>
-                                </paper-dropdown-menu>
-
-                                <paper-checkbox>label 1</paper-checkbox>
-                                <paper-checkbox>label 2</paper-checkbox>
-                                <paper-checkbox>label 3</paper-checkbox>
-                                <paper-checkbox>label 4</paper-checkbox>
-
-                                <paper-input-container>
-                                    <label>Your name</label>
-                                    <input is="iron-input">
-                                </paper-input-container>
+                                <carbo-component-settings>
+                                </carbo-component-settings>
 
                             </div>
+
+
+
+
                         </carbo-panel>
                     </div>
 
@@ -261,8 +222,9 @@
 
                     <div id="right-panel">
 
-                        <carbo-panel title="Estilo" icon="book" menu="{{ boxmenuitem }}">
+                        <carbo-panel title="Estilo" icon="image:palette" menu="{{ boxmenuitem }}">
                             <div class="box-content">
+                                <carbo-components-tree component="{{componentscategories}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
 
                             </div>
                         </carbo-panel>
