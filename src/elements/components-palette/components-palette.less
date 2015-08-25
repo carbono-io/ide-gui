@@ -3,6 +3,39 @@
 :host {
 }
 
+paper-tabs {
+    --paper-tabs-selection-bar-color: #6D6D6D;
+    height: 32px;
+    border-bottom: 1px solid #D2D2D2;
+    box-sizing: border-box;
+    font-family: "Source Sans Pro";
+    font-size: 12px;
+    background-color: #F2F2F2;
+}
+
+paper-tab {
+    --paper-tab {
+        background-color: #F2F2F2;
+        color: #6D6D6D;
+    }
+}
+
+paper-input-container {
+    padding: 16px 0;
+    font-size: 12px;
+    font-family: "source sans pro";
+    --default-primary-color: #6D6D6D;
+    --primary-text-color: #6D6D6D;
+    --secondary-text-color: #D2D2D2;
+    --paper-input-container-input {
+        line-height: 32px;
+        font-size: 12px;
+    }
+    --paper-input-container-label {
+        font-size: 12px;
+    }
+}
+
 .tab {
     display: flex;
     flex-direction: row;
@@ -57,27 +90,20 @@
 }
 
 #prefix {
-        i {
-        color: @mediumgrey;
-
-        //font-size of icons: 18px
-        font-size: @font-size-6;
-        line-height: 24px;
-        padding: 0 @base-size;
-        }
+    padding-bottom: @base-size/4;
     }
 
 iron-icon {
         width: 18px;
         height: 18px;
+        padding: 0 @base-size;
+//        margin-top: @base-size/2;
         }
 
 
-// continuar a ver isso depois!!!
-    #label-style {
-        font-size: @font-size-3;
-    }
-
+#label-style {
+    font-size: @font-size-3;
+}
 
 
 #input {
@@ -85,40 +111,77 @@ iron-icon {
 }
 
 
-
 #preview {
-    visibility: visible;
-    opacity: 1;
-    position: fixed;
-//    .translate(-(2 * @base-size), 2 * @base-size);
-    transition: visibility ease 0.3s, opacity 0.5s ease;
+    visibility: hidden;
+//    display: none;
+//    max-height: 0;
+    opacity: 0;
+//    overflow: hidden;
+    position: absolute;
+//    transition: visibility ease 0.3s 0.5s, opacity 0.3s ease 0.5s, max-height 0.3s ease;
 
     .component-preview-container {
-
+        visibility: hidden;
+        max-height: 0;
         padding-top: 3 * @base-size;
         padding-right: 3 * @base-size;
         padding-bottom: 3 * @base-size;
         padding-left: 3 * @base-size;
-
         background-color: @white;
         text-align: left;
 
-
         .title {
+            visibility: hidden;
+            max-height: 0;
             font-size: @font-size-4;
             margin-bottom: @base-size;
+
         }
 
         .preview-screen {
-            background-color: @white;
+            visibility: hidden;
+            max-height: @phone-proportion * @phone-frame-width/ 1.5;
             width: @phone-frame-width/ 1.5;
-            height: @phone-proportion * @phone-frame-width/ 1.5;
+            background-color: @white;
             border: solid 1px @mediumgrey;
             box-sizing: border-box; //consider border on height size
-
         }
+
         .screen-caption {
+            visibility: hidden;
+            max-height: 0;
             margin-top: @base-size;
+        }
+
+    }
+}
+
+
+#preview.show {
+    visibility: visible;
+//    display: block;
+//    max-height: 420px;
+    opacity: 1;
+    transition: visibility ease 0.3s 0.8s, opacity 0.3s ease 0.8s, max-height 0.3s ease;
+
+    .component-preview-container {
+        visibility: visible;
+        max-height: 1000px;
+
+        .title {
+            visibility: visible;
+            max-height: 20px;
+        }
+
+        .preview-screen {
+            visibility: visible;
+            height: @phone-proportion * @phone-frame-width/ 1.5;
+            max-height: @phone-proportion * @phone-frame-width/ 1.5;
+        }
+
+        .screen-caption {
+            visibility: visible;
+            max-height: 1000px;
         }
 
 

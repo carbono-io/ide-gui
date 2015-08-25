@@ -14,41 +14,6 @@
         --default-primary-color: #6D6D6D;
         --primary-text-color: #6D6D6D;
         --secondary-text-color: #D2D2D2;
-        paper-tabs {
-            --paper-tabs-selection-bar-color: #6D6D6D;
-            height: 32px;
-            border-bottom: 1px solid #D2D2D2;
-            box-sizing: border-box;
-            font-family: "Source Sans Pro";
-            font-size: 12px;
-        }
-
-        paper-tab {
-            --paper-tab {
-                background-color: #F2F2F2;
-                color: #6D6D6D;
-            }
-        }
-
-        paper-input-container {
-            padding: 16px 0;
-            font-size: 12px;
-            font-family: "source sans pro";
-            --default-primary-color: #6D6D6D;
-            --primary-text-color: #6D6D6D;
-            --secondary-text-color: #D2D2D2;
-            --paper-input-container-input {
-                line-height: 32px;
-                font-size: 12px;
-            }
-            --paper-input-container-label {
-                font-size: 12px;
-            }
-        }
-
-        label {
-            font-size: 12px;
-        }
 
     </style>
 
@@ -72,7 +37,7 @@
         <div id="tabs-content">
             <div class="tab">
                 <template is="dom-repeat" items="{{ components }}">
-                    <div class="component" on-mouseover="handleComponentMouseOver">
+                    <div class="component" on-mouseover="handleComponentMouseOver" on-mouseout="hidePreview">
                         <div class="component-icon">
                             <iron-icon icon="{{ item.icon }}"></iron-icon>
                         </div>
@@ -83,7 +48,8 @@
 
         </div>
 
-        <div id="preview">
+        <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
+<!--            <div id="preview">-->
             <div class="component-preview-container has-shadow-2">
                 <div class="title">Preview</div>
                 <div class="preview-screen"></div>
@@ -92,6 +58,7 @@
         </div>
     </template>
 
-    <script src="components-palette.js"></script>
+    <script src="components-palette.js">
+    </script>
 
 </dom-module>
