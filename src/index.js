@@ -95,15 +95,26 @@
         items: [section1, section2]
     }
 
+    var categorie = {
+        name: 'Texto',
+        children: [
+        { name: 'Título 1' },
+        { name: 'Título 2' }
+        ]
+
+    }
 
 
     carbo.AAAAAA = body;
 
     carbo.boxmenuitem = menu;
 
+    carbo.paletteComponents = components;
+
     carbo.appsections = sections;
 
-    carbo.paletteComponents = components;
+    carbo.componentscategories = categorie;
+
 
 //    window.addEventListener('WebComponentsReady', function () {
 //
