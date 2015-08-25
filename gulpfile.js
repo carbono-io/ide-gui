@@ -29,6 +29,11 @@ var LESS_DIR = [
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
+var CSS_DIR = [
+    SRC_DIR + '/**/*.css',
+    '!' + SRC_DIR + '/bower_components/**/*',
+];
+
 var HTML_DIR = [
     SRC_DIR + '/**/*.html',
     '!' + SRC_DIR + '/bower_components/**/*',
@@ -48,7 +53,7 @@ function _less() {
     ].join('\n');
 
     return gulp.src(LESS_DIR)
-        // .pipe($.changed(SRC_DIR, { extension: '.css' }))
+        .pipe($.changed(SRC_DIR, { extension: '.css' }))
         .pipe($.duration('Compiling .less files'))
         .pipe($.less())
         .on('error', $.notify.onError({
@@ -89,9 +94,7 @@ function _vulcanize() {
 // Register tasks
 gulp.task('less', _less);
 gulp.task('vulcanize', ['less'], _vulcanize);
-gulp.task('distribute', ['vulcanize'], function () {
-
-});
+gulp.task('distribute', ['vulcanize']);
 
 // Beautifiers
 gulp.task('beautify-html', function () {
@@ -127,7 +130,7 @@ gulp.task('develop', function () {
     // http://stackoverflow.com/questions/22391527/
     // gulps-gulp-watch-not-triggered-for-new-or-deleted-files
     $.watch(LESS_DIR, _less);
-    $.watch(JS_DIR.concat(LESS_DIR).concat(HTML_DIR), function () {
+    $.watch(JS_DIR.concat(CSS_DIR).concat(HTML_DIR), function () {
         browserSync.reload();
         _todo();
     });

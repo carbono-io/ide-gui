@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>sandbox</title>
+
+    <!-- Polymer config -->
+    <script>
+        window.Polymer = window.Polymer || {};
+        // Habilitar shadow dom para visualizar tudo isolado
+        window.Polymer.dom = 'shadow';
+    </script>
+    <!-- polymer -->
+    <link rel="import" href="../../bower_components/polymer/polymer.html">
+
+    <!-- polymer elements -->
+    <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+    <!-- estilos de testes -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <!-- carbo-* (carbo components) -->
+    <link rel="import" href="../../elements/header/header.html">
+
+    <!-- test-* (test components) -->
+    <link rel="import" href="elements/hello/hello.html">
+
+</head>
+<body>
+
+    <!-- criar um escopo base para acessar -->
+    <template is="dom-bind" id="escopo-base">
+
+        <!-- <carbo-header></carbo-header> -->
+
+        <!-- hard-coded -->
+        <test-hello who="luci"></test-hello>
+
+        <!-- dinamic -->
+        <test-hello who="{{ who }}"></test-hello>
+
+        <!-- input -->
+        <paper-input label="quem?" value="{{ who }}"></paper-input>
+
+    </template>
+    <!-- fecha escopo -->
+
+    <!-- script. poderia ser externo, mas inline é mais fácil visualizar -->
+    <script>
+
+        // seleciona o elemento do escopo base
+        var escopoBase = document.querySelector('#escopo-base');
+
+        // modificar propriedade no escopo base
+        escopoBase.who = "outra pessoa";
+
+    </script>
+
+</body>
+</html>

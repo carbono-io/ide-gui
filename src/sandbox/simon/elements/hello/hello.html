@@ -1,0 +1,24 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<dom-module id="test-hello">
+    
+    <template>
+        <div>
+            <span>olá, </span><span>{{ who }}</span>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+        Polymer({
+            is: 'test-hello',
+            properties: {
+                who: {
+                    type: String,
+                    value: 'valor default',
+                    notify: true,
+                }
+            }
+        });
+    </script>
+
+</dom-module>
