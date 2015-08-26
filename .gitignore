@@ -22,3 +22,6 @@ npm-debug.log
 # Generated documentation
 /docs
 TODO.md
+
+# OSX stuff
+.DS_Store

@@ -2,21 +2,18 @@
 
 // Native dependencies
 var path        = require('path');
+var exec        = require('child_process').exec;
 
 // External dependencies
 var gulp        = require('gulp');
 var browserSync = require('browser-sync');
-var guppy       = require('git-guppy');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
 
-// Let guppy integrate with gulp
-guppy(gulp);
-
 // Constants
-var SRC_DIR      = './src';
-var DIST_DIR     = './dist';
+var SRC_DIR     = './src';
+var DIST_DIR    = './dist';
 
 var JS_DIR = [
     SRC_DIR + '/**/*.js',
@@ -114,15 +111,18 @@ function _todo() {
 gulp.task('todo', _todo);
 
 // Develop task
-gulp.task('develop', function () {
+gulp.task('serve', function () {
 
     browserSync({
-        port: 3000,
+        // port: 3000,
         server: {
             baseDir: './src',
         },
         open: true,
     });
+});
+
+gulp.task('watch', function () {
 
     // Watch files for changes
     // Using gulp-watch plugin because the default gulp.watch method does
@@ -136,7 +136,23 @@ gulp.task('develop', function () {
     });
 });
 
+// Starts the mock server
+gulp.task('mock-server', function () {
 
+    var mockServerModulePath = path.join(__dirname, 'node_modules/carbono-mocks');
+
+    // Consign uses `process.cwd()`, which fucks stuff up.
+    // `cd` into the dir before starting module up
+    exec('cd ' + mockServerModulePath + ' && node index.js', function (err, stdout, stderr) {
+        $.util.log($.util.colors.green('mock server running'));
+        $.util.log($.util.colors.green(stdout));
+    });
+});
+
+gulp.task('develop', ['mock-server', 'serve', 'watch']);
+
+
+// Code style and quality checks
 function _jshint() {
 
     return gulp.src(JS_DIR)
