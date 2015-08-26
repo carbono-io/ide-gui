@@ -59,11 +59,11 @@
     };
 
     var components = [
-        { title: "Formulário", icon: "assignment" },
-        { title: "Galeria", icon: "view-agenda" },
-        { title: "Gráfico", icon: "editor:insert-chart" },
-        { title: "Gráfico", icon: "editor:insert-chart" },
-        { title: "Gráfico", icon: "editor:insert-chart" }
+        { title: "Formulário bem grande o nome", icon: "assignment", pages: "2" },
+        { title: "Galeria", icon: "view-agenda", pages: "2" },
+        { title: "Gráfico 1", icon: "editor:insert-chart", pages: "1" },
+        { title: "Gráfico 2", icon: "editor:insert-chart", pages: "1" },
+        { title: "Gráfico 3", icon: "editor:insert-chart", pages: "1" }
     ]
 
     var section1 = {
