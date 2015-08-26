@@ -14,10 +14,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../workspace/workspace.html">
 
     <!-- carbo polymer components -->
+<!--
     <link rel="import" href="../components-tree/components-tree.html">
     <link rel="import" href="../panel/panel.html">
     <link rel="import" href="../components-palette/components-palette.html">
     <link rel="import" href="../component-settings/component-settings.html">
+-->
 
 
 
@@ -32,140 +34,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <div id="carbo-body">
 
-                    <div id="left-panel">
+            <div id="left-panel">
+                <content select="componentslist-content"></content>
+            </div>
 
-                        <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
-                            <div class="box-content">
-                                <carbo-components-tree component="{{AAAAAA}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
-                            </div>
-                        </carbo-panel>
+            <div id="canvas-container">
+                <content select="canvas-container-content"></content>
+            </div>
 
-                        <carbo-panel title="Configurações" icon="settings" menu="{{ boxmenuitem }}">
-                            <div class="box-content">
+            <div id="box" class="has-shadow">
+               <content select="addcomponents-content"></content>
+            </div>
 
-                                <carbo-component-settings>
-                                </carbo-component-settings>
+             <div id="right-panel">
+               <content select="style-content"></content>
+             </div>
 
-                            </div>
-
-
-
-
-                        </carbo-panel>
-                    </div>
-
-                    <div id="canvas-container">
-
-
-                        <div id="canvas-control">
-                            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
-                            <div id="control">
-                                <div id="control-zoom">
-                                    zoom
-                                </div>
-                                <div id="control-screen">
-                                    <i class="material-icons">keyboard_arrow_left</i>
-                                    <span>|</span>
-                                    <i class="material-icons">keyboard_arrow_right</i>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div id="box" class="has-shadow">
-
-                        <div class="box-header">
-                            <div class="icon-name">
-                                <i class="material-icons">add</i>
-                                <span>ADICIONAR COMPONENTES</span>
-                            </div>
-                            <div class="menu">
-                                <i class="material-icons">close</i>
-                            </div>
-                        </div>
-
-
-
-<!--
-                        <style is="custom-style">
-
-                            --default-primary-color: #6D6D6D;
-                            --primary-text-color: #6D6D6D;
-                            --secondary-text-color: #D2D2D2;
-                            paper-tabs {
-                                --paper-tabs-selection-bar-color: #6D6D6D;
-                                height: 32px;
-                                border-bottom: 1px solid #D2D2D2;
-                                box-sizing: border-box;
-                                font-family: "Source Sans Pro";
-                                font-size: 12px;
-                            }
-
-                            paper-tab {
-                                --paper-tab {
-                                    background-color: #F2F2F2;
-                                    color: #6D6D6D;
-                                }
-                            }
-
-                            paper-input-container {
-                                padding: 16px 0;
-                                font-size: 12px;
-                                font-family: "source sans pro";
-                                --default-primary-color: #6D6D6D;
-                                --primary-text-color: #6D6D6D;
-                                --secondary-text-color: #D2D2D2;
-                                --paper-input-container-input {
-                                    line-height: 32px;
-                                    font-size: 12px;
-                                }
-                                --paper-input-container-label {
-                                    font-size: 12px;
-                                }
-                            }
-
-                        </style>
--->
-
-                        <div class="box-content">
-<!--
-                            <paper-tabs selected="0" noink="false">
-                                <paper-tab>Básicos</paper-tab>
-                                <paper-tab>Avançados</paper-tab>
-                            </paper-tabs>
-
-
-
-
-                            <paper-input-container no-label-float="true">
-                                <div prefix id="prefix"><i class="material-icons">search</i></div>
-                                <label>Buscar elementos</label>
-                                <input is="iron-input" id="input">
-                            </paper-input-container>
--->
-                            <carbo-components-palette components="{{ paletteComponents }}"></carbo-components-palette>
-
-                        </div>
-
-                    </div>
-
-                    <div id="right-panel">
-
-                        <carbo-panel title="Estilo" icon="image:palette" menu="{{ boxmenuitem }}">
-                            <div class="box-content">
-                                <carbo-components-tree component="{{componentscategories}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
-
-                            </div>
-                        </carbo-panel>
-
-                    </div>
-                </div>
-
-
-
-
+        </div>
 
 
     </template>

@@ -26,11 +26,9 @@
     <link rel="import" href="elements/workspace/workspace.html">
 -->
 
-<!--
 
-     Material Icons
+<!--     Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
--->
 
 
 
@@ -42,10 +40,10 @@
     <link rel="import" href="elements/routing.html">
 
     <!-- paper-tabs of polymer-->
-<!--    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">-->
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
 
     <!-- paper-input of polymer-->
-<!--    <link rel="import" href="bower_components/paper-input/paper-input.html">-->
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
 
     <!-- paper-checkbox of polymer-->
 <!--    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">-->
@@ -57,19 +55,17 @@
     <link rel="import" href="bower_components/iron-pages/iron-pages.html">
 
     <!-- Polymer components -->
-<!--    <link rel="import" href="bower_components/paper-menu/paper-menu.html">-->
+    <link rel="import" href="bower_components/paper-menu/paper-menu.html">
 
     <!-- Polymer components -->
-<!--    <link rel="import" href="bower_components/paper-item/paper-item.html">-->
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
 
 
     <!-- carbo polymer components -->
-<!--
     <link rel="import" href="elements/components-tree/components-tree.html">
     <link rel="import" href="elements/panel/panel.html">
     <link rel="import" href="elements/components-palette/components-palette.html">
     <link rel="import" href="elements/component-settings/component-settings.html">
--->
 
 
 </head>
@@ -101,8 +97,9 @@
 
                 <carbo-header sections="{{appsections}}"> </carbo-header>
                 <carbo-body>
-                    <left>
-                          <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
+
+                    <componentslist-content>
+                        <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
                             <div class="box-content">
                                 <carbo-components-tree component="{{AAAAAA}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
                             </div>
@@ -115,16 +112,59 @@
                                 </carbo-component-settings>
 
                             </div>
-
-
-
-
                         </carbo-panel>
-                    </left>
 
-                    <workspace></workspace>
-                    <box></box>
-                    <right></right>
+                    </componentslist-content>
+
+                    <canvas-container-content>
+
+                        <div id="canvas-control">
+                            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
+                            <div id="control">
+                                <div id="control-zoom">
+                                    zoom
+                                </div>
+                                <div id="control-screen">
+                                    <i class="material-icons">keyboard_arrow_left</i>
+                                    <span>|</span>
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                </div>
+                            </div>
+                        </div>
+                    </canvas-container-content>
+
+
+                    <addcomponents-content>
+
+                    <div class="box-header">
+                        <div class="icon-name">
+                            <i class="material-icons">add</i>
+                            <span>ADICIONAR COMPONENTES</span>
+                        </div>
+                        <div class="menu">
+                            <i class="material-icons">close</i>
+                        </div>
+                    </div>
+
+                    <div class="box-content">
+
+                        <carbo-components-palette components="{{ paletteComponents }}"></carbo-components-palette>
+
+                    </div>
+
+                    </addcomponents-content>
+
+
+                    <style-content>
+                        <carbo-panel title="Estilo" icon="image:palette" menu="{{ boxmenuitem }}">
+                            <div class="box-content">
+                                <carbo-components-tree component="{{componentscategories}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
+                            </div>
+                        </carbo-panel>
+
+                    </style-content>
+
+
                 </carbo-body>
 
             </div>
