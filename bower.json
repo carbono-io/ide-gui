@@ -24,7 +24,9 @@
     "paper-tabs": "https://github.com/PolymerElements/paper-tabs.git#~1.0.1",
     "paper-input": "PolymerElements/paper-input#~1.0.11",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#~1.0.1",
-    "paper-checkbox": "PolymerElements/paper-checkbox#~1.0.6"
+    "paper-checkbox": "PolymerElements/paper-checkbox#~1.0.6",
+    "iron-image": "PolymerElements/iron-image#~1.0.2",
+    "iron-form": "PolymerElements/iron-form#~1.0.8"
   },
   "devDependencies": {
     "polymer-starter-kit": "https://github.com/PolymerElements/polymer-starter-kit.git#~1.0.3"
