@@ -2,6 +2,7 @@
 'use strict';
 var CarboComponentsPalette = Polymer({
     is: 'carbo-components-palette',
+
     handleComponentMouseOver: function(event) {
 
         this.showPreview(event);

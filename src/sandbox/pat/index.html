@@ -23,13 +23,25 @@
     <!-- test-* (test components) -->
     <link rel="import" href="elements/hello/hello.html">
 
+
+    <!-- para teste do inspector -->
+    <link rel="import" href="../../elements/inspector/inspector.html">
+    <link rel="import" href="../../elements/panel/panel.html">
+    <link rel="import" href="../../elements/components-palette/components-palette.html">
+    <link rel="import" href="../../elements/components-tree/components-tree.html">
+    <link rel="import" href="../../elements/header/header.html">
+
+    <link rel="import" href="../../bower_components/iron-image/iron-image.html">
+    <link rel="import" href="../../bower_components/iron-form/iron-form.html">
+
+
 </head>
 <body>
 
     <!-- criar um escopo base para acessar -->
     <template is="dom-bind" id="escopo-base">
 
-        <!-- <carbo-header></carbo-header> -->
+        <carbo-header sections="{{appsections}}"> </carbo-header>
 
         <!-- hard-coded -->
         <test-hello who="patricia"></test-hello>
@@ -39,6 +51,27 @@
 
         <!-- input -->
         <paper-input label="quem?" value="{{ who }}"></paper-input>
+
+        <carbo-inspector></carbo-inspector>
+
+        <div></div>
+
+        <div style="display:flex; flex-direction:row; justify-content:space-around;">
+
+        <div></div>
+
+        <carbo-components-palette></carbo-components-palette>
+        <carbo-components-tree></carbo-components-tree>
+
+
+        <iron-image style="width:400px; height:400px; background-color: lightgray;"
+      sizing="cover" preload fade src="http://lorempixel.com/600/400"></iron-image>
+
+            <form is="iron-form" id="form" method="post" action="/form/handler" style="width:600px; background-color:blue;">
+              <paper-input name="name" label="name"></paper-input>
+            </form>
+
+        </div>
 
     </template>
     <!-- fecha escopo -->
