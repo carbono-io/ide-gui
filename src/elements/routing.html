@@ -2,23 +2,30 @@
 <script src="../bower_components/socket.io-client/socket.io.js"></script>
 <script>
     
+    var project = {
+        projectId: '340987612301',
+        containerId: 'lalala',
+        host: '192.168.99.100',
+        ports: {
+            '8000': '32772'
+        },
+        
+        // MOCKKKK
+        projectUrl: 'http://localhost:3000/code-machine/resources/marked/src/index.html',
+    };
+
     function createNewProject(callback) {
         
         // mock
         setTimeout(function () {
-            
-            callback({
-                projectId: '340987612301',
-                containerId: 'lalala',
-                host: '192.168.99.100',
-                ports: {
-                    '8000': '32772'
-                },
-                
-                // MOCKKKK
-                projectUrl: 'http://localhost:8000/resources/marked/src/index.html',
-            });
+            callback(project);
         }, 2000);
+    }
+
+    function loadProject(callback) {
+        setTimeout(function () {
+            callback(project);
+        }, 1000);
     }
     
     window.addEventListener('WebComponentsReady', function() {
@@ -35,6 +42,10 @@
         page('/lab/:projectId', function (data) {
             carbo.route = 'lab'; 
             carbo.projectId = data.params.projectId;
+
+            loadProject(function (project) {
+                carbo.project = project;
+            })
         });
         
         page('/new', function () {

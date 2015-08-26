@@ -59,19 +59,11 @@
     };
 
     var components = [
-        {
-            title: "Formulário",
-            icon: "assignment"
-        },
-        {
-            title: "Galeria",
-            icon: "view-agenda"
-        },
-        {
-            title: "Gráfico",
-            icon: "editor:insert-chart"
-        }
-
+        { title: "Formulário", icon: "assignment" },
+        { title: "Galeria", icon: "view-agenda" },
+        { title: "Gráfico", icon: "editor:insert-chart" },
+        { title: "Gráfico", icon: "editor:insert-chart" },
+        { title: "Gráfico", icon: "editor:insert-chart" }
     ]
 
     var section1 = {
