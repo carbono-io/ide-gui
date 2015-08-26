@@ -9,7 +9,7 @@
     <script>
         window.Polymer = window.Polymer || {};
         // o default será com isso sem estar comentado :)
-//        window.Polymer.dom = 'shadow';
+       window.Polymer.dom = 'shadow';
     </script>
 
 
@@ -65,7 +65,7 @@
     <link rel="import" href="elements/panel/panel.html">
     <link rel="import" href="elements/components-palette/components-palette.html">
     <link rel="import" href="elements/component-settings/component-settings.html">
-
+    <link rel="import" href="elements/inspector/inspector.html">
 
 </head>
 
@@ -73,6 +73,9 @@
 
     <!-- create a root for Polymer data binding -->
     <template id="carbo" is="dom-bind">
+
+        <!-- inspector element -->
+        <carbo-inspector></carbo-inspector>
 
 
         <!-- pages for navigation -->
