@@ -75,8 +75,7 @@
     <!-- create a root for Polymer data binding -->
     <template id="carbo" is="dom-bind">
 
-        <!-- inspector element -->
-        <carbo-inspector></carbo-inspector>
+
 
 
         <!-- pages for navigation -->
@@ -100,6 +99,9 @@
 
                 <carbo-header sections="{{appsections}}"> </carbo-header>
                 <carbo-body>
+
+                            <!-- inspector element -->
+        <carbo-inspector></carbo-inspector>
 
                     <componentslist-content>
                         <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
