@@ -4,21 +4,23 @@ var CarboComponentsPalette = Polymer({
     is: 'carbo-components-palette',
 
     handleComponentMouseOver: function(event) {
+
         this.showPreview(event);
     },
 
+
+    // function that makes box preview visible while mouse hovered
+    // it's a good idea to apply this function only if component has more pages
     handlePreviewMouseOver: function(event) {
         this.toggleClass('show', true, this.$.preview);
     },
 
-
-
-
+    // function that makes box preview appear
     showPreview: function (event) {
-
 
         this.toggleClass('show', true, this.$.preview);
 //        this.$.preview.style.transform = "translateX(0)";
+        this.$.preview.style.display = "block";
 
         // get window's size dynamically
         var windowWidth = window.innerWidth;
@@ -52,12 +54,12 @@ var CarboComponentsPalette = Polymer({
         // calculate dynamically
         // left-position of preview box
         // according to space to right available
-        if ((previewWidth - (componentTargetWidth * 3/4)) <= spaceToRight) {
+        if ((previewWidth - (componentTargetWidth * 5/6)) <= spaceToRight) {
             console.log("largura suficiente - colocar à direita");
-            preview.style.left = componentTargetLeftPosition + (componentTargetWidth * 3/4) + "px";
+            preview.style.left = componentTargetLeftPosition + (componentTargetWidth * 5/6) + "px";
         } else {
             console.log("largura insuficiente - colocar à esquerda");
-            preview.style.left = componentTargetLeftPosition - (componentTargetWidth * 3/4) + "px";
+            preview.style.left = componentTargetLeftPosition - (componentTargetWidth * 5/6) + "px";
         }
 
         // y-axis
@@ -69,18 +71,13 @@ var CarboComponentsPalette = Polymer({
             console.log("altura suficiente");
 
         } else {
-            preview.style.top = windowHeight - previewHeight - componentTargetHeight + "px";
-//            preview.style.bottom = 15 + "px";
+            preview.style.top = windowHeight - previewHeight - 72 + "px";
+//            preview.style.top = windowHeight - previewHeight - componentTargetHeight + "px";
             console.log("altura insuf");
-
-            console.log('window %s', windowHeight);
-            console.log('preview %s', previewHeight);
-            console.log('window-preview %s', windowHeight - previewHeight);
         }
     },
 
     hidePreview: function (event) {
         this.toggleClass('show', false, this.$.preview);
-//        this.$.preview.style.transform = "translateX(-1000%)";
     }
 });
