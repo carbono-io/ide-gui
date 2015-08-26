@@ -114,7 +114,7 @@ gulp.task('todo', _todo);
 gulp.task('serve', function () {
 
     browserSync({
-        // port: 3000,
+        port: 4000,
         server: {
             baseDir: './src',
         },
@@ -143,9 +143,17 @@ gulp.task('mock-server', function () {
 
     // Consign uses `process.cwd()`, which fucks stuff up.
     // `cd` into the dir before starting module up
-    exec('cd ' + mockServerModulePath + ' && node index.js', function (err, stdout, stderr) {
-        $.util.log($.util.colors.green('mock server running'));
-        $.util.log($.util.colors.green(stdout));
+    exec('cd ' + mockServerModulePath + ' && node .', function (err, stdout, stderr) {
+
+        if (!err) {
+            // No error on mock server
+            $.util.log($.util.colors.green('mock server running'));
+            $.util.log($.util.colors.green(stdout));
+        } else {
+            // Error on mock server startup
+            $.util.log($.util.colors.red('mock server startup problems'));
+            $.util.log($.util.colors.red(stderr));
+        }
     });
 });
 
