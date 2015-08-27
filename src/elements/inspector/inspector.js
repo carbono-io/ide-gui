@@ -7,13 +7,25 @@
 
             document.addEventListener('mousemove', this.handleMousemove.bind(this));
 
+
             document.addEventListener('mouseout', function (e) {
 
                 var from = e.relatedTarget || e.toElement;
                 if (!from || from.nodeName == "HTML") {
                     this.unHighlight();
                 }
-            }.bind(this));
+            }.bind(this))detai
+
+//            document.addEventListener('mouseenter', function (e) {
+//
+//                var from = e.relatedTarget || e.toElement;
+//                if (!from || from.nodeName == "HTML") {
+//                    this.unHighlight();
+//                }
+//            }.bind(this));
+
+
+
         },
 
         handleMousemove: function (event) {
@@ -75,7 +87,7 @@
 
 
             var rect = element.getBoundingClientRect();
-addedd
+
             highlighter.style.left = rect.left + "px";
             highlighter.style.top = rect.top + "px";
 
