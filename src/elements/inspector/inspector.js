@@ -37,15 +37,15 @@
             var highlighter = this.$.highlighter;
 //            console.log(highlighter);
 
-            //?
+            //
             if (this.activeElement) {
                 this.unHighlight(this.activeElement);
             }
 
-            //? faz a função highlight no elemento que ele guardou na variavel 'element'
+            // faz a função highlight no elemento que ele guardou na variavel 'element'
             this.highlight(element, highlighter);
 
-            //? 'ativa' o elemento que ele guardou na variavel 'element': Returns the currently focused element, that is, the element that will get keystroke events if the user types any. This attribute is read only.
+            // 'ativa' o elemento que ele guardou na variavel 'element': Returns the currently focused element, that is, the element that will get keystroke events if the user types any. This attribute is read only.
             // Set active element
             this.activeElement = element;
         },
@@ -60,34 +60,29 @@
 
 //            element.style.border = '4px red dashed';
 
-            //FAZER: ao invés de colocar um border no proprio component, colocar uma div por cima com transparência e border
-//calcular o tamanho e posicao dessa div a partir do elemento - ex do preview da luci
-//essa div terá position fixed com localização = do elemento 'selecionado' provavelmente
 
             this.toggleClass('show', true, this.$.highlighter);
 
-            // get element's size dynamically
-            var elementWidth = element.offsetWidth;
-            var elementHeight = element.offsetHeight;
+//            // get element's size dynamically
+//            var elementWidth = element.offsetWidth;
+//            var elementHeight = element.offsetHeight;
+//
+//
+//            // get left-position of element
+//            var elementLeftPosition = element.offsetLeft;
+//            // get height-position of element
+//            var elementTopPosition = element.offsetTop;
 
 
-            // get left-position of element
-            var elementLeftPosition = element.offsetLeft;
-            // get height-position of element
-            var elementTopPosition = element.offsetTop;
+            var rect = element.getBoundingClientRect();
+addedd
+            highlighter.style.left = rect.left + "px";
+            highlighter.style.top = rect.top + "px";
 
-            highlighter.style.left = elementLeftPosition + "px";
-            highlighter.style.top = elementTopPosition + "px";
+            highlighter.style.width = rect.width + "px";
+            highlighter.style.height = rect.height + "px";
 
-            // highlighter.style.top = (elementTopPosition + 56) + "px";
-
-            highlighter.style.width = elementWidth + "px";
-            highlighter.style.height = elementHeight + "px";
-
-            console.log(element);
-            console.log(elementWidth);
-            console.log(elementHeight);
-
+            console.log(rect.left);
 
         },
 
