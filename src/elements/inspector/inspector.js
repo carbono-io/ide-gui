@@ -8,23 +8,14 @@
             document.addEventListener('mousemove', this.handleMousemove.bind(this));
 
 
-            document.addEventListener('mouseout', function (e) {
 
-                var from = e.relatedTarget || e.toElement;
-                if (!from || from.nodeName == "HTML") {
-                    this.unHighlight();
-                }
-            }.bind(this));
 
-//            document.addEventListener('mouseenter', function (e) {
-//
+//            document.addEventListener('mouseout', function (e) {
 //                var from = e.relatedTarget || e.toElement;
 //                if (!from || from.nodeName == "HTML") {
 //                    this.unHighlight();
 //                }
 //            }.bind(this));
-
-
 
         },
 
@@ -41,12 +32,13 @@
 
             console.log(element.id);
 
-            if (element === this) {
-                return;
-            }
+//            if (element === this) {
+//                return;
+//            }
 
             // salva a div highlighter numa variável
             var highlighter = this.$.highlighter;
+            var clickarea = this.$.clickarea;
 //            console.log(highlighter);
 
             //
@@ -55,14 +47,16 @@
             }
 
             // faz a função highlight no elemento que ele guardou na variavel 'element'
-            this.highlight(element, highlighter);
+            this.highlight(element, highlighter, clickarea);
 
             // 'ativa' o elemento que ele guardou na variavel 'element': Returns the currently focused element, that is, the element that will get keystroke events if the user types any. This attribute is read only.
             // Set active element
             this.activeElement = element;
         },
 
-        highlight: function (element, highlighter) {
+        // *****end handlemousemove
+
+        highlight: function (element, highlighter, clickarea) {
             // if (this.activeElement === element) {
             //     return;
             // }
@@ -74,6 +68,8 @@
 
 
             this.toggleClass('show', true, this.$.highlighter);
+            this.toggleClass('show', true, this.$.clickarea);
+
 
 //            // get element's size dynamically
 //            var elementWidth = element.offsetWidth;
@@ -94,16 +90,39 @@
             highlighter.style.width = rect.width + "px";
             highlighter.style.height = rect.height + "px";
 
-            console.log(rect.left);
+            clickarea.style.left = rect.left + "px";
+            clickarea.style.top = rect.top + "px";
+
+            clickarea.style.width = rect.width + "px";
+            clickarea.style.height = rect.height + "px";
+
+
+//            console.log(rect.left);
+
+//            element.style.pointerEvents = none;
 
         },
+        // *****end highlight
 
         unHighlight: function (element) {
-//            element.style.border = 'none';
-              this.toggleClass('show', false, this.$.highlighter);
 
+//             if (this.activeElement === element) {
+//                 return;
+//             }
+
+            this.toggleClass('show', false, this.$.highlighter);
+            this.toggleClass('show', false, this.$.clickarea);
+
+//              element.style.pointerEvents = all;
 
         },
+        //*****end unhighlight
+
     })
 
 })();
+
+
+
+
+//--------------------------------------
