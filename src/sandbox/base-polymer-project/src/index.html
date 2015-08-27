@@ -2,6 +2,13 @@
     <head>
         <link rel="stylesheet" type="text/css" href="index.css">
 
+        <!-- forcing shadow dom -->
+        <script>
+            window.Polymer = window.Polymer || {};
+            // o default será com isso sem estar comentado :)
+            window.Polymer.dom = 'shadow';
+        </script>
+
         <link rel="import" href="../../../bower_components/polymer/polymer.html">
         <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
         <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
