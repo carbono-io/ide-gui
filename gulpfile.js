@@ -95,7 +95,7 @@ gulp.task('distribute', ['vulcanize']);
 
 // Beautifiers
 gulp.task('beautify-html', function () {
-    gulp.src('./src/index.html')
+    gulp.src(HTML_DIR)
         .pipe($.jsbeautifier({indentSize: 4}))
         .pipe(gulp.dest('./tmp'));
 });
@@ -157,7 +157,7 @@ gulp.task('mock-server', function () {
     });
 });
 
-gulp.task('develop', ['mock-server', 'serve', 'watch']);
+gulp.task('develop', ['less', 'mock-server', 'serve', 'watch']);
 
 
 // Code style and quality checks
