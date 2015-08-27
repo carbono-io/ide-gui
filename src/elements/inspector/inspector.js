@@ -14,7 +14,7 @@
                 if (!from || from.nodeName == "HTML") {
                     this.unHighlight();
                 }
-            }.bind(this))detai
+            }.bind(this));
 
 //            document.addEventListener('mouseenter', function (e) {
 //
