@@ -7,6 +7,13 @@
 
             document.addEventListener('mousemove', this.handleMousemove.bind(this));
 
+            document.addEventListener('mouseout', function (e) {
+
+                var from = e.relatedTarget || e.toElement;
+                if (!from || from.nodeName == "HTML") {
+                    this.unHighlight();
+                }
+            }.bind(this));
         },
 
         handleMousemove: function (event) {
@@ -19,6 +26,12 @@
 
             // get hovered component (Element under that position)
             var element = document.elementFromPoint(pos.x, pos.y);
+
+            console.log(element.id);
+
+            if (element === this) {
+                return;
+            }
 
             // salva a div highlighter numa variável
             var highlighter = this.$.highlighter;
@@ -70,6 +83,10 @@
 
             highlighter.style.width = elementWidth + "px";
             highlighter.style.height = elementHeight + "px";
+
+            console.log(element);
+            console.log(elementWidth);
+            console.log(elementHeight);
 
 
         },
