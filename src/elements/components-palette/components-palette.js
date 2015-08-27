@@ -6,6 +6,7 @@ var CarboComponentsPalette = Polymer({
     handleComponentMouseOver: function(event) {
 
         this.showPreview(event);
+
     },
 
 
@@ -18,9 +19,19 @@ var CarboComponentsPalette = Polymer({
     // function that makes box preview appear
     showPreview: function (event) {
 
+        // input content dynamically,
+        // according to hovered component
+
+
+
         this.toggleClass('show', true, this.$.preview);
 //        this.$.preview.style.transform = "translateX(0)";
         this.$.preview.style.display = "block";
+
+        // get component items of index.js
+        var componentItem = event.model.item;
+        this.screens = componentItem.screens;
+        this.title = componentItem.title;
 
         // get window's size dynamically
         var windowWidth = window.innerWidth;
@@ -55,10 +66,10 @@ var CarboComponentsPalette = Polymer({
         // left-position of preview box
         // according to space to right available
         if ((previewWidth - (componentTargetWidth * 5/6)) <= spaceToRight) {
-            console.log("largura suficiente - colocar à direita");
+//            console.log("largura suficiente - colocar à direita");
             preview.style.left = componentTargetLeftPosition + (componentTargetWidth * 5/6) + "px";
         } else {
-            console.log("largura insuficiente - colocar à esquerda");
+//            console.log("largura insuficiente - colocar à esquerda");
             preview.style.left = componentTargetLeftPosition - (componentTargetWidth * 5/6) + "px";
         }
 
@@ -68,12 +79,11 @@ var CarboComponentsPalette = Polymer({
         // according to space to bottom available
         if (previewHeight - componentTargetHeight <= spaceToBottom - componentTargetHeight) {
             preview.style.top = componentTargetTopPosition + "px";
-            console.log("altura suficiente");
+//            console.log("altura suficiente");
 
         } else {
-            preview.style.top = windowHeight - previewHeight - 72 + "px";
-//            preview.style.top = windowHeight - previewHeight - componentTargetHeight + "px";
-            console.log("altura insuf");
+            preview.style.top = windowHeight - previewHeight - 72 + "px"; // 56 from the page-header and 16 from the margin-bottom of box
+//            console.log("altura insuf");
         }
     },
 
