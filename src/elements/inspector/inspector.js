@@ -51,25 +51,25 @@
 //calcular o tamanho e posicao dessa div a partir do elemento - ex do preview da luci
 //essa div terá position fixed com localização = do elemento 'selecionado' provavelmente
 
-        this.toggleClass('show', true, this.$.highlighter);
+            this.toggleClass('show', true, this.$.highlighter);
 
-        // get element's size dynamically
-        var elementWidth = element.offsetWidth;
-        var elementHeight = element.offsetHeight;
+            // get element's size dynamically
+            var elementWidth = element.offsetWidth;
+            var elementHeight = element.offsetHeight;
 
 
-        // get left-position of element
-        var elementLeftPosition = element.offsetLeft;
-        // get height-position of element
-        var elementTopPosition = element.offsetTop;
+            // get left-position of element
+            var elementLeftPosition = element.offsetLeft;
+            // get height-position of element
+            var elementTopPosition = element.offsetTop;
 
-        highlighter.style.left = elementLeftPosition + "px";
-        highlighter.style.top = elementTopPosition + "px";
+            highlighter.style.left = elementLeftPosition + "px";
+            highlighter.style.top = elementTopPosition + "px";
 
-//       highlighter.style.top = (elementTopPosition + 56) + "px";
+            // highlighter.style.top = (elementTopPosition + 56) + "px";
 
-       highlighter.style.width = elementWidth + "px";
-       highlighter.style.height = elementHeight + "px";
+            highlighter.style.width = elementWidth + "px";
+            highlighter.style.height = elementHeight + "px";
 
 
         },

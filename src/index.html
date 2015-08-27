@@ -3,7 +3,6 @@
 <head>
     <title>carbono</title>
 
-
     <!-- webcomponents lite -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script>
@@ -12,62 +11,32 @@
        window.Polymer.dom = 'shadow';
     </script>
 
-
-    <!-- semantic-ui stylesheet -->
-    <!--    <link rel="stylesheet" type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css">-->
-
-    <!-- my styles -->
-    <link rel="stylesheet" type="text/css" href="index.css">
-
-    <link rel="import" href="elements/header/header.html">
-    <link rel="import" href="elements/body/body.html">
-<!--
-    <link rel="import" href="elements/structure/structure.html">
-    <link rel="import" href="elements/workspace/workspace.html">
--->
-
-
-<!--     Material Icons-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-
     <!-- Source Sans Pro Font -->
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
 
-
-
-    <link rel="import" href="elements/routing.html">
-
-    <!-- paper-tabs of polymer-->
-    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
-
-    <!-- paper-input of polymer-->
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
-
-    <!-- paper-checkbox of polymer-->
-<!--    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">-->
-
-    <!-- paper-dropbown-menu of polymer-->
-<!--    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">-->
+    <!-- Icons -->
+    <link rel="import" href="bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="bower_components/iron-icons/editor-icons.html">
 
     <!-- Polymer components -->
     <link rel="import" href="bower_components/iron-pages/iron-pages.html">
-
-    <!-- Polymer components -->
     <link rel="import" href="bower_components/paper-menu/paper-menu.html">
-
-    <!-- Polymer components -->
     <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
 
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="index.css">
 
-    <!-- carbo polymer components -->
+    <!-- Carbo components -->
+    <link rel="import" href="elements/routing.html">
+    <link rel="import" href="elements/header/header.html">
+    <link rel="import" href="elements/body/body.html">
     <link rel="import" href="elements/components-tree/components-tree.html">
     <link rel="import" href="elements/panel/panel.html">
     <link rel="import" href="elements/components-palette/components-palette.html">
     <link rel="import" href="elements/component-settings/component-settings.html">
     <link rel="import" href="elements/inspector/inspector.html">
-
 </head>
 
 <body>
@@ -75,56 +44,60 @@
     <!-- create a root for Polymer data binding -->
     <template id="carbo" is="dom-bind">
 
-
-
-
         <!-- pages for navigation -->
         <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-
             <div data-route="start" id="start">
                 <a id="new-button" href="/new">
-                    <i class="material-icons">
-                        mode edit
-                    </i>
+                    <iron-icon icon="editor:mode-edit"></iron-icon>
                 </a>
             </div>
 
+            <!-- loading -->
             <div data-route="loading" id="loading">
                 <div>loading ...</div>
             </div>
+            <!-- loading -->
 
-
+            <!-- lab -->
             <div data-route="lab" id="container">
 
-                <carbo-header sections="{{appsections}}"> </carbo-header>
+                <carbo-header sections="{{appsections}}"></carbo-header>
                 <carbo-body>
 
-                            <!-- inspector element -->
-        <carbo-inspector></carbo-inspector>
-
                     <componentslist-content>
-                        <carbo-panel title="Componentes" icon="backup" menu="{{ boxmenuitem }}">
+                        <carbo-panel 
+                            title="Componentes" 
+                            icon="backup" 
+                            menu="{{ boxmenuitem }}"
+                        >
                             <div class="box-content">
-                                <carbo-components-tree component="{{AAAAAA}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
+                                <carbo-components-tree 
+                                    component="{{AAAAAA}}" 
+                                    menu="{{ boxmenuitem }}"
+                                ></carbo-components-tree>
                             </div>
                         </carbo-panel>
 
-                        <carbo-panel title="Configurações" icon="settings" menu="{{ boxmenuitem }}">
+                        <carbo-panel 
+                            title="Configurações" 
+                            icon="settings" 
+                            menu="{{ boxmenuitem }}"
+                        >
                             <div class="box-content">
-
-                                <carbo-component-settings>
-                                </carbo-component-settings>
-
+                                <carbo-component-settings></carbo-component-settings>
                             </div>
                         </carbo-panel>
 
                     </componentslist-content>
 
                     <canvas-container-content>
-
                         <div id="canvas-control">
-                            <iframe id="canvas" class="has-shadow" src="{{ project.projectUrl }}"></iframe>
+                            <iframe 
+                                id="canvas" 
+                                class="has-shadow" 
+                                src="{{ project.projectUrl }}"
+                            ></iframe>
                             <div id="control">
                                 <div id="control-zoom">
                                     zoom
@@ -138,17 +111,19 @@
                         </div>
                     </canvas-container-content>
 
-
                     <addcomponents-content>
 
-                        <carbo-panel-box title="ADICIONAR COMPONENTES" icon="image:add" menu="{{ boxmenuitem }}">
+                        <carbo-panel-box 
+                            title="ADICIONAR COMPONENTES" 
+                            icon="image:add" 
+                            menu="{{ boxmenuitem }}"
+                        >
                             <div class="box-content">
-
-                                <carbo-components-palette components="{{ paletteComponents }}"></carbo-components-palette>
-
+                                <carbo-components-palette 
+                                    components="{{ paletteComponents }}"
+                                ></carbo-components-palette>
                             </div>
                         </carbo-panel-box>
-
 
                         <div class="box-header">
                             <div class="icon-name">
@@ -161,27 +136,33 @@
                         </div>
 
                         <div class="box-content">
-
-                            <carbo-components-palette components="{{ paletteComponents }}"></carbo-components-palette>
-
+                            <carbo-components-palette 
+                                components="{{ paletteComponents }}"
+                            ></carbo-components-palette>
                         </div>
 
                     </addcomponents-content>
 
 
                     <style-content>
-                        <carbo-panel title="Estilo" icon="image:palette" menu="{{ boxmenuitem }}">
+                        <carbo-panel 
+                            title="Estilo" 
+                            icon="image:palette" 
+                            menu="{{ boxmenuitem }}"
+                        >
                             <div class="box-content">
-                                <carbo-components-tree component="{{componentscategories}}" menu="{{ boxmenuitem }}"></carbo-components-tree>
+                                <carbo-components-tree 
+                                    component="{{componentscategories}}" 
+                                    menu="{{ boxmenuitem }}"
+                                ></carbo-components-tree>
                             </div>
                         </carbo-panel>
-
                     </style-content>
-
 
                 </carbo-body>
 
             </div>
+            <!-- lab -->
 
         </iron-pages>
         <!-- end of the pages container -->
