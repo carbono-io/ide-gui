@@ -38,27 +38,27 @@
         align-items: center;
 
         #header-left {
-                font-size: @font-size-5;
-                width: 30%;
+            font-size: @font-size-5;
+            width: 30%;
+            display:flex;
+            flex-direction: row;
+            align-items:center;
+
+            iron-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            #header-left-section {
                 display:flex;
                 flex-direction: row;
                 align-items:center;
+                font-weight: @bold;
 
-                iron-icon {
-                    width: 18px;
-                    height: 18px;
+                &:hover {
+                    cursor: pointer;
                 }
-
-                #header-left-section {
-                        display:flex;
-                        flex-direction: row;
-                        align-items:center;
-                        font-weight: @bold;
-
-                                &:hover {
-                                cursor: pointer;
-                                }
-                }
+            }
         }
 
         #header-center {
@@ -80,13 +80,11 @@
 
                     transition: all ease 0.3s;
 
-
                     iron-icon {
                         width: 18px;
                         height: 18px;
                         margin-bottom: @base-size/2;
                     }
-
 
                     &:hover {
                         cursor: pointer;
@@ -98,41 +96,36 @@
         }
 
         #header-right {
+            font-size: @font-size-3;
+            width: 30%;
+            display:flex;
+            flex-direction: row;
+            justify-content: flex-end;
 
-                font-size: @font-size-3;
-                width: 30%;
-                display:flex;
+            iron-icon {
+                width: 18px;
+                height: 18px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            #header-right-preview {
+                display: flex;
                 flex-direction: row;
-                justify-content: flex-end;
+                align-items: center;
+                margin-right: @base-size*2;
 
-
-                iron-icon {
-                    width: 18px;
-                    height: 18px;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
+                &:hover {
+                    cursor: pointer;
                 }
 
-                #header-right-preview {
-
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        margin-right: @base-size*2;
-
-                        &:hover {
-                            cursor: pointer;
-                        }
-
-                        .play {
-                            margin-right: @base-size/2;
-                        }
+                .play {
+                    margin-right: @base-size/2;
                 }
+            }
         }
-
-
     }
 
     #carbo-header-panel {
@@ -170,8 +163,6 @@
             &:hover {
                 background-color: @lightgrey;
                 cursor: pointer;
-
-
             }
 
             .carbo-section-header {
@@ -179,7 +170,6 @@
                 font-size: @font-size-4;
                 margin-bottom: @base-size;
             }
-
 
             .carbo-section-contents {
                 display: flex;
@@ -192,15 +182,13 @@
                 margin-bottom: 0;
                 margin-left: @base-size;
 
-                    &:first-child {
-                            margin-left: 0;
-                    }
+                &:first-child {
+                    margin-left: 0;
+                }
 
-                    &:last-child {
-                            margin-right: 0;
-                    }
-
-
+                &:last-child {
+                    margin-right: 0;
+                }
 
                 .carbo-section-screen {
                     background-color: @white;
@@ -215,37 +203,6 @@
                         border-color: @darkgrey;
                         cursor: pointer;
                     }
-
-
-                    /**
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     */
-                    .fake-fake-fake-fake-fake-app-header {
-                        background-color: @lightgrey;
-
-                        font-size: @font-size-2;
-
-                        font-weight: @regular;
-
-                        text-align: center;
-
-                        padding-top: 3px;
-                        padding-bottom: 3px;
-                    }
-                    /**
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     * REMOVER PELO AMOR DE DEUS
-                     */
-
                 }
 
                 .carbo-section-screen-caption {
@@ -253,8 +210,6 @@
                     margin-top: @base-size;
                     height: 2 * @base-size;
                 }
-
-
 
                 // The button for adding screens
                 .carbo-section-screen-add-button {
@@ -268,7 +223,6 @@
                     justify-content: center;
                     align-items: center;
 
-
                     iron-icon {
                         color: @grey;
                         height: 2 * @base-size;
@@ -277,13 +231,6 @@
                             color: @darkgrey;
                         }
                     }
-
-//                    .material-icons {
-//                        color: @grey;
-//                            &:hover {
-//                                color: @darkgrey;
-//                            }
-//                    }
 
                     .button-caption {
                         text-align: center;
@@ -303,29 +250,28 @@
 
     }
 
-        #close-header-panel{
-                background-color: @mediumgrey;
-                opacity: 0;
-                visibility: hidden;
-                position: fixed;
-                z-index: 0;
-                top: 0;
-                width: 100%;
-                transition: all 0.3s ease;
-                transition-delay: 0;
+    #close-header-panel {
+        background-color: @mediumgrey;
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        z-index: 0;
+        top: 0;
+        width: 100%;
+        transition: all 0.3s ease;
+        transition-delay: 0;
 
-                &.active {
-                        visibility: visible;
-                        opacity: 0.9;
-                        bottom:0;
-                }
+        &.active {
+            visibility: visible;
+            opacity: 0.9;
+            bottom: 0;
         }
-
+    }
 }
 
 .has-shadow {
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .has-shadow-2 {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

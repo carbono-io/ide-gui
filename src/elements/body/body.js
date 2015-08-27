@@ -1,4 +1,3 @@
-    Polymer({
-        is: 'carbo-body',
-
-    })
+Polymer({
+    is: 'carbo-body',
+});
