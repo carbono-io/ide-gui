@@ -139,11 +139,9 @@ iron-icon {
 
         .preview-screen {
             visibility: hidden;
-            max-height: @phone-proportion * @phone-frame-width/ 1.5;
-            width: @phone-frame-width/ 1.5;
+//            max-height: @phone-proportion * @phone-frame-width/ 1.5;
+//            width: @phone-frame-width/ 1.5;
             background-color: @white;
-            border: solid 1px @mediumgrey;
-            box-sizing: border-box; //consider border on height size
         }
 
         .screen-caption {
@@ -174,8 +172,14 @@ iron-icon {
 
         .preview-screen {
             visibility: visible;
-            height: @phone-proportion * @phone-frame-width/ 1.5;
+//            height: @phone-proportion * @phone-frame-width/ 1.5;
             max-height: @phone-proportion * @phone-frame-width/ 1.5;
+            overflow: hidden;
+            img {
+                width: @phone-frame-width/ 1.5;
+                border: solid 1px @mediumgrey;
+                box-sizing: border-box; //consider border on height size
+            }
         }
 
         .screen-caption {

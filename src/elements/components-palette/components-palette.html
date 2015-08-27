@@ -51,13 +51,16 @@
         <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
 <!--            <div id="preview">-->
             <div class="component-preview-container has-shadow-2">
-                <div class="title">Preview</div>
-                <div class="preview-screen"></div>
-                <div class="screen-caption">Título da página</div>
+                <div class="title">{{ title }}</div>
+                <template is="dom-repeat" items="{{ screens }}">
+                    <div class="preview-screen"><img src="{{ item.url }}"></div>
+                    <div class="screen-caption">{{ item.screensCaption }}</div>
+
+                </template>
             </div>
         </div>
     </template>
 
-    <script src="components-palette.js"></script>
+    <script src="components-palette.js" ></script>
 
 </dom-module>
