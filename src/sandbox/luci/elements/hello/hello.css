@@ -3,7 +3,4 @@
  | All modifications to it will be lost, mercilessly! |
  -----------------------------------------------------*/
 
-#ola.active {
-  background-color: yellow;
-  color: black;
-}
+#ola.active{background-color:#ff0;color:#000}
