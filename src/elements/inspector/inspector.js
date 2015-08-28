@@ -4,10 +4,14 @@
         is: 'carbo-inspector',
         ready: function () {
             
+
+            //?mudou para window - window inclui a overlay - certo?
             window.addEventListener('message', this.handleFrameMessage.bind(this), false);
 
 //            document.addEventListener('mousemove', this.handleMousemove.bind(this));
 
+
+            //nao entendi exatamente essa parte
             document.addEventListener('mouseout', function (e) {
                 var from = e.relatedTarget || e.toElement;
                 if (!from || from.nodeName == "HTML") {
@@ -17,9 +21,20 @@
 
         },
         
+        //
         handleFrameMessage: function (event) {
-            var data = JSON.parse(event.data);
+
+// mensagem original
+//            message = '{name: luciana}'
+
+// mensagem  convertida em json
+//            var message = {
+//                name: 'luciana'
+//            };
+//
             
+            //método JSON.parse() converte string para JSON
+            var data = JSON.parse(event.data);
             var operationName = data.operation;
             var args          = data.args || [];
             
@@ -40,10 +55,17 @@
                 y: event.clientY
             };
 
-            // faz a função highlight no elemento que ele guardou na variavel 'element'
             this.highlightElementAtPoint(pos);
 
         },
+
+
+        handleClick: function (event) {
+
+            console.log('clicou');
+
+        },
+
 
         // *****end handlemousemove
 
