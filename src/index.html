@@ -38,7 +38,7 @@
     <link rel="import" href="elements/panel-box/panel-box.html">
     <link rel="import" href="elements/components-palette/components-palette.html">
     <link rel="import" href="elements/component-settings/component-settings.html">
-    <link rel="import" href="elements/inspector/inspector.html">
+    <link rel="import" href="elements/canvas/canvas.html">
 
     <!--polymer - iron icon -->
     <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -102,11 +102,10 @@
 
                     <canvas-container-content>
                         <div id="canvas-control">
-                            <iframe
-                                id="canvas"
+                            <carbo-canvas
                                 class="has-shadow"
-                                src="{{ project.projectUrl }}"
-                            ></iframe>
+                                project-url="{{ project.projectUrl }}"
+                            ></carbo-canvas>
                             <div id="control">
                                 <div id="control-zoom">
                                     zoom

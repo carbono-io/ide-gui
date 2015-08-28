@@ -3,17 +3,33 @@
     Polymer({
         is: 'carbo-inspector',
         ready: function () {
+            
+            window.addEventListener('message', this.handleFrameMessage.bind(this), false);
 
-
-            document.addEventListener('mousemove', this.handleMousemove.bind(this));
+//            document.addEventListener('mousemove', this.handleMousemove.bind(this));
 
             document.addEventListener('mouseout', function (e) {
-
                 var from = e.relatedTarget || e.toElement;
                 if (!from || from.nodeName == "HTML") {
                     this.unHighlight();
                 }
             }.bind(this));
+
+        },
+        
+        handleFrameMessage: function (event) {
+            var data = JSON.parse(event.data);
+            
+            var operationName = data.operation;
+            var args          = data.args || [];
+            
+            var operation = this[operationName];
+            
+            if (operation) {
+                operation.apply(this, args);
+            } else {
+                console.warn('Operation %s not defined at inspector', operationName);
+            }
         },
 
         handleMousemove: function (event) {
@@ -24,79 +40,67 @@
                 y: event.clientY
             };
 
-            // get hovered component (Element under that position)
-            var element = document.elementFromPoint(pos.x, pos.y);
+            // faz a função highlight no elemento que ele guardou na variavel 'element'
+            this.highlightElementAtPoint(pos);
 
-            console.log(element.id);
+        },
 
-            if (element === this) {
-                return;
-            }
+        // *****end handlemousemove
 
-            // salva a div highlighter numa variável
-            var highlighter = this.$.highlighter;
-//            console.log(highlighter);
-
-            //?
+        highlight: function (element) {
+            
             if (this.activeElement) {
                 this.unHighlight(this.activeElement);
             }
 
-            //? faz a função highlight no elemento que ele guardou na variavel 'element'
-            this.highlight(element, highlighter);
-
-            //? 'ativa' o elemento que ele guardou na variavel 'element': Returns the currently focused element, that is, the element that will get keystroke events if the user types any. This attribute is read only.
+            // 'ativa' o elemento que ele guardou na variavel 'element': Returns the currently focused element, that is, the element that will get keystroke events if the user types any. This attribute is read only.
             // Set active element
             this.activeElement = element;
+            
+            var highlighter = this.$.highlighter;
+            
+            this.toggleClass('show', true, highlighter);
+//            this.toggleClass('show', true, this.$.clickarea);
+
+            var rect = element.getBoundingClientRect();
+
+            highlighter.style.left = rect.left + "px";
+            highlighter.style.top = rect.top + "px";
+
+            highlighter.style.width = rect.width + "px";
+            highlighter.style.height = rect.height + "px";
         },
+        // *****end highlight
 
-        highlight: function (element, highlighter) {
-            // if (this.activeElement === element) {
-            //     return;
-            // }
-
-//            console.log('highlight');
-//            console.log(element)
-
-//            element.style.border = '4px red dashed';
-
-            //FAZER: ao invés de colocar um border no proprio component, colocar uma div por cima com transparência e border
-//calcular o tamanho e posicao dessa div a partir do elemento - ex do preview da luci
-//essa div terá position fixed com localização = do elemento 'selecionado' provavelmente
-
-            this.toggleClass('show', true, this.$.highlighter);
-
-            // get element's size dynamically
-            var elementWidth = element.offsetWidth;
-            var elementHeight = element.offsetHeight;
-
-
-            // get left-position of element
-            var elementLeftPosition = element.offsetLeft;
-            // get height-position of element
-            var elementTopPosition = element.offsetTop;
-
-            highlighter.style.left = elementLeftPosition + "px";
-            highlighter.style.top = elementTopPosition + "px";
-
-            // highlighter.style.top = (elementTopPosition + 56) + "px";
-
-            highlighter.style.width = elementWidth + "px";
-            highlighter.style.height = elementHeight + "px";
-
-            console.log(element);
-            console.log(elementWidth);
-            console.log(elementHeight);
-
-
+        unHighlight: function () {
+            this.toggleClass('show', false, this.$.highlighter);
         },
-
-        unHighlight: function (element) {
-//            element.style.border = 'none';
-              this.toggleClass('show', false, this.$.highlighter);
-
-
+        //*****end unhighlight
+        
+        highlightElementAtPoint: function (point) {
+            // get hovered component (Element under that position)
+            var element = document.elementFromPoint(point.x, point.y);
+            
+            if (element === this) {
+                this.unHighlight();
+            }
+            
+            this.highlight(element);
         },
+        
+        
+        scrollBy: function (deltaX, deltaY) {
+            
+//            console.log('scroll x: %s, y: %s', deltaX, deltaY);
+            window.scrollBy(deltaX, deltaY);
+            
+            this.unHighlight();
+        }
     })
 
 })();
+
+
+
+
+//--------------------------------------

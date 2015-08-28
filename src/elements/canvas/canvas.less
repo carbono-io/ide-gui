@@ -1,5 +1,37 @@
 @import '../../less/variables.less';
 
 :host {
-    background-color: red;
+}
+
+#canvas {
+    position: relative;
+    height: @phone-proportion * @phone-frame-width;
+    width: @phone-frame-width;
+    border: 3px solid @mediumgrey;
+}
+
+#overlay {
+    position: absolute;
+    
+    z-index: 9999;
+    
+    opacity: 0.3;
+    background-color: darkred;
+    
+    overflow: scroll;
+    
+    &.active {
+        // only occupy full screen when active
+        // otherwise, just disappear
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+#iframe {
+    border: none;
+    height: 100%;
+    width: 100%;
 }

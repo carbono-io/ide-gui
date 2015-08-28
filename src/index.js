@@ -154,6 +154,11 @@
 
     carbo.componentscategories = categorie;
 
+    
+    window.addEventListener('WebComponentsReady', function () {
+        window.canvas = document.getElementById('canvas');
+    });
+    
 
 //    window.addEventListener('WebComponentsReady', function () {
 //
