@@ -3,18 +3,7 @@
     Polymer({
         is: 'carbo-inspector',
         ready: function () {
-            
-            window.addEventListener('message', this.handleFrameMessage.bind(this), false);
-
-//            document.addEventListener('mousemove', this.handleMousemove.bind(this));
-
-            document.addEventListener('mouseout', function (e) {
-                var from = e.relatedTarget || e.toElement;
-                if (!from || from.nodeName == "HTML") {
-                    this.unHighlight();
-                }
-            }.bind(this));
-
+            window.addEventListener('message', this.handleFrameMessage.bind(this));
         },
         
         handleFrameMessage: function (event) {
@@ -33,7 +22,6 @@
         },
 
         handleMousemove: function (event) {
-
             // Position of mouse
             var pos = {
                 x: event.clientX,
@@ -42,13 +30,9 @@
 
             // faz a função highlight no elemento que ele guardou na variavel 'element'
             this.highlightElementAtPoint(pos);
-
         },
 
-        // *****end handlemousemove
-
         highlight: function (element) {
-            
             if (this.activeElement) {
                 this.unHighlight(this.activeElement);
             }
@@ -60,7 +44,6 @@
             var highlighter = this.$.highlighter;
             
             this.toggleClass('show', true, highlighter);
-//            this.toggleClass('show', true, this.$.clickarea);
 
             var rect = element.getBoundingClientRect();
 
@@ -70,12 +53,10 @@
             highlighter.style.width = rect.width + "px";
             highlighter.style.height = rect.height + "px";
         },
-        // *****end highlight
 
         unHighlight: function () {
             this.toggleClass('show', false, this.$.highlighter);
         },
-        //*****end unhighlight
         
         highlightElementAtPoint: function (point) {
             // get hovered component (Element under that position)
@@ -88,10 +69,8 @@
             this.highlight(element);
         },
         
-        
         scrollBy: function (deltaX, deltaY) {
-            
-//            console.log('scroll x: %s, y: %s', deltaX, deltaY);
+            // console.log('scroll x: %s, y: %s', deltaX, deltaY);
             window.scrollBy(deltaX, deltaY);
             
             this.unHighlight();
@@ -99,8 +78,3 @@
     })
 
 })();
-
-
-
-
-//--------------------------------------
