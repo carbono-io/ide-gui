@@ -27,12 +27,17 @@
     "paper-checkbox": "PolymerElements/paper-checkbox#~1.0.6",
     "iron-image": "PolymerElements/iron-image#~1.0.2",
     "iron-form": "PolymerElements/iron-form#~1.0.8",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "q": "1.4.1",
+    "paper-card": "PolymerElements/paper-card#~1.0.3"
   },
   "devDependencies": {
     "polymer-starter-kit": "https://github.com/PolymerElements/polymer-starter-kit.git#~1.0.3"
   },
   "maquina": {
     "cruder": "12321"
+  },
+  "resolutions": {
+    "polymer": "~1.0.9"
   }
 }
