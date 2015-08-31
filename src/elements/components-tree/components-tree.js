@@ -42,4 +42,5 @@
             closed: Boolean,
         }
     });
+
 })();

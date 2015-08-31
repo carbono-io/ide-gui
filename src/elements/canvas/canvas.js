@@ -1,3 +1,19 @@
+/**
+ * Before reading the code, it will be helpful to contextualize
+ * yourself at what this module does.
+ *
+ * In essence, it is the guy responsible for all interactions with the
+ * application frame within it.
+ *
+ * There are multiple events that we must intercept at this module:
+ * the clicks on the application, scroll, mousemove. 
+ *
+ * All these events are intercepted by a sub-component we call the 
+ * `overlay`, which is an opacity-0-div that is over the application iframe.
+ *
+ * All events are detected on the overlay and passed onto the application if 
+ * necessary.
+ */
 (function () {
 
     /**
@@ -35,10 +51,10 @@
             this._inspectorOperationDefers = {};
         },
 
-        /**
-         * Event handling
-         */
-        
+        properties: {
+
+        },
+
         /**
          * Hash of event listeners for the DOM
          */
@@ -57,7 +73,6 @@
          * let the overlay handle keydown events for shortcut detection.
          */
         handleCanvasMouseenter: function (event) {
-            
             // Set focus onto the overlay so that it can handle keydown events
             this.$.overlay.focus();
             this.$.overlay.addEventListener('keydown', this.handleOverlayKeydown);
@@ -87,7 +102,6 @@
          * @param  {Event} event
          */
         handleOverlayMousewheel: function (event) {
-
             // Prevent event from being captured by outer nodes
             // (I am looking at you, window)
             event.preventDefault();
@@ -115,7 +129,6 @@
          * @param  {Event} event 
          */
         handleOverlayMousemove: function (event) {
-
             var normalizedMousePos = this.normalizeMousePosition({
                 x: event.clientX,
                 y: event.clientY
@@ -130,7 +143,6 @@
          * @param  {Event} event 
          */
         handleOverlayKeydown: function (event) {
-            
             // DOM lvl3 event.key is not supported by all browsers 
             // but MDN recommends using it instead of keyCode
             // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
@@ -166,7 +178,6 @@
          * @param  {Event} event
          */
         handleOverlayClick: function (event) {
-            
             this.executeInspectorOperation('getActiveElementData')
                 .then(function (activeElementData) {
                     console.log(activeElementData);
@@ -180,7 +191,6 @@
          * @return {{x: Numver, y: Number} Object} pos Normalized position
          */
         normalizeMousePosition: function (pos) {
-
             // Calculate the rect of the overlay
             var overlayRect = this.$.overlay.getBoundingClientRect();
             
@@ -195,13 +205,16 @@
         /**
          * Executes and operation inside the iframe.
          * Communicates with the <carbo-inspector> component within the frame
+         *
+         * Implements the promise interface that makes it possible 
+         * to use request-response paradigm in the `window.postMessage` 
+         * communication.
          * 
          * @param  {String} operation The name of the operation to be executed.
          * @param  {Array|*} args     Array of arguments or single argument.
          * @return {Promise}          Promise to be resolved after the response.
          */
         executeInspectorOperation: function (operation, args) {
-            
             // Create and id for the operation
             var opid = _.uniqueId(INSPECTOR_OPERATION_PREFIX);
 

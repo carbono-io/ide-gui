@@ -4,17 +4,13 @@
     <link rel="import" type="css" href="canvas.css">
 
     <template>
-        
         <div id="canvas">
-
             <iframe id="iframe" src="{{ projectUrl }}"></iframe>
             
             <!-- TODO: mousewheel event not supported by firefox -->
             <!-- overlay comes activated by default -->
             <div id="overlay" tabindex="1" class="active"></div>
-            
         </div>
-
     </template>
     
     <script src="../../bower_components/q/q.js"></script>
