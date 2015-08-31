@@ -9,4 +9,11 @@
         { title: 'fourth card' }
     ];
 
+    submitForm = function() {
+        console.log("submitted");
+        document.getElementById('formdefault').submit();
+
+
+
+    }
 })();

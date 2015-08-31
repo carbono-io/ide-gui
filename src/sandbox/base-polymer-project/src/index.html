@@ -17,6 +17,7 @@
         <link rel="import" href="../../../bower_components/paper-card/paper-card.html">
         <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
         <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+        <link rel="import" href="../../../bower_components/paper-spinner/paper-spinner.html">
 
         <!-- injected component -->
         <link rel="import" href="../../../elements/inspector/inspector.html">
@@ -76,9 +77,9 @@
 
 
             paper-input-container {
-                --default-primary-color: #6D6D6D;
+                --default-primary-color: purple;
                 --primary-text-color: #6D6D6D;
-                --secondary-text-color: #D2D2D2;
+                --secondary-text-color: #6D6D6D;
             }
 
 
@@ -133,19 +134,47 @@
 -->
             <carbo-form>
 
-                <paper-input label="Name">
-
-                </paper-input>
-
-                <paper-input-container>
-                    <label>Total</label>
-                    <input is="iron-input">
-                </paper-input-container>
-
-                <div id="buttons-container">
-                    <paper-button raised onclick="clickHandler(event)">Cancelar</paper-button>
-                    <paper-button raised onclick="clickHandler(event)">Enviar</paper-button>
+<!--
+                <div id="formloading" class="active">
+                    <paper-spinner alt="Loading form" active></paper-spinner>
+                    <p>Carregando</p>
                 </div>
+-->
+                <paper-spinner alt="Loading form" active></paper-spinner>
+
+                <div id=formdefault>
+<!--
+                    <paper-input label="Name">
+                    </paper-input>
+-->
+                    <paper-input-container>
+                        <label>Total</label>
+                        <input is="iron-input">
+                    </paper-input-container>
+
+                    <paper-input-container>
+                        <label>Total</label>
+                        <input is="iron-input">
+                    </paper-input-container>
+
+                    <div id="buttons-container">
+                        <paper-button raised onclick="cancelForm()">Cancelar</paper-button>
+                        <paper-button raised onclick="submitForm()" id="submit">Enviar</paper-button>
+                    </div>
+
+                    <div id="formerror">
+                        Formulário com erro de envio!
+                    </div>
+
+                </div>
+
+                <div id="formsubmitted">
+                    <p>Formulário enviado com sucesso!</p>
+                </div>
+
+
+
+
             </carbo-form>
 
         </template>

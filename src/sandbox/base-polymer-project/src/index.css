@@ -28,12 +28,54 @@ section > div {
 
 
 paper-button {
-    margin: 0 0 0 8px;
+    margin: 0 0 0 16px;
 }
 
-paper-input-container {
-    --default-primary-color: red;
-    --primary-text-color: red;
-    --secondary-text-color: red;
-    color: red;
+paper-button#submit {
+    background: purple;
+    color: #fff;
+}
+
+
+/*
+#formloading {
+    display: none;
+}
+
+#formloading.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+*/
+
+paper-spinner {
+    width: 100%;
+    margin: auto;
+}
+
+#formdefault {
+    display: none;
+}
+
+#formdefault.active {
+    display: block;
+}
+
+#formerror {
+    display: none;
+}
+
+#formerror.active {
+    display: block;
+}
+
+#formsubmitted {
+    display: none;
+}
+
+#formsubmitted.active {
+    display: block;
 }

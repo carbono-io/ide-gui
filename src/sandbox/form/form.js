@@ -1,8 +1,12 @@
  Polymer({
-        is: 'carbo-form',
+    is: 'carbo-form',
 
-//        function submitForm() {
-//            document.getElementById('form').submit();
-//        }
+//    listeners: {
+//        'submit.onclick': 'submitform'
+//    },
+//
+//    submitform: function() {
+//        console.log("ouvi o submit");
+//    }
 
  })
