@@ -136,15 +136,6 @@
          */
         handleFrameRequestMessage: function (event) {
 
-// mensagem original
-//            message = '{name: luciana}'
-
-// mensagem  convertida em json
-//            var message = {
-//                name: 'luciana'
-//            };
-//
-            
             // método JSON.parse() converte string para JSON
             var request = JSON.parse(event.data);
 
@@ -183,10 +174,19 @@
         getActiveElementData: function () {
             var element = this.activeElement;
 
+            var boundingRect = element.getBoundingClientRect();
+
+            //PEGA AS INFOS DO ELEMENTO CLICADO ENVIADAS PELO CANVAS
             var data = {
                 tagName: element.tagName,
                 attributes: DOMHelpers.getAttributes(element),
                 computedStyle: DOMHelpers.getComputedStyle(element),
+                rect: {
+                    top: boundingRect.top,
+                    left: boundingRect.left,
+                    width: boundingRect.width,
+                    height: boundingRect.height,
+                },
             };
 
             return data;
@@ -234,6 +234,7 @@
             // the highlighted element to the highlighter
             var computedStyle = DOMHelpers.getComputedStyle(element);
 
+            //forEach - para cada um dos itens do array MIMIC_STYLES
             MIMIC_STYLES.forEach(function (styleProp) {
                 if (computedStyle[styleProp]) {
                     // Simply copy the styles

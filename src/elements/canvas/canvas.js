@@ -136,6 +136,8 @@
 
             // Highlight element
             this.executeInspectorOperation('highlightElementAtPoint', normalizedMousePos);
+
+
         },
         
         /**
@@ -180,8 +182,21 @@
         handleOverlayClick: function (event) {
             this.executeInspectorOperation('getActiveElementData')
                 .then(function (activeElementData) {
-                    console.log(activeElementData);
-                });
+                    //aqui: fazer o contorno ficar na clicked area
+                    //fazer a clicked area transformar o mouse para (+)
+                var clickedarea = this.$.clickedarea;
+                var rect = activeElementData.rect;
+
+                console.log(clickedarea);
+
+                // Set positions
+                clickedarea.style.left   = rect.left   + 'px';
+                clickedarea.style.top    = rect.top    + 'px';
+                clickedarea.style.width  = rect.width  + 'px';
+                clickedarea.style.height = rect.height + 'px';
+
+                this.toggleClass('active', true, this.$.clickedarea);
+                }.bind(this));
         },
         
         /**
@@ -196,10 +211,12 @@
             
             // Calculate the position of the mouse
             // relative to the rect of the overlay
-            return {
+            var normalized =  {
                 x: pos.x - overlayRect.left,
                 y: pos.y - overlayRect.top
             };
+
+            return normalized;
         },
 
         /**
@@ -224,7 +241,7 @@
                 args: Array.isArray(args) ? args : [args]
             });            
             
-            // Send the message to the iframe
+            // Send the message to the iframe -
             this.$.iframe.contentWindow.postMessage(message, '*');
 
             // Create a deferred object to be returned and store it

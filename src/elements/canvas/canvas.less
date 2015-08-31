@@ -13,7 +13,7 @@
 #overlay {
     position: absolute;
     
-    z-index: 9999;
+    z-index: 9997;
     
     opacity: 0;
     user-select: none;
@@ -35,3 +35,27 @@
     height: 100%;
     width: 100%;
 }
+
+
+#clickedarea {
+
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    border: 3px green solid;
+    z-index: 9999;
+    box-sizing: border-box;
+
+
+    &.active {
+        // only occupy full screen when active
+        // otherwise, just disappear
+//        top: 0;
+//        bottom: 0;
+//        left: 0;
+//        right: 0;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+

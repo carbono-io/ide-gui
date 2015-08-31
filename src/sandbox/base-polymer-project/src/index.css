@@ -18,3 +18,22 @@ section > div {
   padding: 14px;
   font-size: 16px;
 }
+
+#buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 16px 0;
+}
+
+
+paper-button {
+    margin: 0 0 0 8px;
+}
+
+paper-input-container {
+    --default-primary-color: red;
+    --primary-text-color: red;
+    --secondary-text-color: red;
+    color: red;
+}
