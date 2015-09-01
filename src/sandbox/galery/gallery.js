@@ -1,5 +1,5 @@
  Polymer({
-    is: 'carbo-galery',
+    is: 'carbo-gallery',
 
 //    listeners: {
 //        'submit.onclick': 'submitform'
