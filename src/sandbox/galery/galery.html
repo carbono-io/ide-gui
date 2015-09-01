@@ -20,30 +20,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 <link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 
 
 
 <dom-module id="carbo-galery">
 
     <link rel="import" type="css" href="galery.css">
-    <template>
 
+<template >
 
+    <paper-card heading="Card Title">
+      <div class="card-content">Some content</div>
+      <div class="card-actions">
+        <paper-button>Some action</paper-button>
+      </div>
+    </paper-card>
 
+</template>
 
-<!--
-        <form is="iron-form" id="formGet" method="get" action="/">
-            <content select="formloading-content"></content>
-            <content select="formdefault-content"></content>
-            <content select="formcommands-content"></content>
-            <content select="formsending-content"></content>
-            <content select="formerror-content"></content>
-            <content select="formsubmitted-content"></content>
+    <!--
+            <div class="content">
 
-        </form>
+                <template is="dom-repeat" items="{{ cards }}">
+
+                    <paper-card class='fancy'>
+                        <div class="card-content">
+                            <div class="avatar">:)</div>
+                            <div class="title">
+                                <div class="medium">{{ item.title }}</div>
+                                <div class="small">subtitle</div>
+                            </div>
+                        </div>
 -->
 
-    </template>
+                        <!-- take this out of the content class so that it can span the whole card -->
+<!--
+                        <img src="http://placehold.it/350x150">
+
+                        <div class="card-content">
+                            <div class="big">Usu eu novum principes, vel quodsi aliquip ea.</div>
+                            <div class="medium">Ut labores minimum atomorum pro. Laudem tibique ut has.</div>
+                            <div class="small">Usu eu novum principes, vel quodsi aliquip ea.</div>
+                        </div>
+                    </paper-card>
+
+                </template>
+
+            </div>
+
+-->
+
+
+
+
 
     <script src="galery.js"></script>
 

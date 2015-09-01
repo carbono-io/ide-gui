@@ -31,7 +31,8 @@
     "q": "1.4.1",
     "paper-card": "PolymerElements/paper-card#~1.0.3",
     "paper-spinner": "PolymerElements/paper-spinner#~1.0.2",
-    "paper-toast": "PolymerElements/paper-toast#~1.0.0"
+    "paper-toast": "PolymerElements/paper-toast#~1.0.0",
+    "iron-list": "PolymerElements/iron-list#~1.1.0"
   },
   "devDependencies": {
     "polymer-starter-kit": "https://github.com/PolymerElements/polymer-starter-kit.git#~1.0.3"
