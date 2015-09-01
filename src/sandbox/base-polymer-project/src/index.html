@@ -18,6 +18,7 @@
         <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
         <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
         <link rel="import" href="../../../bower_components/paper-spinner/paper-spinner.html">
+        <link rel="import" href="../../../bower_components/paper-toast/paper-toast.html">
 
         <!-- injected component -->
         <link rel="import" href="../../../elements/inspector/inspector.html">
@@ -134,43 +135,48 @@
 -->
             <carbo-form>
 
-<!--
-                <div id="formloading" class="active">
+                <formloading id="formloading" class="">
                     <paper-spinner alt="Loading form" active></paper-spinner>
                     <p>Carregando</p>
-                </div>
--->
-                <paper-spinner alt="Loading form" active></paper-spinner>
+                </formloading>
 
-                <div id=formdefault>
-<!--
-                    <paper-input label="Name">
-                    </paper-input>
--->
-                    <paper-input-container>
-                        <label>Total</label>
+
+                <formdefault id="formdefault" class="active">
+
+                    <paper-input-container invalid="true">
+                        <label>Campo 1</label>
                         <input is="iron-input">
                     </paper-input-container>
 
                     <paper-input-container>
-                        <label>Total</label>
+                        <label>Campo 2</label>
                         <input is="iron-input">
                     </paper-input-container>
 
-                    <div id="buttons-container">
-                        <paper-button raised onclick="cancelForm()">Cancelar</paper-button>
-                        <paper-button raised onclick="submitForm()" id="submit">Enviar</paper-button>
-                    </div>
+                </formdefault>
 
-                    <div id="formerror">
-                        Formulário com erro de envio!
-                    </div>
+                <formcommands class="buttons-container active">
+                    <paper-button raised onclick="document.querySelector('#sending').show()">Cancelar</paper-button>
+                    <paper-button raised onclick="document.querySelector('#errormessage').show()"
+ id="submit">Enviar</paper-button>
+                    <paper-button disabled onclick="document.querySelector('#sucess').show()">Sucesso</paper-button>
 
-                </div>
+<!--                    <paper-button raised onclick="submitForm()" id="submit">Enviar</paper-button>-->
+                </formcommands>
 
-                <div id="formsubmitted">
-                    <p>Formulário enviado com sucesso!</p>
-                </div>
+                <formsending id="formsending" class="">
+                    <paper-toast id="sending" text="Enviando..."></paper-toast>
+                </formsending>
+
+                <formerror id="formerror" class="">
+                    <paper-toast id="errormessage" text="Erro de envio.">
+                        <span role="button" tabindex="0" style="color: #eeff41;" onclick="console.log('RETRY')">Reenviar</span>
+                    </paper-toast>
+                </formerror>
+
+                <formsubmitted id="formsubmitted" class="">
+                    <paper-toast id="sucess" text="Enviado com sucesso!"></paper-toast>
+                </formsubmitted>
 
 
 

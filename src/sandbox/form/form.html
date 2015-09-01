@@ -25,14 +25,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="carbo-form">
 
-  <link rel="import" type="css" href="form.css">
-  <template>
+    <link rel="import" type="css" href="form.css">
+    <template>
 
-       <form is="iron-form" id="formGet" method="get" action="/">
-<content></content>
+        <form is="iron-form" id="formGet" method="get" action="/">
+            <content select="formloading"></content>
+            <content select="formdefault"></content>
+            <content select="formcommands"></content>
+            <content select="formsending"></content>
+            <content select="formerror"></content>
+            <content select="formsubmitted"></content>
+
         </form>
 
-  </template>
+    </template>
 
     <script src="form.js"></script>
 

@@ -3,8 +3,10 @@
  | All modifications to it will be lost, mercilessly! |
  -----------------------------------------------------*/
 
-form {
+:host {
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 16px;
+    padding-bottom: 16px;
+    height: 100%;
 }

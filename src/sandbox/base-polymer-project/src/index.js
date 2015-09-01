@@ -11,9 +11,6 @@
 
     submitForm = function() {
         console.log("submitted");
-        document.getElementById('formdefault').submit();
-
-
 
     }
 })();
