@@ -135,13 +135,13 @@
 -->
             <carbo-form>
 
-                <formloading id="formloading" class="">
+                <formloading-content id="formloading" class="active">
                     <paper-spinner alt="Loading form" active></paper-spinner>
                     <p>Carregando</p>
-                </formloading>
+                </formloading-content>
 
 
-                <formdefault-content id="formdefault" class="active">
+                <formdefault-content id="formdefault" class="">
 
                     <paper-input-container invalid>
                         <label>Campo 1</label>
@@ -155,7 +155,7 @@
 
                 </formdefault-content>
 
-                <formcommands-content class="formcommands active">
+                <formcommands-content class="formcommands ">
                     <paper-button raised onclick="document.querySelector('#sending').show()">Cancelar</paper-button>
                     <paper-button raised onclick="document.querySelector('#errormessage').show()"
  id="submit">Enviar</paper-button>
