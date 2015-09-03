@@ -19,14 +19,14 @@ section > div {
   font-size: 16px;
 }
 
-.buttons-container {
+.formcommands {
     display: none;
 }
 
-.buttons-container.active {
+.formcommands.active {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+/*    flex-wrap: wrap;*/
     justify-content: flex-end;
     padding: 16px 0;
 }
