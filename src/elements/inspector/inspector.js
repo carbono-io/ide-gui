@@ -215,6 +215,17 @@
             // Save the element to the active element
             this.activeElement = element;
 
+            console.log(element);
+
+            // Get element tag name
+            var elementLabelName = element.tagName;
+
+            // Get label div of inpector.html
+            var elementLabelContainer = this.$.elementlabel;
+
+            // Set value of label div
+            elementLabelContainer.innerHTML = elementLabelName;
+
             // The highlighter DOMNode
             var highlighter = this.$.highlighter;
             // The bounding rectangle for the element to be hightlighted
