@@ -3,7 +3,7 @@
 
     Polymer({
         is: 'carbo-components-tree',
-        ready: function(){
+        ready: function() {
             var componentItself = this.$$('#component-itself');
             console.log(componentItself);
             var componentContext = this;
@@ -20,7 +20,7 @@
                 isClosed = true;
             }
 
-            componentItself.addEventListener('click', function(event){
+            componentItself.addEventListener('click', function(event) {
 
                 if (isClosed) {
                     console.log('open');

@@ -9,13 +9,15 @@ var gulp        = require('gulp');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var through2    = require('through2');
+var del         = require('del');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
 
 // Constants
-var SRC_DIR     = './src';
-var DIST_DIR    = './dist';
+var SRC_DIR     = 'src';
+var DIST_DIR    = 'dist';
+var MAPS_DIR    = 'source-maps';
 
 var JS_DIR = [
     SRC_DIR + '/**/*.js',
@@ -42,7 +44,7 @@ var HTML_DIR = [
 /**
  * Task for less.
  */
-function _less() {
+gulp.task('less', function () {
 
     // Message to be prepended to all .css files generated via less
     var message = [
@@ -53,7 +55,7 @@ function _less() {
     ].join('\n');
 
     return gulp.src(LESS_DIR)
-        // .pipe($.changed(SRC_DIR, { extension: '.css' }))
+        .pipe($.changed(SRC_DIR, { extension: '.css' }))
         .pipe($.duration('Compiling .less files'))
             .pipe($.sourcemaps.init())
             .pipe($.less())
@@ -81,18 +83,18 @@ function _less() {
                 cascade: false,
             }))
             // .pipe($.minifyCss())
-            // .pipe($.header(message))
-        .pipe($.sourcemaps.write('./maps'))
+            .pipe($.header(message))
+        .pipe($.sourcemaps.write(MAPS_DIR))
         // Put files at source dir in order to use them for vulcanization
         .pipe(gulp.dest(SRC_DIR))
         .pipe(gulp.dest(DIST_DIR))
         .pipe($.size({ title: 'less' }));
-}
+});
 
 /**
  * Function for vulcanize task
  */
-function _vulcanize() {
+gulp.task('vulcanize', function () {
     return gulp.src(SRC_DIR + '/elements/elements.html')
         .pipe($.vulcanize({
             stripComments: true,
@@ -101,29 +103,24 @@ function _vulcanize() {
         }))
         .pipe(gulp.dest(DIST_DIR + '/elements'))
         .pipe($.size({title: 'vulcanize'}));
-}
+});
 
-// Register tasks
-gulp.task('less', _less);
-gulp.task('vulcanize', ['less'], _vulcanize);
 gulp.task('distribute', ['vulcanize']);
 
 // Beautifiers
 gulp.task('beautify-html', function () {
-    gulp.src(HTML_DIR)
+    return gulp.src(HTML_DIR)
         .pipe($.jsbeautifier({indentSize: 4}))
-        .pipe(gulp.dest('./tmp'));
+        .pipe(gulp.dest('tmp'));
 });
 
-
-function _todo() {
-    gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
+gulp.task('todo', function () {
+    return gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
         .pipe($.todo({
             reporter: 'markdown',
         }))
-        .pipe(gulp.dest('./'));
-}
-gulp.task('todo', _todo);
+        .pipe(gulp.dest(''));
+});
 
 // Develop task
 gulp.task('serve', function () {
@@ -131,7 +128,7 @@ gulp.task('serve', function () {
     browserSync({
         port: 4000,
         server: {
-            baseDir: './src',
+            baseDir: 'src',
         },
         open: true,
         // tunnel: true
@@ -145,42 +142,52 @@ gulp.task('watch', function () {
     // not watch for newly added files. Porbably must revise soon.
     // http://stackoverflow.com/questions/22391527/
     // gulps-gulp-watch-not-triggered-for-new-or-deleted-files
-    $.watch(LESS_DIR, _less);
-    $.watch(JS_DIR.concat(CSS_DIR).concat(HTML_DIR), function () {
-        browserSync.reload();
-        _todo();
-    });
+    gulp.watch(LESS_DIR, ['less'])
+        .on('change', function (event) {
+            if (event.type === 'deleted') {
+
+                var p = path.parse(event.path);
+                var css = p.dir + '/' + p.name + '.css';
+
+                // Remove css file
+                del(css);
+            }
+        });
+
+    gulp.watch(JS_DIR.concat(HTML_DIR), ['jshint', 'jscs', 'todo'])
+        .on('change', browserSync.reload);
+
+    gulp.watch(CSS_DIR)
+        .on('change', browserSync.reload);
 });
 
 // Starts the mock server
 gulp.task('mock-server', function () {
 
-    var mockServerModulePath = path.join(__dirname, 'node_modules/carbono-mocks');
+    // var mockServerModulePath = path.join(__dirname, 'node_modules/carbono-mocks');
 
-    // Consign uses `process.cwd()`, which fucks stuff up.
-    // `cd` into the dir before starting module up
-    exec('cd ' + mockServerModulePath + ' && node .', function (err, stdout, stderr) {
+    // // Consign uses `process.cwd()`, which fucks stuff up.
+    // // `cd` into the dir before starting module up
+    // exec('cd ' + mockServerModulePath + ' && node .', function (err, stdout, stderr) {
 
-        if (!err) {
-            // No error on mock server
-            $.util.log($.util.colors.green('mock server running'));
-            $.util.log($.util.colors.green(stdout));
-        } else {
-            // Error on mock server startup
-            $.util.log($.util.colors.red('mock server startup problems'));
-            $.util.log($.util.colors.red(stderr));
-        }
-    });
+    //     if (!err) {
+    //         // No error on mock server
+    //         $.util.log($.util.colors.green('mock server running'));
+    //         $.util.log($.util.colors.green(stdout));
+    //     } else {
+    //         // Error on mock server startup
+    //         $.util.log($.util.colors.red('mock server startup problems'));
+    //         $.util.log($.util.colors.red(stderr));
+    //     }
+    // });
 });
 
 gulp.task('develop', function (done) {
-
     runSequence(['less', 'mock-server'], 'serve', 'watch', done);
 });
 
-
 // Code style and quality checks
-function _jshint() {
+gulp.task('jshint', function () {
 
     var reporter = through2.obj(
         function (file, encoding, cb) {
@@ -227,15 +234,14 @@ function _jshint() {
             // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
             icon: path.join(__dirname, 'logo.png'),
         }));
-}
-gulp.task('jshint', _jshint);
+});
 
 gulp.task('jscs', function () {
 
     gulp.src(JS_DIR)
         .pipe($.jscs({
             configPath: '.jscsrc',
-            fix: true
+            // fix: true
         }))
         .on('error', $.notify.onError({
             title: 'JSCS style check error',
@@ -245,12 +251,11 @@ gulp.task('jscs', function () {
             // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
             // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
             icon: path.join(__dirname, 'logo.png'),
-        }))
-        .pipe(gulp.dest('./tmp'));
+        }));
 });
 
 gulp.task('jsdoc', function () {
     gulp.src(JS_DIR)
         .pipe($.jsdoc.parser())
-        .pipe($.jsdoc.generator('./docs'));
+        .pipe($.jsdoc.generator('docs'));
 });

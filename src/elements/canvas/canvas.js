@@ -30,7 +30,6 @@
      */
     var OVERLAY_DEACTIVATE_KEY = 'a';
 
-
     Polymer({
         is: 'carbo-canvas',
         
@@ -137,7 +136,6 @@
             // Highlight element
             this.executeInspectorOperation('highlightElementAtPoint', normalizedMousePos);
 
-
         },
         
         /**
@@ -184,18 +182,18 @@
                 .then(function (activeElementData) {
                     //aqui: fazer o contorno ficar na clicked area
                     //fazer a clicked area transformar o mouse para (+)
-                var clickedarea = this.$.clickedarea;
-                var rect = activeElementData.rect;
+                    var clickedarea = this.$.clickedarea;
+                    var rect = activeElementData.rect;
 
-                console.log(clickedarea);
+                    console.log(clickedarea);
 
-                // Set positions
-                clickedarea.style.left   = rect.left   + 'px';
-                clickedarea.style.top    = rect.top    + 'px';
-                clickedarea.style.width  = rect.width  + 'px';
-                clickedarea.style.height = rect.height + 'px';
+                    // Set positions
+                    clickedarea.style.left   = rect.left   + 'px';
+                    clickedarea.style.top    = rect.top    + 'px';
+                    clickedarea.style.width  = rect.width  + 'px';
+                    clickedarea.style.height = rect.height + 'px';
 
-                this.toggleClass('active', true, this.$.clickedarea);
+                    this.toggleClass('active', true, this.$.clickedarea);
                 }.bind(this));
         },
         

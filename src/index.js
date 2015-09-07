@@ -45,11 +45,9 @@
         children: [header, content, footer]
     };
 
-
-
     var menu = {
-//        title: 'Menu',
-//        icon: 'backup',
+        //        title: 'Menu',
+        //        icon: 'backup',
         items: [
             { icon: 'backup', title: 'menu 1' },
             { icon: 'close', title: 'menu 2' },
@@ -115,17 +113,17 @@
     var section1 = {
         title: 'SEÇÃO 1',
         screens: [
-        { title: 'Tela 1' },
-        { title: 'Tela 2' }
+            { title: 'Tela 1' },
+            { title: 'Tela 2' }
         ]
     };
 
     var section2 = {
         title: 'SEÇÃO 2',
         screens: [
-        { title: 'Tela 1' },
-        { title: 'Tela 2' },
-        { title: 'Tela 3' }
+            { title: 'Tela 1' },
+            { title: 'Tela 2' },
+            { title: 'Tela 3' }
         ]
     };
 
@@ -137,12 +135,11 @@
     var categorie = {
         name: 'Texto',
         children: [
-        { name: 'Título 1' },
-        { name: 'Título 2' }
+            { name: 'Título 1' },
+            { name: 'Título 2' }
         ]
 
     };
-
 
     carbo.AAAAAA = body;
 
@@ -154,7 +151,6 @@
 
     carbo.componentscategories = categorie;
 
-    
     window.addEventListener('WebComponentsReady', function () {
         window.canvas = document.getElementById('canvas');
     });

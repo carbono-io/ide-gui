@@ -3,7 +3,7 @@
 
     Polymer({
         is: 'carbo-header',
-        togglePanel:function(){
+        togglePanel:function() {
             var panel = this.$['carbo-header-panel'];
             var closePanel = this.$['close-header-panel'];
 

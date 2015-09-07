@@ -20,10 +20,8 @@
             // input content dynamically,
             // according to hovered component
 
-
-
             this.toggleClass('show', true, this.$.preview);
-    //        this.$.preview.style.transform = "translateX(0)";
+            //        this.$.preview.style.transform = "translateX(0)";
             this.$.preview.style.display = "block";
 
             // get component items of index.js
@@ -63,12 +61,12 @@
             // calculate dynamically
             // left-position of preview box
             // according to space to right available
-            if ((previewWidth - (componentTargetWidth * 5/6)) <= spaceToRight) {
-    //            console.log("largura suficiente - colocar à direita");
-                preview.style.left = componentTargetLeftPosition + (componentTargetWidth * 5/6) + "px";
+            if ((previewWidth - (componentTargetWidth * 5 / 6)) <= spaceToRight) {
+                //            console.log("largura suficiente - colocar à direita");
+                preview.style.left = componentTargetLeftPosition + (componentTargetWidth * 5 / 6) + "px";
             } else {
-    //            console.log("largura insuficiente - colocar à esquerda");
-                preview.style.left = componentTargetLeftPosition - (componentTargetWidth * 5/6) + "px";
+                //            console.log("largura insuficiente - colocar à esquerda");
+                preview.style.left = componentTargetLeftPosition - (componentTargetWidth * 5 / 6) + "px";
             }
 
             // y-axis
@@ -81,7 +79,7 @@
 
             } else {
                 preview.style.top = windowHeight - previewHeight - 72 + "px"; // 56 from the page-header and 16 from the margin-bottom of box
-    //            console.log("altura insuf");
+                //            console.log("altura insuf");
             }
         },
 
