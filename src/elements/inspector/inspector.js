@@ -162,7 +162,7 @@
                 }), '*');
 
             } else {
-                throw new Error('Operation %s is not available at inspector', operationName)
+                throw new Error('Operation %s is not available at inspector', operationName);
             }
         },
 

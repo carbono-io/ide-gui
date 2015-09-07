@@ -7,6 +7,8 @@ var exec        = require('child_process').exec;
 // External dependencies
 var gulp        = require('gulp');
 var browserSync = require('browser-sync');
+var runSequence = require('run-sequence');
+var through2    = require('through2');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
@@ -18,6 +20,7 @@ var DIST_DIR    = './dist';
 var JS_DIR = [
     SRC_DIR + '/**/*.js',
     '!' + SRC_DIR + '/bower_components/**/*',
+    '!' + SRC_DIR + '/sandbox/**/*',
     'gulpfile.js',
 ];
 
@@ -50,34 +53,36 @@ function _less() {
     ].join('\n');
 
     return gulp.src(LESS_DIR)
-        .pipe($.changed(SRC_DIR, { extension: '.css' }))
+        // .pipe($.changed(SRC_DIR, { extension: '.css' }))
         .pipe($.duration('Compiling .less files'))
-        .pipe($.less())
-        .on('error', $.notify.onError({
-            title: 'Less compiling error',
-            message: '<%= error.message %>',
-            open: 'file:///<%= error.filename %>',
-            sound: 'Glass',
-            // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
-            // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
-            icon: path.join(__dirname, 'logo.png'),
-        }))
-        .pipe($.autoprefixer({
-            browsers: [
-                'ie >= 10',
-                'ie_mob >= 10',
-                'ff >= 30',
-                'chrome >= 34',
-                'safari >= 7',
-                'opera >= 23',
-                'ios >= 7',
-                'android >= 4.4',
-                'bb >= 10'
-            ],
-            cascade: false,
-        }))
-//        .pipe($.minifyCss())
-        .pipe($.header(message))
+            .pipe($.sourcemaps.init())
+            .pipe($.less())
+            .on('error', $.notify.onError({
+                title: 'Less compiling error',
+                message: '<%= error.message %>',
+                open: 'file:///<%= error.filename %>',
+                sound: 'Glass',
+                // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
+                // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
+                icon: path.join(__dirname, 'logo.png'),
+            }))
+            .pipe($.autoprefixer({
+                browsers: [
+                    'ie >= 10',
+                    'ie_mob >= 10',
+                    'ff >= 30',
+                    'chrome >= 34',
+                    'safari >= 7',
+                    'opera >= 23',
+                    'ios >= 7',
+                    'android >= 4.4',
+                    'bb >= 10'
+                ],
+                cascade: false,
+            }))
+            // .pipe($.minifyCss())
+            // .pipe($.header(message))
+        .pipe($.sourcemaps.write('./maps'))
         // Put files at source dir in order to use them for vulcanization
         .pipe(gulp.dest(SRC_DIR))
         .pipe(gulp.dest(DIST_DIR))
@@ -168,20 +173,53 @@ gulp.task('mock-server', function () {
     });
 });
 
-gulp.task('develop', ['less', 'mock-server', 'serve', 'watch']);
+gulp.task('develop', function (done) {
+
+    runSequence(['less', 'mock-server'], 'serve', 'watch', done);
+});
 
 
 // Code style and quality checks
 function _jshint() {
 
-    return gulp.src(JS_DIR)
+    var reporter = through2.obj(
+        function (file, encoding, cb) {
+
+            if (!file.jshint.success) {
+
+                var err = new $.util.PluginError('jshint', {
+                    message: 'JSHint failed at ' + file.path
+                });
+
+                // Store the path for later usage 
+                err.path = file.path;
+
+                // store errrors
+                this.errors = this.errors || [];
+                this.errors.push(err);
+            }
+
+            // continue stream
+            cb(null, file);
+
+        }, 
+        function (cb) {
+
+            if (this.errors && this.errors.length > 0) {
+                cb(this.errors.pop());
+            }
+        }
+    );
+
+    return gulp.src(JS_DIR.concat(HTML_DIR))
+        .pipe($.jshint.extract('auto'))
         .pipe($.jshint('.jshintrc'))
         .pipe($.jshint.reporter(require('jshint-stylish')))
-        .pipe($.jshint.reporter('fail'))
+        .pipe(reporter)
         .on('error', $.notify.onError({
             title: 'JSHint check error',
             message: '<%= error.message %>',
-            open: 'file:///<%= error.filename %>',
+            open: 'file:///<%= error.path %>',
             sound: 'Glass',
             // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
             // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
