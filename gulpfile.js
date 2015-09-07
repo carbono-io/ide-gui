@@ -10,6 +10,11 @@ var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var through2    = require('through2');
 var del         = require('del');
+var watchify    = require('watchify');
+var browserify  = require('browserify');
+var vinylSource = require('vinyl-source-stream');
+var vinylBuffer = require('vinyl-buffer');
+var _           = require('lodash');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
@@ -21,6 +26,7 @@ var MAPS_DIR    = 'source-maps';
 
 var JS_DIR = [
     SRC_DIR + '/**/*.js',
+    '!' + SRC_DIR + '/**/*.bundle.js',
     '!' + SRC_DIR + '/bower_components/**/*',
     '!' + SRC_DIR + '/sandbox/**/*',
     'gulpfile.js',
@@ -40,6 +46,10 @@ var HTML_DIR = [
     SRC_DIR + '/**/*.html',
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
+
+///////////
+// build //
+///////////
 
 /**
  * Task for less.
@@ -92,77 +102,82 @@ gulp.task('less', function () {
 });
 
 /**
- * Function for vulcanize task
+ * Vulcanize polymer components
  */
 gulp.task('vulcanize', function () {
-    return gulp.src(SRC_DIR + '/elements/elements.html')
+    return gulp.src(SRC_DIR + '/elements.html')
         .pipe($.vulcanize({
             stripComments: true,
             inlineCss: true,
             inlineScripts: true,
         }))
-        .pipe(gulp.dest(DIST_DIR + '/elements'))
+        .pipe(gulp.dest(DIST_DIR))
         .pipe($.size({title: 'vulcanize'}));
 });
 
-gulp.task('distribute', ['vulcanize']);
-
-// Beautifiers
-gulp.task('beautify-html', function () {
-    return gulp.src(HTML_DIR)
-        .pipe($.jsbeautifier({indentSize: 4}))
-        .pipe(gulp.dest('tmp'));
+/**
+ * Browserify
+ */
+var BROWSERIFY_OPTIONS = _.assign({}, watchify.args, {
+    entries: ['./src/index.js'],
+    debug: true,
+    standalone: 'C',
 });
 
-gulp.task('todo', function () {
-    return gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
-        .pipe($.todo({
-            reporter: 'markdown',
-        }))
-        .pipe(gulp.dest(''));
+/**
+ * Converts a browserify stream into a gulp friendly vinyl stream
+ */
+function vinylifyBrowserify(b) {
+    return b.bundle()
+        // log errors if they happen
+        .on('error', $.util.log.bind($.util, 'Browserify Error'))
+        .pipe(vinylSource('index.bundle.js'))
+        // optional, remove if you don't need to buffer file contents
+        .pipe(vinylBuffer());
+}
+
+/**
+ * Runs the browserify task once
+ */
+gulp.task('distribute:browserify', function () {
+    return vinylifyBrowserify(browserify(BROWSERIFY_OPTIONS))
+        // optional, remove if you dont want sourcemaps
+        .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
+            // uglify
+            .pipe($.uglify({ preserveComments: 'license' }))
+            // calculate size before writing source maps
+            .pipe($.size({ title: 'browserify dist' }))
+        // Add transformation tasks to the pipeline here.
+        .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
+        .pipe(gulp.dest(DIST_DIR));
 });
 
-// Develop task
-gulp.task('serve', function () {
+// Distribute
+gulp.task('distribute', ['vulcanize', 'distribute:browserify'], function () {
 
-    browserSync({
-        port: 4000,
-        server: {
-            baseDir: 'src',
-        },
-        open: true,
-        // tunnel: true
+    // Other assets
+    var copyFrom = [
+        'index.css',
+        'index.html',
+        'sandbox/base-polymer-project/**/*',
+    ].map(function (f) {
+        return path.join(SRC_DIR, f);
     });
+
+    gulp.src(copyFrom, { base: SRC_DIR })
+        .pipe(gulp.dest(DIST_DIR));
 });
 
-gulp.task('watch', function () {
+///////////
+// build //
+///////////
 
-    // Watch files for changes
-    // Using gulp-watch plugin because the default gulp.watch method does
-    // not watch for newly added files. Porbably must revise soon.
-    // http://stackoverflow.com/questions/22391527/
-    // gulps-gulp-watch-not-triggered-for-new-or-deleted-files
-    gulp.watch(LESS_DIR, ['less'])
-        .on('change', function (event) {
-            if (event.type === 'deleted') {
-
-                var p = path.parse(event.path);
-                var css = p.dir + '/' + p.name + '.css';
-
-                // Remove css file
-                del(css);
-            }
-        });
-
-    gulp.watch(JS_DIR.concat(HTML_DIR), ['jshint', 'jscs', 'todo'])
-        .on('change', browserSync.reload);
-
-    gulp.watch(CSS_DIR)
-        .on('change', browserSync.reload);
-});
+/////////////
+// backend //
+/////////////
 
 // Starts the mock server
-gulp.task('mock-server', function () {
+gulp.task('backend', function () {
 
     // var mockServerModulePath = path.join(__dirname, 'node_modules/carbono-mocks');
 
@@ -182,11 +197,128 @@ gulp.task('mock-server', function () {
     // });
 });
 
-gulp.task('develop', function (done) {
-    runSequence(['less', 'mock-server'], 'serve', 'watch', done);
+/////////////
+// backend //
+/////////////
+
+/////////////////
+// development //
+/////////////////
+
+/**
+ * Compiles todos throughout the source code
+ */
+gulp.task('todo', function () {
+    return gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
+        .pipe($.todo({
+            reporter: 'markdown',
+        }))
+        .pipe(gulp.dest(''));
 });
 
-// Code style and quality checks
+/**
+ * Serves the application client
+ */
+gulp.task('serve', function () {
+
+    browserSync({
+        port: 4000,
+        server: {
+            baseDir: 'src',
+        },
+        open: true,
+        // tunnel: true
+    });
+});
+
+/**
+ * Serves the application client
+ */
+gulp.task('serve:dist', function () {
+
+    browserSync({
+        port: 4000,
+        server: {
+            baseDir: 'dist',
+        },
+        open: true,
+        // tunnel: true
+    });
+});
+
+/**
+ * Watches files for changes and acts accordingly
+ */
+gulp.task('watch', function () {
+    // JS 
+    gulp.watch(JS_DIR, ['jshint', 'jscs']);
+
+    // Instantiate watchify
+    var w = watchify(browserify(BROWSERIFY_OPTIONS));
+
+    // gulp.task('browserify', bundle); // so you can run `gulp js` to build the file
+    w.on('update', watchifyBundle); // on any dep update, runs the bundler
+    w.on('log', $.util.log); // output build logs to terminal
+
+    /**
+     * Bundles browserify stack using watchify
+     */
+    function watchifyBundle() {
+        return vinylifyBrowserify(w)
+            // optional, remove if you dont want sourcemaps
+            .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
+                .on('end', browserSync.reload)
+            .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
+            .pipe(gulp.dest(SRC_DIR))
+            .pipe($.size({ title: 'browserify' }));
+    }
+
+    // HTML & web-components
+    gulp.watch(HTML_DIR, ['jshint', 'jscs'])
+        .on('change', browserSync.reload);
+
+    // LESS
+    gulp.watch(LESS_DIR, ['less'])
+        .on('change', function (event) {
+            if (event.type === 'deleted') {
+
+                var p = path.parse(event.path);
+                var css = p.dir + '/' + p.name + '.css';
+
+                // Remove css file
+                del(css);
+            }
+        });
+    gulp.watch(CSS_DIR)
+        .on('change', browserSync.reload);
+
+    // Invoke watchify bundle once to start watching files
+    // and return the stream in order to prevent subsequent
+    // tasks from continuing without the browserify being complete
+    // (crappish gulp+browserify+watchify integration)
+    return watchifyBundle();
+});
+
+/**
+ * Runs all tasks for development environment setup and go
+ */
+gulp.task('develop', function (done) {
+    // First compile less, run backend and watch 
+    // then serve.
+    runSequence(['less', 'backend', 'watch'], 'serve', done);
+});
+
+/////////////////
+// development //
+/////////////////
+
+//////////////////
+// code quality //
+//////////////////
+
+/**
+ * Runs jshint against the code from scripts and webcomponents
+ */
 gulp.task('jshint', function () {
 
     var reporter = through2.obj(
@@ -236,6 +368,9 @@ gulp.task('jshint', function () {
         }));
 });
 
+/**
+ * Runs jscs against scripts. Todo: extract js from web componetns as well.
+ */
 gulp.task('jscs', function () {
 
     gulp.src(JS_DIR)
@@ -254,8 +389,6 @@ gulp.task('jscs', function () {
         }));
 });
 
-gulp.task('jsdoc', function () {
-    gulp.src(JS_DIR)
-        .pipe($.jsdoc.parser())
-        .pipe($.jsdoc.generator('docs'));
-});
+//////////////////
+// code quality //
+//////////////////
