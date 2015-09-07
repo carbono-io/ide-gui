@@ -15,12 +15,14 @@ var browserify  = require('browserify');
 var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 var _           = require('lodash');
+var polybuild   = require('polybuild');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
 
 // Constants
 var SRC_DIR     = 'src';
+var STAGE_DIR   = 'stage';
 var DIST_DIR    = 'dist';
 var MAPS_DIR    = 'source-maps';
 
@@ -47,6 +49,50 @@ var HTML_DIR = [
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
+/////////////
+// helpers //
+/////////////
+
+var jsRe = /.+\.js$/;
+var htmlRe = /.+\.html$/;
+
+var H = {
+
+    /**
+     * Converts a browserify stream into a gulp friendly vinyl stream
+     */
+    vinylifyBrowserify: function (b) {
+        return b.bundle()
+            // log errors if they happen
+            .on('error', $.util.log.bind($.util, 'Browserify Error'))
+            .pipe(vinylSource('index.bundle.js'))
+            // optional, remove if you don't need to buffer file contents
+            .pipe(vinylBuffer());
+    },
+
+    isJs: function (file) {
+        return jsRe.test(file.path);
+    },
+
+    isHtml: function (file) {
+        return htmlRe.test(file.path);
+    },
+
+    fmtStrLength: function (str, length) {
+
+        while (str.length < length) {
+            str += ' ';
+        }
+
+        return str;
+    },
+
+};
+
+/////////////
+// helpers //
+/////////////
+
 ///////////
 // build //
 ///////////
@@ -65,9 +111,8 @@ gulp.task('less', function () {
     ].join('\n');
 
     return gulp.src(LESS_DIR)
-        .pipe($.changed(SRC_DIR, { extension: '.css' }))
-        .pipe($.duration('Compiling .less files'))
-            .pipe($.sourcemaps.init())
+        // .pipe($.changed(SRC_DIR, { extension: '.css' }))
+        .pipe($.sourcemaps.init())
             .pipe($.less())
             .on('error', $.notify.onError({
                 title: 'Less compiling error',
@@ -92,27 +137,74 @@ gulp.task('less', function () {
                 ],
                 cascade: false,
             }))
-            // .pipe($.minifyCss())
             .pipe($.header(message))
         .pipe($.sourcemaps.write(MAPS_DIR))
         // Put files at source dir in order to use them for vulcanization
         .pipe(gulp.dest(SRC_DIR))
-        .pipe(gulp.dest(DIST_DIR))
-        .pipe($.size({ title: 'less' }));
+        .pipe($.size({
+            title: 'less',
+            showFiles: false
+        }));
 });
 
 /**
- * Vulcanize polymer components
+ * Runs the browserify task once
  */
-gulp.task('vulcanize', function () {
-    return gulp.src(SRC_DIR + '/elements.html')
-        .pipe($.vulcanize({
-            stripComments: true,
-            inlineCss: true,
-            inlineScripts: true,
+gulp.task('browserify', function () {
+    return H.vinylifyBrowserify(browserify(BROWSERIFY_OPTIONS))
+        // optional, remove if you dont want sourcemaps
+        .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
+            // calculate size before writing source maps
+            .pipe($.size({ title: 'browserify' }))
+        // Add transformation tasks to the pipeline here.
+        .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
+        .pipe(gulp.dest(SRC_DIR));
+});
+
+/**
+ * Vulcanize polymer components (use polybuild instead)
+ */
+// gulp.task('vulcanize', function () {
+//     return gulp.src(SRC_DIR + '/elements.html')
+//         .pipe($.vulcanize({
+//             stripComments: true,
+//             inlineCss: true,
+//             inlineScripts: true,
+//         }))
+//         .pipe(gulp.dest(DIST_DIR))
+//         .pipe($.size({title: 'vulcanize'}));
+// });
+
+gulp.task('build:stage', ['less', 'browserify'], function () {
+
+    return gulp.src(SRC_DIR + '/index.html')
+        // maximumCrush should uglify the js
+        .pipe(polybuild({ maximumCrush: true }))
+        .pipe($.size({
+            title: 'polybuild',
+            showFiles: true,
+            gzip: true
         }))
-        .pipe(gulp.dest(DIST_DIR))
-        .pipe($.size({title: 'vulcanize'}));
+        .pipe(gulp.dest(STAGE_DIR));
+
+});
+
+gulp.task('build:dist', ['build:stage'], function () {
+
+    var stageFiles = [
+        STAGE_DIR + '/index.build.html',
+        STAGE_DIR + '/index.build.js',
+    ];
+
+    return gulp.src(stageFiles, { baseDir: STAGE_DIR })
+        // remove debugging (debugger, console.*, alert)
+        .pipe($.if(H.isJs, $.stripDebug()))
+        .pipe($.size({
+            title: 'dist',
+            showFiles: true,
+            gzip: true
+        }))
+        .pipe(gulp.dest(DIST_DIR));
 });
 
 /**
@@ -124,45 +216,12 @@ var BROWSERIFY_OPTIONS = _.assign({}, watchify.args, {
     standalone: 'C',
 });
 
-/**
- * Converts a browserify stream into a gulp friendly vinyl stream
- */
-function vinylifyBrowserify(b) {
-    return b.bundle()
-        // log errors if they happen
-        .on('error', $.util.log.bind($.util, 'Browserify Error'))
-        .pipe(vinylSource('index.bundle.js'))
-        // optional, remove if you don't need to buffer file contents
-        .pipe(vinylBuffer());
-}
-
-/**
- * Runs the browserify task once
- */
-gulp.task('distribute:browserify', function () {
-    return vinylifyBrowserify(browserify(BROWSERIFY_OPTIONS))
-        // optional, remove if you dont want sourcemaps
-        .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
-            // uglify
-            .pipe($.uglify({ preserveComments: 'license' }))
-            // calculate size before writing source maps
-            .pipe($.size({ title: 'browserify dist' }))
-        // Add transformation tasks to the pipeline here.
-        .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
-        .pipe(gulp.dest(DIST_DIR));
-});
-
 // Distribute
-gulp.task('distribute', ['vulcanize', 'distribute:browserify'], function () {
+gulp.task('dist', ['polybuild'], function () {
 
     // Other assets
     var copyFrom = [
-        'index.css',
-        'index.html',
-        'sandbox/base-polymer-project/**/*',
-    ].map(function (f) {
-        return path.join(SRC_DIR, f);
-    });
+    ];
 
     gulp.src(copyFrom, { base: SRC_DIR })
         .pipe(gulp.dest(DIST_DIR));
@@ -179,22 +238,6 @@ gulp.task('distribute', ['vulcanize', 'distribute:browserify'], function () {
 // Starts the mock server
 gulp.task('backend', function () {
 
-    // var mockServerModulePath = path.join(__dirname, 'node_modules/carbono-mocks');
-
-    // // Consign uses `process.cwd()`, which fucks stuff up.
-    // // `cd` into the dir before starting module up
-    // exec('cd ' + mockServerModulePath + ' && node .', function (err, stdout, stderr) {
-
-    //     if (!err) {
-    //         // No error on mock server
-    //         $.util.log($.util.colors.green('mock server running'));
-    //         $.util.log($.util.colors.green(stdout));
-    //     } else {
-    //         // Error on mock server startup
-    //         $.util.log($.util.colors.red('mock server startup problems'));
-    //         $.util.log($.util.colors.red(stderr));
-    //     }
-    // });
 });
 
 /////////////
@@ -219,9 +262,9 @@ gulp.task('todo', function () {
 /**
  * Serves the application client
  */
-gulp.task('serve', function () {
+gulp.task('serve:src', ['backend'], function () {
 
-    browserSync({
+    var bs = browserSync({
         port: 4000,
         server: {
             baseDir: 'src',
@@ -229,21 +272,56 @@ gulp.task('serve', function () {
         open: true,
         // tunnel: true
     });
+
+    function notifyIsSrcServer() {
+        bs.notify('<b>/src</b>', 3000);
+    }
+
+    bs.emitter.on('client:connected', notifyIsSrcServer);
 });
 
 /**
  * Serves the application client
  */
-gulp.task('serve:dist', function () {
+gulp.task('serve:stage', ['backend'], function () {
 
-    browserSync({
+    var bs = browserSync({
+        port: 4000,
+        server: {
+            baseDir: 'stage',
+            index: 'index.build.html'
+        },
+        serveStatic: [SRC_DIR + '/' + MAPS_DIR],
+        open: true,
+    });
+
+    function notifyIsStagingServer() {
+        bs.notify('<b>/stage</b>', 3000);
+    }
+
+    bs.emitter.on('client:connected', notifyIsStagingServer);
+    // setTimeout(notifyIsStagingServer, 3000);
+});
+
+/**
+ * Serves the application client
+ */
+gulp.task('serve:dist', ['backend'], function () {
+
+    var bs = browserSync({
         port: 4000,
         server: {
             baseDir: 'dist',
+            index: 'index.build.html'
         },
         open: true,
-        // tunnel: true
     });
+
+    function notifyIsDistServer() {
+        bs.notify('<b>/dist</b>', 3000);
+    }
+
+    bs.emitter.on('client:connected', notifyIsDistServer);
 });
 
 /**
@@ -264,7 +342,7 @@ gulp.task('watch', function () {
      * Bundles browserify stack using watchify
      */
     function watchifyBundle() {
-        return vinylifyBrowserify(w)
+        return H.vinylifyBrowserify(w)
             // optional, remove if you dont want sourcemaps
             .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
                 .on('end', browserSync.reload)
@@ -305,7 +383,7 @@ gulp.task('watch', function () {
 gulp.task('develop', function (done) {
     // First compile less, run backend and watch 
     // then serve.
-    runSequence(['less', 'backend', 'watch'], 'serve', done);
+    runSequence(['less', 'browserify'], 'serve:src', 'watch', done);
 });
 
 /////////////////
@@ -373,10 +451,9 @@ gulp.task('jshint', function () {
  */
 gulp.task('jscs', function () {
 
-    gulp.src(JS_DIR)
+    gulp.src(JS_DIR, { base: '.' })
         .pipe($.jscs({
             configPath: '.jscsrc',
-            // fix: true
         }))
         .on('error', $.notify.onError({
             title: 'JSCS style check error',

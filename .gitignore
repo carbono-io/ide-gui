@@ -7,6 +7,7 @@ npm-debug.log
 
 # all files from dist version
 /dist/
+/stage/
 
 # all css files from src
 /src/**/*.css
