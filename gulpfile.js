@@ -207,6 +207,8 @@ function _jshint() {
 
             if (this.errors && this.errors.length > 0) {
                 cb(this.errors.pop());
+            } else {
+                $.util.log($.util.colors.green('JSHint passed with success :)'));
             }
         }
     );
@@ -231,7 +233,10 @@ gulp.task('jshint', _jshint);
 gulp.task('jscs', function () {
 
     gulp.src(JS_DIR)
-        .pipe($.jscs('.jscsrc'))
+        .pipe($.jscs({
+            configPath: '.jscsrc',
+            fix: true
+        }))
         .on('error', $.notify.onError({
             title: 'JSCS style check error',
             message: '<%= error.message %>',
@@ -240,7 +245,8 @@ gulp.task('jscs', function () {
             // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
             // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
             icon: path.join(__dirname, 'logo.png'),
-        }));
+        }))
+        .pipe(gulp.dest('./tmp'));
 });
 
 gulp.task('jsdoc', function () {

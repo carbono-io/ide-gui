@@ -30,7 +30,7 @@
     
     window.addEventListener('WebComponentsReady', function() {
       
-        console.log('routing started')
+        console.log('routing started');
 
         // We use Page.js for routing. This is a Micro
         // client-side router inspired by the Express router
@@ -45,7 +45,7 @@
 
             loadProject(function (project) {
                 carbo.project = project;
-            })
+            });
         });
         
         page('/new', function () {

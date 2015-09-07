@@ -20,5 +20,5 @@
   "disallowKeywords": ["with", "eval"],
   "disallowMultipleLineBreaks": true,
   "requireLineFeedAtFileEnd": true,
-  "validateIndentation": 2
+  "validateIndentation": 4
 }
