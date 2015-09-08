@@ -5,7 +5,7 @@ var path        = require('path');
 var exec        = require('child_process').exec;
 
 // External dependencies
-var gulp        = require('gulp');
+var gulp        = require('gulp-help')(require('gulp'));
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
 var through2    = require('through2');
@@ -148,14 +148,14 @@ gulp.task('less', function () {
 });
 
 /**
- * Runs the browserify task once
+ * Runs the javascript task once
  */
-gulp.task('browserify', function () {
+gulp.task('javascript', 'Builds up the javascript file', function () {
     return H.vinylifyBrowserify(browserify(BROWSERIFY_OPTIONS))
         // optional, remove if you dont want sourcemaps
         .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
             // calculate size before writing source maps
-            .pipe($.size({ title: 'browserify' }))
+            .pipe($.size({ title: 'javascript' }))
         // Add transformation tasks to the pipeline here.
         .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
         .pipe(gulp.dest(SRC_DIR));
@@ -175,13 +175,13 @@ gulp.task('browserify', function () {
 //         .pipe($.size({title: 'vulcanize'}));
 // });
 
-gulp.task('build:stage', ['less', 'browserify'], function () {
+gulp.task('build:stage', 'Bundles all assets into files ready for stage-deployment', ['less', 'javascript'], function () {
 
     return gulp.src(SRC_DIR + '/index.html')
         // maximumCrush should uglify the js
         .pipe(polybuild({ maximumCrush: true }))
         .pipe($.size({
-            title: 'polybuild',
+            title: 'build:stage',
             showFiles: true,
             gzip: true
         }))
@@ -189,7 +189,7 @@ gulp.task('build:stage', ['less', 'browserify'], function () {
 
 });
 
-gulp.task('build:dist', ['build:stage'], function () {
+gulp.task('build', 'Prepare dist', ['build:stage'], function () {
 
     var stageFiles = [
         STAGE_DIR + '/index.build.html',
@@ -200,7 +200,7 @@ gulp.task('build:dist', ['build:stage'], function () {
         // remove debugging (debugger, console.*, alert)
         .pipe($.if(H.isJs, $.stripDebug()))
         .pipe($.size({
-            title: 'dist',
+            title: 'build',
             showFiles: true,
             gzip: true
         }))
@@ -216,17 +216,6 @@ var BROWSERIFY_OPTIONS = _.assign({}, watchify.args, {
     standalone: 'C',
 });
 
-// Distribute
-gulp.task('dist', ['polybuild'], function () {
-
-    // Other assets
-    var copyFrom = [
-    ];
-
-    gulp.src(copyFrom, { base: SRC_DIR })
-        .pipe(gulp.dest(DIST_DIR));
-});
-
 ///////////
 // build //
 ///////////
@@ -236,7 +225,7 @@ gulp.task('dist', ['polybuild'], function () {
 /////////////
 
 // Starts the mock server
-gulp.task('backend', function () {
+gulp.task('dev:backend', 'Setup backend for development', function () {
 
 });
 
@@ -251,7 +240,7 @@ gulp.task('backend', function () {
 /**
  * Compiles todos throughout the source code
  */
-gulp.task('todo', function () {
+gulp.task('dev:todo', 'Retrieve all todos to TODO.md file', function () {
     return gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
         .pipe($.todo({
             reporter: 'markdown',
@@ -262,7 +251,7 @@ gulp.task('todo', function () {
 /**
  * Serves the application client
  */
-gulp.task('serve:src', ['backend'], function () {
+gulp.task('serve:src', 'Serve the source code (for development)', ['dev:backend'], function () {
 
     var bs = browserSync({
         port: 4000,
@@ -283,7 +272,7 @@ gulp.task('serve:src', ['backend'], function () {
 /**
  * Serves the application client
  */
-gulp.task('serve:stage', ['backend'], function () {
+gulp.task('serve:stage', 'Serve the staging environment', ['dev:backend'], function () {
 
     var bs = browserSync({
         port: 4001,
@@ -306,7 +295,7 @@ gulp.task('serve:stage', ['backend'], function () {
 /**
  * Serves the application client
  */
-gulp.task('serve:dist', ['backend'], function () {
+gulp.task('serve:dist', 'Serve the distribution environment', ['dev:backend'], function () {
 
     var bs = browserSync({
         port: 4002,
@@ -327,14 +316,13 @@ gulp.task('serve:dist', ['backend'], function () {
 /**
  * Watches files for changes and acts accordingly
  */
-gulp.task('watch', function () {
+gulp.task('watch', 'Watch files for changes and reload servers', function () {
     // JS 
     gulp.watch(JS_DIR, ['jshint', 'jscs']);
 
     // Instantiate watchify
     var w = watchify(browserify(BROWSERIFY_OPTIONS));
 
-    // gulp.task('browserify', bundle); // so you can run `gulp js` to build the file
     w.on('update', watchifyBundle); // on any dep update, runs the bundler
     w.on('log', $.util.log); // output build logs to terminal
 
@@ -348,7 +336,7 @@ gulp.task('watch', function () {
                 .on('end', browserSync.reload)
             .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
             .pipe(gulp.dest(SRC_DIR))
-            .pipe($.size({ title: 'browserify' }));
+            .pipe($.size({ title: 'javascript' }));
     }
 
     // HTML & web-components
@@ -380,10 +368,10 @@ gulp.task('watch', function () {
 /**
  * Runs all tasks for development environment setup and go
  */
-gulp.task('develop', function (done) {
+gulp.task('develop', 'Set up development environment. If you are in doubt, try this one ;)', function (done) {
     // First compile less, run backend and watch 
     // then serve.
-    runSequence(['less', 'browserify'], 'serve:src', 'watch', done);
+    runSequence(['less', 'javascript'], 'serve:src', 'watch', done);
 });
 
 /////////////////
@@ -397,7 +385,7 @@ gulp.task('develop', function (done) {
 /**
  * Runs jshint against the code from scripts and webcomponents
  */
-gulp.task('jshint', function () {
+gulp.task('jshint', 'Checks javascript code for possible errors', function () {
 
     var reporter = through2.obj(
         function (file, encoding, cb) {
@@ -449,7 +437,7 @@ gulp.task('jshint', function () {
 /**
  * Runs jscs against scripts. Todo: extract js from web componetns as well.
  */
-gulp.task('jscs', function () {
+gulp.task('jscs', 'Checks your javascript code for style errors', function () {
 
     gulp.src(JS_DIR, { base: '.' })
         .pipe($.jscs({
@@ -469,3 +457,8 @@ gulp.task('jscs', function () {
 //////////////////
 // code quality //
 //////////////////
+
+// do not shot at help list
+gulp.task('default', false, ['help'], function () {
+    console.log('\nRun ' + $.util.colors.white.bgGreen('gulp develop') + ' if you are lost :)\n');
+});
