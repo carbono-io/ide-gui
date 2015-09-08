@@ -286,7 +286,7 @@ gulp.task('serve:src', ['backend'], function () {
 gulp.task('serve:stage', ['backend'], function () {
 
     var bs = browserSync({
-        port: 4000,
+        port: 4001,
         server: {
             baseDir: 'stage',
             index: 'index.build.html'
@@ -309,7 +309,7 @@ gulp.task('serve:stage', ['backend'], function () {
 gulp.task('serve:dist', ['backend'], function () {
 
     var bs = browserSync({
-        port: 4000,
+        port: 4002,
         server: {
             baseDir: 'dist',
             index: 'index.build.html'
