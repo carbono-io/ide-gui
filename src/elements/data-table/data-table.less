@@ -1,0 +1,25 @@
+@import '../../less/variables.less';
+@import '../../bower_components/lesshat/build/lesshat.less';
+
+:host {
+//encontrar uma solução para issoo!!!!!!!!! ainda está identando!!!!
+    position: relative;
+
+}
+
+#entity {
+    display:flex;
+    flex-direction: column;
+
+    .entity-id {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:flex-start;
+        height: 5 * @base-size;
+        padding-left: @base-size;
+        padding-right: @base-size;
+
+    }
+
+}
