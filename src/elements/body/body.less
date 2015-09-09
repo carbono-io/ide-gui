@@ -96,8 +96,15 @@
 
         #canvas-bar {
 
-            height: 40px;
-            background-color: aqua;
+//            height: 40px;
+//            background-color: aqua;
+
+            padding: @base-size 2 * @base-size;
+            height: 5 * @base-size;
+            border-bottom: 1px solid @mediumgrey;
+            background-color: @lightgrey;
+            align-content: center;
+            box-sizing:border-box; //consider border on height size
         }
 
         #canvas-area {
@@ -130,26 +137,6 @@
                     width: @phone-frame-width;
 
                     border: 3px solid @mediumgrey;
-                }
-
-                #control {
-                    border-top: 1px solid @grey;
-                    margin-top: 2 * @base-size;
-                    padding-top: @base-size;
-                    width: 100%;
-
-                    color: @grey;
-
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    #control-screen {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: flex-content;
-                    }
                 }
             }
         }
