@@ -47,11 +47,11 @@
     left: 0;
     margin: 0;
     .translateY(-100%);
-    border-bottom: solid 1px @mediumgrey;
+    border-bottom: solid 1px @item-border-bottom;
     box-sizing: border-box;
     //consider border on height size
     &:hover, &.active {
-        background-color: @mediumgrey;
+        background-color: @item-panel-background-hover;
         transition: all ease 0.3s;
         cursor: pointer;
     }
@@ -109,9 +109,13 @@
         cursor: pointer;
         .item-menu {
             display: flex;
+            color: @item-panel-color-hover;
+        }
+        .item-id {
+            color: @item-panel-color-hover;
         }
         &+#hoverer {
-            background-color: @mediumgrey;
+            background-color: @item-panel-background-hover;
             transition: all ease 0.3s;
             cursor: pointer;
         }
