@@ -28,7 +28,7 @@
 		flex-grow: 0;
 		flex-shrink: 0;
 
-		margin-right: @base-size;
+		margin-right: 0;
 		border-right: solid 1px @mediumgrey;
 	}
 
@@ -85,92 +85,122 @@
 		}
 	}
 
-	#canvas-container {
+    #workspace {
 
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+
+        flex-grow: 1;
+
+        #canvas-bar {
+
+            height: 40px;
+            background-color: aqua;
+
+            #bar {
+            }
+        }
+
+        #canvas-area {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            flex-grow: 1;
+
+            #canvas-container {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
 
 
-		margin-top: 2 * @base-size;
-		margin-bottom: 2 * @base-size;
-		margin-left: @base-size;
-		margin-right: @base-size;
+            margin-top: 2 * @base-size;
+            margin-bottom: 2 * @base-size;
+            margin-left: @base-size;
+            margin-right: @base-size;
 
-		// this container should occupy all space left
-		flex-grow: 1;
+            // this container should occupy all space left
+            flex-grow: 1;
 
-		#canvas-control {
+            #canvas-control {
 
-			#canvas {
-				height: @phone-proportion * @phone-frame-width;
-				width: @phone-frame-width;
+                #canvas {
+                    height: @phone-proportion * @phone-frame-width;
+                    width: @phone-frame-width;
 
-				border: 3px solid @mediumgrey;
-			}
+                    border: 3px solid @mediumgrey;
+                }
 
-			#control {
-				border-top: 1px solid @grey;
-				margin-top: 2 * @base-size;
-				padding-top: @base-size;
-				width: 100%;
+                #control {
+                    border-top: 1px solid @grey;
+                    margin-top: 2 * @base-size;
+                    padding-top: @base-size;
+                    width: 100%;
 
-				color: @grey;
+                    color: @grey;
 
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
 
-				#control-screen {
-					display: flex;
-					flex-direction: row;
-					justify-content: flex-content;
-				}
-			}
-		}
-	}
+                    #control-screen {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-content;
+                    }
+                }
+            }
+        }
 
-	#box {
-		width: @panel-width;
+        #box {
+            width: @panel-width;
 
-		// no growing nor shrinking
-		flex-grow: 0;
-		flex-shrink: 0;
+            // no growing nor shrinking
+            flex-grow: 0;
+            flex-shrink: 0;
 
-		margin-top: 2 * @base-size;
-		margin-bottom: 2 * @base-size;
-		margin-left: @base-size;
-		margin-right: @base-size;
+            margin-top: 2 * @base-size;
+            margin-bottom: 2 * @base-size;
+            margin-left: 2 * @base-size;
+            margin-right: 2 * @base-size;
 
-		background-color: @white;
+            background-color: @white;
 
-		.box-header {
-		border-bottom: none;
-		box-sizing:border-box; //consider border on height size
-		}
+            .box-header {
+            border-bottom: none;
+            box-sizing:border-box; //consider border on height size
+            }
 
-		.box-content {
-			#prefix {
-				i {
-					color: @mediumgrey;
+            .box-content {
+                #prefix {
+                    i {
+                        color: @mediumgrey;
 
-					//font-size of icons: 18px
-					font-size: @font-size-6;
-					line-height: 24px;
-					padding: 0 @base-size;
-				}
-			}
-			label {
-				font-size: @font-size-3;
-			}
+                        //font-size of icons: 18px
+                        font-size: @font-size-6;
+                        line-height: 24px;
+                        padding: 0 @base-size;
+                    }
+                }
+                label {
+                    font-size: @font-size-3;
+                }
 
-			#input {
-				font-size: @font-size-3;
-			}
-		}
-	}
+                #input {
+                    font-size: @font-size-3;
+                }
+            }
+        }
+
+        }
+
+
+    }
 
 	#right-panel {
 
@@ -178,7 +208,7 @@
 		flex-grow: 0;
 		flex-shrink: 0;
 
-		margin-left: @base-size;
+		margin-left: 0;
 		border-left: solid 1px @mediumgrey;
 
 		background-color: @white;

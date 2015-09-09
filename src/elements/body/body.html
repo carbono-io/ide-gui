@@ -12,17 +12,27 @@
                 <content select="componentslist-content"></content>
             </div>
 
-            <div id="canvas-container">
-                <content select="canvas-container-content"></content>
+            <div id="workspace">
+
+                <div id="canvas-bar">
+                    <content select="canvas-bar-content"></content>
+                </div>
+
+
+                <div id="canvas-area">
+                    <div id="canvas-container">
+                        <content select="canvas-container-content"></content>
+                    </div>
+
+                    <div id="box" class="has-shadow">
+                       <content select="addcomponents-content"></content>
+                    </div>
+                </div>
             </div>
 
-            <div id="box" class="has-shadow">
-               <content select="addcomponents-content"></content>
+            <div id="right-panel">
+                <content select="style-content"></content>
             </div>
-
-             <div id="right-panel">
-               <content select="style-content"></content>
-             </div>
 
         </div>
 
