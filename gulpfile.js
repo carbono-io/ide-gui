@@ -111,7 +111,7 @@ gulp.task('less', function () {
     ].join('\n');
 
     return gulp.src(LESS_DIR)
-        // .pipe($.changed(SRC_DIR, { extension: '.css' }))
+        .pipe($.changed(SRC_DIR, { extension: '.css' }))
         .pipe($.sourcemaps.init())
             .pipe($.less())
             .on('error', $.notify.onError({
