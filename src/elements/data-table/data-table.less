@@ -1,0 +1,34 @@
+@import '../../less/variables.less';
+@import '../../bower_components/lesshat/build/lesshat.less';
+
+:host {
+//encontrar uma solução para issoo!!!!!!!!! ainda está identando!!!!
+    display:flex;
+    flex-direction: column;
+}
+
+    .entity-id {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:flex-start;
+        height: 5 * @base-size;
+        padding-left: @base-size;
+        padding-right: @base-size;
+
+        #arrow {
+            width: 16px;
+            height: 16px;
+            margin-right: 0;
+            padding-left: - 8;
+            transition: all 0.3s ease;
+        }
+    }
+
+    .entity-properties {
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+    }
+
