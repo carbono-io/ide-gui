@@ -4,10 +4,6 @@ var path = require('path');
 // External dependencies
 var through2 = require('through2');
 
-//////////////////
-// code quality //
-//////////////////
-
 var config = require('./config');
 
 module.exports = function (gulp, $) {
@@ -83,8 +79,4 @@ module.exports = function (gulp, $) {
                 icon: path.join(__dirname, 'logo.png'),
             }));
     });
-
-    //////////////////
-    // code quality //
-    //////////////////
-}
+};

@@ -19,7 +19,7 @@ module.exports = function (gulp, $) {
 
         // Execute 
         var child = exec('node .', {
-            cwd: path.join(__dirname, 'tmp/code-machine'),
+            cwd: path.join(config.root, 'tmp/code-machine'),
             env: {
                 NODE_ENV: 'ide'
             }
