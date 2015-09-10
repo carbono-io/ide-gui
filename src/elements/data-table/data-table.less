@@ -35,11 +35,12 @@
 .table-container {
     overflow: scroll;
 
+
 }
 
 table {
     border-spacing:0;
-    margin: 0 2 * @base-size;
+    padding: 0 2 * @base-size;
 
 
 }
@@ -51,6 +52,9 @@ thead {
     th {
         height: 5 * @base-size;
         padding: 0 @base-size 0 @base-size;
+        width: auto;
+        max-width: 96px;
+        min-width: 80px;
         border-bottom: 1px solid @mediumgrey;
         box-sizing: border-box;
         font-weight: @regular;
@@ -58,6 +62,8 @@ thead {
 
         iron-icon {
 
+            width: 18px;
+            height: 18px;
 
            &:hover, &.active {
 
@@ -116,19 +122,21 @@ tbody {
     padding: @base-size;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
 
-
+//ainda não está totalmente resolvido o caso do tamanho do paragrafo que estava aumentando o tamanho do box. deixei ele com um tamanho maximo razoável para evitar problemas.
     p {
         margin: @base-size;
         font-size: @font-size-2;
-
-
-
+        box-sizing: border-box;
+        max-width: 320px;
     }
 
     iron-icon {
-        width: 2 * @base-size;
-        height: 2 * @base-size;
+        width: 18px;
+        height: 18px;
     }
 
 }
