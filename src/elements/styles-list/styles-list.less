@@ -2,7 +2,6 @@
 @import '../../bower_components/lesshat/build/lesshat.less';
 
 :host {
-// TODO: encontrar uma solução para issoo!!!!!!!!! ainda está identando!!!!
     position: relative;
 
 }
@@ -16,7 +15,7 @@
             max-height: 0;
 //          overflow: hidden;
 
-            carbo-components-tree {
+            carbo-styles-list {
                 visibility: hidden;
                 transition: visibility 0s linear 0.2s;
 
@@ -25,17 +24,6 @@
     }
 }
 
-#component-children-container {
-    padding-left: @base-size * 2;
-    overflow-y: hidden;
-    max-height: 800px;
-    transition: max-height 0.2s ease;
-
-    carbo-components-tree {
-        transition: visibility 0s linear 0s;
-        visibility: visible;
-    }
-}
 
 
 // TODO: documentation of hoverer
@@ -56,6 +44,7 @@
         cursor: pointer;
     }
 }
+
 
 #component-itself {
     position:relative;

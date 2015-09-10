@@ -16,7 +16,6 @@ var header = {
     name: 'header',
 };
 
-console.log('hello im at line 11');
 var tabNav = {
     name: 'tabNav',
     children: [
@@ -61,6 +60,23 @@ var menu = {
         { icon: 'backup', title: 'menu 4' }
     ]
 };
+
+var verde = {
+    name: 'Verde',
+    icon: 'icon'
+};
+
+var cinza = {
+    name: 'Cinza',
+    icon: 'icon'
+};
+
+
+var group = {
+    name: 'Background',
+    items: [verde, cinza],
+};
+
 
 var components = [
     {
@@ -148,6 +164,8 @@ var categorie = {
 };
 
 carbo.AAAAAA = body;
+
+carbo.styleGroups = group;
 
 carbo.boxmenuitem = menu;
 
