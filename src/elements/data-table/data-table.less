@@ -20,98 +20,32 @@
 //          overflow: hidden;
 
             table {
-                height: 0;
                 visibility: hidden;
                 transition: visibility 0s linear 0.2s;
             }
 
-            .data-alert {
-                visibility: hidden;
-                transition: visibility 0s linear 0.2s;
-            }
+
         }
     }
 
-}
 
 
-#entity-id {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:flex-start;
-    height: 5 * @base-size;
-    padding-left: @base-size;
-    padding-right: @base-size;
-
-    #arrow {
-        width: 16px;
-        height: 16px;
-        margin-right: 0;
-        padding-left: - 8;
-        transition: all 0.3s ease;
-    }
-
-    &:hover, &.active {
-        background-color: @item-panel-background-hover;
-        transition: all ease 0.3s;
-        cursor: pointer;
-    }
-
-}
-
-.table-container {
-    overflow: scroll;
-
-}
-
-table {
-    border-spacing:0;
-    padding: 0 2 * @base-size;
-    visibility: visible;
-    transition: visibility 0s linear 0.2s;
-
-
-}
-
-thead {
-
-    font-size: @font-size-3;
-
-    th {
+    #entity-id {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:flex-start;
         height: 5 * @base-size;
-        padding: 0 @base-size 0 @base-size;
-        width: auto;
-        max-width: 96px;
-        min-width: 80px;
-        border-bottom: 1px solid @mediumgrey;
-        box-sizing: border-box;
-        font-weight: @regular;
-        text-align: left;
+        padding-left: @base-size;
+        padding-right: @base-size;
 
-        iron-icon {
-
-            width: 18px;
-            height: 18px;
-
-           &:hover, &.active {
-
-                transition: all ease 0.3s;
-                cursor: pointer;
-            }
-
+        #arrow {
+            width: 16px;
+            height: 16px;
+            margin-right: 0;
+            padding-left: - 8;
+            transition: all 0.3s ease;
         }
-
-    }
-
-}
-
-tbody {
-
-    tr {
-
-       max-height: 6 * @base-size;
-
 
         &:hover, &.active {
             background-color: @item-panel-background-hover;
@@ -119,45 +53,107 @@ tbody {
             cursor: pointer;
         }
 
+    }
 
-        td {
-            font-size: @font-size-2;
+    .table-container {
+        overflow-y: hidden;
+        max-height:800px;
+        transition: max-height 0.2s ease;
+
+
+    }
+
+    table {
+        border-spacing:0;
+        padding: 0 2 * @base-size;
+        visibility: visible;
+        transition: visibility 0s linear 0s;
+
+
+    }
+
+    thead {
+
+        font-size: @font-size-3;
+
+        th {
+            height: 5 * @base-size;
             padding: 0 @base-size 0 @base-size;
             width: auto;
             max-width: 96px;
             min-width: 80px;
-            height: 5 * @base-size;
             border-bottom: 1px solid @mediumgrey;
             box-sizing: border-box;
+            font-weight: @regular;
+            text-align: left;
 
             iron-icon {
 
                 width: 18px;
                 height: 18px;
 
+               &:hover, &.active {
+
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+                }
+
             }
 
         }
 
-        &.add-data {
-            color: @mediumgrey;
+    }
+
+    tbody {
+
+        tr {
+
+           max-height: 6 * @base-size;
+
 
             &:hover, &.active {
-                background-color: #FFF;
+                background-color: @item-panel-background-hover;
                 transition: all ease 0.3s;
                 cursor: pointer;
             }
 
+
             td {
-                border-bottom: 0;
+                font-size: @font-size-2;
+                padding: 0 @base-size 0 @base-size;
+                width: auto;
+                max-width: 96px;
+                min-width: 80px;
+                height: 5 * @base-size;
+                border-bottom: 1px solid @mediumgrey;
+                box-sizing: border-box;
+
+                iron-icon {
+
+                    width: 18px;
+                    height: 18px;
+
+                }
+
             }
+
+            &.add-data {
+                color: @mediumgrey;
+
+                &:hover, &.active {
+                    background-color: #FFF;
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+                }
+
+                td {
+                    border-bottom: 0;
+                }
+            }
+
+
         }
-
-
-
     }
-
-
 }
 
 .data-alert{
