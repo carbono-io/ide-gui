@@ -5,9 +5,37 @@
 //encontrar uma solução para issoo!!!!!!!!! ainda está identando!!!!
     display:flex;
     flex-direction: column;
+
 }
 
-.entity-id {
+
+#entity {
+
+    &.closed {
+        #arrow {
+            .rotate(-90deg);
+        }
+        .table-container {
+            max-height: 0;
+//          overflow: hidden;
+
+            table {
+                height: 0;
+                visibility: hidden;
+                transition: visibility 0s linear 0.2s;
+            }
+
+            .data-alert {
+                visibility: hidden;
+                transition: visibility 0s linear 0.2s;
+            }
+        }
+    }
+
+}
+
+
+#entity-id {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -35,12 +63,13 @@
 .table-container {
     overflow: scroll;
 
-
 }
 
 table {
     border-spacing:0;
     padding: 0 2 * @base-size;
+    visibility: visible;
+    transition: visibility 0s linear 0.2s;
 
 
 }
@@ -90,13 +119,6 @@ tbody {
             cursor: pointer;
         }
 
-        &.add-data {
-            color: @mediumgrey;
-
-            td {
-                border-bottom: 0;
-            }
-        }
 
         td {
             font-size: @font-size-2;
@@ -108,8 +130,30 @@ tbody {
             border-bottom: 1px solid @mediumgrey;
             box-sizing: border-box;
 
+            iron-icon {
+
+                width: 18px;
+                height: 18px;
+
+            }
 
         }
+
+        &.add-data {
+            color: @mediumgrey;
+
+            &:hover, &.active {
+                background-color: #FFF;
+                transition: all ease 0.3s;
+                cursor: pointer;
+            }
+
+            td {
+                border-bottom: 0;
+            }
+        }
+
+
 
     }
 

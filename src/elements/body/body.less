@@ -150,12 +150,15 @@
 
 		background-color: @panel-background-color;
 //      comentei o tamanho aqui para testar com tamanho maior           para os dados
-//		width: @panel-width;
 
-//        para o caso de dados:
-        width: auto;
-        max-width:448px;
+        &.style {
+            width: @panel-width;
+        }
 
+        &.data {
+            width: auto;
+            max-width:448px;
+        }
 	}
 }
 
