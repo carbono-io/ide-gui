@@ -9,7 +9,7 @@ body {
     background-color: darken(@background-color, 5%);
     font-family: @font-family;
     font-size: @font-size-3;
-    color: @darkgrey;
+    color: @text-color;
 
     #start {
         height: 100%;
@@ -29,14 +29,14 @@ body {
             align-items: center;
 
             text-decoration: none;
-            color: @darkgrey;
+            color: @text-color;
             background-color: @grey;
 
             .transition(background-color ease 0.3s, color ease 0.3s);
 
             &:hover {
                 color: @lightgrey;
-                background-color: @darkgrey;
+                background-color: @text-color;
             }
 
             .material-icons {
