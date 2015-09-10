@@ -3,6 +3,7 @@
 // Native dependencies
 var path        = require('path');
 var exec        = require('child_process').exec;
+var fs          = require('fs');
 
 // External dependencies
 var gulp        = require('gulp-help')(require('gulp'));
@@ -16,6 +17,7 @@ var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 var _           = require('lodash');
 var polybuild   = require('polybuild');
+var mergeStream = require('merge-stream');
 
 // Load all installed gulp plugins into $
 var $           = require('gulp-load-plugins')();
@@ -25,6 +27,7 @@ var SRC_DIR     = 'src';
 var STAGE_DIR   = 'stage';
 var DIST_DIR    = 'dist';
 var MAPS_DIR    = 'source-maps';
+var TMP_DIR     = 'tmp';
 
 var JS_DIR = [
     SRC_DIR + '/**/*.js',
@@ -87,6 +90,26 @@ var H = {
         return str;
     },
 
+    pathExists: function (p, dirOrFile) {
+
+        var exists;
+        dirOrFile = dirOrFile || 'file';
+
+        try {
+            var stats = fs.lstatSync(p);
+
+            if (dirOrFile === 'dir') {
+                exists = stats.isDirectory();
+            } else {
+                exists = stats.isFile();
+            }
+
+        } catch (e) {
+            exists = false;
+        }
+
+        return exists;
+    }
 };
 
 /////////////
@@ -234,249 +257,324 @@ var BROWSERIFY_OPTIONS = _.assign({}, watchify.args, {
 // backend //
 /////////////
 
-// Starts the mock server
-gulp.task('dev:backend', 'Setup backend for development', function () {
+/**
+ * Creates tmp dir if it does not exist yet
+ */
+gulp.task('tmp:create', function () {
 
+    var tmpPath = path.join(__dirname, TMP_DIR);
+
+    try {
+        var stats = fs.lstatSync(tmpPath);
+
+        if (!stats.isDirectory()) {
+            fs.mkdirSync(tmpPath);
+        }
+
+    } catch (e) {
+        fs.mkdirSync(tmpPath);
+    }
+});
+
+/**
+ * Cleans the TMP_DIR
+ */
+gulp.task('tmp:clean', function () {
+    del.sync(path.join(__dirname, TMP_DIR));
+});
+
+/**
+ * Clones code machine and sets up config files
+ */
+gulp.task('backend:code-machine', ['tmp:create'], function (done) {
+    var repo = 'git@bitbucket.org:carbonoio/code-machine.git';
+    var tmpPath   = path.join(__dirname, TMP_DIR);
+    var cmPath    = path.join(tmpPath, 'code-machine');
+
+    if (H.pathExists(cmPath, 'dir')) {
+
+        $.util.log($.util.colors.green('code-machine already installed'));
+        done();
+
+        return;
+    }
+
+    /**
+     * Clones git repo
+     */
+    function clone(cb) {
+        return exec('git clone -b develop --single-branch ' + repo, {
+            cwd: tmpPath,
+        }, cb);
+    }
+
+    /**
+     * Writes a config file for using with the IDE
+     */
+    function writeConfig() {
+
+        var IDEConfig = JSON.stringify({
+            port: 8000,
+            codeDir: '../workspace',
+        });
+
+        fs.writeFileSync(path.join(cmPath, 'config/ide.json'), IDEConfig, {
+            encoding: 'utf8'
+        });
+    }
+
+    /**
+     * Installs npm dependencies for code-machine
+     */
+    function install(cb) {
+        return exec('npm install', {
+            cwd: cmPath
+        }, cb);
+    }
+
+    clone(function () {
+        writeConfig();
+        $.util.log('backend:code-machine clone finished');
+        install(function () {
+            $.util.log('backend:code-machine npm install finished');
+            done();
+        });
+    });
+});
+
+/**
+ * Clones workspace dir and installs bower dependencies
+ */
+gulp.task('backend:workspace', ['tmp:create'], function (done) {
+    var repo     = 'git@bitbucket.org:carbonoio/base-polymer-project.git';
+    var tmpPath  = path.join(__dirname, TMP_DIR);
+    var projPath = path.join(tmpPath, 'workspace');
+
+    if (H.pathExists(projPath, 'dir')) {
+        $.util.log($.util.colors.green('workspace already installed'));
+        done();
+
+        return;
+    }
+
+    function clone(cb) {
+        return exec('git clone -b develop --single-branch ' + repo + ' workspace', {
+            cwd: tmpPath,
+        }, cb);
+    }
+
+    function install(cb) {
+        // -F for forcing latest on conflict resolution
+        return exec('bower install -F', {
+            cwd: projPath,
+        }, cb);
+    }
+
+    clone(function () {
+        $.util.log('backend:workspace clone finished');
+        install(function () {
+            $.util.log('backend:workspace bower install finished');
+            done();
+        });
+    });
+});
+
+/**
+ * Resets the workspace to the last version at remote repo
+ */
+gulp.task('backend:workspace:reset', function () {
+    var projPath = path.join(__dirname, TMP_DIR, 'workspace');
+
+    del.sync(projPath);
+    return runSequence('backend:workspace');
+});
+
+/**
+ * Updates both code-machine and workspace
+ */
+gulp.task('backend:update', ['backend:code-machine', 'backend:workspace'], function () {
+    $.util.log($.util.colors.green('Code machine and workspace updated'));
 });
 
 /////////////
 // backend //
 /////////////
 
-/////////////////
-// development //
-/////////////////
+// /////////////////
+// // development //
+// /////////////////
 
-/**
- * Compiles todos throughout the source code
- */
-gulp.task('dev:todo', 'Retrieve all todos to TODO.md file', function () {
-    return gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
-        .pipe($.todo({
-            reporter: 'markdown',
-        }))
-        .pipe(gulp.dest(''));
-});
+// /**
+//  * Starts the backend code-machine for development purposes
+//  */
+// gulp.task('serve:backend', 'Start code-machine backend for development', ['backend:update'], function () {
 
-/**
- * Serves the application client
- */
-gulp.task('serve:src', 'Serve the source code (for development)', ['dev:backend'], function () {
+//     // Execute 
+//     var child = exec('node .', {
+//         cwd: path.join(__dirname, 'tmp/code-machine'),
+//         env: {
+//             NODE_ENV: 'ide'
+//         }
+//     });
 
-    var bs = browserSync({
-        port: 4000,
-        server: {
-            baseDir: 'src',
-        },
-        open: true,
-        // tunnel: true
-    });
+//     // Stdout
+//     child.stdout.pipe(process.stdout);
+// });
 
-    function notifyIsSrcServer() {
-        bs.notify('<b>/src</b>', 3000);
-    }
+// /**
+//  * Compiles todos throughout the source code
+//  */
+// gulp.task('dev:todo', 'Retrieve all todos to TODO.md file', function () {
+//     return gulp.src(JS_DIR.concat(LESS_DIR).concat(HTML_DIR))
+//         .pipe($.todo({
+//             reporter: 'markdown',
+//         }))
+//         .pipe(gulp.dest(''));
+// });
 
-    bs.emitter.on('client:connected', notifyIsSrcServer);
-});
+// /**
+//  * Serves the application client
+//  */
+// gulp.task('serve:src', 'Serve the source code (for development)', ['serve:backend'], function () {
 
-/**
- * Serves the application client
- */
-gulp.task('serve:stage', 'Serve the staging environment', ['dev:backend'], function () {
+//     var bs = browserSync({
+//         port: 4000,
+//         server: {
+//             baseDir: 'src',
+//         },
+//         open: true,
+//         // tunnel: true
+//     });
 
-    var bs = browserSync({
-        port: 4001,
-        server: {
-            baseDir: 'stage',
-            index: 'index.build.html'
-        },
-        serveStatic: [SRC_DIR + '/' + MAPS_DIR],
-        open: true,
-    });
+//     function notifyIsSrcServer() {
+//         bs.notify('<b>/src</b>', 3000);
+//     }
 
-    function notifyIsStagingServer() {
-        bs.notify('<b>/stage</b>', 3000);
-    }
+//     bs.emitter.on('client:connected', notifyIsSrcServer);
+// });
 
-    bs.emitter.on('client:connected', notifyIsStagingServer);
-    // setTimeout(notifyIsStagingServer, 3000);
-});
+// /**
+//  * Serves the application client
+//  */
+// gulp.task('serve:stage', 'Serve the staging environment', ['serve:backend'], function () {
 
-/**
- * Serves the application client
- */
-gulp.task('serve:dist', 'Serve the distribution environment', ['dev:backend'], function () {
+//     var bs = browserSync({
+//         port: 4001,
+//         server: {
+//             baseDir: 'stage',
+//             index: 'index.build.html'
+//         },
+//         serveStatic: [SRC_DIR + '/' + MAPS_DIR],
+//         open: true,
+//     });
 
-    var bs = browserSync({
-        port: 4002,
-        server: {
-            baseDir: 'dist',
-            index: 'index.build.html'
-        },
-        open: true,
-    });
+//     function notifyIsStagingServer() {
+//         bs.notify('<b>/stage</b>', 3000);
+//     }
 
-    function notifyIsDistServer() {
-        bs.notify('<b>/dist</b>', 3000);
-    }
+//     bs.emitter.on('client:connected', notifyIsStagingServer);
+//     // setTimeout(notifyIsStagingServer, 3000);
+// });
 
-    bs.emitter.on('client:connected', notifyIsDistServer);
-});
+// /**
+//  * Serves the application client
+//  */
+// gulp.task('serve:dist', 'Serve the distribution environment', ['serve:backend'], function () {
 
-/**
- * Watches files for changes and acts accordingly
- */
-gulp.task('watch', 'Watch files for changes and reload servers', function () {
+//     var bs = browserSync({
+//         port: 4002,
+//         server: {
+//             baseDir: 'dist',
+//             index: 'index.build.html'
+//         },
+//         open: true,
+//     });
 
-    // Message to be prepended to all .js files generated via less
-    var message = [
-        '/*-----------------------------------------------------',
-        ' | This file was generated by Browserify.             |',
-        ' | All modifications to it will be lost, mercilessly! |',
-        ' -----------------------------------------------------*/\n\n',
-    ].join('\n');
+//     function notifyIsDistServer() {
+//         bs.notify('<b>/dist</b>', 3000);
+//     }
 
-    // JS 
-    gulp.watch(JS_DIR, ['jshint', 'jscs']);
+//     bs.emitter.on('client:connected', notifyIsDistServer);
+// });
 
-    // Instantiate watchify
-    var w = watchify(browserify(BROWSERIFY_OPTIONS));
+// /**
+//  * Watches files for changes and acts accordingly
+//  */
+// gulp.task('watch', 'Watch files for changes and reload servers', function () {
 
-    w.on('update', watchifyBundle); // on any dep update, runs the bundler
-    w.on('log', $.util.log); // output build logs to terminal
+//     // Message to be prepended to all .js files generated via less
+//     var message = [
+//         '/*-----------------------------------------------------',
+//         ' | This file was generated by Browserify.             |',
+//         ' | All modifications to it will be lost, mercilessly! |',
+//         ' -----------------------------------------------------*/\n\n',
+//     ].join('\n');
 
-    /**
-     * Bundles browserify stack using watchify
-     */
-    function watchifyBundle() {
-        return H.vinylifyBrowserify(w)
-            // optional, remove if you dont want sourcemaps
-            .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
-                .on('end', browserSync.reload)
-            .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
-            .pipe($.header(message))
-            .pipe(gulp.dest(SRC_DIR))
-            .pipe($.size({ title: 'javascript' }));
-    }
+//     // JS 
+//     gulp.watch(JS_DIR, ['jshint', 'jscs']);
 
-    // HTML & web-components
-    gulp.watch(HTML_DIR, ['jshint', 'jscs'])
-        .on('change', browserSync.reload);
+//     // Instantiate watchify
+//     var w = watchify(browserify(BROWSERIFY_OPTIONS));
 
-    // LESS
-    gulp.watch(LESS_DIR, ['less'])
-        .on('change', function (event) {
-            if (event.type === 'deleted') {
+//     w.on('update', watchifyBundle); // on any dep update, runs the bundler
+//     w.on('log', $.util.log); // output build logs to terminal
 
-                var p = path.parse(event.path);
-                var css = p.dir + '/' + p.name + '.css';
+//     /**
+//      * Bundles browserify stack using watchify
+//      */
+//     function watchifyBundle() {
+//         return H.vinylifyBrowserify(w)
+//             // optional, remove if you dont want sourcemaps
+//             .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
+//                 .on('end', browserSync.reload)
+//             .pipe($.sourcemaps.write(MAPS_DIR)) // writes .map file
+//             .pipe($.header(message))
+//             .pipe(gulp.dest(SRC_DIR))
+//             .pipe($.size({ title: 'javascript' }));
+//     }
 
-                // Remove css file
-                del(css);
-            }
-        });
-    gulp.watch(CSS_DIR)
-        .on('change', browserSync.reload);
+//     // HTML & web-components
+//     gulp.watch(HTML_DIR, ['jshint', 'jscs'])
+//         .on('change', browserSync.reload);
 
-    // Invoke watchify bundle once to start watching files
-    // and return the stream in order to prevent subsequent
-    // tasks from continuing without the browserify being complete
-    // (crappish gulp+browserify+watchify integration)
-    return watchifyBundle();
-});
+//     // LESS
+//     gulp.watch(LESS_DIR, ['less'])
+//         .on('change', function (event) {
+//             if (event.type === 'deleted') {
 
-/**
- * Runs all tasks for development environment setup and go
- */
-gulp.task('develop', 'Set up development environment. If you are in doubt, try this one ;)', function (done) {
-    // First compile less, run backend and watch 
-    // then serve.
-    runSequence(['less', 'javascript'], 'serve:src', 'watch', done);
-});
+//                 var p = path.parse(event.path);
+//                 var css = p.dir + '/' + p.name + '.css';
 
-/////////////////
-// development //
-/////////////////
+//                 // Remove css file
+//                 del(css);
+//             }
+//         });
+//     gulp.watch(CSS_DIR)
+//         .on('change', browserSync.reload);
 
-//////////////////
-// code quality //
-//////////////////
+//     // Invoke watchify bundle once to start watching files
+//     // and return the stream in order to prevent subsequent
+//     // tasks from continuing without the browserify being complete
+//     // (crappish gulp+browserify+watchify integration)
+//     return watchifyBundle();
+// });
 
-/**
- * Runs jshint against the code from scripts and webcomponents
- */
-gulp.task('jshint', 'Checks javascript code for possible errors', function () {
+// /**
+//  * Runs all tasks for development environment setup and go
+//  */
+// gulp.task('develop', 'Set up development environment. If you are in doubt, try this one ;)', function (done) {
+//     // First compile less, run backend and watch 
+//     // then serve.
+//     runSequence(['less', 'javascript'], 'serve:src', 'watch', done);
+// });
 
-    var reporter = through2.obj(
-        function (file, encoding, cb) {
+// /////////////////
+// // development //
+// /////////////////
 
-            if (!file.jshint.success) {
+require('./tasks/develop')(gulp, $);
 
-                var err = new $.util.PluginError('jshint', {
-                    message: 'JSHint failed at ' + file.path
-                });
-
-                // Store the path for later usage 
-                err.path = file.path;
-
-                // store errrors
-                this.errors = this.errors || [];
-                this.errors.push(err);
-            }
-
-            // continue stream
-            cb(null, file);
-
-        }, 
-        function (cb) {
-
-            if (this.errors && this.errors.length > 0) {
-                cb(this.errors.pop());
-            } else {
-                $.util.log($.util.colors.green('JSHint passed with success :)'));
-            }
-        }
-    );
-
-    return gulp.src(JS_DIR.concat(HTML_DIR))
-        .pipe($.jshint.extract('auto'))
-        .pipe($.jshint('.jshintrc'))
-        .pipe($.jshint.reporter(require('jshint-stylish')))
-        .pipe(reporter)
-        .on('error', $.notify.onError({
-            title: 'JSHint check error',
-            message: '<%= error.message %>',
-            open: 'file:///<%= error.path %>',
-            sound: 'Glass',
-            // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
-            // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
-            icon: path.join(__dirname, 'logo.png'),
-        }));
-});
-
-/**
- * Runs jscs against scripts. Todo: extract js from web componetns as well.
- */
-gulp.task('jscs', 'Checks your javascript code for style errors', function () {
-
-    gulp.src(JS_DIR, { base: '.' })
-        .pipe($.jscs({
-            configPath: '.jscsrc',
-        }))
-        .on('error', $.notify.onError({
-            title: 'JSCS style check error',
-            message: '<%= error.message %>',
-            open: 'file:///<%= error.filename %>',
-            sound: 'Glass',
-            // Basso, Blow, Bottle, Frog, Funk, Glass, Hero,
-            // Morse, Ping, Pop, Purr, Sosumi, Submarine, Tink
-            icon: path.join(__dirname, 'logo.png'),
-        }));
-});
-
-//////////////////
-// code quality //
-//////////////////
+require('./tasks/linting')(gulp, $);
 
 // do not shot at help list
 gulp.task('default', false, ['help'], function () {
