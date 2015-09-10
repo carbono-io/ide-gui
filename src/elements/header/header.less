@@ -3,7 +3,7 @@
 
 :host {
   position: relative;
-  z-index: 1000;
+  z-index: 10000;
 }
 
 #carbo-header-container {
@@ -58,7 +58,7 @@
                 display:flex;
                 flex-direction: row;
                 align-items:center;
-                font-weight: @bold;
+                font-weight: @regular;
 
                 &:hover {
                     cursor: pointer;
@@ -167,7 +167,7 @@
             .transition(background-color ease 0.5s);
 
             &:hover {
-                background-color: @lightgrey;
+                background-color: @item-panel-background-hover;
                 cursor: pointer;
             }
 
@@ -200,13 +200,13 @@
                     background-color: @white;
                     width: @phone-frame-width/ 3;
                     height: @phone-proportion * @phone-frame-width/ 3;
-                    border: solid 1px @mediumgrey;
+                    border: solid 1px @border-bottom;
                     box-sizing: border-box; //consider border on height size
 
                     .transition(border ease 0.5s);
 
                     &:hover {
-                        border-color: @darkgrey;
+                        border-color: @text-color;
                         cursor: pointer;
                     }
                 }
@@ -222,7 +222,7 @@
                     background-color: @lightgrey;
                     width: @phone-frame-width/ 3;
                     height: @phone-proportion * @phone-frame-width/ 3;
-                    border: solid 1px @mediumgrey;
+                    border: solid 1px @border-bottom;
 
                     display: flex;
                     flex-direction: column;

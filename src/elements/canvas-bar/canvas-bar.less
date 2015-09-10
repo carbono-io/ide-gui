@@ -1,0 +1,45 @@
+@import '../../less/variables.less';
+
+:host {
+}
+
+#bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    span {
+        margin-right: @base-size;
+    }
+}
+
+#right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    span {
+        margin-left: @base-size;
+    }
+}
+
+iron-icon {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    color: @inactive-bar-icon-color;
+
+    &:hover {
+        color: @active-bar-icon-color;
+    }
+    &.rotate {
+        transform: rotate(90deg);
+    }
+}
