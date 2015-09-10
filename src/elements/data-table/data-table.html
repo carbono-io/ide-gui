@@ -49,9 +49,10 @@
 
                                     <!-- repete colunas de cada linha-->
                                     <template is="dom-repeat" items="{{ dataitem.properties }}" as="propertiecontent">
-
-<!--                                        <td><paper-input label=" label">{{ propertiecontent.content }}</paper-input></td>-->
-                                        <td>{{ propertiecontent.content }}</td>
+                                        <td>
+                                            <input value="{{ propertiecontent.content }}">
+                                        </td>
+<!--                                    <td>{{ propertiecontent.content }}</td>-->
                                     </template>
                                     <!-- fim do repete colunas -->
 
