@@ -7,18 +7,18 @@ paper-checkbox {
     padding: 8px;
     font-size: 12px;
     font-family: "source sans pro";
-    --default-primary-color: #6D6D6D;
-    --primary-text-color: #6D6D6D;
-    --secondary-text-color: #D2D2D2;
+    --default-primary-color: @text-color;
+    --primary-text-color: @text-color;
+    --secondary-text-color: @placeholder-text-color;
 }
 
 paper-dropdown-menu {
     padding: 0;
     font-size: 12px;
     font-family: "source sans pro";
-    --default-primary-color: #6D6D6D;
-    --primary-text-color: #6D6D6D;
-    --secondary-text-color: #D2D2D2;
+    --default-primary-color: @text-color;
+    --primary-text-color: @text-color;
+    --secondary-text-color: @placeholder-text-color;
     --paper-menu-button {
         padding: 0;
     }
@@ -28,6 +28,9 @@ paper-dropdown-menu {
     }
 }
 
-paper-input-container{
+paper-input-container {
     padding: 8px;
+    --default-primary-color: @text-color;
+    --primary-text-color: @text-color;
+    --secondary-text-color: @placeholder-text-color;
 }

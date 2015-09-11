@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="index.css">
 
+        <script src="../../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
         <!-- forcing shadow dom -->
         <script>
             window.Polymer = window.Polymer || {};
@@ -13,88 +14,155 @@
         <link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
         <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
         <link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
+        <link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+        <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+        <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+        <link rel="import" href="../../../bower_components/paper-spinner/paper-spinner.html">
+        <link rel="import" href="../../../bower_components/paper-toast/paper-toast.html">
 
         <!-- injected component -->
         <link rel="import" href="../../../elements/inspector/inspector.html">
+        <link rel="import" href="../../form/form.html">
+        <link rel="import" href="../../gallery/gallery.html">
+
+
+
+        <style is="custom-style">
+/*
+            body {
+              background-color: var(--paper-grey-50);
+            }
+            #cards {
+              @apply(--layout-vertical);
+              @apply(--center-justified);
+              max-width: 400px;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            paper-card {
+              width: 100%;
+              margin-bottom: 16px;
+            }
+            .avatar {
+              display: inline-block;
+              height: 64px;
+              width: 64px;
+              border-radius: 50%;
+              background: var(--paper-pink-500);
+              color: white;
+              line-height: 64px;
+              font-size: 30px;
+              text-align: center;
+            }
+            .fancy .title {
+              position: absolute;
+              top: 30px;
+              left: 100px;
+              color: var(--paper-indigo-500);
+            }
+            .fancy img {
+              width: 100%;
+            }
+            .fancy .big {
+              font-size: 22px;
+              padding: 8px 0 16px;
+              color: var(--google-grey-500);
+            }
+            .fancy .medium {
+              font-size: 16px;
+              padding-bottom: 8px;
+            }
+            .pink {
+              --paper-card-header-color: var(--paper-pink-500);
+            }
+*/
+
+
+            paper-input-container {
+                --default-primary-color: purple;
+                --primary-text-color: #6D6D6D;
+                --secondary-text-color: #6D6D6D;
+            }
+
+
+          </style>
+
+
+        
     </head>
     <body class="fullbleed layout vertical">
 
         <!-- inspector -->
         <carbo-inspector></carbo-inspector>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="1" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="2" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="3" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="4" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="1" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="2" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="3" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="4" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
+
+        <template is="dom-bind" id="app">
+
+
             <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="1" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="2" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="3" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button id="4" icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
-        <paper-toolbar>
-            <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Title</div>
-            <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
-        </paper-toolbar>
+                <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+                <div class="title">Title</div>
+                <paper-icon-button id="1" icon="more-vert" on-tap="moreAction"></paper-icon-button>
+            </paper-toolbar>
+
+<!--
+            <carbo-galery>
+
+            </carbo-galery>
+
+
+
+ CARBO FORM LINDÃO - COMENTEI PARA TESTAR A GALERIA
+-->
+
+            <carbo-form>
+
+                <formloading-content id="formloading" class="">
+                    <paper-spinner alt="Loading form" active></paper-spinner>
+                    <p>Carregando</p>
+                </formloading-content>
+
+
+                <formdefault-content id="formdefault" class="active">
+
+                    <paper-input-container invalid>
+                        <label>Campo 1</label>
+                        <input is="iron-input">
+                    </paper-input-container>
+
+                    <paper-input-container>
+                        <label>Campo 2</label>
+                        <input is="iron-input">
+                    </paper-input-container>
+
+                </formdefault-content>
+
+                <formcommands-content class="formcommands active">
+                    <paper-button raised onclick="document.querySelector('#sending').show()">Cancelar</paper-button>
+                    <paper-button raised onclick="document.querySelector('#errormessage').show()"
+ id="submit">Enviar</paper-button>
+                    <paper-button raised onclick="document.querySelector('#sucess').show()">Sucesso</paper-button>
+
+                </formcommands-content>
+
+                <formsending-content id="formsending" class="">
+                    <paper-toast id="sending" text="Enviando..."></paper-toast>
+                </formsending-content>
+
+                <formerror-content id="formerror" class="">
+                    <paper-toast id="errormessage" text="Erro de envio.">
+                        <span role="button" tabindex="0" style="color: #eeff41;" onclick="console.log('RETRY')">Reenviar</span>
+                    </paper-toast>
+                </formerror-content>
+
+                <formsubmitted-content id="formsubmitted" class="">
+                    <paper-toast id="sucess" text="Enviado com sucesso!"></paper-toast>
+                </formsubmitted-content>
+
+            </carbo-form>
+
+
+        </template>
+
+        <script src="index.js"></script>
     </body>
 </html>

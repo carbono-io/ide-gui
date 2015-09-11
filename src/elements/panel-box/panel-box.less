@@ -9,10 +9,9 @@
     justify-content: space-between;
 
     padding: @base-size;
-    height: 4 * @base-size;
-    // border-bottom: 1px solid @mediumgrey;
-    box-sizing:border-box;
-    background-color: @lightgrey;
+    height: 5 * @base-size;
+    box-sizing: border-box;
+    background-color: @box-header-background;
 
     .item {
         align-self: center;
@@ -26,6 +25,7 @@
         align-self: baseline;
         cursor: default;
         text-transform: uppercase;
+        padding: @base-size/2 0;
 
         span {
             padding-left: @base-size;

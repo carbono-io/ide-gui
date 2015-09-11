@@ -7,11 +7,16 @@ npm-debug.log
 
 # all files from dist version
 /dist/
+/stage/
 
 # all css files from src
-/src/index.css
-/src/less/**/*.css
-/src/elements/**/*.css
+/src/**/*.css
+
+# All source maps
+/**/*.map
+
+# All bundled js
+/**/*.bundle.js
 
 # Test resources bower_components
 /src/test-resources/app/bower_components

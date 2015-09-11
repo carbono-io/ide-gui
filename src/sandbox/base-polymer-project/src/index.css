@@ -1,3 +1,79 @@
 body {
     background-color: #ffffff;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+.content {
+    padding: 10px 10px 10px 10px;
+}
+
+
+section {
+  padding: 20px 0;
+}
+
+section > div {
+  padding: 14px;
+  font-size: 16px;
+}
+
+.formcommands {
+    display: none;
+}
+
+.formcommands.active {
+    display: flex;
+    flex-direction: row;
+/*    flex-wrap: wrap;*/
+    justify-content: flex-end;
+    padding: 16px 0;
+}
+
+
+paper-button {
+    margin: 0 0 0 16px;
+}
+
+paper-button:first-child {
+    margin: 0 0 0 0px;
+}
+
+paper-button#submit {
+    background-color: purple;
+    color: #fff;
+}
+
+#formloading {
+    display: none;
+}
+
+#formloading.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 50%;
+}
+
+#formdefault {
+    display: none;
+}
+
+#formdefault.active {
+    display: block;
+}
+
+paper-toast{
+    min-width: 100px;
+    right: 8px;
+    left: 8px;
+    bottom: 8px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
 }

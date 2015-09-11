@@ -1,112 +1,295 @@
-Polymer({
-    is: 'carbo-canvas',
-    
-    ready: function () {
+/**
+ * Before reading the code, it will be helpful to contextualize
+ * yourself at what this module does.
+ *
+ * In essence, it is the guy responsible for all interactions with the
+ * application frame within it.
+ *
+ * There are multiple events that we must intercept at this module:
+ * the clicks on the application, scroll, mousemove. 
+ *
+ * All these events are intercepted by a sub-component we call the 
+ * `overlay`, which is an opacity-0-div that is over the application iframe.
+ *
+ * All events are detected on the overlay and passed onto the application if 
+ * necessary.
+ */
+(function () {
+
+    /**
+     * The prefix to be used by all `window.postMessage(iframe, message)`
+     * requests.
+     * 
+     * @type {Constant}
+     */
+    var INSPECTOR_OPERATION_PREFIX = 'canvas_inspector_operation_';
+
+    /**
+     * The char that deactivates the overlay.
+     * @type {String}
+     */
+    var OVERLAY_DEACTIVATE_KEY = 'a';
+
+    Polymer({
+        is: 'carbo-canvas',
         
-        // Bind theese methods to this object
-        // because we need to add and remove them as eventHandlers
-        this.handleOverlayKeydown = this.handleOverlayKeydown.bind(this);
-        this.handleOverlayKeyup = this.handleOverlayKeyup.bind(this);
-    },
-    
-    
-    listeners: {
-        'canvas.mouseenter': 'handleCanvasMouseenter',
-        'canvas.mouseleave': 'handleCanvasMouseleave',
-        
-        'overlay.mousemove': 'handleOverlayMousemove',
-        'overlay.mousewheel': 'handleOverlayMousewheel',
-    },
-    
-    
-    handleOverlayMousewheel: function (event) {
-        this.executeInspectorOperation('scrollBy', [-1 * event.wheelDeltaX, -1 * event.wheelDeltaY]);
-    },
-    
-    handleOverlayMousemove: function (event) {
-        var overlayRect = this.$.overlay.getBoundingClientRect();
-        
-        var normalizedMousePos = {
-            x: event.clientX - overlayRect.left,
-            y: event.clientY - overlayRect.top
-        };
-        
-        this.executeInspectorOperation('highlightElementAtPoint', normalizedMousePos);
-    },
-    
-    handleCanvasMouseenter: function (event) {
-        console.log('Overlay mouse entered');
-        
-        // set focus onto the overlay
-        this.$.overlay.focus();
-        this.$.overlay.addEventListener('keydown', this.handleOverlayKeydown);
-    },
-    
-    handleCanvasMouseleave: function (event) {
-        console.log('Overlay mouse left')
-           
-        // unfocus the overlay
-        this.$.overlay.blur();
-        
-        // unHighlight
-        this.executeInspectorOperation('unHighlight');
-        
-        // activate overlay
-        this.activateOverlay();
-    },
-    
-    handleOverlayKeydown: function (event) {
-        console.log('keydown event on Overlay');
-        
-        // DOM lvl3 event.key is not supported by all browsers 
-        // but MDN recommends using it instead of keyCode
-        // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-        if (event.key && event.key === 'a') {
+        /**
+         * Called whenever the component is instantiated.
+         * See https://www.polymer-project.org/1.0/docs/devguide/registering-elements.html
+         */
+        created: function () {
             
-            this.deactivateOverlay();
+            // Bind theese methods to this object
+            // because we need to add and remove them as eventHandlers
+            this.handleOverlayKeydown = this.handleOverlayKeydown.bind(this);
+            this.handleOverlayKeyup = this.handleOverlayKeyup.bind(this);
+
+            // Hash to store the deferred
+            // for opertaions invoked on the inspector (inside iframe)
+            // Keys are uniqueIds and values are the deferred;
+            this._inspectorOperationDefers = {};
+        },
+
+        properties: {
+
+        },
+
+        /**
+         * Hash of event listeners for the DOM
+         */
+        listeners: {
+            'canvas.mouseenter': 'handleCanvasMouseenter',
+            'canvas.mouseleave': 'handleCanvasMouseleave',
             
-        } else if (event.keyCode && event.keyCode === 65) {
+            'overlay.mousemove': 'handleOverlayMousemove',
+            'overlay.mousewheel': 'handleOverlayMousewheel',
+            'overlay.DOMMouseScroll': 'handleOverlayMousewheel',
+            'overlay.click': 'handleOverlayClick',
+        },
+        
+        /**
+         * Whenever the mouse enters the canva element area,
+         * let the overlay handle keydown events for shortcut detection.
+         */
+        handleCanvasMouseenter: function (event) {
+            // Set focus onto the overlay so that it can handle keydown events
+            this.$.overlay.focus();
+            this.$.overlay.addEventListener('keydown', this.handleOverlayKeydown);
+        },
+
+        /**
+         * Whenever the mouse leaves the canvas, 
+         * make sure the overlay is activated and the inspector unhighlighted.
+         */
+        handleCanvasMouseleave: function (event) {
+               
+            // unfocus the overlay
+            this.$.overlay.blur();
+            
+            // unHighlight
+            this.executeInspectorOperation('unHighlight');
+            
+            // activate overlay
+            this.activateOverlay();
+        },
+
+        /**
+         * Handles mousewheel events on the overlay layer.
+         * Basically makes the scroll on the overlay
+         * become the scroll within the iframe.
+         * 
+         * @param  {Event} event
+         */
+        handleOverlayMousewheel: function (event) {
+            // Prevent event from being captured by outer nodes
+            // (I am looking at you, window)
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Let the iframe scroll the same as the mousewheel
+            this.executeInspectorOperation('scrollBy', [-1 * event.wheelDeltaX, -1 * event.wheelDeltaY]);
+
+            // Normalize the mouse position from clientX and clientY
+            // to overlayX and overlayY
+            var normalizedMousePos = this.normalizeMousePosition({
+                x: event.clientX,
+                y: event.clientY
+            });
+
+            // Highlight element under the normalized mouse position
+            // Force the highlight to ensure the highlighter moves even
+            // if the highlighted element is still the same.
+            this.executeInspectorOperation('highlightElementAtPoint', [normalizedMousePos, true]);
+        },
+        
+        /**
+         * Whenever the mouse moves on the overlay, highlight the
+         * element at the point
+         * @param  {Event} event 
+         */
+        handleOverlayMousemove: function (event) {
+            var normalizedMousePos = this.normalizeMousePosition({
+                x: event.clientX,
+                y: event.clientY
+            });
+
+            // Highlight element
+            this.executeInspectorOperation('highlightElementAtPoint', normalizedMousePos);
+
+        },
+        
+        /**
+         * Handles `keydown` events on the overlay
+         * @param  {Event} event 
+         */
+        handleOverlayKeydown: function (event) {
+            // DOM lvl3 event.key is not supported by all browsers 
+            // but MDN recommends using it instead of keyCode
+            // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+            var condition1 = (event.key && event.key === OVERLAY_DEACTIVATE_KEY);
+            var condition2 = (event.keyCode && event.keyCode === 65);
             // keyCodes:
             // https://css-tricks.com/snippets/javascript/javascript-keycodes/
-            this.deactivateOverlay();
+            if (condition1 || condition2) {
+                this.deactivateOverlay();   
+            }
+            
+            var overlay = this.$.overlay;
+            overlay.removeEventListener('keydown', this.handleOverlayKeydown);
+            overlay.addEventListener('keyup', this.handleOverlayKeyup);
+        },
+            
+        /**
+         * Handles keyup events on the overlay
+         * This handler basically stops the overlay from handling keyboard
+         * shortcuts.
+         * @param  {Event} event
+         */
+        handleOverlayKeyup: function (event) {
+            var overlay = this.$.overlay;
+            overlay.addEventListener('keydown', this.handleOverlayKeydown);
+            overlay.removeEventListener('keyup', this.handleOverlayKeyup);
+            this.activateOverlay();
+        },
+
+        /**
+         * Handles click events on the overlay
+         * 
+         * @param  {Event} event
+         */
+        handleOverlayClick: function (event) {
+            this.executeInspectorOperation('getActiveElementData')
+                .then(function (activeElementData) {
+                    //aqui: fazer o contorno ficar na clicked area
+                    //fazer a clicked area transformar o mouse para (+)
+                    var clickedarea = this.$.clickedarea;
+                    var rect = activeElementData.rect;
+
+                    console.log(clickedarea);
+
+                    // Set positions
+                    clickedarea.style.left   = rect.left   + 'px';
+                    clickedarea.style.top    = rect.top    + 'px';
+                    clickedarea.style.width  = rect.width  + 'px';
+                    clickedarea.style.height = rect.height + 'px';
+
+                    this.toggleClass('active', true, this.$.clickedarea);
+                }.bind(this));
+        },
+        
+        /**
+         * Normalizes the mouse position by eliminating the 
+         * distance of the overlay from top and left of the client window.
+         * @param  {{x: Number, y: Number} Object} pos Original position
+         * @return {{x: Numver, y: Number} Object} pos Normalized position
+         */
+        normalizeMousePosition: function (pos) {
+            // Calculate the rect of the overlay
+            var overlayRect = this.$.overlay.getBoundingClientRect();
+            
+            // Calculate the position of the mouse
+            // relative to the rect of the overlay
+            var normalized =  {
+                x: pos.x - overlayRect.left,
+                y: pos.y - overlayRect.top
+            };
+
+            return normalized;
+        },
+
+        /**
+         * Executes and operation inside the iframe.
+         * Communicates with the <carbo-inspector> component within the frame
+         *
+         * Implements the promise interface that makes it possible 
+         * to use request-response paradigm in the `window.postMessage` 
+         * communication.
+         * 
+         * @param  {String} operation The name of the operation to be executed.
+         * @param  {Array|*} args     Array of arguments or single argument.
+         * @return {Promise}          Promise to be resolved after the response.
+         */
+        executeInspectorOperation: function (operation, args) {
+            // Create and id for the operation
+            var opid = _.uniqueId(INSPECTOR_OPERATION_PREFIX);
+
+            var message = JSON.stringify({
+                id: opid,
+                operation: operation,
+                args: Array.isArray(args) ? args : [args]
+            });            
+            
+            // Send the message to the iframe -
+            this.$.iframe.contentWindow.postMessage(message, '*');
+
+            // Create a deferred object to be returned and store it
+            // using the id
+            var deferred = Q.defer();
+            this._inspectorOperationDefers[opid] = deferred;
+
+            // Create an listener for the response event
+            var responseListener = function (event) {
+                var response = JSON.parse(event.data);
+
+                // Only resolve deferred if the response id matches
+                if (response.id === opid) {
+                    // Resolve the deferred object
+                    this._inspectorOperationDefers[opid].resolve(response.res);
+
+                    // Remove it from the hash
+                    delete this._inspectorOperationDefers[opid];
+
+                    // Remove the listener after the response has arrived
+                    window.removeEventListener('message', responseListener);
+                }
+
+            }.bind(this);
+
+            window.addEventListener('message', responseListener);
+
+            // Return the promise of the deferred object
+            return deferred.promise;
+        },
+        
+        /**
+         * Activates the overlay
+         */
+        activateOverlay: function () {
+            this.toggleClass('active', true, this.$.overlay);
+        },
+        
+        /**
+         * Deactivates the overlay
+         */
+        deactivateOverlay: function () {
+            var overlay = this.$.overlay;
+            
+            // remove 'active' class from overlay
+            this.toggleClass('active', false, overlay);
+            
+            // Unhighlight whatever is highlighted.
+            this.executeInspectorOperation('unHighlight');
         }
-        
-        var overlay = this.$.overlay;
-        overlay.removeEventListener('keydown', this.handleOverlayKeydown);
-        overlay.addEventListener('keyup', this.handleOverlayKeyup);
-    },
-    
-    handleOverlayKeyup: function (event) {
-        console.log('keyup event on overlay');
-        
-        var overlay = this.$.overlay;
-        overlay.addEventListener('keydown', this.handleOverlayKeydown);
-        overlay.removeEventListener('keyup', this.handleOverlayKeyup);
-        this.activateOverlay();
-    },
-    
-    executeInspectorOperation: function (operation, args) {
-        
-        var message = JSON.stringify({
-            operation: operation,
-            args: Array.isArray(args) ? args : [args]
-        });
-        
-        this.$.iframe.contentWindow.postMessage(message, '*');
-    },
-    
-    
-    activateOverlay: function () {
-        this.toggleClass('active', true, this.$.overlay);
-    },
-    
-    deactivateOverlay: function () {
-        var overlay = this.$.overlay;
-        
-        // remove 'active' class from overlay
-        this.toggleClass('active', false, overlay);
-        
-        // inspect
-        this.executeInspectorOperation('unHighlight');
-    }
-});
+    });
+
+})();
