@@ -10,28 +10,47 @@
 
 <dom-module id="carbo-styles-list">
     <link rel="import" type="css" href="styles-list.css">
-    <template>
-        <!--componente start-->
-        <div id="group">
-            <div id="group-name">
-                <div class="item-id">
-                    <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
-                    <span>{{ group.name }}</span>
-                </div>
+<!--
+    <template is="dom-repeat" items="{{ components }}">
+        <div class="component" on-mouseover="handleComponentMouseOver" on-mouseout="hidePreview">
+            <div class="component-icon">
+                <iron-icon icon="{{ item.icon }}"></iron-icon>
             </div>
-            <div id="hoverer"></div>
-            <template is="dom-repeat" items="{{ group.items }}">
-                <div id="style-name" group="{{ item }}">
+            <div class="component-label">{{ item.title }}</div>
+        </div>
+    </template>
+
+<template is="dom-repeat" items="{{ screens }}">
+                    <div class="preview-screen"><img src="{{ item.url }}"></div>
+                    <div class="screen-caption">{{ item.screensCaption }}</div>
+
+                </template>
+-->
+    <template>
+        <template is="dom-repeat" items="{{ group }}">
+            <!--componente start-->
+            <div id="group">
+                <div id="group-name">
                     <div class="item-id">
-                        <div class="style-preview"></div>
-                        <span>{{ item.name }}</span>
+                        <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
+                        <span>{{ item.title }}</span>
                     </div>
                 </div>
-            </template>
-        </div>
-
-        <!--componente end-->
+                <div id="hoverer"></div>
+                <template is="dom-repeat" items="{{ item.styles }}">
+                    <div id="style-name">
+                        <div class="item-id">
+                            <div class="style-preview-2">{{ item.icon }</div>
+                            <span>{{ item.name }}</span>
+                        </div>
+                    </div>
+                    <div id="hoverer"></div>
+                </template>
+            </div>
+            <!--componente end-->
+        </template>
     </template>
+
     <script src="styles-list.js"></script>
 
 </dom-module>

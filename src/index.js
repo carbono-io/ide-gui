@@ -63,27 +63,48 @@ var menu = {
 
 var verde = {
     name: 'Verde',
-    icon: 'icon'
+    icon: 'verde'
 };
 
 var cinza = {
     name: 'Cinza',
-    icon: 'icon'
-};
-
-
-var group = {
-    name: 'Background',
-    items: [verde, cinza],
+    icon: 'cinza'
 };
 
 //var group = {
-//    items: [
-//        { name: 'Background', subitems: [verde, cinza] },
-//        { name: 'Botões', subitems: [verde, cinza] }
-//    ]
+//    name: 'Background',
+//    items: [verde, cinza],
 //};
 
+
+var group = [
+    {
+        title: "Background",
+        styles: [
+            {
+                name: "Cinza",
+                icon: "cinza"
+            },
+            {
+                name: "Verde",
+                icon: "verde"
+            },
+        ],
+    },
+    {
+        title: "Botões",
+        styles: [
+            {
+                name: "Botão 1",
+                icon: "btn1"
+            },
+            {
+                name: "Botão 2",
+                icon: "btn2"
+            },
+        ],
+    },
+];
 
 var components = [
     {

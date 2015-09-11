@@ -6,19 +6,18 @@
 
 }
 
-#component {
+#group {
     &.closed {
         #arrow {
             .rotate(-90deg);
         }
-        #component-children-container {
+        #style-name {
             max-height: 0;
 //          overflow: hidden;
 
-            carbo-styles-list {
+            .item-id {
                 visibility: hidden;
                 transition: visibility 0s linear 0.2s;
-
             }
         }
     }
@@ -46,7 +45,7 @@
 }
 
 
-#component-itself {
+#group-name {
     position:relative;
     z-index: 4;
     display: flex;
@@ -80,26 +79,8 @@
 
     }
 
-    .item-menu {
-        display: none;
-
-        paper-menu-button {
-            padding: 0;
-        }
-
-        paper-icon-button {
-            margin-right: -8px;
-            --iron-icon-height: 18px;
-            --iron-icon-width: 18px;
-        }
-
-    }
     &:hover, &.active {
         cursor: pointer;
-        .item-menu {
-            display: flex;
-            color: @item-panel-color-hover;
-        }
         .item-id {
             color: @item-panel-color-hover;
         }
@@ -110,3 +91,56 @@
         }
     }
 }
+
+#style-name {
+    position:relative;
+    z-index: 4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 5 * @base-size;
+    padding-left: 3 * @base-size;
+    padding-right: @base-size;
+    max-height: 800px;
+    transition: max-height 0.2s ease;
+
+    .item-id {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        transition: visibility 0s linear 0s;
+        visibility: visible;
+
+        .style-preview {
+            height: 3 * @base-size;
+            width: 3 * @base-size;
+            background-color: forestgreen;
+            margin-right: @base-size;
+        }
+
+        .style-preview-2 {
+            height: 3 * @base-size;
+            width: 3 * @base-size;
+            background-color: red;
+            margin-right: @base-size;
+            border-radius: 3px;
+            box-shadow: 0 2px 1px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+
+    }
+
+    &:hover, &.active {
+        cursor: pointer;
+        .item-id {
+            color: @item-panel-color-hover;
+        }
+        &+#hoverer {
+            background-color: @item-panel-background-hover;
+            transition: all ease 0.3s;
+            cursor: pointer;
+        }
+    }
+}
+
