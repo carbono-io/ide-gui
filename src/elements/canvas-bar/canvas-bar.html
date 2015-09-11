@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
+
+<dom-module id="carbo-canvas-bar">
+    <link rel="import" type="css" href="canvas-bar.css">
+
+    <template>
+        <div id="bar">
+            <div id="left">
+                <span><iron-icon icon="undo"></iron-icon></span>
+                <span><iron-icon icon="redo"></iron-icon></span>
+            </div>
+            <div id="right">
+                <span>Preview</span>
+                <span><iron-icon icon="hardware:phone-android"></iron-icon></span>
+                <span><iron-icon icon="hardware:phone-android" class="rotate"></iron-icon></span>
+                <span>Zoom</span>
+            </div>
+        </div>
+    </template>
+
+    <script src="canvas-bar.js"></script>
+
+</dom-module>

@@ -1,8 +1,8 @@
 body {
     background-color: #ffffff;
-  font-family: 'Roboto', 'Noto', sans-serif;
-  font-size: 14px;
-  margin: 0;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-size: 14px;
+    margin: 0;
 }
 
 .content {
@@ -41,7 +41,7 @@ paper-button:first-child {
 }
 
 paper-button#submit {
-    background: purple;
+    background-color: purple;
     color: #fff;
 }
 

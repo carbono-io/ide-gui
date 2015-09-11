@@ -2,19 +2,19 @@
 @import '../../bower_components/lesshat/build/lesshat.less';
 
 paper-tabs {
-    --paper-tabs-selection-bar-color: #6D6D6D;
+    --paper-tabs-selection-bar-color: @text-color;
     height: 32px;
-    border-bottom: 1px solid #D2D2D2;
+    border-bottom: 1px solid @border-bottom;
     box-sizing: border-box;
     font-family: "Source Sans Pro";
     font-size: 12px;
-    background-color: #F2F2F2;
+    background-color: @box-header-background;
 }
 
 paper-tab {
     --paper-tab {
-        background-color: #F2F2F2;
-        color: #6D6D6D;
+        background-color: @box-header-background;
+        color: @text-color;
     }
 }
 
@@ -22,9 +22,9 @@ paper-input-container {
     padding: 16px 0;
     font-size: 12px;
     font-family: "source sans pro";
-    --default-primary-color: #6D6D6D;
-    --primary-text-color: #6D6D6D;
-    --secondary-text-color: #D2D2D2;
+    --default-primary-color: @text-color;
+    --primary-text-color: @text-color;
+    --secondary-text-color: @placeholder-text-color;
     --paper-input-container-input {
         line-height: 32px;
         font-size: 12px;
@@ -123,6 +123,7 @@ paper-input-container {
 
 #prefix {
     padding-bottom: @base-size/4;
+    color: @placeholder-text-color;
 }
 
 iron-icon {
@@ -131,7 +132,6 @@ iron-icon {
     padding: 0 @base-size;
 //        margin-top: @base-size/2;
 }
-
 
 #label-style {
     font-size: @font-size-3;

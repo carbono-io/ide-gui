@@ -5,9 +5,32 @@
 //encontrar uma solução para issoo!!!!!!!!! ainda está identando!!!!
     display:flex;
     flex-direction: column;
+
 }
 
-    .entity-id {
+
+#entity {
+
+    &.closed {
+        #arrow {
+            .rotate(-90deg);
+        }
+        .table-container {
+            max-height: 0;
+//          overflow: hidden;
+
+            table {
+                visibility: hidden;
+                transition: visibility 0s linear 0.2s;
+            }
+
+
+        }
+    }
+
+
+
+    #entity-id {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -23,12 +46,149 @@
             padding-left: - 8;
             transition: all 0.3s ease;
         }
+
+        &:hover, &.active {
+            background-color: @item-panel-background-hover;
+            transition: all ease 0.3s;
+            cursor: pointer;
+        }
+
     }
 
-    .entity-properties {
-        display:flex;
-        flex-direction: row;
-        justify-content: flex-start;
+    .table-container {
+        overflow-y: hidden;
+        max-height:800px;
+        transition: max-height 0.2s ease;
+
 
     }
 
+    table {
+        border-spacing:0;
+        padding: 0 2 * @base-size;
+        visibility: visible;
+        transition: visibility 0s linear 0s;
+
+
+    }
+
+    thead {
+
+        font-size: @font-size-3;
+
+        th {
+            height: 5 * @base-size;
+            padding: 0 @base-size 0 @base-size;
+            width: auto;
+            max-width: 96px;
+            min-width: 80px;
+            border-bottom: 1px solid @mediumgrey;
+            box-sizing: border-box;
+            font-weight: @regular;
+            text-align: left;
+
+            iron-icon {
+
+                width: 18px;
+                height: 18px;
+
+               &:hover, &.active {
+
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+                }
+
+            }
+
+        }
+
+    }
+
+    tbody {
+
+        tr {
+
+           max-height: 6 * @base-size;
+
+
+            &:hover, &.active {
+                background-color: @item-panel-background-hover;
+                transition: all ease 0.3s;
+
+            }
+
+
+            td {
+                font-size: @font-size-2;
+                padding: 0 @base-size 0 @base-size;
+                width: auto;
+                max-width: 96px;
+                min-width: 80px;
+                height: 5 * @base-size;
+                border-bottom: 1px solid @mediumgrey;
+                box-sizing: border-box;
+
+                iron-icon {
+
+                    width: 18px;
+                    height: 18px;
+
+                }
+
+                input {
+                    outline: 0;
+                    border: none;
+                    background-color: transparent;
+
+                    &:hover, &.active {
+                        transition: all ease 0.3s;
+                        cursor: pointer;
+                    }
+
+                }
+
+            }
+
+            &.add-data {
+                color: @mediumgrey;
+
+                &:hover, &.active {
+                    background-color: #FFF;
+                    transition: all ease 0.3s;
+                    cursor: pointer;
+                }
+
+                td {
+                    border-bottom: 0;
+                }
+            }
+
+
+        }
+    }
+}
+
+.data-alert{
+
+    background-color: #F9F0CD;
+    padding: @base-size;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+
+//ainda não está totalmente resolvido o caso do tamanho do paragrafo que estava aumentando o tamanho do box. deixei ele com um tamanho maximo razoável para evitar problemas.
+    p {
+        margin: @base-size;
+        font-size: @font-size-2;
+        box-sizing: border-box;
+        max-width: 320px;
+    }
+
+    iron-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+}

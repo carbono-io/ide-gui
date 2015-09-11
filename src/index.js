@@ -200,6 +200,48 @@ var categorie = {
 
 };
 
+var item1 = {
+
+    properties: [
+        { content: 'bla 1' },
+        { content: 'bla 2' },
+        { content: 'bla 3' },
+        { content: 'bla 4' },
+        { content: 'bla 5' },
+    ]
+};
+
+var item2 = {
+
+    properties: [
+        { content: 'bla 1' },
+        { content: 'bla 2' },
+        { content: 'bla 3' },
+        { content: 'bla 4' },
+        { content: 'bla 5' },
+    ]
+};
+
+
+
+var entity1 = {
+
+    properties: [
+        { name: 'Pergunta 1' },
+        { name: 'Pergunta 2' },
+        { name: 'Pergunta 3' },
+        { name: 'Pergunta 4' },
+        { name: 'Pergunta 5' }
+
+
+    ],
+
+    items: [item1, item2],
+
+}
+
+
+
 carbo.AAAAAA = body;
 
 carbo.boxmenuitem = menu;
@@ -207,6 +249,10 @@ carbo.boxmenuitem = menu;
 carbo.paletteComponents = components;
 
 carbo.appsections = sections;
+
+//carbo.data = entity1;
+
+carbo.entitydata = entity1;
 
 carbo.componentscategories = categorie;
 

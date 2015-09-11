@@ -75,14 +75,8 @@
                     </componentslist-content>
 
                     <canvas-bar-content>
-                        <div id="bar">
-                            <div id="left">
-                                esquerda
-                            </div>
-                            <div id="right">
-                                direita
-                            </div>
-                        </div>
+                        <carbo-canvas-bar></carbo-canvas-bar>
+
                     </canvas-bar-content>
 
                     <canvas-container-content>
@@ -135,13 +129,12 @@
                      <data-content>
                         <carbo-panel
                             title="Dados"
-                            icon="image:palette"
+                            icon="maps:layers"
                             menu="{{ boxmenuitem }}"
                         >
                             <div class="box-content">
 
-                                <carbo-data-table>
-
+                                <carbo-data-table  entity1="{{ entitydata }}">
                                 </carbo-data-table>
 
                             </div>

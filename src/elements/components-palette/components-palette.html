@@ -10,15 +10,6 @@
 
 <dom-module id="carbo-components-palette">
 
-    <style is="custom-style">
-
-        --default-primary-color: #6D6D6D;
-        --primary-text-color: #6D6D6D;
-        --secondary-text-color: #D2D2D2;
-
-    </style>
-
-
     <link rel="import" type="css" href="components-palette.css">
     <template>
 
@@ -55,13 +46,13 @@
 
             </div>
 
+            <!-- TODO - resolver o problema do scroll-->
             <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
                 <div class="component-preview-container has-shadow-2">
                     <div class="title">{{ title }}</div>
                     <template is="dom-repeat" items="{{ screens }}">
                         <div class="preview-screen"><img src="{{ item.url }}"></div>
                         <div class="screen-caption">{{ item.screensCaption }}</div>
-
                     </template>
                 </div>
             </div>
