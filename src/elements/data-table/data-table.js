@@ -33,7 +33,15 @@
                             isClosed = true;
                         }
                     });
-                },
+
+                    handleClick: function() {
+                        alert('Ow!');
+                    }
+
+
+
+
+        },
 
 
 

@@ -23,8 +23,6 @@
                 visibility: hidden;
                 transition: visibility 0s linear 0.2s;
             }
-
-
         }
     }
 
@@ -129,23 +127,34 @@
                 box-sizing: border-box;
 
                 iron-icon {
-
                     width: 18px;
                     height: 18px;
+                }
+
+                &:hover, &.active {
+                    font-weight: @bold;
+                    cursor: pointer;
 
                 }
 
-                input {
-                    outline: 0;
-                    border: none;
-                    background-color: transparent;
 
-                    &:hover, &.active {
-                        transition: all ease 0.3s;
-                        cursor: pointer;
-                    }
-
-                }
+//                textarea {
+//                    outline: 0;
+//                    padding: 0;
+//                    border: none;
+//                    background-color: transparent;
+////                    width: auto;
+//                    max-width: 88px;
+////                    min-width: 72px;
+//                    resize:none;
+//                    vertical-align:middle;
+//
+//                    &:hover, &.active {
+//                        font-weight: @bold;
+//
+//                    }
+//
+//                }
 
             }
 
