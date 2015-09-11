@@ -2,22 +2,26 @@ var fs   = require('fs');
 var path = require('path');
 var exec = require('child_process').exec;
 
-var config = require('./config');
-var H = require('./helpers');
+var runSequence = require('run-sequence');
+var del         = require('del');
 
-module.exports = function (gulp, $) {
+var config = require('./config');
+var aux = require('./auxiliary');
+
+module.exports = function (gulp, $, emitter) {
 
     /**
      * Clones code machine and sets up config files
      */
     gulp.task('backend:code-machine', ['tmp:create'], function (done) {
-        var repo = 'git@bitbucket.org:carbonoio/code-machine.git';
+        var repo      = 'git@bitbucket.org:carbonoio/code-machine.git';
         var tmpPath   = path.join(config.root, config.tmpDir);
+        var branch    = 'ide-integration';
         var cmPath    = path.join(tmpPath, 'code-machine');
 
-        if (H.pathExists(cmPath, 'dir')) {
+        if (aux.pathExists(cmPath, 'dir')) {
 
-            $.util.log($.util.colors.green('code-machine already installed'));
+            $.util.log($.util.colors.green('code-machine already cloned'));
             done();
 
             return;
@@ -27,7 +31,7 @@ module.exports = function (gulp, $) {
          * Clones git repo
          */
         function clone(cb) {
-            return exec('git clone -b develop --single-branch ' + repo, {
+            return exec('git clone -b ' + branch + ' --single-branch ' + repo, {
                 cwd: tmpPath,
             }, cb);
         }
@@ -39,7 +43,7 @@ module.exports = function (gulp, $) {
 
             var IDEConfig = JSON.stringify({
                 port: 8000,
-                codeDir: '../workspace',
+                codeDir: path.join(config.root, config.tmpDir, 'workspace'),
             });
 
             fs.writeFileSync(path.join(cmPath, 'config/ide.json'), IDEConfig, {
@@ -67,6 +71,20 @@ module.exports = function (gulp, $) {
     });
 
     /**
+     * Resets the workspace to the last version at remote repo
+     */
+    gulp.task('backend:workspace:reset', function () {
+        var projPath = path.join(config.root, config.tmpDir, 'workspace');
+
+        del.sync(projPath);
+        return runSequence('backend:workspace', function () {
+
+            $.util.log($.util.colors.blue('backend:workspace:reset finished'));
+            emitter.emit('backend:workspace:reset');
+        });
+    });
+
+    /**
      * Clones workspace dir and installs bower dependencies
      */
     gulp.task('backend:workspace', ['tmp:create'], function (done) {
@@ -74,7 +92,7 @@ module.exports = function (gulp, $) {
         var tmpPath  = path.join(config.root, config.tmpDir);
         var projPath = path.join(tmpPath, 'workspace');
 
-        if (H.pathExists(projPath, 'dir')) {
+        if (aux.pathExists(projPath, 'dir')) {
             $.util.log($.util.colors.green('workspace already installed'));
             done();
 
@@ -101,16 +119,6 @@ module.exports = function (gulp, $) {
                 done();
             });
         });
-    });
-
-    /**
-     * Resets the workspace to the last version at remote repo
-     */
-    gulp.task('backend:workspace:reset', function () {
-        var projPath = path.join(config.root, config.tmpDir, 'workspace');
-
-        del.sync(projPath);
-        return runSequence('backend:workspace');
     });
 
     /**

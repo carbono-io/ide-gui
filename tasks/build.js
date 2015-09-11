@@ -4,7 +4,7 @@ var browserify = require('browserify');
 var polybuild  = require('polybuild');
 
 var config  = require('./config');
-var helpers = require('./helpers');
+var aux = require('./auxiliary');
 
 module.exports = function (gulp, $) {
 
@@ -71,7 +71,7 @@ module.exports = function (gulp, $) {
             ' -----------------------------------------------------*/\n\n',
         ].join('\n');
 
-        return helpers.vinylifyBrowserify(browserify(config.browserifyOptions))
+        return aux.vinylifyBrowserify(browserify(config.browserifyOptions))
             // optional, remove if you dont want sourcemaps
             .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
                 // calculate size before writing source maps
@@ -119,7 +119,7 @@ module.exports = function (gulp, $) {
 
         return gulp.src(stageFiles, { baseDir: config.stageDir })
             // remove debugging (debugger, console.*, alert)
-            .pipe($.if(helpers.isJs, $.stripDebug()))
+            .pipe($.if(aux.isJs, $.stripDebug()))
             .pipe($.size({
                 title: 'build',
                 showFiles: true,

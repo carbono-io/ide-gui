@@ -88,6 +88,7 @@
                     <canvas-container-content>
                         <div id="canvas-control">
                             <carbo-canvas
+                                id="canvas"
                                 class="has-shadow"
                                 project-url="{{ project.projectUrl }}"
                             ></carbo-canvas>
@@ -105,6 +106,8 @@
                             <div class="box-content">
                                 <carbo-components-palette
                                     components="{{ paletteComponents }}"
+                                    code-machine="{{ services.codeMachine }}"
+                                    canvas="{{ components.canvas }}"
                                 ></carbo-components-palette>
                             </div>
                         </carbo-panel-box>

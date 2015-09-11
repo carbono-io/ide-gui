@@ -80,6 +80,37 @@ paper-input-container {
     }
 }
 
+/**
+ * States
+ */
+#loading, #error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    visibility: hidden;
+
+    position: relative;
+    z-index: 5000000;
+}
+
+#wrapper.loading {
+    #loading {
+        visibility: visible;
+    }
+}
+
+#wrapper.error {
+    #error {
+        visibility: visible;
+    }
+}
+/**
+ * States
+ */
+
 .has-shadow {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }

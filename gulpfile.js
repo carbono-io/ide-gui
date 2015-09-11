@@ -1,9 +1,11 @@
 // Native dependencies
-var path        = require('path');
-var fs          = require('fs');
+var path         = require('path');
+var fs           = require('fs');
+var EventEmitter = require('events');
 
 // External dependencies
 var gulp        = require('gulp-help')(require('gulp'));
+var gulpRepl    = require('gulp-repl');
 var del         = require('del');
 
 // Load all installed gulp plugins into $
@@ -11,38 +13,16 @@ var $           = require('gulp-load-plugins')();
 
 // Internal dependencies
 var config      = require('./tasks/config');
-var helpers     = require('./tasks/helpers');
+var aux         = require('./tasks/auxiliary');
 
-/**
- * Creates tmp dir if it does not exist yet
- */
-gulp.task('tmp:create', function () {
+// Instantiate an EventEmitter for intertask communication
+var emitter = new EventEmitter();
 
-    var tmpPath = path.join(__dirname, config.tmpDir);
-
-    try {
-        var stats = fs.lstatSync(tmpPath);
-
-        if (!stats.isDirectory()) {
-            fs.mkdirSync(tmpPath);
-        }
-
-    } catch (e) {
-        fs.mkdirSync(tmpPath);
-    }
-});
-
-/**
- * Cleans the config.tmpDir
- */
-gulp.task('tmp:clean', function () {
-    del.sync(path.join(__dirname, config.tmpDir));
-});
-
-require('./tasks/build')(gulp, $);
-require('./tasks/backend')(gulp, $);
-require('./tasks/develop')(gulp, $);
-require('./tasks/linting')(gulp, $);
+require('./tasks/basic')(gulp, $, emitter);
+require('./tasks/build')(gulp, $, emitter);
+require('./tasks/setup')(gulp, $, emitter);
+require('./tasks/develop')(gulp, $, emitter);
+require('./tasks/linting')(gulp, $, emitter);
 
 // do not show at help list
 gulp.task('default', false, ['help'], function () {

@@ -8,25 +8,28 @@ var watchify    = require('watchify');
 var runSequence = require('run-sequence');
 
 var config = require('./config');
-var H = require('./helpers');
+var aux = require('./auxiliary');
 
-module.exports = function (gulp, $) {
+module.exports = function (gulp, $, emitter) {
 
     /**
-     * Starts the backend code-machine for development purposes
+     * Starts the code-machine code-machine for development purposes
      */
-    gulp.task('serve:backend', 'Start code-machine backend for development', ['backend:update'], function () {
+    gulp.task('serve:code-machine', 'Start code-machine for development', function () {
+
+        $.util.log($.util.colors.red('Buggish. Not working yet, please start the process manually by running: `cd tmp/code-machine`, `export NODE_ENV=ide` and `node .` sequentially'));
 
         // Execute 
-        var child = exec('node .', {
-            cwd: path.join(config.root, 'tmp/code-machine'),
-            env: {
-                NODE_ENV: 'ide'
-            }
-        });
+        // var cmProcess = exec('node .', {
+        //     cwd: path.join(config.root, config.tmpDir, 'code-machine'),
+        //     env: {
+        //         NODE_ENV: 'ide'
+        //     }
+        // });
 
-        // Stdout
-        child.stdout.pipe(process.stdout);
+        // // Stdout
+        // cmProcess.stdout.pipe(process.stdout);
+        // cmProcess.stderr.pipe(process.stdout);
     });
 
     /**
@@ -43,7 +46,7 @@ module.exports = function (gulp, $) {
     /**
      * Serves the application client
      */
-    gulp.task('serve:src', 'Serve the source code (for development)', ['serve:backend'], function () {
+    gulp.task('serve:src', 'Serve the source code (for development)', function () {
 
         var bs = browserSync({
             port: 4000,
@@ -59,12 +62,15 @@ module.exports = function (gulp, $) {
         }
 
         bs.emitter.on('client:connected', notifyIsSrcServer);
+
+        // Reload the server when the workspace is reset
+        emitter.on('code-machine:workspace:reset', bs.reload);
     });
 
     /**
      * Serves the application client
      */
-    gulp.task('serve:stage', 'Serve the staging environment', ['serve:backend'], function () {
+    gulp.task('serve:stage', 'Serve the staging environment', ['serve:code-machine'], function () {
 
         var bs = browserSync({
             port: 4001,
@@ -87,7 +93,7 @@ module.exports = function (gulp, $) {
     /**
      * Serves the application client
      */
-    gulp.task('serve:dist', 'Serve the distribution environment', ['serve:backend'], function () {
+    gulp.task('serve:dist', 'Serve the distribution environment', ['serve:code-machine'], function () {
 
         var bs = browserSync({
             port: 4002,
@@ -131,7 +137,7 @@ module.exports = function (gulp, $) {
          * Bundles browserify stack using watchify
          */
         function watchifyBundle() {
-            return H.vinylifyBrowserify(w)
+            return aux.vinylifyBrowserify(w)
                 // optional, remove if you dont want sourcemaps
                 .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
                     .on('end', browserSync.reload)
@@ -171,7 +177,7 @@ module.exports = function (gulp, $) {
      * Runs all tasks for development environment setup and go
      */
     gulp.task('develop', 'Set up development environment. If you are in doubt, try this one ;)', function (done) {
-        // First compile less, run backend and watch 
+        // First compile less, run code-machine and watch 
         // then serve.
         runSequence(['less', 'javascript'], 'serve:src', 'watch', done);
     });

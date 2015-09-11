@@ -7,6 +7,25 @@ var carbo = document.querySelector('#carbo');
 // The router for in page navigation
 carbo.router = require('./scripts/router');
 
+// Services
+var services = {};
+services.codeMachine        = require('./scripts/services/code-machine');
+services.componentsRegistry = require('./scripts/services/components-registry');
+services.config             = require('./scripts/services/config');
+carbo.set('services', services);
+
+console.log(carbo.services.codeMachine);
+
+window.addEventListener('WebComponentsReady', function () {
+
+    // Components
+    var components = {};
+    components.canvas = document.querySelector('#canvas');
+
+    carbo.set('components', components);
+
+});
+
 carbo.app = 'teste';
 
 carbo.route = 'start';
@@ -16,7 +35,6 @@ var header = {
     name: 'header',
 };
 
-console.log('hello im at line 11');
 var tabNav = {
     name: 'tabNav',
     children: [
@@ -71,6 +89,41 @@ var components = [
                 url: "https://placehold.it/200x500",
                 screensCaption: "tela1"
             }
+        ],
+
+        html: '<carbo-form id="test"> <form is="iron-form" action="/demo/data.json" method="get"> <paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input> <paper-input name="test0" label="Campo 2" required error-message="Campo obrigatório" ></paper-input> </form> <div form-control> <div class="form-commands"> <paper-button raised action="reset" >Cancelar</paper-button> <paper-button class="purple" raised action="submit" >Enviar</paper-button> </div></div><div state="invalid"> <paper-toast text="Por favor, corrija os campos inválidos" show="show"> </paper-toast> </div><div state="loading"> <div id="formloading"> <paper-spinner alt="Loading form" active></paper-spinner> <p>Carregando</p></div></div><div state="error"> <paper-toast text="Erro de envio" show="show"> <span raised action="click:submit">Tentar novamente</span> </paper-toast> </div><div state="success"> <paper-toast text="Formulário enviado com sucesso!" show="show"> </paper-toast> </div></carbo-form>',
+
+        // Compliant with code machine API
+        // html: [
+        //     '<carbo-form>',
+        //         '<form is="iron-form">',
+        //             '<paper-input name="campo-1" label="Campo-1"></paper-input>',
+        //             '<paper-input name="campo-2" label="Campo-2"></paper-input>',
+        //         '</form>',
+        //     '</carbo-form>'
+        // ].join(''),
+
+        components: [
+            {
+                name: 'carbo-form',
+                repository: 'https://github.com/carbono-io/carbo-form.git',
+            },
+            {
+                name: 'iron-form',
+                repository: 'PolymerElements/iron-form',
+            },
+            {
+                name: 'paper-input',
+                repository: 'PolymerElements/paper-input',
+            },
+            {
+                name: 'paper-toast',
+                repository: 'PolymerElements/paper-toast',
+            },
+            {
+                name: 'paper-button',
+                repository: 'PolymerElements/paper-button',
+            },
         ],
     },
     {
@@ -156,9 +209,5 @@ carbo.paletteComponents = components;
 carbo.appsections = sections;
 
 carbo.componentscategories = categorie;
-
-window.addEventListener('WebComponentsReady', function () {
-    window.canvas = document.getElementById('canvas');
-});
 
 module.exports = carbo;

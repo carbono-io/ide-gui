@@ -6,6 +6,7 @@
 <!--polymer - sets - sets específicos de ícones - necessário para utilizar ícones destes sets -->
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 
 <dom-module id="carbo-components-palette">
 
@@ -21,44 +22,61 @@
     <link rel="import" type="css" href="components-palette.css">
     <template>
 
-        <paper-tabs selected="0" noink="false">
-            <paper-tab>Básicos</paper-tab>
-            <paper-tab>Avançados</paper-tab>
-        </paper-tabs>
+        <div id="wrapper">
 
-        <paper-input-container no-label-float="true">
-            <div prefix id="prefix">
-                <iron-icon icon="search"></iron-icon>
-            </div>
-            <label id="label-style">Buscar elementos</label>
-            <input is="iron-input" id="input">
-        </paper-input-container>
+            <paper-tabs selected="0" noink="false">
+                <paper-tab>Básicos</paper-tab>
+                <paper-tab>Avançados</paper-tab>
+            </paper-tabs>
 
-        <div id="tabs-content">
-            <div class="tab">
-                <template is="dom-repeat" items="{{ components }}">
-                    <div class="component" on-mouseover="handleComponentMouseOver" on-mouseout="hidePreview">
-                        <div class="component-icon">
-                            <iron-icon icon="{{ item.icon }}"></iron-icon>
+            <paper-input-container no-label-float="true">
+                <div prefix id="prefix">
+                    <iron-icon icon="search"></iron-icon>
+                </div>
+                <label id="label-style">Buscar elementos</label>
+                <input is="iron-input" id="input">
+            </paper-input-container>
+
+            <div id="tabs-content">
+                <div class="tab">
+                    <template is="dom-repeat" items="{{ components }}">
+                        <div class="component" 
+                            on-mouseover="handleComponentMouseOver" 
+                            on-mouseout="hidePreview"
+                            on-click="handleComponentClick"
+                        >
+                            <div class="component-icon">
+                                <iron-icon icon="{{ item.icon }}"></iron-icon>
+                            </div>
+                            <div class="component-label">{{ item.title }}</div>
                         </div>
-                        <div class="component-label">{{ item.title }}</div>
-                    </div>
-                </template>
+                    </template>
+                </div>
+
+            </div>
+
+            <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
+                <div class="component-preview-container has-shadow-2">
+                    <div class="title">{{ title }}</div>
+                    <template is="dom-repeat" items="{{ screens }}">
+                        <div class="preview-screen"><img src="{{ item.url }}"></div>
+                        <div class="screen-caption">{{ item.screensCaption }}</div>
+
+                    </template>
+                </div>
+            </div>
+
+            <div id="loading">
+                <paper-spinner alt="Loading form" active></paper-spinner>
+                <p>Carregando</p>
+            </div>
+
+            <div id="error">
+                <p>erro!!!!! ;(</p>
             </div>
 
         </div>
-
-        <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
-<!--            <div id="preview">-->
-            <div class="component-preview-container has-shadow-2">
-                <div class="title">{{ title }}</div>
-                <template is="dom-repeat" items="{{ screens }}">
-                    <div class="preview-screen"><img src="{{ item.url }}"></div>
-                    <div class="screen-caption">{{ item.screensCaption }}</div>
-
-                </template>
-            </div>
-        </div>
+        <!-- wrapper end -->
     </template>
 
     <script src="components-palette.js" ></script>

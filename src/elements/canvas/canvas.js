@@ -289,6 +289,24 @@
             
             // Unhighlight whatever is highlighted.
             this.executeInspectorOperation('unHighlight');
+        },
+
+        /**
+         * Reloads the iframe
+         *
+         * See second response:
+         * http://stackoverflow.com/questions/86428/whats-the-best-way-to-reload-refresh-an-iframe-using-javascript
+         */
+        reload: function () {
+
+            console.log('reload');
+
+            var iframe = this.$.iframe;
+
+            iframe.src = iframe.src;
+
+            // Does not work across domains
+            // this.$.iframe.contentWindow.location.reload();
         }
     });
 

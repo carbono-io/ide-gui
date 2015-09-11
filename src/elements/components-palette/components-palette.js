@@ -4,8 +4,73 @@
     Polymer({
         is: 'carbo-components-palette',
 
+        properties: {
+            codeMachine: {
+                type: Object,
+                notify: true
+            },
+            canvas: {
+                type: Object,
+                notify: true,
+            }
+        },
+
+        handleComponentClick: function (event) {
+
+            var component = event.model.item;
+
+            // Check for required services
+            if (!this.codeMachine) {
+                throw new Error('No codeMachine for carbo-components-palette');
+            }
+
+            if (!this.canvas) {
+                throw new Error('No canvas for carbo-components-palette');
+            }
+            // Keep reference to the canvas element
+            var canvas = this.canvas;
+
+            this.codeMachine
+                .insertElement({
+                    html: component.html,
+                    components: component.components
+                })
+                .then(function (res) {
+                    
+                    canvas.reload();
+
+                    this.toggleLoading(false);
+
+                }.bind(this), function (err) {
+
+                    this.toggleLoading(false);
+                    this.toggleError(true);
+                    console.log(err);
+                    console.log('error! :(');
+                }.bind(this)).done();
+
+            this.toggleLoading(true);
+            this.toggleError(false);
+        },
+
+        /**
+         * Toggles loading status
+         * @param  {Boolean} loading 
+         */
+        toggleLoading: function (loading) {
+            Polymer.Base.toggleClass('loading', loading, this.$.wrapper);
+        },
+
+        /**
+         * Toggles error status
+         * @param  {Boolean} error 
+         */
+        toggleError: function (error) {
+            Polymer.Base.toggleClass('error', error, this.$.wrapper);
+        },
+
         handleComponentMouseOver: function(event) {
-            this.showPreview(event);
+            // this.showPreview(event);
         },
 
         // function that makes box preview visible while mouse hovered
