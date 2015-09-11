@@ -77,6 +77,13 @@ var group = {
     items: [verde, cinza],
 };
 
+//var group = {
+//    items: [
+//        { name: 'Background', subitems: [verde, cinza] },
+//        { name: 'Botões', subitems: [verde, cinza] }
+//    ]
+//};
+
 
 var components = [
     {

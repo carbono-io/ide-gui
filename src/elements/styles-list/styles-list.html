@@ -12,57 +12,24 @@
     <link rel="import" type="css" href="styles-list.css">
     <template>
         <!--componente start-->
-        <div id="component">
-            <div id="component-itself">
+        <div id="group">
+            <div id="group-name">
                 <div class="item-id">
                     <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
                     <span>{{ group.name }}</span>
-
-                </div>
-                <div class="item-menu">
-
-                    <paper-menu-button>
-
-                        <paper-icon-button icon="more-vert" id="icon-style" class="dropdown-trigger"></paper-icon-button>
-                        <paper-menu class="dropdown-content">
-                            <template is="dom-repeat" items="{{ group.items }}">
-                                <paper-item><iron-icon icon="{{ item.icon }}"></iron-icon>{{ item.name }}</paper-item>
-                            </template>
-                        </paper-menu>
-                    </paper-menu-button>
-
-
                 </div>
             </div>
             <div id="hoverer"></div>
-
-            <div id="component-children-container">
-                <template is="dom-repeat" items="{{ group.items }}">
-<!--                    <carbo-styles-list closed group="{{ item }}"></carbo-styles-list>-->
-                    <div id="component-itself" group="{{ item }}">
-                        <div class="item-id">
-                            <div class="style-preview"></div>
-                            <span>{{ item.name }}</span>
-                        </div>
-                        <div class="item-menu">
-
-                            <paper-menu-button>
-
-                                <paper-icon-button icon="more-vert" id="icon-style" class="dropdown-trigger"></paper-icon-button>
-                                <paper-menu class="dropdown-content">
-                                    <template is="dom-repeat" items="{{ group.items }}">
-                                        <paper-item><iron-icon icon="{{ item.icon }}"></iron-icon>{{ item.name }}</paper-item>
-                                    </template>
-                                </paper-menu>
-                            </paper-menu-button>
-
-
-                        </div>
+            <template is="dom-repeat" items="{{ group.items }}">
+                <div id="style-name" group="{{ item }}">
+                    <div class="item-id">
+                        <div class="style-preview"></div>
+                        <span>{{ item.name }}</span>
                     </div>
-                    <div id="hoverer"></div>
-                </template>
-            </div>
+                </div>
+            </template>
         </div>
+
         <!--componente end-->
     </template>
     <script src="styles-list.js"></script>
