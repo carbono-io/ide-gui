@@ -20,114 +20,116 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 
+<link rel="import" href="header-styles.html">
+
 
 <dom-module id="carbo-header">
-  
-  <link rel="import" type="css" href="header.css">
-  <template>
-    
-    <div id="carbo-header-container">
-        <div id="carbo-header">
-            <div id="header-left">
-                <img id="img-logo" src="../../img/logo-carbono.svg" alt="carbono logo">
-                <span>App <span>{{ app }}</span></span>
-                <iron-icon icon="hardware:keyboard-arrow-right"></iron-icon>
-                <div id="header-left-section" on-click="togglePanel">
-                    <span>Seção 1</span>
-                    <iron-icon icon="arrow-drop-down"></iron-icon>
+
+    <style include="header-styles"></style>
+    <template>
+
+        <div id="carbo-header-container">
+            <div id="carbo-header">
+                <div id="header-left">
+                    <img id="img-logo" src="../../img/logo-carbono.svg" alt="carbono logo">
+                    <span>App <span>{{ app }}</span></span>
+                    <iron-icon icon="hardware:keyboard-arrow-right"></iron-icon>
+                    <div id="header-left-section" on-click="togglePanel">
+                        <span>Seção 1</span>
+                        <iron-icon icon="arrow-drop-down"></iron-icon>
+                    </div>
+                </div>
+                <div id="header-center">
+                    <nav id="header-nav">
+                        <div>
+                            <iron-icon icon="image:palette"></iron-icon>
+                            <span>ESTILO</span>
+                        </div>
+                        <div>
+                            <iron-icon icon="maps:layers"></iron-icon>
+                            <span>DADOS</span>
+                        </div>
+                        <div>
+                            <iron-icon icon="image:flash-on"></iron-icon>
+                            <span>AÇÕES</span>
+                        </div>
+
+                        <div>
+                            <iron-icon icon="editor:publish"></iron-icon>
+
+                            <span>PUBLICAÇÃO</span>
+                        </div>
+                    </nav>
+                </div>
+                <div id="header-right">
+        <!--
+                    <div id="header-right-preview">
+                        <iron-icon icon="av:play-circle-outline" class="play"></iron-icon>
+                    </div>
+        -->
+                    <div>
+                        <iron-icon icon="settings"></iron-icon>
+        <!--                    <i class="material-icons">settings</i>-->
+                    </div>
                 </div>
             </div>
-            <div id="header-center">
-                <nav id="header-nav">
-                    <div>
-                        <iron-icon icon="image:palette"></iron-icon>
-                        <span>ESTILO</span>
-                    </div>
-                    <div>
-                        <iron-icon icon="maps:layers"></iron-icon>
-                        <span>DADOS</span>
-                    </div>
-                    <div>
-                        <iron-icon icon="image:flash-on"></iron-icon>
-                        <span>AÇÕES</span>
-                    </div>
 
-                    <div>
-                        <iron-icon icon="editor:publish"></iron-icon>
-
-                        <span>PUBLICAÇÃO</span>
-                    </div>
-                </nav>
-            </div>
-            <div id="header-right">
-<!--
-                <div id="header-right-preview">
-                    <iron-icon icon="av:play-circle-outline" class="play"></iron-icon>
-                </div>
--->
-                <div>
-                    <iron-icon icon="settings"></iron-icon>
-<!--                    <i class="material-icons">settings</i>-->
-                </div>
-            </div>
-        </div>
-
-        <div id="carbo-header-panel" class="has-shadow">
+            <div id="carbo-header-panel" class="has-shadow">
 
 
-        <template is="dom-repeat" items="{{ sections.items }}" as="section">
+            <template is="dom-repeat" items="{{ sections.items }}" as="section">
 
-            <div class="carbo-section">
-                <div class="carbo-section-header">{{ section.title }}</div>
+                <div class="carbo-section">
+                    <div class="carbo-section-header">{{ section.title }}</div>
 
-                <div class="carbo-section-contents">
+                    <div class="carbo-section-contents">
 
 
-                    <template is="dom-repeat" items="{{ section.screens }}" as="screen">
+                        <template is="dom-repeat" items="{{ section.screens }}" as="screen">
 
-                        <div class="carbo-section-screen-container">
-                            <div class="carbo-section-screen">
-                                <div class="fake-fake-fake-fake-fake-app-header">{{ screen.title }}</div>
+                            <div class="carbo-section-screen-container">
+                                <div class="carbo-section-screen">
+                                    <div class="fake-fake-fake-fake-fake-app-header">{{ screen.title }}</div>
+                                </div>
+                                <div class="carbo-section-screen-caption">{{ screen.title }}</div>
                             </div>
-                            <div class="carbo-section-screen-caption">{{ screen.title }}</div>
+
+                        </template>
+
+
+                        <!-- add screen -->
+                        <div class="carbo-section-screen-container">
+                            <div class="carbo-section-screen-add-button">
+        <!--                            <i class="material-icons add-screen-button">add_circle</i>-->
+                                <iron-icon icon="add-circle"></iron-icon>
+
+                                <div class="button-caption">adicionar tela
+                                    <br>nesta seção</div>
+                            </div>
                         </div>
 
-                    </template>
-
-
-                    <!-- add screen -->
-                    <div class="carbo-section-screen-container">
-                        <div class="carbo-section-screen-add-button">
-<!--                            <i class="material-icons add-screen-button">add_circle</i>-->
-                            <iron-icon icon="add-circle"></iron-icon>
-
-                            <div class="button-caption">adicionar tela
-                                <br>nesta seção</div>
-                        </div>
                     </div>
 
                 </div>
 
+                <div class="carbo-section-divider"></div>
+
+            </template>
+
+
+
+
             </div>
 
-            <div class="carbo-section-divider"></div>
 
-        </template>
-
+            <div id="close-header-panel" on-click="togglePanel">
+                layer
+            </div>
 
 
 
         </div>
-
-
-        <div id="close-header-panel" on-click="togglePanel">
-            layer
-        </div>
-
-
-
-    </div>
-  </template>
+    </template>
 
     <script src="header.js"></script>
 

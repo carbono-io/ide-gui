@@ -1,7 +1,7 @@
 var path = require('path');
 
-var browserify = require('browserify');
-var polybuild  = require('polybuild');
+var browserify    = require('browserify');
+var polybuild     = require('polybuild');
 
 var config  = require('./config');
 var aux = require('./auxiliary');
@@ -22,8 +22,8 @@ module.exports = function (gulp, $) {
         ].join('\n');
 
         return gulp.src(config.lessDir)
-            .pipe($.changed(config.srcDir, { extension: '.css' }))
-            .pipe($.sourcemaps.init())
+            // .pipe($.changed(config.srcDir, { extension: '.css' }))
+            // .pipe($.sourcemaps.init())
                 .pipe($.less())
                 .on('error', $.notify.onError({
                     title: 'Less compiling error',
@@ -48,8 +48,19 @@ module.exports = function (gulp, $) {
                     ],
                     cascade: false,
                 }))
-                .pipe($.header(message))
-            .pipe($.sourcemaps.write(config.mapsDir))
+                // .pipe($.header(message))
+            .pipe($.polymerizeCss({
+                styleId: function (file) {
+                    var basename = path.basename(file.path, '.css');
+
+                    return basename + '-styles';
+                }
+            }))
+            .pipe($.rename(function (path) {
+                path.basename += '-styles';
+                path.extname = '.html';
+            }))
+            // .pipe($.sourcemaps.write(config.mapsDir))
             // Put files at source dir in order to use them for vulcanization
             .pipe(gulp.dest(config.srcDir))
             .pipe($.size({

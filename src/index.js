@@ -222,8 +222,6 @@ var item2 = {
     ]
 };
 
-
-
 var entity1 = {
 
     properties: [
@@ -232,15 +230,11 @@ var entity1 = {
         { name: 'Pergunta 3' },
         { name: 'Pergunta 4' },
         { name: 'Pergunta 5' }
-
-
     ],
 
     items: [item1, item2],
 
-}
-
-
+};
 
 carbo.AAAAAA = body;
 

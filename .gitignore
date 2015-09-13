@@ -9,8 +9,10 @@ npm-debug.log
 /dist/
 /stage/
 
-# all css files from src
+# all css and style files from src
 /src/**/*.css
+/src/**/*-styles.html
+
 
 # All source maps
 /**/*.map
