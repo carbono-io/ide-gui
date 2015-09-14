@@ -25,13 +25,14 @@ config.getCodeMachineLocation().then(function (location) {
 /**
  * Inserts an element
  */
-exports.insertElement = function (element) {
+exports.insertElement = function (path, element) {
 
     if (!socket) {
         throw new Error('Code machine socket not found');
     }
 
     console.info('service:code-machine:insertElement');
+    console.log(path);
     console.log(element);
 
     // Create a deferred object
@@ -40,7 +41,7 @@ exports.insertElement = function (element) {
     var insert = {
         path: {
             file: 'src/index.html',
-            xpath: '/html/body',
+            xpath: path.xpath,
         },
         html: element.html,
         components: element.components || []

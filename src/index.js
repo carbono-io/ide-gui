@@ -14,16 +14,19 @@ services.componentsRegistry = require('./scripts/services/components-registry');
 services.config             = require('./scripts/services/config');
 carbo.set('services', services);
 
-console.log(carbo.services.codeMachine);
+carbo.context = carbo;
 
 window.addEventListener('WebComponentsReady', function () {
 
     // Components
-    var components = {};
-    components.canvas = document.querySelector('#canvas');
+    var components        = carbo.components = {};
+    var body              = document.querySelector('#body');
+    var canvas            = document.querySelector('#canvas');
+    var componentsPalette = document.querySelector('#components-palette');
 
-    carbo.set('components', components);
-
+    carbo.set('components.body', body);
+    carbo.set('components.canvas', canvas);
+    carbo.set('components.componentsPalette', componentsPalette);
 });
 
 carbo.app = 'teste';
@@ -240,7 +243,7 @@ carbo.AAAAAA = body;
 
 carbo.boxmenuitem = menu;
 
-carbo.paletteComponents = components;
+// carbo.paletteComponents = components;
 
 carbo.appsections = sections;
 

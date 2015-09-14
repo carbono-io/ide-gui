@@ -5,7 +5,7 @@ var EventEmitter = require('events');
 
 // External dependencies
 var gulp        = require('gulp-help')(require('gulp'));
-// var gulpRepl    = require('gulp-repl');
+var gulpRepl    = require('gulp-repl');
 var del         = require('del');
 
 // Load all installed gulp plugins into $

@@ -9,7 +9,7 @@
 
         <div id="carbo-body">
 
-            <div id="left-panel">
+            <div id="left-panel" class="panel" state$="{{ state.leftPanel }}">
                 <content select="componentslist-content"></content>
             </div>
 
@@ -21,19 +21,19 @@
 
 
                 <div id="canvas-area">
-                    <div id="canvas-container">
+                    <div id="canvas-container" class="panel" state$="{{ state.canvas }}">
                         <content select="canvas-container-content"></content>
                     </div>
 
 <!--COMENTEI SÓ PARA TESTAR O BOX DE DADOS SEM ISSO
 -->
-                    <div id="box" class="has-shadow">
+                    <div id="box" class="has-shadow panel" state$="{{ boxState }}">
                        <content select="addcomponents-content"></content>
                     </div>
                 </div>
             </div>
 
-             <div id="right-panel" class="data">
+             <div id="right-panel" class="data panel" state$="{{ state.rightPanel }}">
 <!--
                <content select="style-content">
             </content>

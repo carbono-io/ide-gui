@@ -64,7 +64,7 @@ module.exports = function (gulp, $, emitter) {
         bs.emitter.on('client:connected', notifyIsSrcServer);
 
         // Reload the server when the workspace is reset
-        emitter.on('build:workspace', bs.reload);
+        emitter.on('workspace-reset', bs.reload);
     });
 
     /**

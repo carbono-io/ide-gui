@@ -13,7 +13,7 @@ var project = {
         '8000': '32772'
     },
     // projectUrl: '/sandbox/base-polymer-project/src/index.html',
-    projectUrl: 'http://localhost:8000/resources/clean/src/index.html',
+    projectUrl: 'http://localhost:8000/resources/marked/src/index.html',
 };
 
 function createNewProject(callback) {
@@ -45,6 +45,24 @@ window.addEventListener('WebComponentsReady', function() {
     page('/lab/:projectId', function (data) {
         carbo.route = 'lab'; 
         carbo.projectId = data.params.projectId;
+
+        loadProject(function (project) {
+            carbo.project = project;
+        });
+    });
+
+    page('/lab/:projectId/styles', function (data) {
+        carbo.route = 'lab';
+        carbo.section = 'styles';
+
+        loadProject(function (project) {
+            carbo.project = project;
+        });
+    });
+
+    page('/lab/:projectId/data', function (data) {
+        carbo.route = 'lab';
+        carbo.section = 'data';
 
         loadProject(function (project) {
             carbo.project = project;

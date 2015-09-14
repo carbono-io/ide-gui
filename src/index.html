@@ -46,7 +46,7 @@
             <div data-route="lab" id="container">
 
                 <carbo-header sections="{{appsections}}"></carbo-header>
-                <carbo-body>
+                <carbo-body id="body">
 
                     <componentslist-content>
                         <carbo-panel
@@ -85,6 +85,9 @@
                                 id="canvas"
                                 class="has-shadow"
                                 project-url="{{ project.projectUrl }}"
+                                components="{{ components }}"
+
+                                context="{{ context }}"
                             ></carbo-canvas>
 
                         </div>
@@ -99,9 +102,15 @@
                         >
                             <div class="box-content">
                                 <carbo-components-palette
+                                    id="components-palette"
+
+                                    registry="{{ services.componentsRegistry }}"
+
                                     components="{{ paletteComponents }}"
                                     code-machine="{{ services.codeMachine }}"
                                     canvas="{{ components.canvas }}"
+
+                                    context-element="{{ contextElement }}"
                                 ></carbo-components-palette>
                             </div>
                         </carbo-panel-box>
@@ -153,6 +162,7 @@
     </template>
     <!-- end of root Polymer binding object (carbo) -->
 
+    <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
     <script type="text/javascript" src="index.bundle.js"></script>
 </body>
 

@@ -51,7 +51,21 @@
         },
 
         properties: {
+            mode: {
+                type: String,
+                notify: true,
+                value: 'inspect'
+            },
 
+            components: {
+                type: Object,
+                notify: true
+            },
+
+            context: {
+                type: Object,
+                notify: true
+            }
         },
 
         /**
@@ -87,7 +101,7 @@
             this.$.overlay.blur();
             
             // unHighlight
-            this.executeInspectorOperation('unHighlight');
+            this.executeInspectorOperation('unHighlight', 'hover');
             
             // activate overlay
             this.activateOverlay();
@@ -119,7 +133,7 @@
             // Highlight element under the normalized mouse position
             // Force the highlight to ensure the highlighter moves even
             // if the highlighted element is still the same.
-            this.executeInspectorOperation('highlightElementAtPoint', [normalizedMousePos, true]);
+            this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos, true]);
         },
         
         /**
@@ -134,7 +148,57 @@
             });
 
             // Highlight element
-            this.executeInspectorOperation('highlightElementAtPoint', normalizedMousePos);
+            this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos]);
+
+            // Check if mouse is over clicked highlighter.
+            // If so, set mode to 'add'
+            this.executeInspectorOperation('areFocusAndHoverTogether')
+                .then(function (res) {
+                    if (res) {
+                        this.set('mode', 'add');
+                    } else {
+                        this.set('mode', 'inspect');
+                    }
+                }.bind(this))
+                .done();
+        },
+
+        /**
+         * Handles click events on the overlay
+         * 
+         * @param  {Event} event
+         */
+        handleOverlayClick: function (event) {
+
+            // Normalize mouse position
+            var normalizedMousePos = this.normalizeMousePosition({
+                x: event.clientX,
+                y: event.clientY
+            });
+
+            // Check current mode
+            var currentMode = this.mode;
+
+            if (currentMode === 'inspect') {
+
+                this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
+
+                // set mode to add
+                this.set('mode', 'add');
+
+            } else {
+
+                this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
+                    .then(function (activeElementData) {
+
+                        this.context.set('contextElement', activeElementData);
+
+                        console.log(activeElementData.attributes['x-path']);
+
+                        this.components.body.openBox();
+                    }.bind(this))
+                    .done();
+                }
 
         },
         
@@ -170,31 +234,6 @@
             overlay.addEventListener('keydown', this.handleOverlayKeydown);
             overlay.removeEventListener('keyup', this.handleOverlayKeyup);
             this.activateOverlay();
-        },
-
-        /**
-         * Handles click events on the overlay
-         * 
-         * @param  {Event} event
-         */
-        handleOverlayClick: function (event) {
-            this.executeInspectorOperation('getActiveElementData')
-                .then(function (activeElementData) {
-                    //aqui: fazer o contorno ficar na clicked area
-                    //fazer a clicked area transformar o mouse para (+)
-                    var clickedarea = this.$.clickedarea;
-                    var rect = activeElementData.rect;
-
-                    console.log(clickedarea);
-
-                    // Set positions
-                    clickedarea.style.left   = rect.left   + 'px';
-                    clickedarea.style.top    = rect.top    + 'px';
-                    clickedarea.style.width  = rect.width  + 'px';
-                    clickedarea.style.height = rect.height + 'px';
-
-                    this.toggleClass('active', true, this.$.clickedarea);
-                }.bind(this));
         },
         
         /**

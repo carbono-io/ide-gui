@@ -95,7 +95,7 @@ module.exports = function (gulp, $, emitter) {
     gulp.task('clone:workspace', ['tmp:create'], function (done) {
         var repo   = 'git@bitbucket.org:carbonoio/base-polymer-project.git';
 
-        var cloneProcess = exec('git clone -b develop --single-branch ' + repo + ' workspace', {
+        var cloneProcess = exec('git clone -b ide-integration --single-branch ' + repo + ' workspace', {
             cwd: cachePath,
         }, function () {
             $.util.log('clone:workspace clone finished');

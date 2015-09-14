@@ -12,7 +12,30 @@
             canvas: {
                 type: Object,
                 notify: true,
+            },
+
+            state: {
+                type: String,
+                notify: true,
+            },
+
+            contextElement: {
+                type: Object,
+                notify: true,
+                observer: '_handleContextElementChange'
+            },
+
+            registry: {
+                type: Object,
+                notify: true
             }
+        },
+
+        _handleContextElementChange: function (contextElement, oldContext) {
+
+            this.set('components', this.registry.get({
+                context: contextElement.tagName
+            }));
         },
 
         handleComponentClick: function (event) {
@@ -30,11 +53,19 @@
             // Keep reference to the canvas element
             var canvas = this.canvas;
 
+            // Path data
+            var insertPath = {
+                xpath: this.contextElement.attributes['x-path'],
+            };
+
+            // Element data
+            var insertElement = {
+                html: component.html,
+                components: component.components
+            };
+
             this.codeMachine
-                .insertElement({
-                    html: component.html,
-                    components: component.components
-                })
+                .insertElement(insertPath, insertElement)
                 .then(function (res) {
                     
                     canvas.reload();

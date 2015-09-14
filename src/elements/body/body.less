@@ -160,6 +160,21 @@
             max-width:448px;
         }
 	}
+
+
+    // Panel styling
+    .panel {
+
+        transition: max-width ease 0.4s;
+
+        &[state="closed"] {
+            display: none;
+        }
+
+        &[state="open"] {
+            display: block;
+        }
+    }
 }
 
 
