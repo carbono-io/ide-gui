@@ -67,12 +67,17 @@
             this.codeMachine
                 .insertElement(insertPath, insertElement)
                 .then(function (res) {
-                    
+                    this.canvas.deactivateLoading();
+
                     canvas.reload();
 
                     this.toggleLoading(false);
 
+
                 }.bind(this), function (err) {
+
+
+                    this.canvas.deactivateLoading();
 
                     this.toggleLoading(false);
                     this.toggleError(true);
@@ -82,6 +87,8 @@
 
             this.toggleLoading(true);
             this.toggleError(false);
+
+            this.canvas.activateLoading();
         },
 
         /**

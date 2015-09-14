@@ -80,6 +80,14 @@
             'overlay.DOMMouseScroll': 'handleOverlayMousewheel',
             'overlay.click': 'handleOverlayClick',
         },
+
+        activateLoading: function () {
+            this.executeInspectorOperation('activateLoading');
+        },
+
+        deactivateLoading: function () {
+            this.executeInspectorOperation('deactivateLoading');
+        },
         
         /**
          * Whenever the mouse enters the canva element area,
