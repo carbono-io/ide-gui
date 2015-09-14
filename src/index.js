@@ -86,8 +86,8 @@ var group = [
                 icon: "cinza"
             },
             {
-                name: "Verde",
-                icon: "verde"
+                name: "Branco",
+                icon: "branco"
             },
         ],
     },
@@ -95,11 +95,11 @@ var group = [
         title: "Botões",
         styles: [
             {
-                name: "Botão 1",
+                name: "Cancelar",
                 icon: "btn1"
             },
             {
-                name: "Botão 2",
+                name: "Enviar",
                 icon: "btn2"
             },
         ],
