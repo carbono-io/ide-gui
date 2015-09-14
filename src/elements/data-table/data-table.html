@@ -1,11 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<!-- TODO: import iron-icons -->
 
-<!--polymer - iron icon - essencial para todos os ícones funcionarem-->
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<!-- Carbo components -->
+<link rel="import" href="../elements.html">
 
-<!-- paper-input of polymer-->
-<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 
 <link rel="import" href="data-table-styles.html">
 
@@ -16,77 +16,89 @@
 
         <!--componente start-->
 
-        <div id="entity" class="closed">
-
+        <!--<div id="entities-container" class="associate-entity-mode">-->
+            
+        <div id="entities-container">
+    
+         <div id="general-action-message">
+                <!--MENSAGEM PARA ASSOCIAR COMPONENTE A ENTIDADE-->
+                <p id="associate-entity-message">Associe o componente a um dos grupos de dados exibidos abaixo, ou crie um novo.</p>
+        </div>
+         
+        
+        <div id="entity" class="closed entity-associated-mode">
             <div id="entity-id" class="active">
+                <div class="associate-button-area">
+                    <input type="radio" class="associate-entity-button">
+                </div>
                 <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
                 <span>Respostas ao formulário 1</span>
             </div>
 
-                <div class="entity-description">
-    <!--                <p>Os dados das respostas ao formulário 1 estarão associados à Resposta ao Formulário 1</p>-->
+                
+                <div id="entity-action-message">   
+                    <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->             
+                    <p id="entity-associated-message" class="active">
+                        Os dados das respostas ao "Formulário 1" estarão associados à "Respostas ao Formulário 1"
+                    </p>
+
+                    <!--MENSAGEM PARA ASSOCIAR COMPONENTE A PROPROEDADE DE ENTIDADE-->
+                    <p id="associate-property-message">
+                        Associe o componente à uma propriedade exibida abaixo, ou crie uma nova.
+                    </p>
+
                 </div>
 
-                <div class="table-container">
-                    <table>
+                    <div class="table-container">
+                        <table on-click="handleClick">
 
-                        <thead>
-                            <tr>
-                                <!-- repete colunas para cada propriedade-->
-                                <template is="dom-repeat" items="{{ entity1.properties }}" as="propertie">
-                                    <th>{{ propertie.name }}</th>
-                                </template>
-                                <!-- fim do repete colunas -->
+                            <thead>
 
-                                <th><iron-icon icon="add"></iron-icon></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-
-
-                            <!-- repete linhas de cada entidade -->
-                            <template is="dom-repeat" items="{{ entity1.items }}" as="dataitem">
                                 <tr>
-
-                                    <!-- repete colunas de cada linha-->
-                                    <template is="dom-repeat" items="{{ dataitem.properties }}" as="propertiecontent">
-                                        <td>
-                                            <input value="{{ propertiecontent.content }}">
-                                        </td>
-<!--                                    <td>{{ propertiecontent.content }}</td>-->
+                                    <!-- repete colunas para cada propriedade-->
+                                    <template is="dom-repeat" items="{{ entity1.properties }}" as="property">
+                                        <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>
                                     </template>
                                     <!-- fim do repete colunas -->
 
-                                    <td></td>
-
+                                    <th><iron-icon icon="add"></iron-icon></th>
                                 </tr>
-                            </template>
-                            <!-- fim do repete das linhas -->
+                            </thead>
 
-                            <tr class="add-data">
-                                    <td>Adicione dado</td>
-                                    <td>Adicione dado</td>
-                                    <td>Adicione dado</td>
-                                    <td>Adicione dado</td>
-                                    <td>Adicione dado</td>
+                            <tbody>
 
-                                <td></td>
-                            </tr>
+                                <!-- repete linhas de cada entidade -->
+                                <template is="dom-repeat" items="{{ entity1.items }}" as="dataitem">
+                                    <tr>
 
-                        </tbody>
+                                        <!-- repete colunas de cada linha-->
+                                        <template is="dom-repeat" items="{{ dataitem.properties }}" as="propertiecontent">
+                                           
+                                            <td><iron-autogrow-textarea bind-value="{{ propertiecontent.content }}" max-rows="3" placeholder="Adicione dado"></iron-autogrow-textarea></td>
 
-                    </table>
-                </div>
+
+
+                                        </template>
+                                        <!-- fim do repete colunas -->
+
+                                        <td></td>
+
+                                    </tr>
+                                </template>
+                                <!-- fim do repete das linhas -->
+
+                            </tbody>
+
+                        </table>
+                    </div>
 
         </div>
 
         <div class="data-alert">
-            <p>IMPORTANTE: Esses dados não são reais. Eles são exibidos apenas para facilitar o desenvolvimento. Para importar os dados reais, acesse a Área de admin.</p>
+            <div><p>IMPORTANTE: Esses dados não são reais. Eles são exibidos apenas para facilitar o desenvolvimento. Para importar os dados reais, acesse a Área de admin.</p></div>
             <div><iron-icon icon="close"></iron-icon></div>
         </div>
-
+</div>
         <!--componente end-->
 
     </template>

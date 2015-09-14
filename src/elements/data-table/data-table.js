@@ -33,7 +33,7 @@
                             isClosed = true;
                         }
                     });
-                },
+        },
 
 
 
