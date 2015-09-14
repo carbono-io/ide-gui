@@ -223,7 +223,7 @@ var section1 = {
     title: 'SEÇÃO 1',
     screens: [
         { title: 'Tela 1' },
-        { title: 'Tela 2' }
+        // { title: 'Tela 2' }
     ]
 };
 
@@ -238,7 +238,10 @@ var section2 = {
 
 var sections = {
 
-    items: [section1, section2]
+    items: [
+        section1,
+        // section2
+    ]
 };
 
 var categorie = {

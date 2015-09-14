@@ -33,11 +33,25 @@ registry.push({
     ],
 });
 
+// CARBO-GALERIA
+registry.push({
+    title: "Galeria",
+    context: ['BODY'],
+    html: '<paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div><div class="card-actions"> <paper-button>Action</paper-button> </div><div class="card-actions"> <paper-button>Moar action!</paper-button> </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div><div class="card-actions"> <paper-button>Action</paper-button> </div><div class="card-actions"> <paper-button>Moar action!</paper-button> </div></paper-card>',
+    icon: "view-agenda",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
+
 // CARBO-SUBMIT-BUTTON
 registry.push({
     title: "Botão de submit",
     context: ['CARBO-FORM-CONTROL'],
-    icon: "assignment",
+    icon: "av:stop",
     html: '<paper-button class="purple" raised action="submit" >Enviar</paper-button>',
     components: [
         {
@@ -52,7 +66,7 @@ registry.push({
 registry.push({
     title: "Botão de cancelar",
     context: ['CARBO-FORM-CONTROL'],
-    icon: "assignment",
+    icon: "av:stop",
     html: '<paper-button class="red" raised action="submit" >Cancelar</paper-button>',
     components: [
         {
@@ -66,7 +80,7 @@ registry.push({
 registry.push({
     title: 'Input de texto',
     context: ['FORM'],
-    icon: "assignment",
+    icon: "image:crop-7-5",
     html: '<paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input>',
     components: [
         {
@@ -80,7 +94,7 @@ registry.push({
 registry.push({
     title: "Botão de menu",
     context: ['PAPER-TOOLBAR'],
-    icon: "assignment",
+    icon: "menu",
     html: '<paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>',
     components: [
         {
@@ -94,7 +108,7 @@ registry.push({
 registry.push({
     title: "Título",
     context: ['PAPER-TOOLBAR'],
-    icon: "assignment",
+    icon: "text-format",
     html: '<div class="title">Title</div>',
 });
 
@@ -102,7 +116,7 @@ registry.push({
 registry.push({
     title: "Botão de mais",
     context: ['PAPER-TOOLBAR'],
-    icon: "assignment",
+    icon: "more-vert",
     html: '<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>',
     components: [
         {
