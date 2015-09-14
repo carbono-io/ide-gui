@@ -24,19 +24,13 @@
                     <div id="canvas-container" class="panel" state$="{{ state.canvas }}">
                         <content select="canvas-container-content"></content>
                     </div>
-
-<!--COMENTEI SÓ PARA TESTAR O BOX DE DADOS SEM ISSO
--->
                     <div id="box" class="has-shadow panel" state$="{{ boxState }}">
                         <content select="addcomponents-content"></content>
                     </div>
                 </div>
             </div>
             <div id="right-panel" class="data panel" state$="{{ state.rightPanel }}">
-<!--                 <content select="style-content"></content>
- -->
-                <content select="data-content"></content>
-
+                <content select="#right-panel-contents"></content>
             </div>
 
         </div>

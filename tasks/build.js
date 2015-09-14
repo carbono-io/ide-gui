@@ -13,6 +13,12 @@ module.exports = function (gulp, $) {
      */
     gulp.task('less', function () {
 
+        // UNGLYYY
+        // TODO: MAKE THE RIGHT WAY
+        function isNotIndexCss(file) {
+            return path.basename(file.path, '.css') !== 'index';
+        }
+
         // Message to be prepended to all .css files generated via less
         var message = [
             '/*-----------------------------------------------------',
@@ -49,17 +55,17 @@ module.exports = function (gulp, $) {
                     cascade: false,
                 }))
                 // .pipe($.header(message))
-            .pipe($.polymerizeCss({
+            .pipe($.if(isNotIndexCss, $.polymerizeCss({
                 styleId: function (file) {
                     var basename = path.basename(file.path, '.css');
 
                     return basename + '-styles';
                 }
-            }))
-            .pipe($.rename(function (path) {
+            })))
+            .pipe($.if(isNotIndexCss, $.rename(function (path) {
                 path.basename += '-styles';
                 path.extname = '.html';
-            }))
+            })))
             // .pipe($.sourcemaps.write(config.mapsDir))
             // Put files at source dir in order to use them for vulcanization
             .pipe(gulp.dest(config.srcDir))

@@ -45,7 +45,29 @@
             <!-- lab -->
             <div data-route="lab" id="container">
 
-                <carbo-header sections="{{appsections}}"></carbo-header>
+                <carbo-header sections="{{appsections}}">
+                    <nav id="header-nav">
+                        <a href="/lab/340987612301/style">
+                            <iron-icon icon="image:palette"></iron-icon>
+                            <span>ESTILO</span>
+                        </a>
+                        <a href="/lab/340987612301/data">
+                            <iron-icon icon="maps:layers"></iron-icon>
+                            <span>DADOS</span>
+                        </a>
+                        <a href="/lab/340987612301/actions">
+                            <iron-icon icon="image:flash-on"></iron-icon>
+                            <span>AÇÕES</span>
+                        </a>
+
+                        <a href="/lab/340987612301/publish">
+                            <iron-icon icon="editor:publish"></iron-icon>
+
+                            <span>PUBLICAÇÃO</span>
+                        </a>
+                    </nav>
+
+                </carbo-header>
                 <carbo-body id="body">
 
                     <componentslist-content>
@@ -119,36 +141,44 @@
                     </addcomponents-content>
 
 
-                    <!--Conteúdo box estilos-->
-                    <style-content>
-                        <carbo-panel
-                            title="Estilo"
-                            icon="image:palette"
-                            menu="{{ boxmenuitem }}"
-                        >
-                            <div class="box-content">
-                                <carbo-styles-list
-                                group="{{ styleGroups }}"
-                                ></carbo-styles-list>
-                            </div>
-                        </carbo-panel>
-                    </style-content>
+                    <iron-pages 
+                        id="right-panel-contents" 
+                        attr-for-selected="data-section" 
+                        selected="{{ section }}"
+                    >
 
-                    <!--Conteúdo box dados-->
-                     <data-content>
-                        <carbo-panel
-                            title="Dados"
-                            icon="maps:layers"
-                            menu="{{ boxmenuitem }}"
-                        >
-                            <div class="box-content">
+                        <!--Conteúdo box estilos-->
+                        <style-content data-section="style">
+                            <carbo-panel
+                                title="Estilo"
+                                icon="image:palette"
+                                menu="{{ boxmenuitem }}"
+                            >
+                                <div class="box-content">
+                                    <carbo-styles-list
+                                    group="{{ styleGroups }}"
+                                    ></carbo-styles-list>
+                                </div>
+                            </carbo-panel>
+                        </style-content>
 
-                                <carbo-data-table  entity1="{{ entitydata }}">
-                                </carbo-data-table>
+                        <!--Conteúdo box dados-->
+                         <data-content data-section="data">
+                            <carbo-panel
+                                title="Dados"
+                                icon="maps:layers"
+                                menu="{{ boxmenuitem }}"
+                            >
+                                <div class="box-content">
 
-                            </div>
-                        </carbo-panel>
-                    </data-content>
+                                    <carbo-data-table  entity1="{{ entitydata }}">
+                                    </carbo-data-table>
+
+                                </div>
+                            </carbo-panel>
+                        </data-content>
+
+                    </iron-pages>
 
 
                 </carbo-body>

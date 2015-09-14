@@ -45,15 +45,17 @@ window.addEventListener('WebComponentsReady', function() {
     page('/lab/:projectId', function (data) {
         carbo.route = 'lab'; 
         carbo.projectId = data.params.projectId;
+        carbo.section = 'style';
 
         loadProject(function (project) {
             carbo.project = project;
         });
     });
 
-    page('/lab/:projectId/styles', function (data) {
+    page('/lab/:projectId/style', function (data) {
+
         carbo.route = 'lab';
-        carbo.section = 'styles';
+        carbo.section = 'style';
 
         loadProject(function (project) {
             carbo.project = project;
