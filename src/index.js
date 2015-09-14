@@ -71,7 +71,11 @@ var footer = {
 
 var body = {
     name: 'body',
-    children: [header, content, footer]
+    children: [
+        header,
+        // content,
+        // footer
+    ]
 };
 
 var menu = {

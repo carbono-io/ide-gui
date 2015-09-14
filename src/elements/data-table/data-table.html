@@ -20,22 +20,22 @@
             
         <div id="entities-container">
     
-         <div id="general-action-message">
+            <div id="general-action-message">
                 <!--MENSAGEM PARA ASSOCIAR COMPONENTE A ENTIDADE-->
-                <p id="associate-entity-message">Associe o componente a um dos grupos de dados exibidos abaixo, ou crie um novo.</p>
-        </div>
-         
-        
-        <div id="entity" class="closed entity-associated-mode">
-            <div id="entity-id" class="active">
-                <div class="associate-button-area">
-                    <input type="radio" class="associate-entity-button">
-                </div>
-                <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
-                <span>Respostas ao formulário 1</span>
+                <p id="associate-entity-message">
+                    Associe o componente a um dos grupos de dados exibidos abaixo, ou crie um novo.
+                </p>
             </div>
 
-                
+            <div id="entity" class="closed entity-associated-mode">
+                <div id="entity-id" class="active">
+                    <div class="associate-button-area">
+                        <input type="radio" class="associate-entity-button">
+                    </div>
+                    <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
+                    <span>Respostas ao formulário 1</span>
+                </div>
+                    
                 <div id="entity-action-message">   
                     <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->             
                     <p id="entity-associated-message" class="active">
@@ -46,66 +46,70 @@
                     <p id="associate-property-message">
                         Associe o componente à uma propriedade exibida abaixo, ou crie uma nova.
                     </p>
-
                 </div>
 
-                    <div class="table-container">
-                        <table on-click="handleClick">
+                <div class="table-container">
+                    <table on-click="handleClick">
+                        <thead>
+                            <tr>
+                                <!-- repete colunas para cada propriedade-->
+                                <template is="dom-repeat" items="{{ entity1.properties }}" as="property">
+    <!--                                    <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>-->
+                                    
+                                    <th>
+                                        <input type="radio" class="associate-property-button" class="active">
+                                        <iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="Add nome">
+                                        </iron-autogrow-textarea>
+                                    </th>
+                                    
+                                </template>
+                                <!-- fim do repete colunas -->
 
-                            <thead>
+                                <th>
+                                    <iron-icon icon="add"></iron-icon>
+                                </th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            <!-- repete linhas de cada entidade -->
+                            <template is="dom-repeat" items="{{ entity1.items }}" as="dataitem">
                                 <tr>
-                                    <!-- repete colunas para cada propriedade-->
-                                    <template is="dom-repeat" items="{{ entity1.properties }}" as="property">
-<!--                                    <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>-->
-                                        
-                                        <th><input type="radio" class="associate-property-button" class="active"><iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="Add nome"></iron-autogrow-textarea></th>                                        
-                                        
-                                        
-                                        
+                                    <!-- repete colunas de cada linha-->
+                                    <template 
+                                        is="dom-repeat" 
+                                        items="{{ dataitem.properties }}" 
+                                        as="propertiecontent"
+                                    >
+                                        <td>
+                                            <iron-autogrow-textarea 
+                                                bind-value="{{ propertiecontent.content }}"
+                                                max-rows="3"
+                                                placeholder="Add dado"
+                                            >
+                                            </iron-autogrow-textarea>
+                                        </td>
                                     </template>
                                     <!-- fim do repete colunas -->
-
-                                    <th><iron-icon icon="add"></iron-icon></th>
+                                    <td></td>
                                 </tr>
-                            </thead>
+                            </template>
+                            <!-- fim do repete das linhas -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                            <tbody>
-
-                                <!-- repete linhas de cada entidade -->
-                                <template is="dom-repeat" items="{{ entity1.items }}" as="dataitem">
-                                    <tr>
-
-                                        <!-- repete colunas de cada linha-->
-                                        <template is="dom-repeat" items="{{ dataitem.properties }}" as="propertiecontent">
-                                           
-                                            <td><iron-autogrow-textarea bind-value="{{ propertiecontent.content }}" max-rows="3" placeholder="Add dado"></iron-autogrow-textarea></td>
-
-
-
-                                        </template>
-                                        <!-- fim do repete colunas -->
-
-                                        <td></td>
-
-                                    </tr>
-                                </template>
-                                <!-- fim do repete das linhas -->
-
-                            </tbody>
-
-                        </table>
-                    </div>
-
+            <div class="data-alert">
+                <div>
+                    <p>IMPORTANTE: Esses dados não são reais. Eles são exibidos apenas para facilitar o desenvolvimento. Para importar os dados reais, acesse a Área de admin.</p>
+                </div>
+                <div>
+                    <iron-icon icon="close"></iron-icon>
+                </div>
+            </div>
         </div>
-
-        <div class="data-alert">
-            <div><p>IMPORTANTE: Esses dados não são reais. Eles são exibidos apenas para facilitar o desenvolvimento. Para importar os dados reais, acesse a Área de admin.</p></div>
-            <div><iron-icon icon="close"></iron-icon></div>
-        </div>
-</div>
         <!--componente end-->
-
     </template>
     <script src="data-table.js"></script>
 
