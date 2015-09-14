@@ -85,6 +85,51 @@ var menu = {
     ]
 };
 
+var verde = {
+    name: 'Verde',
+    icon: 'verde'
+};
+
+var cinza = {
+    name: 'Cinza',
+    icon: 'cinza'
+};
+
+//var group = {
+//    name: 'Background',
+//    items: [verde, cinza],
+//};
+
+
+var group = [
+    {
+        title: "Background",
+        styles: [
+            {
+                name: "Cinza",
+                icon: "cinza"
+            },
+            {
+                name: "Branco",
+                icon: "branco"
+            },
+        ],
+    },
+    {
+        title: "Botões",
+        styles: [
+            {
+                name: "Cancelar",
+                icon: "btn1"
+            },
+            {
+                name: "Enviar",
+                icon: "btn2"
+            },
+        ],
+    },
+];
+
 var components = [
     {
         title: "Formulário cujo nome é bem grande mesmo",
@@ -247,6 +292,8 @@ var entity1 = {
 };
 
 carbo.AAAAAA = body;
+
+carbo.styleGroups = group;
 
 carbo.boxmenuitem = menu;
 

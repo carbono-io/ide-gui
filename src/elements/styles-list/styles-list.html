@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<!-- TODO: import iron-icons -->
+
+<!--polymer - iron icon - essencial para todos os ícones funcionarem-->
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<!--polymer - icon sets - sets específicos de ícones - necessário para utilizar ícones destes sets -->
+<link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/image-icons.html">
+
+<dom-module id="carbo-styles-list">
+    <link rel="import" type="css" href="styles-list.css">
+<!--
+    <template is="dom-repeat" items="{{ components }}">
+        <div class="component" on-mouseover="handleComponentMouseOver" on-mouseout="hidePreview">
+            <div class="component-icon">
+                <iron-icon icon="{{ item.icon }}"></iron-icon>
+            </div>
+            <div class="component-label">{{ item.title }}</div>
+        </div>
+    </template>
+
+<template is="dom-repeat" items="{{ screens }}">
+                    <div class="preview-screen"><img src="{{ item.url }}"></div>
+                    <div class="screen-caption">{{ item.screensCaption }}</div>
+
+                </template>
+-->
+    <template>
+        <template is="dom-repeat" items="{{ group }}">
+            <!--componente start-->
+            <div id="group">
+                <div id="group-name" on-click="toggleClosedClass">
+                    <div class="item-id">
+                        <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
+                        <span>{{ item.title }}</span>
+                    </div>
+                </div>
+                <div id="hoverer"></div>
+                <template is="dom-repeat" items="{{ item.styles }}">
+                    <div id="style-name">
+                        <div class="item-id">
+                            <div class="style-preview-2" on-click="setClassName"><!--{{ item.icon }}--></div>
+                            <span>{{ item.name }}</span>
+                        </div>
+                    </div>
+                    <div id="hoverer"></div>
+                </template>
+            </div>
+            <!--componente end-->
+        </template>
+    </template>
+
+    <script src="styles-list.js"></script>
+
+</dom-module>
