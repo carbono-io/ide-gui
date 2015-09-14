@@ -7,16 +7,18 @@ var carbo = document.querySelector('#carbo');
 // The router for in page navigation
 carbo.router = require('./scripts/router');
 
-// Services
-var services = {};
-services.codeMachine        = require('./scripts/services/code-machine');
-services.componentsRegistry = require('./scripts/services/components-registry');
-services.config             = require('./scripts/services/config');
-carbo.set('services', services);
-
-carbo.context = carbo;
 
 window.addEventListener('WebComponentsReady', function () {
+
+
+    // Services
+    var services = {};
+    services.codeMachine        = require('./scripts/services/code-machine');
+    services.componentsRegistry = require('./scripts/services/components-registry');
+    services.config             = require('./scripts/services/config');
+    carbo.set('services', services);
+
+    carbo.context = carbo;
 
     // Components
     var components        = carbo.components = {};
