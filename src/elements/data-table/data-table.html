@@ -17,15 +17,13 @@
             
         <div id="entities-container">
     
-
          <div id="general-action-message">
                 <!--MENSAGEM PARA ASSOCIAR COMPONENTE A ENTIDADE-->
                 <p id="associate-entity-message">Associe o componente a um dos grupos de dados exibidos abaixo, ou crie um novo.</p>
         </div>
+         
         
-        
-        <div id="entity" class="closed associate-entity-mode">
-            
+        <div id="entity" class="closed entity-associated-mode">
             <div id="entity-id" class="active">
                 <div class="associate-button-area">
                     <input type="radio" class="associate-entity-button">
@@ -36,12 +34,15 @@
 
                 
                 <div id="entity-action-message">   
+                    <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->             
+                    <p id="entity-associated-message" class="active">
+                        Os dados das respostas ao "Formulário 1" estarão associados à "Respostas ao Formulário 1"
+                    </p>
 
-                        <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->             
-                        <p id="entity-associated-message" class="active">Os dados das respostas ao "Formulário 1" estarão associados à "Respostas ao Formulário 1"</p>
-
-                        <!--MENSAGEM PARA ASSOCIAR COMPONENTE A PROPROEDADE DE ENTIDADE-->
-                        <p id="associate-property-message">Associe o componente à uma propriedade exibida abaixo, ou crie uma nova.</p>
+                    <!--MENSAGEM PARA ASSOCIAR COMPONENTE A PROPROEDADE DE ENTIDADE-->
+                    <p id="associate-property-message">
+                        Associe o componente à uma propriedade exibida abaixo, ou crie uma nova.
+                    </p>
 
                 </div>
 
@@ -52,9 +53,8 @@
 
                                 <tr>
                                     <!-- repete colunas para cada propriedade-->
-                                    <template is="dom-repeat" items="{{ entity1.properties }}" as="propertie">
-                                        <th><input type="radio" class="associate-property-button" class="active">{{ propertie.name }}</th>
-
+                                    <template is="dom-repeat" items="{{ entity1.properties }}" as="property">
+                                        <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>
                                     </template>
                                     <!-- fim do repete colunas -->
 
@@ -63,8 +63,6 @@
                             </thead>
 
                             <tbody>
-
-
 
                                 <!-- repete linhas de cada entidade -->
                                 <template is="dom-repeat" items="{{ entity1.items }}" as="dataitem">
