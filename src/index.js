@@ -280,11 +280,11 @@ var item3 = {
 var entity1 = {
 
     properties: [
-        { name: 'Pergunta 1' },
-        { name: 'Pergunta 2' },
-        // { name: 'Pergunta 3' },
-        // { name: 'Pergunta 4' },
-        // { name: 'Pergunta 5' }
+        { name: 'Campo 1' },
+        { name: 'Campo 2' },
+        // { name: 'Campo 3' },
+        // { name: 'Campo 4' },
+        // { name: 'Campo 5' }
     ],
 
     items: [item3],
