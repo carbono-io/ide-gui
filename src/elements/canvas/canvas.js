@@ -187,14 +187,14 @@
             // Check current mode
             var currentMode = this.mode;
 
-            if (currentMode === 'inspect') {
+            // if (currentMode === 'inspect') {
 
                 this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
 
                 // set mode to add
-                this.set('mode', 'add');
+            //     this.set('mode', 'add');
 
-            } else {
+            // } else {
 
                 this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
                     .then(function (activeElementData) {
@@ -206,7 +206,7 @@
                         this.components.body.openBox();
                     }.bind(this))
                     .done();
-                }
+                // }
 
         },
         

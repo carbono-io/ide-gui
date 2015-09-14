@@ -70,7 +70,7 @@ var footer = {
 };
 
 var body = {
-    name: 'body',
+    name: 'Tela 1',
     children: [
         header,
         // content,
@@ -107,31 +107,31 @@ var cinza = {
 
 var group = [
     {
-        title: "Background",
+        title: "Header",
         styles: [
             {
-                name: "Cinza",
+                name: "Fundo azul",
                 icon: "cinza"
             },
-            {
-                name: "Branco",
-                icon: "branco"
-            },
+            // {
+            //     name: "Branco",
+            //     icon: "branco"
+            // },
         ],
     },
-    {
-        title: "Botões",
-        styles: [
-            {
-                name: "Cancelar",
-                icon: "btn1"
-            },
-            {
-                name: "Enviar",
-                icon: "btn2"
-            },
-        ],
-    },
+    //    {
+    //    title: "Botões",
+    //     styles: [
+    //         {
+    //             name: "Cancelar",
+    //             icon: "btn1"
+    //         },
+    //         {
+    //             name: "Enviar",
+    //             icon: "btn2"
+    //         },
+    //     ],
+    // },
 ];
 
 var components = [
