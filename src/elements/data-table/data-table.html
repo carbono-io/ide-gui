@@ -54,7 +54,12 @@
                                 <tr>
                                     <!-- repete colunas para cada propriedade-->
                                     <template is="dom-repeat" items="{{ entity1.properties }}" as="property">
-                                        <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>
+<!--                                    <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>-->
+                                        
+                                        <th><input type="radio" class="associate-property-button" class="active"><iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="Add nome"></iron-autogrow-textarea></th>                                        
+                                        
+                                        
+                                        
                                     </template>
                                     <!-- fim do repete colunas -->
 
@@ -71,7 +76,7 @@
                                         <!-- repete colunas de cada linha-->
                                         <template is="dom-repeat" items="{{ dataitem.properties }}" as="propertiecontent">
                                            
-                                            <td><iron-autogrow-textarea bind-value="{{ propertiecontent.content }}" max-rows="3" placeholder="Adicione dado"></iron-autogrow-textarea></td>
+                                            <td><iron-autogrow-textarea bind-value="{{ propertiecontent.content }}" max-rows="3" placeholder="Add dado"></iron-autogrow-textarea></td>
 
 
 
