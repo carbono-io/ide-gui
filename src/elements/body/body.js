@@ -4,9 +4,6 @@
         is: 'carbo-body',
 
         ready: function () {
-
-            console.log('qeqrqw')
-
             this.openLeftPanel();
             this.openCanvas();
             this.closeBox();

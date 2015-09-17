@@ -1,6 +1,6 @@
 @import '../../less/variables.less';
-@import '../../bower_components/lesshat/build/lesshat.less';
 
+// TODO: css acho melhor você me explicar o css 
 :host {
 
     display:flex;
@@ -8,6 +8,7 @@
 }
 
 #entities-container {
+    // TODO: consertar identação
     #general-action-message {
     padding: @base-size;
     font-size: @font-size-2;
@@ -51,7 +52,6 @@
 
     .associate-button-area {
         display: none;
-
     }
     
     &.closed {
@@ -59,11 +59,10 @@
             .rotate(-90deg);
         }
 
-
-            
+        // TODO: arrumar identação
             .table-container {
             
-            max-height: 0;    
+                max-height: 0;    
                 
                 table {
                     visibility: hidden;
@@ -72,13 +71,11 @@
             }
             
             #entity-action-message {
-                
-            max-height: 0;
-            padding: 0;
-                
+                max-height: 0;
+                padding: 0;
                 p {
                     visibility: hidden;
-                                            }
+                }
             }
             
     }
@@ -104,20 +101,19 @@
             }
 
             iron-autogrow-textarea {
+                // TODO: width 100% parece não ter 
+                // efeitos
                 width: 100%;
                 border: none;
                 overflow: scroll;
                 font-weight: @bold;
             }
             
-            
             iron-icon {
-
                 width: 18px;
                 height: 18px;
 
                &:hover, &.active {
-
                     transition: all ease 0.3s;
                     cursor: pointer;
                 }
@@ -140,17 +136,14 @@
         p {
             margin: @base-size;
             display: none;
-
         }
-        
-        
     }
 
     #entity-id {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content:flex-start;
+        justify-content: flex-start;
         height: 5 * @base-size;
         padding-left: @base-size;
         padding-right: @base-size;
@@ -159,7 +152,7 @@
             width: 16px;
             height: 16px;
             margin-right: 0;
-            padding-left: - 8;
+            padding-left: -8;
             transition: all 0.3s ease;
         }
 
@@ -168,16 +161,12 @@
             transition: all ease 0.3s;
             cursor: pointer;
         }
-
     }
-
     
     .table-container {
         overflow-y: hidden;
         max-height:800px;
         transition: max-height 0.2s ease;
-
-
     }
 
     table {
@@ -185,22 +174,16 @@
         padding: 0 2 * @base-size;
         visibility: visible;
         transition: visibility 0s linear 0s;
-
-
     }
-
 
     tbody {
 
         tr {
-
-           max-height: 6 * @base-size;
-
+            max-height: 6 * @base-size;
 
             &:hover, &.active {
                 background-color: @item-panel-background-hover;
                 transition: all ease 0.3s;
-
             }
 
 
@@ -208,11 +191,11 @@
                 font-size: @font-size-2;
                 padding: 0 @base-size 0 @base-size;
 
+// TODO: remover comentário
 // isso nao funciona com iron text area
 //                width: auto;
 //                max-width: 96px;
 //                min-width: 80px;
-
 
                 width: auto;
                 min-width: 88px;
@@ -229,7 +212,6 @@
                 &:hover, &.active {
                     font-weight: @bold;
                     cursor: pointer;
-
                 }
                 
                 iron-autogrow-textarea {
@@ -237,24 +219,18 @@
                     border: none;
                     overflow: scroll;
                 }
-
             }
-
         }
     }
     
-    
-    
- 
-    
-    //MODO ENTIDADE ASSOCIADA A COMPONENTE
+    // MODO ENTIDADE ASSOCIADA A COMPONENTE
     &.entity-associated-mode {
         
         #entity-action-message {
             display: block;
             
             #entity-associated-message {
-                    display: block;
+                display: block;
             }
         }
     }
@@ -265,19 +241,17 @@
     
         th {
             height: 7 * @base-size;
-                
-                &:hover, &.active {
-                    background-color: @item-panel-background-hover;
-                    transition: all ease 0.3s;
-
-                }    
-                
-                .associate-property-button {
-                    display: block;
-                    margin: @base-size 0;
-                }
             
+            &:hover, &.active {
+                background-color: @item-panel-background-hover;
+                transition: all ease 0.3s;
+            }    
+            
+            .associate-property-button {
+                display: block;
+                margin: @base-size 0;
             }
+        }
         
         #entity-action-message {
             display: block;
@@ -286,37 +260,31 @@
                 display: block;
             }
         }
-    }
-    
-    
-    
-    
-    
-    
+    }    
 }
 
-    .data-alert{
+.data-alert {
+    background-color: #F9F0CD;
+    padding: @base-size;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
 
-        background-color: #F9F0CD;
-        padding: @base-size;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
+    // deixei o tamanho fixo do box para evitar problemas 
+    // com esses paragrafos que estavam aumentando o box. 
+    // acho ok. 
+    // aí mais para frente, quando o usuário aumentar o box, 
+    // ele aumenta e fica fixo no novo tamanho.
+    p {
+        margin: @base-size;
+        font-size: @font-size-2;
         box-sizing: border-box;
-
-    //deixei o tamanho fixo do box para evitar problemas com esses paragrafos que estavam aumentando o box. acho ok. aí mais para frente, quando o usuário aumentar o box, ele aumenta e fica fixo no novo tamanho.
-
-        p {
-            margin: @base-size;
-            font-size: @font-size-2;
-            box-sizing: border-box;
-        }
-
-        iron-icon {
-            width: 18px;
-            height: 18px;
-        }
-    
     }
 
+    iron-icon {
+        width: 18px;
+        height: 18px;
+    }
+}

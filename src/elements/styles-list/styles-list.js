@@ -6,6 +6,7 @@
 
         ready: function() {
 
+// TODO: remover comentários de código morto
 //
 //            console.log('!!!!!!');
 //            console.log(this.group);
@@ -50,7 +51,7 @@
             var groupNode = event.currentTarget.parentNode;
             var isClosed = groupNode.matches(".closed");
 
-            if(isClosed == true) {
+            if(isClosed === true) {
                 Polymer.Base.toggleClass('closed', false, groupNode);
                 isClosed = false;
 
