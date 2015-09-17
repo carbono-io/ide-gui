@@ -335,7 +335,9 @@
             this.toggleClass('active', false, overlay);
             
             // Unhighlight whatever is highlighted.
-            this.executeInspectorOperation('unHighlight');
+            this.executeInspectorOperation('unHighlight', ['hover']);
+            this.executeInspectorOperation('unHighlight', ['focus']);
+
         },
 
         /**
