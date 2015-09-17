@@ -1,45 +1,17 @@
 <!-- 
-TODO: comentário geral: mais para o futuro, faremos
+mais para o futuro, faremos
 um dom-repeat para cada "entity" na lista de "entities"
 da aplicação.
-
-Não acho que seja relevante fazer isso agora, mas já fique alertada
-para as modificações para o futuro.
-
-É possível que tenhamos que quebrar este componente em dois.
-Mas ainda é especulação.
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<!-- Carbo components -->
-<!--
-TODO: esta referência está quebrada.
-Lembro que você tinha me perguntado algo sobre utilizar elements.html,
-e eu ter respondido que era bom sim. Mas acho que na época não tinha entendido
-a pergunta direito. O elements.html é parte da aplicação principal,
-ou seja, ele não deve ser utilizado dentro dos elements.
 
-Tudo que está dentro da pasta elements/**/* são componentes que praticamente 
-são completamtente independentes da aplicação principal, ou seja,
-quase poderiam ser repositórios git separados. 
-(Isso apenas ao nível do código, pois no nível da semântica, eles não fariam 
-sentido separados e é isso que os impede de ir para repositórios separados. 
-Ex.: o canvas jamais faria sentido fora do contexto da nossa IDE, não seria utilizado
-em nenhuma outra aplicação.
-
-Long story short, é melhor remover esta referência altogether, e é mais fácil até porque você não está usando nada dos imports do elements.
--->
-<link rel="import" href="../elements.html">
-
-<!--
-TODO: os dialogs não estão sendo utilizados no momento
-comenete este bloco de código e deixe a anotação para utilizá-los e em qual 
-momento utilizá-los    
--->
+<!-- DIALOG PARA USAR NO DATA TABLE NO FUTURO (no momento de editar o conteúdo da célula)
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+-->
 
 <link rel="import" href="data-table-styles.html">
 
@@ -116,12 +88,12 @@ momento utilizá-los
                                     <template 
                                         is="dom-repeat" 
                                         items="{{ dataitem.properties }}" 
-                                        as="propertiecontent"
+                                        as="propertycontent"
                                     >
                                         <td>
-                                            <!-- TODO: propertiecontent está escrito errado -->
+                                            
                                             <iron-autogrow-textarea 
-                                                bind-value="{{ propertiecontent.content }}"
+                                                bind-value="{{ propertycontent.content }}"
                                                 max-rows="3"
                                                 placeholder="Add dado"
                                             >
@@ -130,13 +102,7 @@ momento utilizá-los
                                     </template>
                                     <!-- fim do repete colunas -->
 
-                                    <!-- TODO: documentar este td
-                                        o meu chute é que ele está aqui 
-                                        para manter o tamanho da table
-                                        mesmo com o botão lá em cima, certo?
-                                        Acho que é uma boa solução sim,
-                                        apenas documente isto.
-                                     -->
+                                    <!-- td somente para manter o tamanho da table certo -->
                                     <td></td>
                                 </tr>
                             </template>
@@ -162,19 +128,3 @@ momento utilizá-los
     <script src="data-table.js"></script>
 
 </dom-module>
-
-
-<!-- 
-TODO: 
-considerações finais:
-
-Achei o código bem desafiador, digo, o trabalho que você fez
-é bem grande para este começo ainda, parabéns :) 
-(fiquei bem orgulhoso, dom-repeat dentro de dom-repeat não é uma coisa simples,
-geralmente dobra a mente das pessoas)
-
-Tome muito cuidado com identação. Ela provavelmente consumiu uns 30% do seu tempo
-sem você perceber ;)
-
-
--->

@@ -8,29 +8,29 @@
 }
 
 #entities-container {
-    // TODO: consertar identação
-    #general-action-message {
-    padding: @base-size;
-    font-size: @font-size-2;
-    box-sizing: border-box;
-    border-top: 1px solid @mediumgrey; 
-    border-bottom: 1px solid @mediumgrey;
-    display: none;
 
-    p {
-        margin: @base-size;
+    #general-action-message {
+        padding: @base-size;
+        font-size: @font-size-2;
+        box-sizing: border-box;
+        border-top: 1px solid @mediumgrey; 
+        border-bottom: 1px solid @mediumgrey;
         display: none;
+
+        p {
+            margin: @base-size;
+            display: none;
+        }
     }
-}
     
     &.associate-entity-mode {
         
         #general-action-message {
             display: block;
 
-                p {
-                    display: block;
-                }
+            p {
+                display: block;
+            }
         }
         
         .associate-button-area {
@@ -41,10 +41,8 @@
             justify-content: center;
             align-items: center;
             
-        }
-        
-    }
-    
+        } 
+    } 
 }    
 
 
@@ -59,24 +57,25 @@
             .rotate(-90deg);
         }
 
-        // TODO: arrumar identação
-            .table-container {
+        
+        .table-container {
+
+            max-height: 0;    
+
+            table {
+                visibility: hidden;
+                transition: visibility 0s linear 0.2s;
+            }        
+        }
+
+        #entity-action-message {
+            max-height: 0;
+            padding: 0;
             
-                max-height: 0;    
-                
-                table {
-                    visibility: hidden;
-                    transition: visibility 0s linear 0.2s;
-                }        
+            p {
+                visibility: hidden;
             }
-            
-            #entity-action-message {
-                max-height: 0;
-                padding: 0;
-                p {
-                    visibility: hidden;
-                }
-            }
+        }
             
     }
     
@@ -101,9 +100,7 @@
             }
 
             iron-autogrow-textarea {
-                // TODO: width 100% parece não ter 
-                // efeitos
-                width: 100%;
+//              width: 100%;
                 border: none;
                 overflow: scroll;
                 font-weight: @bold;
@@ -131,7 +128,6 @@
         border-top: 1px solid @mediumgrey; 
         border-bottom: 1px solid @mediumgrey;
         display: none;
-
         
         p {
             margin: @base-size;
@@ -190,13 +186,6 @@
             td {
                 font-size: @font-size-2;
                 padding: 0 @base-size 0 @base-size;
-
-// TODO: remover comentário
-// isso nao funciona com iron text area
-//                width: auto;
-//                max-width: 96px;
-//                min-width: 80px;
-
                 width: auto;
                 min-width: 88px;
                 max-width: 104px;
@@ -271,12 +260,7 @@
     justify-content: space-between;
     width: 100%;
     box-sizing: border-box;
-
-    // deixei o tamanho fixo do box para evitar problemas 
-    // com esses paragrafos que estavam aumentando o box. 
-    // acho ok. 
-    // aí mais para frente, quando o usuário aumentar o box, 
-    // ele aumenta e fica fixo no novo tamanho.
+    
     p {
         margin: @base-size;
         font-size: @font-size-2;
@@ -288,3 +272,10 @@
         height: 18px;
     }
 }
+
+
+    // deixei o tamanho fixo do box para evitar problemas 
+    // com esses paragrafos que estavam aumentando o box. 
+    // acho ok. 
+    // aí mais para frente, quando o usuário aumentar o box, 
+    // ele aumenta e fica fixo no novo tamanho.
