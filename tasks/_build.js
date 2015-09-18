@@ -1,10 +1,20 @@
 var path = require('path');
 
-var browserify    = require('browserify');
-var polybuild     = require('polybuild');
+var _           = require('lodash');
+var mergeStream = require('merge-stream');
+var browserify  = require('browserify');
+var vinylSource = require('vinyl-source-stream');
+var vinylBuffer = require('vinyl-buffer');
+var polybuild   = require('polybuild');
 
 var config  = require('./config');
 var aux = require('./auxiliary');
+
+// Entries that need browserifying
+var BROWSERIFY_ENTRIES = [
+    config.srcDir + '/index.js',
+    config.srcDir + '/elements/canvas/canvas.js'
+];
 
 module.exports = function (gulp, $) {
 
@@ -88,30 +98,50 @@ module.exports = function (gulp, $) {
             ' -----------------------------------------------------*/\n\n',
         ].join('\n');
 
-        return aux.vinylifyBrowserify(browserify(config.browserifyOptions))
-            // optional, remove if you dont want sourcemaps
-            .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
-                // calculate size before writing source maps
-                .pipe($.size({ title: 'javascript' }))
-            // Add transformation tasks to the pipeline here.
-            .pipe($.sourcemaps.write(config.mapsDir)) // writes .map file
-            .pipe($.header(message))
-            .pipe(gulp.dest(config.srcDir));
-    });
+        // RegExp for matching srcDir
+        var srcDirRegExp = new RegExp('^' + config.srcDir + '/');
 
-    /**
-     * Vulcanize polymer components (use polybuild instead)
-     */
-    // gulp.task('vulcanize', function () {
-    //     return gulp.src(config.srcDir + '/elements.html')
-    //         .pipe($.vulcanize({
-    //             stripComments: true,
-    //             inlineCss: true,
-    //             inlineScripts: true,
-    //         }))
-    //         .pipe(gulp.dest(config.distDir))
-    //         .pipe($.size({title: 'vulcanize'}));
-    // });
+        // Loop through all entries that should be browserified
+        var browserifyTasks = BROWSERIFY_ENTRIES.map(function (entry) {
+
+            // One config for each browserify task
+            var entryConfig = {
+                // Set the entry option so that it browserifies
+                // only one file
+                entries: [entry]
+            };
+
+            // Build a file path for writing the resulting
+            // browserified file
+            var gulpEntryFilePath = entry.replace(srcDirRegExp, '') + '.bundle.js';
+
+            // Create a gulp stream for the single browserify task
+            return browserify(entryConfig).bundle()
+                // log errors if they happen
+                .on('error', $.util.log.bind($.util, 'Browserify Error'))
+                // transform browserify file stream into a vinyl file object stream
+                // and modify the file name
+                .pipe(vinylSource(gulpEntryFilePath))
+                // transform vinyl stream into buffer so that sourcemaps may work
+                .pipe(vinylBuffer())
+                // optional, remove if you dont want sourcemaps
+                .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
+                    // calculate size before writing source maps
+                    .pipe($.size({
+                        title: 'javascript',
+                        showFiles: true
+                    }))
+                // Add transformation tasks to the pipeline here.
+                .pipe($.sourcemaps.write(config.mapsDir)) // writes .map file
+                .pipe($.header(message))
+                // write to root, as the files contain './src' reference
+                .pipe(gulp.dest(config.srcDir)); 
+        });
+
+        // Return a merged stream object
+        // that delays until all browserifyTasks are done
+        return mergeStream(browserifyTasks);
+    });
 
     gulp.task('build:stage', 'Bundles all assets into files ready for stage-deployment', ['less', 'javascript'], function () {
 

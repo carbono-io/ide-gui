@@ -16,9 +16,6 @@
  */
 (function () {
 
-    // Load behaviors
-    var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
-
     /**
      * The prefix to be used by all `window.postMessage(iframe, message)`
      * requests.
@@ -35,8 +32,6 @@
 
     Polymer({
         is: 'carbo-canvas',
-
-        behaviors: [FrameMessagingBehavior],
         
         /**
          * Called whenever the component is instantiated.

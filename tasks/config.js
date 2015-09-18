@@ -40,12 +40,3 @@ exports.htmlDir = [
     SRC_DIR + '/**/*.html',
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
-
-/**
- * Browserify
- */
-exports.browserifyOptions = _.assign({}, watchify.args, {
-    entries: ['./src/index.js'],
-    debug: true,
-    standalone: 'C',
-});
