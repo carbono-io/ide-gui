@@ -51,7 +51,9 @@ module.exports = function (gulp, $) {
 
             // Build a file path for writing the resulting
             // browserified file
-            var gulpEntryFilePath = entry.replace(srcDirRegExp, '') + '.bundle.js';
+            var gulpEntryFilePath = entry
+                .replace(srcDirRegExp, '')
+                .replace(/\.js$/, '');
 
             // Create a gulp stream for the single browserify task
             return browserify(entryConfig).bundle()
@@ -59,7 +61,7 @@ module.exports = function (gulp, $) {
                 .on('error', $.util.log.bind($.util, 'Browserify Error'))
                 // transform browserify file stream into a vinyl file object stream
                 // and modify the file name
-                .pipe(vinylSource(gulpEntryFilePath))
+                .pipe(vinylSource(gulpEntryFilePath + '.bundle.js'))
                 // transform vinyl stream into buffer so that sourcemaps may work
                 .pipe(vinylBuffer())
                 // optional, remove if you dont want sourcemaps
