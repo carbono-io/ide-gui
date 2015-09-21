@@ -1,6 +1,10 @@
 // Scripts dependend upon
 require('./bower_components/webcomponentsjs/webcomponents-lite.js');
 
+// Read configurations
+var readConfig = require('./scripts/config');
+var configPromise = readConfig();
+
 // The application wrapper
 var carbo = document.querySelector('#carbo');
 
@@ -10,27 +14,21 @@ carbo.router = require('./scripts/router');
 // Set placeholder data onto the main scope of the application
 require('./scripts/placeholder-data')(carbo);
 
+// Only start setting up thing when WebComponentsReady event is fired
 window.addEventListener('WebComponentsReady', function () {
-    
-    // Config
-    carbo.set('config', require('./scripts/config'));
 
-    // Router
-    carbo.router = require('./scripts/router')(carbo);
+    configPromise.then(function (config) {
+        // Router
+        carbo.router = require('./scripts/router')(carbo, config);
 
-    // Services
-    carbo.set('services', {});
-    carbo.set('services.codeMachine', require('./scripts/services/code-machine'));
-    carbo.set('services.componentsRegistry', require('./scripts/services/components-registry'));
-
-    // Components
-    carbo.set('components', {});
-    carbo.set('components.body', document.querySelector('#body'));
-    carbo.set('components.canvas', document.querySelector('#canvas'));
-    carbo.set('components.componentsPalette', document.querySelector('#components-palette'));
-
-    // Reference to the carbono itself
-    carbo.context = carbo;
+        // Services
+        require('./scripts/initialization/services')(carbo, config);        
+        // Components
+        require('./scripts/initialization/components')(carbo, config);
+        // Reference to the carbono itself
+        carbo.context = carbo;
+    })
+    .done();
 });
 
 // Export the component scope

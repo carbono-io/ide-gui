@@ -1,39 +1,58 @@
-// External dependencies
+// external dependencies
 var socketIo = require('socket.io-client');
-var Message  = require('carbono-json-messages');
-var Q        = require('q');
 
-var config = require('./config');
+// internal dependencies
+var SocketRequestManager = require('./lib/socket-request-manager');
 
-// Declare variable to store the socket
-var socket;
+REQUIRED_CONFIGS = ['location', 'userService'];
 
 /**
- * Object to hold all requests
- * Keys are request ids
- * values are objects describing the request
- * @type {Object}
+ * The class
+ * @param {POJO} config Configuration object
+ *                      - location: location of the code-machine server
  */
-var _requestsStore = {};
+function CodeMachineClient(config) {
 
-// Connect to code-machine
-config.getCodeMachineLocation().then(function (location) {
+    REQUIRED_CONFIGS.forEach(function (configName) {
+        if (!config[configName]) {
+            throw new Error('`%s` is required for CodeMachineClient', configName);
+        }
+    });
 
-    socket = socketIo(location);
-});
+    this.config = config;
+
+    this.socket = socketIo(config.location);
+
+    // Instantiate socket request manager
+    this.socketRequestManager = new SocketRequestManager(this.socket);
+}
 
 /**
  * Inserts an element
  */
-exports.insertElement = function (path, element) {
+// CodeMachineClient.prototype.insertElement = function (path, element) {
+
+//     var insert = {
+//         path: {
+//             file: 'src/index.html',
+//             xpath: path.xpath,
+//         },
+//         html: element.html,
+//         components: element.components || []
+//     };
+
+//     return this.socketRequestManager.sendCommand('insertElement', [insert]);
+// };
+
+CodeMachineClient.prototype.insertElement = function (path, element) {
+
+    var socket = this.socket;
 
     if (!socket) {
         throw new Error('Code machine socket not found');
     }
 
-    console.info('service:code-machine:insertElement');
-    console.log(path);
-    console.log(element);
+    console.info('[service] code-machine:insertElement(%s, %s)', path, JSON.stringify(element));
 
     // Create a deferred object
     var defer = Q.defer();
@@ -95,3 +114,6 @@ exports.insertElement = function (path, element) {
     // Return the promise :)
     return defer.promise;
 };
+
+// export the class
+module.exports = CodeMachineClient;

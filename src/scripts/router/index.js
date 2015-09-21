@@ -2,6 +2,11 @@
 var page           = require('page');
 var socketIOClient = require('socket.io-client');
 
+/**
+ * Checks whether the router has been initialized.
+ */
+var ROUTER_INITIALIZED = false;
+
 // Mock data
 var project = {
     projectId: '340987612301',
@@ -32,13 +37,10 @@ function loadProject(callback) {
  * Function to be executed only when webcomponents are ready.
  * Bear in mind that this event requires webcomponents-lite.js
  * to have been imported into the application.
+ *
+ * Receives a reference to the main scope of the application.
  */
 function initializeRouter(carbo) {
-
-    // retrieve the element representing the application
-    var carbo = document.querySelector('#carbo');
-  
-    console.log('routing started');
 
     // We use Page.js for routing. This is a Micro
     // client-side router inspired by the Express router
@@ -46,46 +48,8 @@ function initializeRouter(carbo) {
     page('/', function () {
         carbo.route = 'start';
     });
-    
-    page('/lab/:projectId', function (data) {
-        carbo.route = 'lab'; 
-        carbo.projectId = data.params.projectId;
-        carbo.section = 'style';
 
-        loadProject(function (project) {
-            carbo.project = project;
-        });
-    });
-
-    page('/lab/:projectId/style', function (data) {
-
-        carbo.route = 'lab';
-        carbo.section = 'style';
-
-        loadProject(function (project) {
-            carbo.project = project;
-        });
-    });
-
-    page('/lab/:projectId/data', function (data) {
-        carbo.route = 'lab';
-        carbo.section = 'data';
-
-        loadProject(function (project) {
-            carbo.project = project;
-        });
-    });
-    
-    page('/new', function () {
-        carbo.route = 'loading';
-        
-        createNewProject(function (project) {
-            
-            carbo.project = project;
-            
-            page('/lab/' + project.projectId);
-        });
-    });
+    require('./project')(carbo);
 
     // add #! before urls
     page({
@@ -93,11 +57,6 @@ function initializeRouter(carbo) {
     });
 
 }
-
-/**
- * Checks whether the router has been initialized.
- */
-var ROUTER_INITIALIZED = false;
 
 /**
  * Export a function that initializes a router
