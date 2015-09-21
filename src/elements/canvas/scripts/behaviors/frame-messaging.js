@@ -1,7 +1,3 @@
-exports.ola = function () {
-    alert('ola');
-};
-
 /**
  * The prefix to be used by all `window.postMessage(iframe, message)`
  * requests.

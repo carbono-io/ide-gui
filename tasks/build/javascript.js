@@ -9,12 +9,6 @@ var vinylBuffer = require('vinyl-buffer');
 var config  = require('../config');
 var aux = require('../auxiliary');
 
-// Entries that need browserifying
-var BROWSERIFY_ENTRIES = [
-    config.srcDir + '/index.js',
-    config.srcDir + '/elements/canvas/canvas.js'
-];
-
 // RegExp for matching srcDir
 var srcDirRegExp = new RegExp('^' + config.srcDir + '/');
 
@@ -40,13 +34,13 @@ module.exports = function (gulp, $) {
     gulp.task('javascript', 'Builds up the javascript file', function () {
 
         // Loop through all entries that should be browserified
-        var browserifyTasks = BROWSERIFY_ENTRIES.map(function (entry) {
+        var browserifyTasks = config.browserifyEntries.map(function (entry) {
 
             // One config for each browserify task
             var entryConfig = {
                 // Set the entry option so that it browserifies
                 // only one file
-                entries: [entry]
+                entries: [entry],
             };
 
             // Build a file path for writing the resulting
@@ -62,19 +56,13 @@ module.exports = function (gulp, $) {
                 // transform browserify file stream into a vinyl file object stream
                 // and modify the file name
                 .pipe(vinylSource(gulpEntryFilePath + '.bundle.js'))
-                // transform vinyl stream into buffer so that sourcemaps may work
                 .pipe(vinylBuffer())
-                // optional, remove if you dont want sourcemaps
-                .pipe($.sourcemaps.init({ loadMaps: true })) // loads map from browserify file
-                    // calculate size before writing source maps
-                    .pipe($.size({
-                        title: 'javascript',
-                        showFiles: true
-                    }))
-                // Add transformation tasks to the pipeline here.
-                .pipe($.sourcemaps.write(config.mapsDir)) // writes .map file
+                // calculate size before writing source maps
+                .pipe($.size({
+                    title: 'javascript',
+                    showFiles: true
+                }))
                 .pipe($.header(message))
-                // write to root, as the files contain './src' reference
                 .pipe(gulp.dest(config.srcDir)); 
         });
 

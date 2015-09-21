@@ -179,63 +179,18 @@
             // Check current mode
             var currentMode = this.mode;
 
-            // if (currentMode === 'inspect') {
+            this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
 
-                this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
+            this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
+                .then(function (activeElementData) {
 
-                // set mode to add
-            //     this.set('mode', 'add');
+                    this.context.set('contextElement', activeElementData);
 
-            // } else {
+                    console.log(activeElementData.attributes['x-path']);
 
-                this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
-                    .then(function (activeElementData) {
-
-                        this.context.set('contextElement', activeElementData);
-
-                        console.log(activeElementData.attributes['x-path']);
-
-                        this.components.body.openBox();
-                    }.bind(this))
-                    .done();
-                // }
-                // this.executeInspectorOperation(
-                //     'executeHighlighterOperation', 
-                //     ['hover', 'getCSSSelectors']
-                // )
-                // .then(function (CSSSelectors) {
-                //     console.log('CSSSelectors')
-                //     console.log(CSSSelectors);
-
-                //     // [
-                //     //     {
-                //     //         title: "Header",
-                //     //         styles: [
-                //     //             {
-                //     //                 name: "Fundo azul",
-                //     //                 icon: "cinza"
-                //     //             },
-                //     //         ],
-                //     //     },
-                //     // ];
-
-                //     var stylesGroups = CSSSelectors.map(function (selector) {
-                        
-                //         return {
-                //             title: selector,
-                //             styles: [
-                //                 {
-                //                     name: "Fundo azul",
-                //                     icon: "cinza"
-                //                 },
-                //             ]
-                //         }
-                //     })
-
-
-                //     this.context.set('styleGroups', stylesGroups);
-                // }.bind(this))
-                // .done();
+                    this.components.body.openBox();
+                }.bind(this))
+                .done();
         },
         
         /**

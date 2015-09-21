@@ -24,6 +24,7 @@ exports.jsDir = [
     '!' + SRC_DIR + '/bower_components/**/*',
     '!' + SRC_DIR + '/sandbox/**/*',
     'gulpfile.js',
+    'tasks/**/*.js',
 ];
 
 exports.lessDir = [
@@ -39,4 +40,11 @@ exports.cssDir = [
 exports.htmlDir = [
     SRC_DIR + '/**/*.html',
     '!' + SRC_DIR + '/bower_components/**/*',
+];
+
+// js files that require browserifying
+// don't put trailing.js
+exports.browserifyEntries = [
+    SRC_DIR + '/index',
+    SRC_DIR + '/elements/canvas/canvas'
 ];

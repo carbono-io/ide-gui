@@ -7,10 +7,8 @@ var carbo = document.querySelector('#carbo');
 // The router for in page navigation
 carbo.router = require('./scripts/router');
 
-
 window.addEventListener('WebComponentsReady', function () {
-
-
+    
     // Services
     var services = {};
     services.codeMachine        = require('./scripts/services/code-machine');
@@ -103,7 +101,6 @@ var cinza = {
 //    name: 'Background',
 //    items: [verde, cinza],
 //};
-
 
 var group = [
     {

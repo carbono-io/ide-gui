@@ -75,7 +75,6 @@ registry.push({
     ],
 });
 
-
 // CARBO-CANCEL-BUTTON
 registry.push({
     title: "Botão de cancelar",
