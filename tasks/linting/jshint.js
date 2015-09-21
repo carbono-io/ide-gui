@@ -18,7 +18,7 @@ var reporter = through2.obj(
                 message: 'JSHint failed at ' + file.path
             });
 
-            // Store the path for later usage 
+            // Store the path for later usage
             err.path = file.path;
 
             // store errrors
@@ -29,7 +29,7 @@ var reporter = through2.obj(
         // continue stream
         cb(null, file);
 
-    }, 
+    },
     function (cb) {
 
         if (this.errors && this.errors.length > 0) {

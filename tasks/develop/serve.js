@@ -16,7 +16,7 @@ module.exports = function (gulp, $) {
 
         // $.util.log($.util.colors.red('Buggish. Not working yet, please start the process manually by running: `cd tmp/code-machine`, `export NODE_ENV=ide` and `node .` sequentially'));
 
-        // Execute 
+        // Execute
         var cmProcess = exec('node .', {
             cwd: path.join(config.root, config.tmpDir, 'code-machine'),
             env: {

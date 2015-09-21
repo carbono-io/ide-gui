@@ -1,7 +1,7 @@
 /**
  * The prefix to be used by all `window.postMessage(iframe, message)`
  * requests.
- * 
+ *
  * @type {Constant}
  */
 var INSPECTOR_OPERATION_PREFIX = 'canvas_inspector_operation_';
@@ -17,10 +17,10 @@ exports.created = function () {
  * Executes and operation inside the iframe.
  * Communicates with the <carbo-inspector> component within the frame
  *
- * Implements the promise interface that makes it possible 
- * to use request-response paradigm in the `window.postMessage` 
+ * Implements the promise interface that makes it possible
+ * to use request-response paradigm in the `window.postMessage`
  * communication.
- * 
+ *
  * @param  {String} operation The name of the operation to be executed.
  * @param  {Array|*} args     Array of arguments or single argument.
  * @return {Promise}          Promise to be resolved after the response.
@@ -33,8 +33,8 @@ exports.executeInspectorOperation = function (operation, args) {
         id: opid,
         operation: operation,
         args: args
-    });            
-    
+    });
+
     // Send the message to the iframe -
     this.$.iframe.contentWindow.postMessage(message, '*');
 

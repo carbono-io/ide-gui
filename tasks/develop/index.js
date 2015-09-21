@@ -13,7 +13,7 @@ module.exports = function (gulp, $) {
      * Runs all tasks for development environment setup and go
      */
     gulp.task('develop', 'Set up development environment. If you are in doubt, try this one ;)', function (done) {
-        // First compile less, run code-machine and watch 
+        // First compile less, run code-machine and watch
         // then serve.
         runSequence(['less', 'javascript'], 'serve:src', 'watch', done);
     });

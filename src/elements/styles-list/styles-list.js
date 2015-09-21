@@ -3,7 +3,7 @@
 
     Polymer({
         is: 'carbo-styles-list',
-        
+
         toggleClosedClass: function (event) {
 
             var groupNode = event.currentTarget.parentNode;

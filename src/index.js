@@ -11,15 +11,17 @@ carbo.router = require('./scripts/router');
 require('./scripts/placeholder-data')(carbo);
 
 window.addEventListener('WebComponentsReady', function () {
+    
+    // Config
+    carbo.set('config', require('./scripts/config'));
 
     // Router
     carbo.router = require('./scripts/router')(carbo);
-    
+
     // Services
     carbo.set('services', {});
     carbo.set('services.codeMachine', require('./scripts/services/code-machine'));
     carbo.set('services.componentsRegistry', require('./scripts/services/components-registry'));
-    carbo.set('services.config', require('./scripts/services/config'));
 
     // Components
     carbo.set('components', {});

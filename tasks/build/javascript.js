@@ -63,7 +63,7 @@ module.exports = function (gulp, $) {
                     showFiles: true
                 }))
                 .pipe($.header(message))
-                .pipe(gulp.dest(config.srcDir)); 
+                .pipe(gulp.dest(config.srcDir));
         });
 
         // Return a merged stream object
