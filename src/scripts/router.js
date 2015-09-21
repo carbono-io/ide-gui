@@ -2,8 +2,6 @@
 var page           = require('page');
 var socketIOClient = require('socket.io-client');
 
-console.log('i am router, the second');
-
 // Mock data
 var project = {
     projectId: '340987612301',
@@ -13,7 +11,7 @@ var project = {
         '8000': '32772'
     },
     // projectUrl: '/sandbox/base-polymer-project/src/index.html',
-    projectUrl: 'http://localhost:8000/resources/marked/index.html',
+    projectUrl: 'http://localhost:8000/resources/marked/src/index.html',
 };
 
 function createNewProject(callback) {
@@ -30,8 +28,15 @@ function loadProject(callback) {
     }, 1000);
 }
 
-// Listen for web componets to be ready 
-window.addEventListener('WebComponentsReady', function() {
+/**
+ * Function to be executed only when webcomponents are ready.
+ * Bear in mind that this event requires webcomponents-lite.js
+ * to have been imported into the application.
+ */
+function initializeRouter(carbo) {
+
+    // retrieve the element representing the application
+    var carbo = document.querySelector('#carbo');
   
     console.log('routing started');
 
@@ -87,6 +92,23 @@ window.addEventListener('WebComponentsReady', function() {
         hashbang: true
     });
 
-});
+}
 
-module.exports = page;
+/**
+ * Checks whether the router has been initialized.
+ */
+var ROUTER_INITIALIZED = false;
+
+/**
+ * Export a function that initializes a router
+ * and returns reference to it.
+ */
+module.exports = function (carbo) {
+
+    if (!ROUTER_INITIALIZED) {
+        // Only initialize the router once.
+        initializeRouter(carbo);
+    }
+
+    return page;
+};

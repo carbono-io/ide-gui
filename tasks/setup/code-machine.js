@@ -53,7 +53,7 @@ module.exports = function (gulp, $) {
 
             var IDEConfig = JSON.stringify({
                 port: 8000,
-                codeDir: path.join(config.root, config.tmpDir, 'workspace/src'),
+                codeDir: path.join(config.root, config.tmpDir, 'workspace'),
             });
 
             fs.writeFileSync(path.join(tmpPath, 'code-machine/config/ide.json'), IDEConfig, {

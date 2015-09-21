@@ -1,5 +1,8 @@
 var Q = require('q');
 
+/**
+ * Mock
+ */
 exports.getCodeMachineLocation = function () {
     var defer = Q.defer();
 
