@@ -277,8 +277,6 @@
          */
         reload: function () {
 
-            console.log('reload');
-
             var iframe = this.$.iframe;
 
             iframe.src = iframe.src;

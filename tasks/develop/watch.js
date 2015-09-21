@@ -76,11 +76,8 @@ module.exports = function (gulp, $) {
      */
     gulp.task('watch', 'Watch files for changes and reload servers', ['watch:watchify'], function () {
 
-        // JS 
-        gulp.watch(config.jsDir, ['jshint', 'jscs']);
-
         // HTML & web-components
-        gulp.watch(config.htmlDir, ['jshint', 'jscs'])
+        gulp.watch(config.htmlDir)
             .on('change', browserSync.reload);
 
         // LESS

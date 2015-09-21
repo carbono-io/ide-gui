@@ -11,11 +11,9 @@
             var isClosed = !this.closed;
 
             if (isClosed) {
-                // console.log('open');
                 Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
                 isClosed = false;
             } else {
-                // console.log('close');
                 Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
                 isClosed = true;
             }
@@ -23,11 +21,9 @@
             componentItself.addEventListener('click', function(event) {
 
                 if (isClosed) {
-                    // console.log('open');
                     Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
                     isClosed = false;
                 } else {
-                    // console.log('close');
                     Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
                     isClosed = true;
                 }
