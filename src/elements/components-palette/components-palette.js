@@ -73,9 +73,7 @@
 
                     this.toggleLoading(false);
 
-
                 }.bind(this), function (err) {
-
 
                     this.canvas.deactivateLoading();
 
@@ -192,4 +190,3 @@
     });
 
 })();
-    

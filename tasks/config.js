@@ -24,6 +24,7 @@ exports.jsDir = [
     '!' + SRC_DIR + '/bower_components/**/*',
     '!' + SRC_DIR + '/sandbox/**/*',
     'gulpfile.js',
+    'tasks/**/*.js',
 ];
 
 exports.lessDir = [
@@ -41,11 +42,9 @@ exports.htmlDir = [
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
-/**
- * Browserify
- */
-exports.browserifyOptions = _.assign({}, watchify.args, {
-    entries: ['./src/index.js'],
-    debug: true,
-    standalone: 'C',
-});
+// js files that require browserifying
+// don't put trailing.js
+exports.browserifyEntries = [
+    SRC_DIR + '/index',
+    SRC_DIR + '/elements/canvas/canvas'
+];

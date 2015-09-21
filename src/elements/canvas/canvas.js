@@ -16,13 +16,8 @@
  */
 (function () {
 
-    /**
-     * The prefix to be used by all `window.postMessage(iframe, message)`
-     * requests.
-     * 
-     * @type {Constant}
-     */
-    var INSPECTOR_OPERATION_PREFIX = 'canvas_inspector_operation_';
+    // Load behaviors
+    var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
 
     /**
      * The char that deactivates the overlay.
@@ -32,6 +27,8 @@
 
     Polymer({
         is: 'carbo-canvas',
+
+        behaviors: [FrameMessagingBehavior],
         
         /**
          * Called whenever the component is instantiated.
@@ -43,11 +40,6 @@
             // because we need to add and remove them as eventHandlers
             this.handleOverlayKeydown = this.handleOverlayKeydown.bind(this);
             this.handleOverlayKeyup = this.handleOverlayKeyup.bind(this);
-
-            // Hash to store the deferred
-            // for opertaions invoked on the inspector (inside iframe)
-            // Keys are uniqueIds and values are the deferred;
-            this._inspectorOperationDefers = {};
         },
 
         properties: {
@@ -109,7 +101,7 @@
             this.$.overlay.blur();
             
             // unHighlight
-            this.executeInspectorOperation('unHighlight', 'hover');
+            this.executeInspectorOperation('unHighlight', ['hover']);
             
             // activate overlay
             this.activateOverlay();
@@ -187,27 +179,18 @@
             // Check current mode
             var currentMode = this.mode;
 
-            // if (currentMode === 'inspect') {
+            this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
 
-                this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
+            this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
+                .then(function (activeElementData) {
 
-                // set mode to add
-            //     this.set('mode', 'add');
+                    this.context.set('contextElement', activeElementData);
 
-            // } else {
+                    console.log(activeElementData.attributes['x-path']);
 
-                this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
-                    .then(function (activeElementData) {
-
-                        this.context.set('contextElement', activeElementData);
-
-                        console.log(activeElementData.attributes['x-path']);
-
-                        this.components.body.openBox();
-                    }.bind(this))
-                    .done();
-                // }
-
+                    this.components.body.openBox();
+                }.bind(this))
+                .done();
         },
         
         /**
@@ -265,60 +248,6 @@
         },
 
         /**
-         * Executes and operation inside the iframe.
-         * Communicates with the <carbo-inspector> component within the frame
-         *
-         * Implements the promise interface that makes it possible 
-         * to use request-response paradigm in the `window.postMessage` 
-         * communication.
-         * 
-         * @param  {String} operation The name of the operation to be executed.
-         * @param  {Array|*} args     Array of arguments or single argument.
-         * @return {Promise}          Promise to be resolved after the response.
-         */
-        executeInspectorOperation: function (operation, args) {
-            // Create and id for the operation
-            var opid = _.uniqueId(INSPECTOR_OPERATION_PREFIX);
-
-            var message = JSON.stringify({
-                id: opid,
-                operation: operation,
-                args: Array.isArray(args) ? args : [args]
-            });            
-            
-            // Send the message to the iframe -
-            this.$.iframe.contentWindow.postMessage(message, '*');
-
-            // Create a deferred object to be returned and store it
-            // using the id
-            var deferred = Q.defer();
-            this._inspectorOperationDefers[opid] = deferred;
-
-            // Create an listener for the response event
-            var responseListener = function (event) {
-                var response = JSON.parse(event.data);
-
-                // Only resolve deferred if the response id matches
-                if (response.id === opid) {
-                    // Resolve the deferred object
-                    this._inspectorOperationDefers[opid].resolve(response.res);
-
-                    // Remove it from the hash
-                    delete this._inspectorOperationDefers[opid];
-
-                    // Remove the listener after the response has arrived
-                    window.removeEventListener('message', responseListener);
-                }
-
-            }.bind(this);
-
-            window.addEventListener('message', responseListener);
-
-            // Return the promise of the deferred object
-            return deferred.promise;
-        },
-        
-        /**
          * Activates the overlay
          */
         activateOverlay: function () {
@@ -347,8 +276,6 @@
          * http://stackoverflow.com/questions/86428/whats-the-best-way-to-reload-refresh-an-iframe-using-javascript
          */
         reload: function () {
-
-            console.log('reload');
 
             var iframe = this.$.iframe;
 
