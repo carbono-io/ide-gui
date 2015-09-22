@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  * Before reading the code, it will be helpful to contextualize
  * yourself at what this module does.

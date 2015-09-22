@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Class that deals with connection with the component registry
  */

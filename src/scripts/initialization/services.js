@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Instantiates all services required for the
  * proper functioning of the application

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Defines basic routes
  */

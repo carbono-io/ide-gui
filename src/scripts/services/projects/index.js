@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Operations regarding the backend related to project
  * management
@@ -31,7 +33,7 @@ function _loadProjectData(cb) {
 
             cb(mockData.project);
 
-        }, 3000);
+        }, 2000);
     }
 }
 
@@ -39,7 +41,7 @@ function _createProject(cb) {
     setTimeout(function () {
 
         cb(mockData.project);
-    }, 5000);
+    }, 2000);
 }
 
 //////////

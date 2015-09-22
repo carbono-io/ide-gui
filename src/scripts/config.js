@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Function to read configurations
  * Reads all configurations for all services and the application
@@ -25,7 +27,7 @@ module.exports = function () {
 
         defer.resolve(_configs);
 
-    }, 1000);
+    }, 500);
 
     return defer.promise;
 };

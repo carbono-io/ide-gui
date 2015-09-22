@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * This file holds all placeholder data used for test purposes.
  */

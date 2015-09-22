@@ -1,3 +1,5 @@
+'use strict';
+
 // external dependencies
 var page = require('page');
 
@@ -33,7 +35,6 @@ module.exports = function (carbo, config, services, components) {
 
         projectsService.readById(data.params.projectId)
             .then(function (project) {
-                console.log(project)
                 carbo.set('project', project);
             })
             // Call done to interrupt promise chain and throw errors.

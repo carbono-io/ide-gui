@@ -1,3 +1,5 @@
+'use strict';
+
 // external dependencies
 var page = require('page');
 
@@ -37,6 +39,9 @@ function initializeRouter(carbo, config, services, components) {
         page({
             hashbang: true
         });
+
+        // set router onto carbo
+        carbo.set('router', page);
 
         // set router initialization to true
         ROUTER_INITIALIZED = true;

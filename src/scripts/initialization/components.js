@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Components are already instantiated through the html
  * Thus, all we do in this initialization function is to 

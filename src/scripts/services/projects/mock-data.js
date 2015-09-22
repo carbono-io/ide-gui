@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Mock some project data
  * @type {Object}

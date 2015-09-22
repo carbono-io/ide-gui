@@ -1,3 +1,5 @@
+'use strict';
+
 var Message = require('carbono-json-messages');
 var Q       = require('q');
 

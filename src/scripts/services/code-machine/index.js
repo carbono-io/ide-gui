@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Handles all communication with code-machine service
  */
@@ -12,7 +14,7 @@ var Message  = require('carbono-json-messages');
 // internal dependencies
 var SocketRequestManager = require('./lib/socket-request-manager');
 
-REQUIRED_CONFIGS = ['location', 'userService'];
+var REQUIRED_CONFIGS = ['location', 'userService'];
 
 /**
  * The class

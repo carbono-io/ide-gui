@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Operations related to user management
  *

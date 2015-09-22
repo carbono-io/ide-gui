@@ -1,3 +1,5 @@
+'use strict';
+
 // load client-side scripts that we depend upon
 require('./bower_components/webcomponentsjs/webcomponents-lite.js');
 
@@ -24,10 +26,9 @@ window.addEventListener('WebComponentsReady', function () {
         var services = initServices(carbo, config);        
         // Components
         var components = initComponents(carbo, config);
-
         // Router
         var router = initRouter(carbo, config, services, components);
-        carbo.router = router;
+
         // Reference to the carbono itself
         carbo.context = carbo;
     })

@@ -1,3 +1,5 @@
+'use strict';
+
 // TODO: create mock server based on json-database
 
 var registry = [];
