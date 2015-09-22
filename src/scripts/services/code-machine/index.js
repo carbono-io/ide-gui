@@ -10,6 +10,7 @@ var util = require('util');
 // external dependencies
 var socketIo = require('socket.io-client');
 var Message  = require('carbono-json-messages');
+var Q        = require('q');
 
 // internal dependencies
 var SocketRequestManager = require('./lib/socket-request-manager');
@@ -54,7 +55,6 @@ function CodeMachineClient(config) {
 
 //     return this.socketRequestManager.sendCommand('insertElement', [insert]);
 // };
-
 
 var _requestsStore = {};
 

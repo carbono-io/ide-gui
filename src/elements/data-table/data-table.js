@@ -18,7 +18,6 @@
         // Pat, depois de fazer as correções, por favor remover todos 
         // os comentários que adicionei.
         
-        
         ready: function() {
             var entityId = this.$$('#entity-id');
 

@@ -16,7 +16,7 @@ function SocketRequestManager(socket) {
 
     // Hash onto which requests are stored
     this._requestStore = {};
-};
+}
 
 /**
  * Handles command success
@@ -56,7 +56,7 @@ SocketRequestManager.prototype._handleCommandError = function (res) {
     var requestData = this.retrieveRequest(res.id);
 
     console.warn('code-machine:request not found ' + res.id);
-    defer.reject(res);
+    requestData.defer.reject(res);
 
 };
 
@@ -90,8 +90,6 @@ SocketRequestManager.prototype.sendCommand = function (commandName, items) {
     // return the promise
     return defer.promise;
 };
-
-
 
 SocketRequestManager.prototype.storeRequest = function (reqId, reqData) {
     this._requestStore[reqId] = reqData;

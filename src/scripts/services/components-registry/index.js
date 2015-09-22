@@ -4,6 +4,12 @@
  * Class that deals with connection with the component registry
  */
 
+// native dependencies
+var util = require('util');
+
+// external dependencies
+var _ = require('lodash');
+
 var REQUIRED_CONFIGS = ['location', 'userService'];
 
 function ComponentsRegistryClient(config) {

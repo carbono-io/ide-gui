@@ -31,8 +31,6 @@ function UserServiceClient(config) {
 
 module.exports = UserServiceClient;
 
-
-
 // Mock
 
 function _login(strategy, userData, cb) {

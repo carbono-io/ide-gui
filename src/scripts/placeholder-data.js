@@ -11,7 +11,6 @@
  */
 module.exports = function (carbo) {
 
-
     // Pseudo components
     var header = {
         name: 'header',

@@ -1,5 +1,7 @@
 'use strict';
 
+/* globals _, Q */
+
 /**
  * The prefix to be used by all `window.postMessage(iframe, message)`
  * requests.
