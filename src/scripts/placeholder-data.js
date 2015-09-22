@@ -272,7 +272,7 @@ module.exports = function (carbo) {
 
     };
 
-    carbo.AAAAAA = body;
+    carbo.activePage = body;
 
     carbo.styleGroups = group;
 
