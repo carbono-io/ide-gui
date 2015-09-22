@@ -84,3 +84,11 @@ Segue o bower.json do `paper-input`
   }
 }
 ```
+
+# bower directory resolution
+// sourceDir -> src
+// projectDir -> /code/project
+// codeDir = path.join(projectDir, sourceDir)
+// brc.directory -> src/bower_components
+
+# reject não aceita mais de um parâmetro
