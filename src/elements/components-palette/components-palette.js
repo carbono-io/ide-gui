@@ -1,4 +1,6 @@
+'use strict';
 // jshint unused:false
+
 (function () {
     
     Polymer({

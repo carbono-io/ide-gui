@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <!--polymer - iron icon - essencial para todos os ícones funcionarem-->
@@ -22,10 +12,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="header-styles.html">
 
-
 <dom-module id="carbo-header">
 
     <style include="header-styles"></style>
+    
     <template>
 
         <div id="carbo-header-container">
@@ -50,69 +40,64 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         -->
                     <div>
                         <iron-icon icon="settings"></iron-icon>
-        <!--                    <i class="material-icons">settings</i>-->
                     </div>
                 </div>
             </div>
 
             <div id="carbo-header-panel" class="has-shadow">
 
+                <template is="dom-repeat" items="{{ sections.items }}" as="section">
 
-            <template is="dom-repeat" items="{{ sections.items }}" as="section">
+                    <div class="carbo-section">
+                        <div class="carbo-section-header">{{ section.title }}</div>
 
-                <div class="carbo-section">
-                    <div class="carbo-section-header">{{ section.title }}</div>
-
-                    <div class="carbo-section-contents">
+                        <div class="carbo-section-contents">
 
 
-                        <template is="dom-repeat" items="{{ section.screens }}" as="screen">
-
-                            <div class="carbo-section-screen-container">
-                                <div class="carbo-section-screen">
-                                    <div class="fake-fake-fake-fake-fake-app-header">{{ screen.title }}</div>
+                            <template 
+                                is="dom-repeat"
+                                items="{{ section.screens }}"
+                                as="screen"
+                            >
+                                <div class="carbo-section-screen-container">
+                                    <div 
+                                        class="carbo-section-screen"
+                                    >{{ screen.title }}</div>
+                                    <div 
+                                        class="carbo-section-screen-caption"
+                                    >{{ screen.title }}</div>
                                 </div>
-                                <div class="carbo-section-screen-caption">{{ screen.title }}</div>
+                            </template>
+
+                            <!-- add screen -->
+                            <div class="carbo-section-screen-container">
+                                <div class="carbo-section-screen-add-button">
+                                    <iron-icon icon="add-circle"></iron-icon>
+
+                                    <div class="button-caption">
+                                        adicionar tela
+                                        <br>
+                                        nesta seção
+                                    </div>
+                                </div>
                             </div>
-
-                        </template>
-
-
-                        <!-- add screen -->
-                        <div class="carbo-section-screen-container">
-                            <div class="carbo-section-screen-add-button">
-        <!--                            <i class="material-icons add-screen-button">add_circle</i>-->
-                                <iron-icon icon="add-circle"></iron-icon>
-
-                                <div class="button-caption">adicionar tela
-                                    <br>nesta seção</div>
-                            </div>
+                            <!-- add screen end -->
                         </div>
-
                     </div>
 
-                </div>
+                    <div class="carbo-section-divider"></div>
 
-                <div class="carbo-section-divider"></div>
-
-            </template>
-
-
-
+                </template>
 
             </div>
-
+            <!-- #carbo-header-panel finish -->
 
             <div id="close-header-panel" on-click="togglePanel">
                 layer
             </div>
-
-
-
         </div>
     </template>
 
     <script src="header.js"></script>
-
 
 </dom-module>

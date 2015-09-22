@@ -1,4 +1,9 @@
-Polymer({
-    is: "carbo-canvas-bar"
-});
+'use strict';
 
+(function () {
+
+    Polymer({
+        is: "carbo-canvas-bar"
+    });
+
+})();
