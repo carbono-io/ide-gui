@@ -1,5 +1,13 @@
+/**
+ * Handles all communication with code-machine service
+ */
+
+// native dependencies
+var util = require('util');
+
 // external dependencies
 var socketIo = require('socket.io-client');
+var Message  = require('carbono-json-messages');
 
 // internal dependencies
 var SocketRequestManager = require('./lib/socket-request-manager');
@@ -15,7 +23,8 @@ function CodeMachineClient(config) {
 
     REQUIRED_CONFIGS.forEach(function (configName) {
         if (!config[configName]) {
-            throw new Error('`%s` is required for CodeMachineClient', configName);
+            var msg = util.format('`%s` is required for CodeMachineClient', configName);
+            throw new Error(msg);
         }
     });
 
@@ -43,6 +52,9 @@ function CodeMachineClient(config) {
 
 //     return this.socketRequestManager.sendCommand('insertElement', [insert]);
 // };
+
+
+var _requestsStore = {};
 
 CodeMachineClient.prototype.insertElement = function (path, element) {
 

@@ -4,6 +4,9 @@
  * Authentication and authorization as well
  */
 
+// native dependencies
+var util = require('util');
+
 // external dependencies
 var Q       = require('q');
 var Message = require('carbono-json-messages');
@@ -16,9 +19,12 @@ function UserServiceClient(config) {
 
     REQUIRED_CONFIGS.forEach(function (configName) {
         if (!config[configName]) {
-            throw new Error('`%s` is required for UserServiceClient', configName);
+            var msg = util.format('`%s` is required for UserServiceClient', configName);
+            throw new Error(msg);
         }
     });
+
+    this.config = config;
 }
 
 module.exports = UserServiceClient;

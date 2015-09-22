@@ -1,15 +1,23 @@
+/**
+ * Function to read configurations
+ * Reads all configurations for all services and the application
+ * as a whole.
+ */
+
 var Q = require('q');
 
 // MOCK
 
 var _configs = {
-    codeMachineLocation: 'https://localhost:8000',
-    componentsRegistryLocation: 'https://localhost:8001',
-    userServiceLocation: 'https://localhost:8002'
+    codeMachineLocation: 'http://localhost:8000',
+    componentsRegistryLocation: 'http://localhost:8001',
+    userServiceLocation: 'http://localhost:8002',
+    projectsServiceLocation: 'http://localhost:8003'
 };
 
 // MOCK
 
+// export a function that reads the configurations
 module.exports = function () {
     var defer = Q.defer();
 

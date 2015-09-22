@@ -1,15 +1,16 @@
-// Scripts dependend upon
+// load client-side scripts that we depend upon
 require('./bower_components/webcomponentsjs/webcomponents-lite.js');
+
+// load initialization scripts
+var initServices   = require('./scripts/initialization/services');
+var initComponents = require('./scripts/initialization/components');
+var initRouter     = require('./scripts/initialization/router');
 
 // Read configurations
 var readConfig = require('./scripts/config');
-var configPromise = readConfig();
 
 // The application wrapper
 var carbo = document.querySelector('#carbo');
-
-// The router for page navigation
-carbo.router = require('./scripts/router');
 
 // Set placeholder data onto the main scope of the application
 require('./scripts/placeholder-data')(carbo);
@@ -17,14 +18,16 @@ require('./scripts/placeholder-data')(carbo);
 // Only start setting up thing when WebComponentsReady event is fired
 window.addEventListener('WebComponentsReady', function () {
 
-    configPromise.then(function (config) {
-        // Router
-        carbo.router = require('./scripts/router')(carbo, config);
+    readConfig().then(function (config) {
 
         // Services
-        require('./scripts/initialization/services')(carbo, config);        
+        var services = initServices(carbo, config);        
         // Components
-        require('./scripts/initialization/components')(carbo, config);
+        var components = initComponents(carbo, config);
+
+        // Router
+        var router = initRouter(carbo, config, services, components);
+        carbo.router = router;
         // Reference to the carbono itself
         carbo.context = carbo;
     })

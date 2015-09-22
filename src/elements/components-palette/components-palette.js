@@ -33,7 +33,7 @@
 
         _handleContextElementChange: function (contextElement, oldContext) {
 
-            this.set('components', this.registry.get({
+            this.set('components', this.registry.read({
                 context: contextElement.tagName
             }));
         },

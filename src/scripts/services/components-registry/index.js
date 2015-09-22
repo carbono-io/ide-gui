@@ -8,10 +8,11 @@ function ComponentsRegistryClient(config) {
 
     REQUIRED_CONFIGS.forEach(function (configName) {
         if (!config[configName]) {
-            throw new Error('`%s` is required for ComponentsRegistryClient', configName);
+            var msg = util.format('`%s` is required for ComponentsRegistryClient', configName);
+            throw new Error(msg);
         }
     });
-
+    
     this.config = config;
 }
 
