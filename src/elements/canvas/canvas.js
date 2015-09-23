@@ -20,6 +20,7 @@
 
     // Load behaviors
     var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
+    var HighlightingBehavior   = require('./scripts/behaviors/highlighting');
 
     /**
      * The char that deactivates the overlay.
@@ -30,7 +31,7 @@
     Polymer({
         is: 'carbo-canvas',
 
-        behaviors: [FrameMessagingBehavior],
+        behaviors: [FrameMessagingBehavior, HighlightingBehavior],
         
         /**
          * Called whenever the component is instantiated.
@@ -69,8 +70,6 @@
             'canvas.mouseenter': 'handleCanvasMouseenter',
             'canvas.mouseleave': 'handleCanvasMouseleave',
             
-            'overlay.mousemove': 'handleOverlayMousemove',
-            'overlay.mousewheel': 'handleOverlayMousewheel',
             'overlay.DOMMouseScroll': 'handleOverlayMousewheel',
             'overlay.click': 'handleOverlayClick',
         },
@@ -136,63 +135,6 @@
             // Force the highlight to ensure the highlighter moves even
             // if the highlighted element is still the same.
             this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos, true]);
-        },
-        
-        /**
-         * Whenever the mouse moves on the overlay, highlight the
-         * element at the point
-         * @param  {Event} event 
-         */
-        handleOverlayMousemove: function (event) {
-            var normalizedMousePos = this.normalizeMousePosition({
-                x: event.clientX,
-                y: event.clientY
-            });
-
-            // Highlight element
-            this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos]);
-
-            // Check if mouse is over clicked highlighter.
-            // If so, set mode to 'add'
-            this.executeInspectorOperation('areFocusAndHoverTogether')
-                .then(function (res) {
-                    if (res) {
-                        this.set('mode', 'add');
-                    } else {
-                        this.set('mode', 'inspect');
-                    }
-                }.bind(this))
-                .done();
-        },
-
-        /**
-         * Handles click events on the overlay
-         * 
-         * @param  {Event} event
-         */
-        handleOverlayClick: function (event) {
-
-            // Normalize mouse position
-            var normalizedMousePos = this.normalizeMousePosition({
-                x: event.clientX,
-                y: event.clientY
-            });
-
-            // Check current mode
-            var currentMode = this.mode;
-
-            this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
-
-            this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
-                .then(function (activeElementData) {
-
-                    this.context.set('contextElement', activeElementData);
-
-                    console.log(activeElementData.attributes['x-path']);
-
-                    this.components.body.openBox();
-                }.bind(this))
-                .done();
         },
         
         /**

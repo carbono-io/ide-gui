@@ -12,7 +12,11 @@ body {
     color: @text-color;
 
     #start {
-        height: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
 
         display: flex;
         flex-direction: column;
@@ -46,7 +50,12 @@ body {
     }
 
     #loading {
-        height: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -62,9 +71,12 @@ body {
         // carbo-body may calculate it's
         // top, bottom left and right
         // relative to the container instead of the window.
-        position: relative;
+        position: fixed;
 
-        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
         min-width: @min-screen-width;
         min-height: @min-application-height;
