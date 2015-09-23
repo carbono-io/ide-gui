@@ -35,15 +35,15 @@ exports.handleCanvasLoad = function () {
     var hover = {
         id: HOVER_ID,
         surfaceStyle: {
-            border: '3px red solid',
-        },
+            border: '3px dashed green'
+        }
     };
     var hoverHltPromise = this.executeInspectorOperation('createHighlighter', [hover]);
 
     var focus = {
         id: FOCUS_ID,
         surfaceStyle: {
-            border: '3px navy solid'
+            border: '3px solid green'
         }
     };
     var focusHltPromise = this.executeInspectorOperation('createHighlighter', [focus]);
@@ -58,16 +58,79 @@ exports.handleCanvasLoad = function () {
         }.bind(this));
 };
 
+///////////
+// HOVER //
+///////////
+
 /**
  * Sets the hover highlighter to a point
  */
-exports.setHoverPoint = function (point) {
-    this.executeInspectorOperation('highlightElementAtPoint', [HOVER_ID, point]);
+exports.hoverElementAtPoint = function (point) {
+    return this.executeInspectorOperation('highlightElementAtPoint', [HOVER_ID, point])
+        .then(function () {
+            return this.executeInspectorOperation('getHighlighterTargetData', [HOVER_ID]);
+        }.bind(this));
 };
+
+exports.hideHover = function () {
+    return this.executeInspectorOperation('unHighlight', [HOVER_ID]);
+};
+
+///////////
+// HOVER //
+///////////
+
+///////////
+// FOCUS //
+///////////
 
 /**
  * Sets the focus highlighter to a point
  */
-exports.setFocusPoint = function (point) {
-    this.executeInspectorOperation('highlightElementAtPoint', [FOCUS_ID, point]);
+exports.focusElementAtPoint = function (point) {
+    return this.executeInspectorOperation('highlightElementAtPoint', [FOCUS_ID, point])
+        .then(function () {
+            return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
+        }.bind(this))
+        .then(function (focusedElementData) {
+            // add some meta data to the focusedElementData
+            // the point at which the focus was activated
+            focusedElementData._point = point;
+
+            // set the focusedElementData
+            this.set('focusedElementData', focusedElementData);
+
+            return focusedElementData;
+        }.bind(this));
 };
+
+/**
+ * Sets the focus highlighter to a selector and returns data o the 
+ * focused element.
+ * @param  {String} selector CSS selector
+ * @return {POJO}
+ */
+exports.focusElementForSelector = function (selector) {
+    return this.executeInspectorOperation('highlightElementForSelector', [FOCUS_ID, selector])
+        .then(function () {
+            return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
+        }.bind(this))
+        .then(function (focusedElementData) {
+            // add some meta data to the focusedElementData
+            // the selector at which the focus was activated
+            focusedElementData._selector = selector;
+
+            // set the focusedElementData
+            this.set('focusedElementData', focusedElementData);
+
+            return focusedElementData;
+        }.bind(this));
+};
+
+exports.hideFocus = function () {
+    return this.executeInspectorOperation('unHighlight', [FOCUS_ID]);
+};
+
+///////////
+// FOCUS //
+///////////

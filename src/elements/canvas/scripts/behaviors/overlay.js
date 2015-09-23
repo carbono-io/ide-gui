@@ -54,7 +54,24 @@ exports.created = function () {
     // add listener for canvas-inspector-ready event
     this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, function () {
 
-        this.setFocusPoint({ x: 0, y: 0 });
+        // read focusedElementData
+        var focus = this.get('focusedElementData');
+
+        // retrieve _point (the point at which the focus was activated)
+        var activationPoint = (focus && focus._point) ?
+            focus._point : { x: 0, y: 0 };
+
+        if (focus && focus._point) {
+            this.focusElementAtPoint(focus._point);
+        } else {
+            // no focus
+            // TODO: hard-coded
+            this.focusElementForSelector('page', {
+                // TODO: implement silent focus
+                silent: true
+            });
+        }
+
     }.bind(this));
 };
 
@@ -75,8 +92,8 @@ exports.deactivateOverlay = function () {
     this.toggleClass('active', false, overlay);
     
     // Unhighlight whatever is highlighted.
-    this.executeInspectorOperation('unHighlight', ['hover']);
-    this.executeInspectorOperation('unHighlight', ['focus']);
+    this.hideHover();
+    this.hideFocus();
 
 };
 
@@ -92,19 +109,7 @@ exports.handleOverlayMousemove = function (event) {
     });
 
     // Highlight element
-    this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos]);
-
-    // Check if mouse is over clicked highlighter.
-    // If so, set mode to 'add'
-    this.executeInspectorOperation('areFocusAndHoverTogether')
-        .then(function (res) {
-            if (res) {
-                this.set('mode', 'add');
-            } else {
-                this.set('mode', 'inspect');
-            }
-        }.bind(this))
-        .done();
+    this.hoverElementAtPoint(normalizedMousePos);
 };
 
 /**
@@ -120,22 +125,15 @@ exports.handleOverlayClick = function (event) {
         y: event.clientY
     });
 
-    // Check current mode
-    var currentMode = this.mode;
-
-    this.executeInspectorOperation('highlightElementAtPoint', ['focus', normalizedMousePos]);
-
-    this.executeInspectorOperation('getActiveElementData', ['focus', normalizedMousePos])
+    // Set the focus to the element under the cursor
+    this.focusElementAtPoint(normalizedMousePos)
         .then(function (focusedElementData) {
 
             // DEPRECATE
             this.context.set('contextElement', focusedElementData);
 
-            // set the focusedElementData
-            this.set('focusedElementData', focusedElementData);
-
-            this.components.body.openBox();
         }.bind(this))
+        // finish promise chain and throw errors
         .done();
 };
 
