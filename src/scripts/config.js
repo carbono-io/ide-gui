@@ -11,6 +11,9 @@ var Q = require('q');
 // MOCK
 
 var _configs = {
+    // development environment
+    env: 'development',
+
     codeMachineLocation: 'http://localhost:8000',
     componentsRegistryLocation: 'http://localhost:8001',
     userServiceLocation: 'http://localhost:8002',

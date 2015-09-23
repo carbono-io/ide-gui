@@ -58,7 +58,7 @@ module.exports = function (gulp, $) {
             bs.notify('<b>/src</b>', 3000);
         }
 
-        bs.emitter.on('client:connected', notifyIsSrcServer);
+        // bs.emitter.on('client:connected', notifyIsSrcServer);
     });
 
     /**

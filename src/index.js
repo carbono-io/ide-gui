@@ -23,11 +23,17 @@ window.addEventListener('WebComponentsReady', function () {
     readConfig().then(function (config) {
 
         // Services
-        var services = initServices(carbo, config);        
+        var services   = initServices(carbo, config);        
         // Components
         var components = initComponents(carbo, config);
         // Router
-        var router = initRouter(carbo, config, services, components);
+        var router     = initRouter(carbo, config, services, components);
+
+        // if configuration for env is 'development',
+        // initialize developer tools
+        if (config.env === 'development') {
+            require('./scripts/development')(carbo, config, services, components);
+        }
 
         // Reference to the carbono itself
         carbo.context = carbo;
