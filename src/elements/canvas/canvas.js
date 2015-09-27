@@ -96,7 +96,7 @@
             this.$.overlay.blur();
             
             // unHighlight
-            this.executeInspectorOperation('unHighlight', ['hover']);
+            this.hideHover();
             
             // activate overlay
             this.activateOverlay();

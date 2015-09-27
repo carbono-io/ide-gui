@@ -17,21 +17,32 @@ module.exports = function (gulp, $) {
     /**
      * Clones code machine and sets up config files
      */
-    gulp.task('clone:code-machine', ['tmp:create'], function (done) {
+    gulp.task('ccache:code-machine', ['tmp:create'], function (done) {
         var repo   = 'git@bitbucket.org:carbonoio/code-machine.git';
 
         /**
          * Clones git repo
          */
         function clone(cb) {
-            return exec('git clone -b ide-integration --single-branch ' + repo, {
+            return exec('git clone -b feature/JRD-465 --single-branch ' + repo, {
                 cwd: cachePath,
             }, cb);
         }
 
         clone(function () {
             $.util.log('backend:code-machine clone finished');
-            done();
+
+
+            var installProcess = exec('npm install', {
+                cwd: path.join(cachePath, 'code-machine')
+            }, function () {
+                $.util.log('backend:code-machine npm install finished');
+                done();
+            });
+
+            installProcess.stdout.pipe(process.stdout);
+            installProcess.stderr.pipe(process.stdout);
+
         }).stderr.pipe(process.stdout);
     });
 
@@ -53,7 +64,8 @@ module.exports = function (gulp, $) {
 
             var IDEConfig = JSON.stringify({
                 port: 8000,
-                codeDir: path.join(config.root, config.tmpDir, 'workspace/src'),
+                projectDir: path.join(config.root, config.tmpDir, 'workspace'),
+                sourceDir: 'src',
             });
 
             fs.writeFileSync(path.join(tmpPath, 'code-machine/config/ide.json'), IDEConfig, {
@@ -61,33 +73,22 @@ module.exports = function (gulp, $) {
             });
         }
 
-        /**
-         * Installs npm dependencies for code-machine
-         */
-        function install(cb) {
-            return exec('npm install', {
-                cwd: cmPath
-            }, cb);
-        }
-
         // Copy from cache
-        gulp.src(path.join(cachePath, 'code-machine/**/*'), { base: cachePath })
+        gulp.src(path.join(cachePath, 'code-machine/**/*'), {
+                base: cachePath, 
+                dot: true
+            })
             .pipe(gulp.dest(tmpPath))
             .on('end', function () {
 
                 // write configurations
                 writeConfig();
-                var installProcess = install(function () {
-                    $.util.log('backend:code-machine npm install finished');
-                    done();
-                });
 
-                installProcess.stdout.pipe(process.stdout);
-                installProcess.stderr.pipe(process.stdout);
+                done();
             });
     });
 
     gulp.task('setup:code-machine', function (done) {
-        runSequence('clone:code-machine', 'build:code-machine', done);
+        runSequence('ccache:code-machine', 'build:code-machine', done);
     });
 };

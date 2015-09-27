@@ -1,5 +1,6 @@
 var path = require('path');
 var exec = require('child_process').exec;
+var _    = require('lodash');
 
 // External
 var browserSync = require('browser-sync');
@@ -16,12 +17,15 @@ module.exports = function (gulp, $) {
 
         // $.util.log($.util.colors.red('Buggish. Not working yet, please start the process manually by running: `cd tmp/code-machine`, `export NODE_ENV=ide` and `node .` sequentially'));
 
+        // Extend the current environment variables
+        var cmEnv = _.extend({}, process.env, {
+            NODE_ENV: 'ide'
+        });
+
         // Execute
         var cmProcess = exec('node .', {
             cwd: path.join(config.root, config.tmpDir, 'code-machine'),
-            env: {
-                NODE_ENV: 'ide'
-            }
+            env: cmEnv
         });
 
         // // Stdout
