@@ -73,7 +73,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
 
     var insert = {
         path: {
-            file: 'index.html',
+            file: '/index.html',
             xpath: path.xpath,
         },
         html: element.html,

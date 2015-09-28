@@ -47,7 +47,7 @@ module.exports = function (gulp, $) {
     /**
      * Serves the application client
      */
-    gulp.task('serve:src', 'Serve the source code (for development)', function () {
+    gulp.task('serve:src', 'Serve the source code (for development)', ['serve:code-machine'], function () {
 
         var bs = browserSync({
             port: 4000,

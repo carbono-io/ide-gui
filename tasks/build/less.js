@@ -68,7 +68,7 @@ module.exports = function (gulp, $) {
         var elementsLessDir = elementsDir + '/**/*.less';
 
         return gulp.src(elementsLessDir)
-            .pipe($.changed(elementsDir, { extension: '.html' }))
+            //.pipe($.changed(elementsDir, { extension: '.html' }))
             .pipe($.less())
             .on('error', $.notify.onError(lessErrorNotifyOptions))
             .pipe($.autoprefixer(autoprefixerOptions))
