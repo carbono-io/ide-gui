@@ -48,7 +48,7 @@ module.exports = function (gulp, $) {
     /**
      * Builds up the workspace
      */
-    gulp.task('build:workspace', function (done) {
+    gulp.task('copy:workspace', function (done) {
         var wkPath = path.join(tmpPath, 'workspace');
 
         del.sync(wkPath);
@@ -61,6 +61,6 @@ module.exports = function (gulp, $) {
     });
 
     gulp.task('setup:workspace', function (done) {
-        runSequence('cache:workspace', 'build:workspace', done);
+        runSequence('cache:workspace', 'copy:workspace', done);
     });
 };

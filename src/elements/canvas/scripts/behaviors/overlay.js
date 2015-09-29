@@ -66,7 +66,7 @@ exports.created = function () {
         } else {
             // no focus
             // TODO: hard-coded
-            this.focusElementForSelector('page', {
+            this.focusElementForSelector('body', {
                 // TODO: implement silent focus
                 silent: true
             });

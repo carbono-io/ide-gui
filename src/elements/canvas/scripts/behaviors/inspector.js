@@ -110,7 +110,9 @@ exports.focusElementAtPoint = function (point) {
  * @param  {String} selector CSS selector
  * @return {POJO}
  */
-exports.focusElementForSelector = function (selector) {
+exports.focusElementForSelector = function (selector, options) {
+    options = options || {};
+
     return this.executeInspectorOperation('highlightElementForSelector', [FOCUS_ID, selector])
         .then(function () {
             return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);

@@ -17,7 +17,7 @@ module.exports = function (gulp, $) {
     /**
      * Clones code machine and sets up config files
      */
-    gulp.task('ccache:code-machine', ['tmp:create'], function (done) {
+    gulp.task('cache:code-machine', ['tmp:create'], function (done) {
         var repo   = 'git@bitbucket.org:carbonoio/code-machine.git';
 
         /**
@@ -28,6 +28,9 @@ module.exports = function (gulp, $) {
                 cwd: cachePath,
             }, cb);
         }
+
+        // delete
+        del.sync(path.join(cachePath, 'code-machine'));
 
         clone(function () {
             $.util.log('backend:code-machine clone finished');
@@ -49,7 +52,7 @@ module.exports = function (gulp, $) {
     /**
      * Builds the code-machine
      */
-    gulp.task('build:code-machine', function (done) {
+    gulp.task('copy:code-machine', function (done) {
 
         var cmPath = path.join(tmpPath, 'code-machine');
 
@@ -89,6 +92,6 @@ module.exports = function (gulp, $) {
     });
 
     gulp.task('setup:code-machine', function (done) {
-        runSequence('ccache:code-machine', 'build:code-machine', done);
+        runSequence('cache:code-machine', 'copy:code-machine', done);
     });
 };
