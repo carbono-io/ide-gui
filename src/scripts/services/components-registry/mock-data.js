@@ -9,7 +9,7 @@ registry.push({
     title: "Formulário",
     context: {
         show: ['PAGE', 'BODY'],
-        insertion: ['BODY', 'PAGE']
+        insertion: ''
     },
     icon: "assignment",
     html: '<carbo-form id="test"> <form is="iron-form" action="/demo/data.json" method="get"> <paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input> <paper-input name="test0" label="Campo 2" required error-message="Campo obrigatório" ></paper-input> </form> <carbo-form-control> <paper-button class="purple" raised action="submit" >Enviar</paper-button> </carbo-form-control> <div state="invalid"> <paper-toast text="Por favor, corrija os campos inválidos" show="show"> </paper-toast> </div><div state="loading"> <div id="formloading"> <paper-spinner alt="Loading form" active></paper-spinner> <p>Carregando</p></div></div><div state="error"> <paper-toast text="Erro de envio" show="show"> <span raised action="click:submit">Tentar novamente</span> </paper-toast> </div><div state="success"> <paper-toast text="Formulário enviado com sucesso!" show="show"> </paper-toast> </div></carbo-form>',
@@ -112,7 +112,10 @@ registry.push({
 // CARBO-SUBMIT-BUTTON
 registry.push({
     title: "Botão de submit",
-    context: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
+    context: {
+        show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
+        insertion: 'carbo-form-control',
+    },
     icon: "image:crop-7-5",
     html: '<paper-button class="purple" raised action="submit" >Enviar</paper-button>',
     components: [
@@ -126,7 +129,10 @@ registry.push({
 // CARBO-CANCEL-BUTTON
 registry.push({
     title: "Botão de cancelar",
-    context: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
+    context: {
+        show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
+        insertion: 'carbo-form-control'
+    },
     icon: "image:crop-7-5",
     html: '<paper-button class="red" raised action="submit" >Cancelar</paper-button>',
     components: [
@@ -159,7 +165,7 @@ registry.push({
     title: "Input de localização",
     context: {
         show: ['FORM', 'CARBO-FORM'],
-        insertion: ['FORM']
+        insertion: 'form'
     },
     html: '<carbo-geo-test></carbo-geo-test>',
     icon: 'communication:location-on',

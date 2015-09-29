@@ -44,10 +44,6 @@
 
             var component = event.model.item;
 
-            console.log(component);
-
-            return false;
-
             // Check for required services
             if (!this.codeMachine) {
                 throw new Error('No codeMachine for carbo-components-palette');
@@ -59,35 +55,47 @@
             // Keep reference to the canvas element
             var canvas = this.canvas;
 
-            // Path data
-            var insertPath = {
-                xpath: this.contextElement.attributes['x-path'],
-            };
+            // retrieve the insertion context for the component
+            var insertionContext = component.context.insertion;
 
-            // Element data
-            var insertElement = {
-                html: component.html,
-                components: component.components
-            };
+            // TODO: handle errors
+            // set the insertion focus
+            canvas.setInsertionFocus(insertionContext)
+                .then(function (insertionElementData) {
+                    console.log(insertionElementData);
 
-            this.codeMachine
-                .insertElement(insertPath, insertElement)
-                .then(function (res) {
-                    this.canvas.deactivateLoading();
+                    // Path data
+                    var insertPath = {
+                        xpath: insertionElementData.attributes['x-path'],
+                    };
 
-                    canvas.reload();
+                    // Element data
+                    var insertElement = {
+                        html: component.html,
+                        components: component.components
+                    };
 
-                    this.toggleLoading(false);
+                    this.codeMachine
+                        .insertElement(insertPath, insertElement)
+                        .then(function (res) {
+                            this.canvas.deactivateLoading();
 
-                }.bind(this), function (err) {
+                            canvas.reload();
 
-                    this.canvas.deactivateLoading();
+                            this.toggleLoading(false);
 
-                    this.toggleLoading(false);
-                    this.toggleError(true);
-                    console.log(err);
-                    console.log('error! :(');
-                }.bind(this)).done();
+                        }.bind(this), function (err) {
+
+                            this.canvas.deactivateLoading();
+
+                            this.toggleLoading(false);
+                            this.toggleError(true);
+                            console.log(err);
+                            console.log('error! :(');
+                        }.bind(this)).done();
+
+                }.bind(this))
+                .done();
 
             this.toggleLoading(true);
             this.toggleError(false);

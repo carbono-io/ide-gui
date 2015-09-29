@@ -66,7 +66,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
         throw new Error('Code machine socket not found');
     }
 
-    console.info('[service] code-machine:insertElement(%s, %s)', path, JSON.stringify(element));
+    console.info('[service] code-machine:insertElement(%s, %s)', path);
 
     // Create a deferred object
     var defer = Q.defer();

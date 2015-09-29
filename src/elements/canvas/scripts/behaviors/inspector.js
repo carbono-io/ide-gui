@@ -12,8 +12,9 @@ var Q = require('q');
 var CONSTANTS = require('../constants');
 
 // constants
-var HOVER_ID = 'canvas_hover';
-var FOCUS_ID = 'canvas_focus';
+var HOVER_ID     = 'canvas_hover';
+var FOCUS_ID     = 'canvas_focus';
+var INSERTION_ID = 'canvas_insertion_focus';
 
 /**
  * Lifecycle callback for whenever the element has been created
@@ -48,9 +49,17 @@ exports.handleCanvasLoad = function () {
     };
     var focusHltPromise = this.executeInspectorOperation('createHighlighter', [focus]);
 
+    var insertion = {
+        id: INSERTION_ID,
+        surfaceStyle: {
+            border: '3px dashed darkred',
+        }
+    };
+    var insertionHltPromise = this.executeInspectorOperation('createHighlighter', [insertion]);
+
     // Wait for both highlighters to be created before
     // firing event of 'inspector-ready'
-    Q.all([hoverHltPromise, focusHltPromise])
+    Q.all([hoverHltPromise, focusHltPromise, insertionHltPromise])
         .then(function () {
 
             this.fire(CONSTANTS.INSPECTOR_READY_EVENT);
@@ -138,6 +147,7 @@ exports.hideFocus = function () {
 ///////////
 
 
+// FOCUS AND HOVER //
 exports.areFocusAndHoverTogether = function () {
 
     var focusedElementData = this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
@@ -148,4 +158,26 @@ exports.areFocusAndHoverTogether = function () {
             return results[0].attributes['x-path'] === results[1].attributes['x-path'];
         });
 
+}
+
+
+///////////////
+// INSERTION //
+///////////////
+exports.setInsertionFocus = function (selector) {
+
+    // force selector to be at least an empty string
+    selector = selector || '';
+
+    var focusedElementData = this.get('focusedElementData');
+
+    selector = '[x-path="' + focusedElementData.attributes['x-path'] + '"] ' + selector;
+
+    return this.executeInspectorOperation('highlightElementForSelector', [INSERTION_ID, selector])
+        .then(function () {
+            return this.executeInspectorOperation('getHighlighterTargetData', [INSERTION_ID]);
+        }.bind(this))
+        .then(function (insertionElementData) {
+            return insertionElementData;
+        });
 }
