@@ -24,7 +24,7 @@ module.exports = function (gulp, $) {
          * Clones git repo
          */
         function clone(cb) {
-            return exec('git clone -b feature/JRD-465 --single-branch ' + repo, {
+            return exec('git clone -b develop --single-branch ' + repo, {
                 cwd: cachePath,
             }, cb);
         }
