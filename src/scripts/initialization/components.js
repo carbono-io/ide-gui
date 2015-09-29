@@ -7,16 +7,20 @@
  */
 module.exports = function (carbo, config) {
 
-    var body              = document.querySelector('#body');
-    var canvas            = document.querySelector('#canvas');
-    var componentsPalette = document.querySelector('#components-palette');
+    var body                 = document.querySelector('#body');
+    var canvas               = document.querySelector('#canvas');
+    var componentsPalette    = document.querySelector('#components-palette');
+    var componentsPaletteBox = document.querySelector('#components-palette-box');
 
     // TODO: check if this is a good approach.
     canvas.addEventListener('focused-element-data-changed', function (event) {
 
         var value = event.detail.value;
 
-        if (value) {
+        var thereIsAFocusedElement = value ? true : false;
+
+        // TODO: improve events and states
+        if ((thereIsAFocusedElement && canvas.get('mode') === 'add') || body.get('boxState') === 'open') {
             // open box when value is not null
             body.openBox();
         } else {

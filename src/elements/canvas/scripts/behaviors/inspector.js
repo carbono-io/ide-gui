@@ -136,3 +136,16 @@ exports.hideFocus = function () {
 ///////////
 // FOCUS //
 ///////////
+
+
+exports.areFocusAndHoverTogether = function () {
+
+    var focusedElementData = this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
+    var hoveredElementData = this.executeInspectorOperation('getHighlighterTargetData', [HOVER_ID])
+
+    return Q.all([focusedElementData, hoveredElementData])
+        .then(function (results) {
+            return results[0].attributes['x-path'] === results[1].attributes['x-path'];
+        });
+
+}

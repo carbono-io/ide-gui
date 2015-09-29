@@ -32,6 +32,15 @@ exports.properties = {
     hoveredElementData: {
         type: Object,
         notify: true
+    },
+
+    /**
+     * The mode at which the canvas is
+     */
+    mode: {
+        type: String,
+        notify: true,
+        value: 'inspect',
     }
 };
 
@@ -108,6 +117,19 @@ exports.handleOverlayMousemove = function (event) {
         y: event.clientY
     });
 
+    // check if hovered element is the same as the focused element
+    this.areFocusAndHoverTogether()
+        .then(function (areTogether) {
+            
+            if (areTogether) {
+                this.set('mode', 'add');
+            } else {
+                this.set('mode', 'inspect');
+            }
+
+        }.bind(this))
+        .done();
+
     // Highlight element
     this.hoverElementAtPoint(normalizedMousePos);
 };
@@ -128,6 +150,8 @@ exports.handleOverlayClick = function (event) {
     // Set the focus to the element under the cursor
     this.focusElementAtPoint(normalizedMousePos)
         .then(function (focusedElementData) {
+
+            this.set('mode', 'add');
 
             // DEPRECATE
             this.context.set('contextElement', focusedElementData);
