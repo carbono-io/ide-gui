@@ -44,6 +44,10 @@
 
             var component = event.model.item;
 
+            console.log(component);
+
+            return false;
+
             // Check for required services
             if (!this.codeMachine) {
                 throw new Error('No codeMachine for carbo-components-palette');
