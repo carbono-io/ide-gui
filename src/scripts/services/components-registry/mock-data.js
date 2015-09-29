@@ -6,7 +6,7 @@ var registry = [];
 
 // CARBO-FORM
 registry.push({
-    title: "Formulário cujo nome é bem grande mesmo",
+    title: "Formulário",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: ['BODY', 'PAGE']
@@ -39,13 +39,68 @@ registry.push({
 });
 
 
-
 // CARBO-GALERIA
 registry.push({
     title: "Galeria",
-    context: ['PAGE'],
+    context: ['PAGE', 'BODY'],
     html: '<paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
-    icon: "list",
+    icon: "view-stream",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
+
+// CARBO-CAROUSEL
+registry.push({
+    title: "Carousel",
+    context: ['PAGE', 'BODY'],
+    html: '<p>carousel de conteúdos</p>',
+    icon: "view-carousel",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
+
+// CARBO-TABELA
+registry.push({
+    title: "Tabela",
+    context: ['PAGE', 'BODY'],
+    html: '<p>tabela de conteúdos</p>',
+    icon: "view-quilt",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
+
+// CARBO-LISTA
+registry.push({
+    title: "Lista",
+    context: ['PAGE', 'BODY'],
+    html: '<p>lista de conteúdos</p>',
+    icon: "view-headline",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
+
+// CARBO-GRID
+registry.push({
+    title: "Grid",
+    context: ['PAGE', 'BODY'],
+    html: '<p>grid de conteúdos</p>',
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
