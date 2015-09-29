@@ -66,12 +66,11 @@ exports.created = function () {
         // read focusedElementData
         var focus = this.get('focusedElementData');
 
-        // retrieve _point (the point at which the focus was activated)
-        var activationPoint = (focus && focus._point) ?
-            focus._point : { x: 0, y: 0 };
+        if (focus) {
 
-        if (focus && focus._point) {
-            this.focusElementAtPoint(focus._point);
+            var selector = '[x-path="' + focus.attributes['x-path'] + '"]';
+
+            this.focusElementForSelector(selector);
         } else {
             // no focus
             // TODO: hard-coded

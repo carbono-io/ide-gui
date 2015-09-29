@@ -155,7 +155,8 @@ exports.areFocusAndHoverTogether = function () {
 
     return Q.all([focusedElementData, hoveredElementData])
         .then(function (results) {
-            return results[0].attributes['x-path'] === results[1].attributes['x-path'];
+            return results[0] && results[1] &&
+                results[0].attributes['x-path'] === results[1].attributes['x-path'];
         });
 
 }
@@ -164,16 +165,18 @@ exports.areFocusAndHoverTogether = function () {
 ///////////////
 // INSERTION //
 ///////////////
-exports.setInsertionFocus = function (selector) {
-
-    // force selector to be at least an empty string
-    selector = selector || '';
+exports.setInsertionFocus = function (insertionContext) {
 
     var focusedElementData = this.get('focusedElementData');
 
-    selector = '[x-path="' + focusedElementData.attributes['x-path'] + '"] ' + selector;
+    // force insertionContext to be at least an empty string
+    var insertionContextSelector = insertionContext[focusedElementData.tagName] || '';
 
-    return this.executeInspectorOperation('highlightElementForSelector', [INSERTION_ID, selector])
+    insertionContextSelector = '[x-path="' + focusedElementData.attributes['x-path'] + '"] ' + insertionContextSelector;
+
+    console.log(insertionContext);
+
+    return this.executeInspectorOperation('highlightElementForSelector', [INSERTION_ID, insertionContextSelector])
         .then(function () {
             return this.executeInspectorOperation('getHighlighterTargetData', [INSERTION_ID]);
         }.bind(this))

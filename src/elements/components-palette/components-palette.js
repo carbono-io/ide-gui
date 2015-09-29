@@ -14,6 +14,7 @@
             canvas: {
                 type: Object,
                 notify: true,
+                observer: '_handleCanvasComponentChange',
             },
 
             state: {
@@ -31,6 +32,12 @@
                 type: Object,
                 notify: true
             }
+        },
+
+        // Used for setting up event listeners onto the canvas component
+        _handleCanvasComponentChange: function (canvas, oldCanvas) {
+
+            console.log('canvas changed');
         },
 
         _handleContextElementChange: function (contextElement, oldContext) {
@@ -80,9 +87,37 @@
                         .then(function (res) {
                             this.canvas.deactivateLoading();
 
-                            canvas.reload();
+                            canvas.reload()
+                                .then(function () {
 
-                            this.toggleLoading(false);
+                                    console.log('reloaded');
+
+                                    // stop loading
+                                    this.toggleLoading(false);
+
+                                    // if there is a postInsertion and a focus on post insertion
+                                    // registered on the component,
+                                    // do the focusing
+                                    if (component.postInsertion && component.postInsertion.focus) {
+
+                                        // get focused element data
+                                        var lastFocus = canvas.get('focusedElementData');
+
+                                        // set focus on new elemeent
+                                        var selector = [
+                                            '[x-path="',
+                                            lastFocus.attributes['x-path'],
+                                            '"]',
+                                            ' ',
+                                            component.postInsertion.focus
+                                        ].join('');
+
+                                        console.log(selector);
+
+                                        canvas.focusElementForSelector(selector);
+                                    }
+                                }.bind(this))
+                                .done();
 
                         }.bind(this), function (err) {
 

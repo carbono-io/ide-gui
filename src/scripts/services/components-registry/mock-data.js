@@ -11,6 +11,10 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: ''
     },
+    // select the carbo-form after the component is inserted
+    postInsertion: {
+        focus: 'carbo-form',
+    },
     icon: "assignment",
     html: '<carbo-form id="test"> <form is="iron-form" action="/demo/data.json" method="get"> <paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input> <paper-input name="test0" label="Campo 2" required error-message="Campo obrigatório" ></paper-input> </form> <carbo-form-control> <paper-button class="purple" raised action="submit" >Enviar</paper-button> </carbo-form-control> <div state="invalid"> <paper-toast text="Por favor, corrija os campos inválidos" show="show"> </paper-toast> </div><div state="loading"> <div id="formloading"> <paper-spinner alt="Loading form" active></paper-spinner> <p>Carregando</p></div></div><div state="error"> <paper-toast text="Erro de envio" show="show"> <span raised action="click:submit">Tentar novamente</span> </paper-toast> </div><div state="success"> <paper-toast text="Formulário enviado com sucesso!" show="show"> </paper-toast> </div></carbo-form>',
 
@@ -114,7 +118,13 @@ registry.push({
     title: "Botão de submit",
     context: {
         show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
-        insertion: 'carbo-form-control',
+        insertion: {
+            'CARBO-FORM-CONTROL': '',
+            'CARBO-FORM': 'carbo-form-control',
+        }
+    },
+    postInsertion: {
+        focus: 'paper-button',
     },
     icon: "image:crop-7-5",
     html: '<paper-button class="purple" raised action="submit" >Enviar</paper-button>',
@@ -131,7 +141,10 @@ registry.push({
     title: "Botão de cancelar",
     context: {
         show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
-        insertion: 'carbo-form-control'
+        insertion: {
+            'CARBO-FORM-CONTROL': '',
+            'CARBO-FORM': 'carbo-form-control',
+        }
     },
     icon: "image:crop-7-5",
     html: '<paper-button class="red" raised action="submit" >Cancelar</paper-button>',
@@ -148,7 +161,13 @@ registry.push({
     title: 'Input de texto',
     context: {
         show: ['FORM', 'CARBO-FORM'],
-        insertion: 'form'
+        insertion: {
+            'FORM': '',
+            'CARBO-FORM': 'form',
+        }
+    },
+    postInsertion: {
+        focus: 'paper-input',
     },
     icon: "text-format",
     html: '<paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input>',
@@ -165,7 +184,10 @@ registry.push({
     title: "Input de localização",
     context: {
         show: ['FORM', 'CARBO-FORM'],
-        insertion: 'form'
+        insertion: {
+            'FORM': '',
+            'CARBO-FORM': 'form',
+        }
     },
     html: '<carbo-geo-test></carbo-geo-test>',
     icon: 'communication:location-on',

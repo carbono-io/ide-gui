@@ -25,6 +25,9 @@
     var OverlayBehavior           = require('./scripts/behaviors/overlay');
     var KeyboardShortcutsBehavior = require('./scripts/behaviors/keyboard-shortcuts');
 
+    // Load constants
+    var CONSTANTS = require('./scripts/constants');
+
     /**
      * The char that deactivates the overlay.
      * @type {String}
@@ -110,12 +113,25 @@
          */
         reload: function () {
 
+            var defer = Q.defer();
+
             var iframe = this.$.iframe;
 
             iframe.src = iframe.src;
 
-            // Does not work across domains
-            // this.$.iframe.contentWindow.location.reload();
+            // event handler for inspector ready
+            function handleReloadFinished() {
+                // resolve deferred object
+                defer.resolve();
+
+                // remove listener
+                this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+            }
+            
+            this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+
+            // return a promise for whenever the reloading is done
+            return defer.promise;
         }
     });
 
