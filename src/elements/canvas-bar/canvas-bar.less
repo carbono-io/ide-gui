@@ -18,6 +18,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     span {
         margin-right: @base-size;
     }
@@ -37,25 +38,11 @@
     flex-direction: row;
     align-items: center;
 
-    .preview {
+    .interaction-mode-toggle {
         display: flex;
         flex-direction: row;
         align-items: center;
-
-        span {
-            margin-left:@base-size/2;
-        }
-
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
-    .device-orientation {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: 2 * @base-size;
+        margin-left: 2*@base-size;
 
         iron-icon {
 
@@ -73,6 +60,47 @@
         }
 
     }
+
+//    .interaction-mode {
+//        display: flex;
+//        flex-direction: row;
+//        align-items: center;
+//        margin-left: 2 * @base-size;
+//
+//        &:hover {
+//            color: @active-bar-icon-color;
+//            cursor: pointer;
+//        }
+//
+//        iron-icon {
+//            margin-right: @base-size/2;
+//
+//        }
+//
+//    }
+
+//    .device-orientation {
+//        display: flex;
+//        flex-direction: row;
+//        align-items: center;
+//        margin-left: 2 * @base-size;
+//
+//        iron-icon {
+//
+//            color: @inactive-bar-icon-color;
+//
+//            &:first-child {
+//                margin-right: @base-size;
+//            }
+//
+//            &:hover, &.active {
+//                color: @active-bar-icon-color;
+//                cursor: pointer;
+//            }
+//
+//        }
+//
+//    }
 
     .zoom {
         display: flex;
