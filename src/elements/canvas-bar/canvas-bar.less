@@ -33,34 +33,50 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100%;
+
 
     .interaction-mode-toggle {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: 2*@base-size;
+        margin-right: @base-size;
+        height: 100%;
 
-        iron-icon {
+        .icon-container {
+            height: 32px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+//            box-sizing: border-box;
+//            border-bottom: solid @border-bottom 1px;
+//
+            iron-icon {
 
-            color: @inactive-bar-icon-color;
-            margin-right: @base-size;
+                color: @inactive-bar-icon-color;
+            }
 
-            // .iron-selected class is added by 'iron-selector' web-component
-            // https://elements.polymer-project.org/elements/iron-selector
             &:hover, &.iron-selected {
-                color: @active-bar-icon-color;
+
+                background-color: @item-panel-background-hover;
                 cursor: pointer;
+
+                iron-icon {
+                    color: @active-bar-icon-color;
+                }
             }
 
         }
-
     }
 
     .zoom {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: 2 * @base-size;
+        margin-left: @base-size;
+
 
         &:hover {
                 color: @active-bar-icon-color;
