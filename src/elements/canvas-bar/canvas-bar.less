@@ -1,9 +1,5 @@
 @import '../../less/variables.less';
 
-:host {
-
-}
-
 #bar {
     width: 100%;
     height: 5 * @base-size;
@@ -49,15 +45,9 @@
             color: @inactive-bar-icon-color;
             margin-right: @base-size;
 
-//            &:first-child {
-//                margin-right: @base-size;
-//            }
-//
-//            &:second-child {
-//                margin-right: @base-size;
-//            }
-
-            &:hover, &.active {
+            // .iron-selected class is added by 'iron-selector' web-component
+            // https://elements.polymer-project.org/elements/iron-selector
+            &:hover, &.iron-selected {
                 color: @active-bar-icon-color;
                 cursor: pointer;
             }
@@ -65,47 +55,6 @@
         }
 
     }
-
-//    .interaction-mode {
-//        display: flex;
-//        flex-direction: row;
-//        align-items: center;
-//        margin-left: 2 * @base-size;
-//
-//        &:hover {
-//            color: @active-bar-icon-color;
-//            cursor: pointer;
-//        }
-//
-//        iron-icon {
-//            margin-right: @base-size/2;
-//
-//        }
-//
-//    }
-
-//    .device-orientation {
-//        display: flex;
-//        flex-direction: row;
-//        align-items: center;
-//        margin-left: 2 * @base-size;
-//
-//        iron-icon {
-//
-//            color: @inactive-bar-icon-color;
-//
-//            &:first-child {
-//                margin-right: @base-size;
-//            }
-//
-//            &:hover, &.active {
-//                color: @active-bar-icon-color;
-//                cursor: pointer;
-//            }
-//
-//        }
-//
-//    }
 
     .zoom {
         display: flex;

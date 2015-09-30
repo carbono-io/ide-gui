@@ -105,7 +105,11 @@
                     </componentslist-content>
 
                     <canvas-bar-content>
-                        <carbo-canvas-bar></carbo-canvas-bar>
+                        <!-- bar that controls the canvas -->
+                        <carbo-canvas-bar
+                            mode="{{ canvasMode }}"
+                        >
+                        </carbo-canvas-bar>
 
                     </canvas-bar-content>
 
@@ -118,6 +122,7 @@
                                 project-url="{{ project.projectUrl }}"
                                 components="{{ components }}"
                                 code-machine="{{ services.codeMachine }}"
+                                mode$="{{ canvasMode }}"
 
                                 context="{{ context }}"
                             ></carbo-canvas>

@@ -41,6 +41,8 @@ exports.properties = {
         type: String,
         notify: true,
         value: 'inspect',
+        // possible values: inspect, add, navigate
+        observer: '_modeChanged',
     }
 };
 
@@ -61,26 +63,48 @@ exports.listeners = {
  */
 exports.created = function () {
     // add listener for canvas-inspector-ready event
-    this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, function () {
+    this.addEventListener(
+        CONSTANTS.INSPECTOR_READY_EVENT,
+        this._highlightLastFocusedElement.bind(this)
+    );
+};
 
-        // read focusedElementData
-        var focus = this.get('focusedElementData');
+/**
+ * Handles changes in the 'mode' property
+ */
+exports._modeChanged = function () {
+    var mode = this.get('mode');
 
-        if (focus) {
+    if (mode === 'navigate') {
+        this.deactivateOverlay();
+    } else if (mode === 'edit' || mode === 'code') {
+        this.activateOverlay();
+    } else {
+        // default behaviour
+        this.activateOverlay();
+    }
+};
 
-            var selector = '[carbono-uuid="' + focus.attributes['carbono-uuid'] + '"]';
+/**
+ * Highlights the current focused element
+ */
+exports._highlightLastFocusedElement = function () {
+    // read focusedElementData
+    var focus = this.get('focusedElementData');
 
-            this.focusElementForSelector(selector);
-        } else {
-            // no focus
-            // TODO: hard-coded
-            this.focusElementForSelector('body', {
-                // TODO: implement silent focus
-                silent: true
-            });
-        }
+    if (focus) {
 
-    }.bind(this));
+        var selector = '[carbono-uuid="' + focus.attributes['carbono-uuid'] + '"]';
+
+        this.focusElementForSelector(selector);
+    } else {
+        // no focus
+        // TODO: hard-coded
+        this.focusElementForSelector('body', {
+            // TODO: implement silent focus
+            silent: true
+        });
+    }
 };
 
 /**
@@ -88,6 +112,9 @@ exports.created = function () {
  */
 exports.activateOverlay = function () {
     this.toggleClass('active', true, this.$.overlay);
+
+    // highlight the last focused element.
+    this._highlightLastFocusedElement();
 };
 
 /**

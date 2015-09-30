@@ -48,11 +48,6 @@
         ],
 
         properties: {
-            mode: {
-                type: String,
-                notify: true,
-                value: 'inspect'
-            },
 
             components: {
                 type: Object,
@@ -104,7 +99,7 @@
             this.hideHover();
             
             // activate overlay
-            this.activateOverlay();
+            // this.activateOverlay();
         },
 
         /**
