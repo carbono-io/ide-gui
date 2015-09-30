@@ -19,12 +19,11 @@
 (function () {
 
     // Load behaviors
-    var IframeBehavior            = require('./scripts/behaviors/iframe');
-    var FrameMessagingBehavior    = require('./scripts/behaviors/frame-messaging');
-    var InspectorBehavior         = require('./scripts/behaviors/inspector');
-    var OverlayBehavior           = require('./scripts/behaviors/overlay');
-    var KeyboardShortcutsBehavior = require('./scripts/behaviors/keyboard-shortcuts');
-    var CodeMachineBehavior       = require('./scripts/behaviors/code-machine');
+    var IframeBehavior         = require('./scripts/behaviors/iframe');
+    var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
+    var InspectorBehavior      = require('./scripts/behaviors/inspector');
+    var OverlayBehavior        = require('./scripts/behaviors/overlay');
+    var CodeMachineBehavior    = require('./scripts/behaviors/code-machine');
 
     // Load constants
     var CONSTANTS = require('./scripts/constants');
@@ -43,7 +42,6 @@
             FrameMessagingBehavior,
             InspectorBehavior,
             OverlayBehavior,
-            KeyboardShortcutsBehavior,
             CodeMachineBehavior
         ],
 
