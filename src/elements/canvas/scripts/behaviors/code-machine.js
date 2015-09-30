@@ -16,7 +16,7 @@ exports.properties = {
         notify: true,
         observer: '_handleCodeMachineChange'
     },
-}
+};
 
 /**
  * Helper function that simply extracts the innerHTML from an HTML string

@@ -2,13 +2,20 @@
 
 (function () {
 
+    // MODES
+    var CONSTANTS = {};
+    CONSTANTS.modes = {
+        graphicalEdition: 'graphical-edition',
+        codeEdition: 'code-edition',
+        navigation: 'navigation'
+    };
+
     Polymer({
         is: "carbo-canvas-bar",
         properties: {
             mode: {
                 type: String,
-                value: 'inspect',
-                // possible values: 'inspect', 'add', 'code', 'navigate'
+                value: CONSTANTS.modes.graphicalEdition,
                 notify: true
             }
         },
@@ -25,11 +32,13 @@
         created: function () {
 
             // use keypress
-            var listener = new window.keypress.Listener();
+            window.addEventListener('load', function () {
+                var listener = new window.keypress.Listener();
 
-            listener.simple_combo('shift g', this.setMode.bind(this, 'inspect'));
-            listener.simple_combo('shift c', this.setMode.bind(this, 'code'));
-            listener.simple_combo('shift n', this.setMode.bind(this, 'navigate'));
+                listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.modes.graphicalEdition));
+                listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.modes.codeEdition));
+                listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.modes.navigation));
+            }.bind(this));
         },
 
         /**

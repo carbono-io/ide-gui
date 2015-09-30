@@ -12,6 +12,7 @@ var CONSTANTS = require('../constants');
 
 /**
  * A set of declared properties specific to the canvas-context behavior
+ * and that should be shared with the external world
  * @type {Object}
  */
 exports.properties = {
@@ -40,8 +41,7 @@ exports.properties = {
     mode: {
         type: String,
         notify: true,
-        value: 'inspect',
-        // possible values: inspect, add, navigate
+        value: CONSTANTS.modes.graphicalEdition,
         observer: '_modeChanged',
     }
 };
@@ -75,9 +75,13 @@ exports.created = function () {
 exports._modeChanged = function () {
     var mode = this.get('mode');
 
-    if (mode === 'navigate') {
+    if (mode === CONSTANTS.modes.navigation) {
+        // navigation mode, let overlay fade
         this.deactivateOverlay();
-    } else if (mode === 'edit' || mode === 'code') {
+    } else if (
+        mode === CONSTANTS.modes.graphicalEdition || 
+        mode === CONSTANTS.modes.codeEdition) {
+        // edition
         this.activateOverlay();
     } else {
         // default behaviour
