@@ -37,81 +37,51 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100%;
+
 
     .interaction-mode-toggle {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: 2*@base-size;
+        margin-right: @base-size;
+        height: 100%;
 
-        iron-icon {
-
-            color: @inactive-bar-icon-color;
-            margin-right: @base-size;
-
-//            &:first-child {
-//                margin-right: @base-size;
-//            }
+        .icon-container {
+            height: 32px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+//            box-sizing: border-box;
+//            border-bottom: solid @border-bottom 1px;
 //
-//            &:second-child {
-//                margin-right: @base-size;
-//            }
+            iron-icon {
+
+                color: @inactive-bar-icon-color;
+            }
 
             &:hover, &.active {
-                color: @active-bar-icon-color;
+
+                background-color: @item-panel-background-hover;
                 cursor: pointer;
+
+                iron-icon {
+                    color: @active-bar-icon-color;
+                }
             }
 
         }
-
     }
 
-//    .interaction-mode {
-//        display: flex;
-//        flex-direction: row;
-//        align-items: center;
-//        margin-left: 2 * @base-size;
-//
-//        &:hover {
-//            color: @active-bar-icon-color;
-//            cursor: pointer;
-//        }
-//
-//        iron-icon {
-//            margin-right: @base-size/2;
-//
-//        }
-//
-//    }
-
-//    .device-orientation {
-//        display: flex;
-//        flex-direction: row;
-//        align-items: center;
-//        margin-left: 2 * @base-size;
-//
-//        iron-icon {
-//
-//            color: @inactive-bar-icon-color;
-//
-//            &:first-child {
-//                margin-right: @base-size;
-//            }
-//
-//            &:hover, &.active {
-//                color: @active-bar-icon-color;
-//                cursor: pointer;
-//            }
-//
-//        }
-//
-//    }
 
     .zoom {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: 2 * @base-size;
+//        margin-left: 2 * @base-size;
+
 
         &:hover {
                 color: @active-bar-icon-color;
