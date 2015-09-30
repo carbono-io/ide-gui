@@ -52,7 +52,7 @@ exports.handleCanvasLoad = function () {
     var insertion = {
         id: INSERTION_ID,
         surfaceStyle: {
-            border: '3px dashed darkred',
+            border: 'none',
         }
     };
     var insertionHltPromise = this.executeInspectorOperation('createHighlighter', [insertion]);

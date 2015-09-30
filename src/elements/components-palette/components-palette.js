@@ -86,41 +86,45 @@
                         .insertElement(insertPath, insertElement)
                         .then(function (res) {
                             this.canvas.deactivateLoading();
+                            // stop loading
+                            this.toggleLoading(false);
+                            
+                            //         // stop loading
+                            //         this.toggleLoading(false);
+                            // canvas.reload()
+                            //     .then(function () {
 
-                            canvas.reload()
-                                .then(function () {
+                            //         console.log('reloaded');
 
-                                    console.log('reloaded');
 
-                                    // stop loading
-                                    this.toggleLoading(false);
 
-                                    // if there is a postInsertion and a focus on post insertion
-                                    // registered on the component,
-                                    // do the focusing
-                                    if (component.postInsertion && component.postInsertion.focus) {
+                            //         // if there is a postInsertion and a focus on post insertion
+                            //         // registered on the component,
+                            //         // do the focusing
+                            //         if (component.postInsertion && component.postInsertion.focus) {
 
-                                        // get focused element data
-                                        var lastFocus = canvas.get('focusedElementData');
+                            //             // get focused element data
+                            //             var lastFocus = canvas.get('focusedElementData');
 
-                                        // set focus on new elemeent
-                                        var selector = [
-                                            '[x-path="',
-                                            lastFocus.attributes['x-path'],
-                                            '"]',
-                                            ' ',
-                                            component.postInsertion.focus
-                                        ].join('');
+                            //             // set focus on new elemeent
+                            //             var selector = [
+                            //                 '[x-path="',
+                            //                 lastFocus.attributes['x-path'],
+                            //                 '"]',
+                            //                 ' ',
+                            //                 component.postInsertion.focus
+                            //             ].join('');
 
-                                        console.log(selector);
+                            //             console.log(selector);
 
-                                        canvas.focusElementForSelector(selector);
-                                    }
-                                }.bind(this))
-                                .done();
+                            //             canvas.focusElementForSelector(selector);
+                            //         }
+                            //     }.bind(this))
+                            //     .done();
 
                         }.bind(this), function (err) {
 
+                            canvas.reload();
                             this.canvas.deactivateLoading();
 
                             this.toggleLoading(false);

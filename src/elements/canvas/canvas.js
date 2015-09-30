@@ -24,6 +24,7 @@
     var InspectorBehavior         = require('./scripts/behaviors/inspector');
     var OverlayBehavior           = require('./scripts/behaviors/overlay');
     var KeyboardShortcutsBehavior = require('./scripts/behaviors/keyboard-shortcuts');
+    var CodeMachineBehavior       = require('./scripts/behaviors/code-machine');
 
     // Load constants
     var CONSTANTS = require('./scripts/constants');
@@ -42,7 +43,8 @@
             FrameMessagingBehavior,
             InspectorBehavior,
             OverlayBehavior,
-            KeyboardShortcutsBehavior
+            KeyboardShortcutsBehavior,
+            CodeMachineBehavior
         ],
 
         properties: {

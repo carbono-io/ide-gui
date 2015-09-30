@@ -6,6 +6,7 @@
 
 // native dependencies
 var util = require('util');
+var EventEmitter = require('events').EventEmitter;
 
 // external dependencies
 var socketIo = require('socket.io-client');
@@ -37,7 +38,23 @@ function CodeMachineClient(config) {
 
     // Instantiate socket request manager
     this.socketRequestManager = new SocketRequestManager(this.socket);
+
+    // inheritance
+    EventEmitter.call(this);
+
+    // listen to socket events
+    this.socket.on('control:contentUpdate', function (eventData) {
+
+        // parse json if needed
+        eventData = _.isString(eventData) ? JSON.parse(eventData) : eventData;
+        
+        // propagate event
+        this.emit('control:contentUpdate', eventData.data.items[0]);
+    }.bind(this));
 }
+
+// Let CodeMachineClient inherit from event emitter
+util.inherits(CodeMachineClient, EventEmitter);
 
 /**
  * Inserts an element
