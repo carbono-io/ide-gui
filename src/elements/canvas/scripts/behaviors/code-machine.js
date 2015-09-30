@@ -22,7 +22,7 @@ exports._handleCodeMachineChange = function (codeMachine, oldCodeMachine) {
 
     codeMachine.on('control:contentUpdate', function (data) {
 
-        var selector = util.format('[carbono-code-machine-uuid="%s"]', data.elementUuid);
+        var selector = util.format('[carbono-uuid="%s"]', data.elementUuid);
         var content = extractInnerHTML(data.content);
 
         // first get data on the target element

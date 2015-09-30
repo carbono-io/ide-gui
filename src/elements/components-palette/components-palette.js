@@ -73,8 +73,10 @@
 
                     // Path data
                     var insertPath = {
-                        xpath: insertionElementData.attributes['x-path'],
+                        uuid: insertionElementData.attributes['carbono-uuid'],
                     };
+
+                    console.log(insertPath);
 
                     // Element data
                     var insertElement = {
@@ -108,8 +110,8 @@
 
                             //             // set focus on new elemeent
                             //             var selector = [
-                            //                 '[x-path="',
-                            //                 lastFocus.attributes['x-path'],
+                            //                 '[carbono-uuid="',
+                            //                 lastFocus.attributes['carbono-uuid'],
                             //                 '"]',
                             //                 ' ',
                             //                 component.postInsertion.focus

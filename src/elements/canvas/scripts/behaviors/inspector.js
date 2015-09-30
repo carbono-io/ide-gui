@@ -156,7 +156,7 @@ exports.areFocusAndHoverTogether = function () {
     return Q.all([focusedElementData, hoveredElementData])
         .then(function (results) {
             return results[0] && results[1] &&
-                results[0].attributes['x-path'] === results[1].attributes['x-path'];
+                results[0].attributes['carbono-uuid'] === results[1].attributes['carbono-uuid'];
         });
 
 }
@@ -172,7 +172,7 @@ exports.setInsertionFocus = function (insertionContext) {
     // force insertionContext to be at least an empty string
     var insertionContextSelector = insertionContext[focusedElementData.tagName] || '';
 
-    insertionContextSelector = '[x-path="' + focusedElementData.attributes['x-path'] + '"] ' + insertionContextSelector;
+    insertionContextSelector = '[carbono-uuid="' + focusedElementData.attributes['carbono-uuid'] + '"] ' + insertionContextSelector;
 
     console.log(insertionContext);
 

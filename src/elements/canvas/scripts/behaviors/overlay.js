@@ -68,7 +68,7 @@ exports.created = function () {
 
         if (focus) {
 
-            var selector = '[x-path="' + focus.attributes['x-path'] + '"]';
+            var selector = '[carbono-uuid="' + focus.attributes['carbono-uuid'] + '"]';
 
             this.focusElementForSelector(selector);
         } else {

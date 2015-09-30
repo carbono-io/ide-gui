@@ -64,7 +64,7 @@ util.inherits(CodeMachineClient, EventEmitter);
 //     var insert = {
 //         path: {
 //             file: 'src/index.html',
-//             xpath: path.xpath,
+//             uuid: path.uuid,
 //         },
 //         html: element.html,
 //         components: element.components || []
@@ -91,7 +91,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
     var insert = {
         path: {
             file: '/index.html',
-            xpath: path.xpath,
+            uuid: path.uuid,
         },
         html: element.html,
         components: element.components || []
