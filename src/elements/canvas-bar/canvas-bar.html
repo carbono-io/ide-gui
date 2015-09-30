@@ -9,15 +9,55 @@
 
     <template>
         <div id="bar">
+
             <div id="left">
-                <span><iron-icon icon="undo"></iron-icon></span>
+                <span><iron-icon icon="undo" class="active"></iron-icon></span>
                 <span><iron-icon icon="redo"></iron-icon></span>
             </div>
+
             <div id="right">
-                <span>Preview</span>
-                <span><iron-icon icon="hardware:phone-android"></iron-icon></span>
-                <span><iron-icon icon="hardware:phone-android" class="rotate"></iron-icon></span>
-                <span>Zoom</span>
+
+<!--
+                <div class="preview">
+                    <iron-icon icon="av:play-circle-outline"></iron-icon>
+                    <span>Preview</span>
+                    <iron-icon icon="arrow-drop-down"></iron-icon>
+                </div>
+-->
+
+<!--
+                <div class="interaction-mode">
+
+                    <iron-icon icon="visibility" title="navigate" alt="navigate"></iron-icon> Navegação
+
+                    <iron-icon icon="create" title="navigate" alt="navigate"></iron-icon> Edição
+
+                    <iron-icon icon="arrow-drop-down"></iron-icon>
+                </div>
+-->
+
+<!--
+                <div class="device-orientation">
+                    <iron-icon icon="hardware:phone-android" class="active"></iron-icon>
+                   <iron-icon icon="hardware:phone-android" class="rotate"></iron-icon>
+                </div>
+-->
+
+
+
+                <div class="interaction-mode-toggle">
+
+                    <iron-icon icon="create" class="active" title="Edition mode (Shift+E)" alt="Edition mode (Shift+E)"></iron-icon>
+
+                    <iron-icon icon="visibility" title="Navigation mode (Shift+N)" alt="Navigation mode (Shift+N)"></iron-icon>
+
+                </div>
+
+                <div class="zoom">
+                    Zoom: 100%
+                    <iron-icon icon="arrow-drop-down"></iron-icon>
+                </div>
+
             </div>
         </div>
     </template>
