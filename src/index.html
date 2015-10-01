@@ -15,6 +15,13 @@
     <!-- Source Sans Pro Font -->
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
 
+    <!--
+        javascript libraries come at the top, before elements so
+        that all elements may use them
+    -->
+    <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
+    <script type="text/javascript" src="bower_components/Keypress/keypress.js"></script>
+    
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="index.css">
 
@@ -206,8 +213,6 @@
     </template>
     <!-- end of root Polymer binding object (carbo) -->
 
-    <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
-    <script type="text/javascript" src="bower_components/Keypress/keypress.js"></script>
     <script type="text/javascript" src="index.bundle.js"></script>
 </body>
 

@@ -32,13 +32,11 @@
         created: function () {
 
             // use keypress
-            window.addEventListener('load', function () {
-                var listener = new window.keypress.Listener();
+            var listener = new window.keypress.Listener();
 
-                listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.modes.graphicalEdition));
-                listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.modes.codeEdition));
-                listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.modes.navigation));
-            }.bind(this));
+            listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.modes.graphicalEdition));
+            listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.modes.codeEdition));
+            listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.modes.navigation));
         },
 
         /**

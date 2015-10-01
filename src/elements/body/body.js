@@ -5,6 +5,17 @@
     Polymer({
         is: 'carbo-body',
 
+        properties: {
+            canvasMode: {
+                type: String,
+
+            },
+
+            components: {
+                type: Object
+            }
+        },
+
         ready: function () {
             this.openLeftPanel();
             this.openCanvas();
