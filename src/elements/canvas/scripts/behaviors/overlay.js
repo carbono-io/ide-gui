@@ -12,6 +12,7 @@ var CONSTANTS = require('../constants');
 
 /**
  * A set of declared properties specific to the canvas-context behavior
+ * and that should be shared with the external world
  * @type {Object}
  */
 exports.properties = {
@@ -32,6 +33,23 @@ exports.properties = {
     hoveredElementData: {
         type: Object,
         notify: true
+    },
+
+    interactionMode: {
+        type: String,
+        notify: true,
+        value: CONSTANTS.canvasInteractionModes.inspection,
+        observer: '_interactionModeChanged',
+    },
+
+    /**
+     * The editionMode at which the canvas is
+     */
+    ideMode: {
+        type: String,
+        notify: true,
+        value: CONSTANTS.ideModes.graphicalEdition,
+        observer: '_ideModeChanged',
     }
 };
 
@@ -52,27 +70,62 @@ exports.listeners = {
  */
 exports.created = function () {
     // add listener for canvas-inspector-ready event
-    this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, function () {
+    this.addEventListener(
+        CONSTANTS.INSPECTOR_READY_EVENT,
+        this._highlightLastFocusedElement.bind(this)
+    );
+};
 
-        // read focusedElementData
-        var focus = this.get('focusedElementData');
+/**
+ * Handles changes in the 'editionMode' property
+ */
+exports._ideModeChanged = function (ideMode, oldIdeMode) {
 
-        // retrieve _point (the point at which the focus was activated)
-        var activationPoint = (focus && focus._point) ?
-            focus._point : { x: 0, y: 0 };
+    if (ideMode === CONSTANTS.ideModes.navigation) {
+        // navigation ideMode, let overlay fade
+        this.deactivateOverlay();
+    } else if (
+        ideMode === CONSTANTS.ideModes.graphicalEdition || 
+        ideMode === CONSTANTS.ideModes.codeEdition) {
+        // edition
+        this.activateOverlay();
+    } else {
+        // default behaviour
+        this.activateOverlay();
+    }
+};
 
-        if (focus && focus._point) {
-            this.focusElementAtPoint(focus._point);
-        } else {
-            // no focus
-            // TODO: hard-coded
-            this.focusElementForSelector('body', {
-                // TODO: implement silent focus
-                silent: true
-            });
-        }
+exports._interactionModeChanged = function (interactionMode, oldInteractionMode) {
 
-    }.bind(this));
+    var insertionMode = (interactionMode === CONSTANTS.canvasInteractionModes.insertion);
+
+    Polymer.Base.toggleClass(
+        'insert-interaction',
+        insertionMode,
+        this.$.overlay
+    );
+};
+
+/**
+ * Highlights the current focused element
+ */
+exports._highlightLastFocusedElement = function () {
+    // read focusedElementData
+    var focus = this.get('focusedElementData');
+
+    if (focus) {
+
+        var selector = '[carbono-uuid="' + focus.attributes['carbono-uuid'] + '"]';
+
+        this.focusElementForSelector(selector);
+    } else {
+        // no focus
+        // TODO: hard-coded
+        this.focusElementForSelector('body', {
+            // TODO: implement silent focus
+            silent: true
+        });
+    }
 };
 
 /**
@@ -80,6 +133,9 @@ exports.created = function () {
  */
 exports.activateOverlay = function () {
     this.toggleClass('active', true, this.$.overlay);
+
+    // highlight the last focused element.
+    this._highlightLastFocusedElement();
 };
 
 /**
@@ -108,6 +164,19 @@ exports.handleOverlayMousemove = function (event) {
         y: event.clientY
     });
 
+    // check if hovered element is the same as the focused element
+    this.areFocusAndHoverTogether()
+        .then(function (areTogether) {
+            
+            if (areTogether) {
+                this.set('interactionMode', CONSTANTS.canvasInteractionModes.insertion);
+            } else {
+                this.set('interactionMode', CONSTANTS.canvasInteractionModes.inspection);
+            }
+
+        }.bind(this))
+        .done();
+
     // Highlight element
     this.hoverElementAtPoint(normalizedMousePos);
 };
@@ -129,6 +198,8 @@ exports.handleOverlayClick = function (event) {
     this.focusElementAtPoint(normalizedMousePos)
         .then(function (focusedElementData) {
 
+            this.set('interactionMode', CONSTANTS.canvasInteractionModes.insertion);
+
             // DEPRECATE
             this.context.set('contextElement', focusedElementData);
 
@@ -137,6 +208,12 @@ exports.handleOverlayClick = function (event) {
         .done();
 };
 
+var _wheelAux = _.throttle(function (normalizedMousePos) {
+    // Highlight element under the normalized mouse position
+    // Force the highlight to ensure the highlighter moves even
+    // if the highlighted element is still the same.
+    this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos]);
+}, 300);
 
 /**
  * Handles mousewheel events on the overlay layer.
@@ -161,10 +238,7 @@ exports.handleOverlayMousewheel = function (event) {
         y: event.clientY
     });
 
-    // Highlight element under the normalized mouse position
-    // Force the highlight to ensure the highlighter moves even
-    // if the highlighted element is still the same.
-    this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos, true]);
+    _wheelAux.call(this, normalizedMousePos);
 };
 
 /**

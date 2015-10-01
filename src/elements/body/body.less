@@ -1,7 +1,39 @@
 @import '../../less/variables.less';
+@import '../../less/shadows.less';
 @import '../../bower_components/lesshat/build/lesshat.less';
 
 #carbo-body {
+    // section styling
+    section {
+        display: block;
+        position: relative;
+
+        transition: width ease 0.4s, opacity ease 0.4s;
+        overflow: hidden;
+
+        &.closed {
+            // width: 0px !important;
+            
+            display: none;
+        }
+
+        &.disabled {
+            opacity: 0.3;
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+
+                z-index: 1;
+
+                cursor: pointer;
+            }
+        }
+    }
+
 	// the body of the application should occupy
 	// all the available height of the window
 	// body.height = window.height - header.height
@@ -20,7 +52,7 @@
 	align-items: stretch;
 	background-color: @background-color;
 
-	#left-panel {
+	#left {
 		background-color: @panel-background-color;
 		width: @panel-width;
 
@@ -32,12 +64,6 @@
 		border-right: solid 1px @border-bottom;
 	}
 
-	#box-configure {
-		.box-content {
-			padding: @base-size;
-		}
-	}
-
     #workspace {
 
         display: flex;
@@ -47,7 +73,7 @@
 
         flex-grow: 1;
 
-        #canvas-bar {
+        #middle-bar {
 
             padding: 0 @base-size;
             height: 5 * @base-size;
@@ -57,7 +83,7 @@
             box-sizing:border-box;
         }
 
-        #canvas-area {
+        #middle-area {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -66,77 +92,49 @@
 
             #canvas-container {
 
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
 
 
-            margin-top: 2 * @base-size;
-            margin-bottom: 2 * @base-size;
-            margin-left: @base-size;
-            margin-right: @base-size;
+                margin-top: 2 * @base-size;
+                margin-bottom: 2 * @base-size;
+                margin-left: 2 * @base-size;
+                margin-right: @base-size;
 
-            // this container should occupy all space left
-            flex-grow: 1;
+                // this container should occupy all space left
+                flex-grow: 1;
 
-            #canvas-control {
+                #canvas-control {
 
-                #canvas {
-                    height: @phone-proportion * @phone-frame-width;
-                    width: @phone-frame-width;
+                    #canvas {
+                        height: @phone-proportion * @phone-frame-width;
+                        width: @phone-frame-width;
 
-                    border: 3px solid @border-bottom;
-                }
-            }
-        }
-
-        #box {
-            width: @panel-width;
-
-            // no growing nor shrinking
-            flex-grow: 0;
-            flex-shrink: 0;
-
-            margin-top: 2 * @base-size;
-            margin-bottom: 2 * @base-size;
-            margin-left: 2 * @base-size;
-            margin-right: 2 * @base-size;
-
-            background-color: @panel-background-color;
-
-            .box-header {
-            border-bottom: none;
-            box-sizing:border-box; //consider border on height size
-            }
-
-            .box-content {
-                #prefix {
-                    i {
-                        color: @mediumgrey;
-
-                        //font-size of icons: 18px
-                        font-size: @font-size-6;
-                        line-height: 24px;
-                        padding: 0 @base-size;
+                        border: 3px solid @border-bottom;
                     }
                 }
-                label {
-                    font-size: @font-size-3;
-                }
+            }
 
-                #input {
-                    font-size: @font-size-3;
-                }
+            #floating-box {
+                width: @panel-width;
+
+                // no growing nor shrinking
+                flex-grow: 0;
+                flex-shrink: 0;
+
+                margin-top: 2 * @base-size;
+                margin-bottom: 2 * @base-size;
+                margin-left: @base-size;
+                margin-right: 2 * @base-size;
+
+                background-color: @panel-background-color;
             }
         }
-
-        }
-
-
     }
 
-	#right-panel {
+	#right {
 
 		// no growing nor shrinking
 		flex-grow: 0;
@@ -159,27 +157,4 @@
             
         }
 	}
-
-
-    // Panel styling
-    .panel {
-
-        transition: max-width ease 0.4s;
-
-        &[state="closed"] {
-            display: none;
-        }
-
-        &[state="open"] {
-            display: block;
-        }
-    }
-}
-
-
-.has-shadow {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-.has-shadow-2 {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

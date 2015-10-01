@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="canvas-bar-styles.html">
 
 <dom-module id="carbo-canvas-bar">
@@ -11,55 +12,62 @@
         <div id="bar">
 
             <div id="left">
-                <span><iron-icon icon="undo" class="active"></iron-icon></span>
-                <span><iron-icon icon="redo"></iron-icon></span>
+                <span>
+                    <iron-icon icon="undo" class="active"></iron-icon>
+                </span>
+                <span>
+                    <iron-icon icon="redo"></iron-icon>
+                </span>
             </div>
 
             <div id="right">
+                <!-- selector start -->
+                <iron-selector
+                    class="interaction-mode-toggle"
+                    attr-for-selected="ide-mode"
+                    selected="{{ ideMode }}"
+                >
+                    <div
+                         class="icon-container"
+                         ide-mode="graphical-edition"
+                    >
+                        <iron-icon
+                            icon="create"
+                            title="Graphic edition mode (Shift+G)"
+                            alt="Graphic edition mode (Shift+G)"
+                        ></iron-icon>
+                    </div>
 
-<!--
-                <div class="preview">
-                    <iron-icon icon="av:play-circle-outline"></iron-icon>
-                    <span>Preview</span>
-                    <iron-icon icon="arrow-drop-down"></iron-icon>
-                </div>
--->
+                    <div
+                         class="icon-container"
+                         ide-mode="code-edition"
+                    >
+                        <iron-icon
+                            icon="code"
+                            title="Code edition mode (Shift+C)"
+                            alt="Code edition mode (Shift+C)"
+                        ></iron-icon>
+                    </div>
 
-<!--
-                <div class="interaction-mode">
+                    <div
+                         class="icon-container"
+                         ide-mode="navigation"
+                    >
+                        <iron-icon
+                            icon="visibility"
+                            title="Navigation mode (Shift+N)"
+                            alt="Navigation mode (Shift+N)"
+                        ></iron-icon>
+                    </div>
 
-                    <iron-icon icon="visibility" title="navigate" alt="navigate"></iron-icon> Navegação
+                </iron-selector>
 
-                    <iron-icon icon="create" title="navigate" alt="navigate"></iron-icon> Edição
+                <svg height="40" width="17">
 
-                    <iron-icon icon="arrow-drop-down"></iron-icon>
-                </div>
--->
+                    <line x1="8" y1="6" x2="8" y2="34" style="stroke:#D2D2D2; stroke-width:1"/>
 
-<!--
-                <div class="device-orientation">
-                    <iron-icon icon="hardware:phone-android" class="active"></iron-icon>
-                   <iron-icon icon="hardware:phone-android" class="rotate"></iron-icon>
-                </div>
--->
-
-
-
-                <div class="interaction-mode-toggle">
-
-                    <div class="icon-container active"><iron-icon icon="create" title="Graphic edition mode (Shift+G)" alt="Graphic edition mode (Shift+G)"></iron-icon></div>
-
-                    <div class="icon-container"><iron-icon icon="code" title="Code edition mode (Shift+C)" alt="Code edition mode (Shift+C)"></iron-icon></div>
-
-                    <div class="icon-container"><iron-icon icon="visibility" title="Navigation mode (Shift+N)" alt="Navigation mode (Shift+N)"></iron-icon></div>
-
-                    <svg height="40" width="17">
-
-                        <line x1="8" y1="6" x2="8" y2="34" style="stroke:#D2D2D2; stroke-width:1"/>
-
-                    </svg>
-
-                </div>
+                </svg>
+                <!-- selector end -->
 
                 <div class="zoom">
                     Zoom: 100%

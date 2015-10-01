@@ -14,6 +14,7 @@
             canvas: {
                 type: Object,
                 notify: true,
+                observer: '_handleCanvasComponentChange',
             },
 
             state: {
@@ -31,6 +32,12 @@
                 type: Object,
                 notify: true
             }
+        },
+
+        // Used for setting up event listeners onto the canvas component
+        _handleCanvasComponentChange: function (canvas, oldCanvas) {
+
+            console.log('canvas changed');
         },
 
         _handleContextElementChange: function (contextElement, oldContext) {
@@ -55,35 +62,48 @@
             // Keep reference to the canvas element
             var canvas = this.canvas;
 
-            // Path data
-            var insertPath = {
-                xpath: this.contextElement.attributes['x-path'],
-            };
+            // retrieve the insertion context for the component
+            var insertionContext = component.context.insertion;
 
-            // Element data
-            var insertElement = {
-                html: component.html,
-                components: component.components
-            };
+            // TODO: handle errors
+            // set the insertion focus
+            canvas.setInsertionFocus(insertionContext)
+                .then(function (insertionElementData) {
+                    console.log(insertionElementData);
 
-            this.codeMachine
-                .insertElement(insertPath, insertElement)
-                .then(function (res) {
-                    this.canvas.deactivateLoading();
+                    // Path data
+                    var insertPath = {
+                        uuid: insertionElementData.attributes['carbono-uuid'],
+                    };
 
-                    canvas.reload();
+                    console.log(insertPath);
 
-                    this.toggleLoading(false);
+                    // Element data
+                    var insertElement = {
+                        html: component.html,
+                        components: component.components
+                    };
 
-                }.bind(this), function (err) {
+                    this.codeMachine
+                        .insertElement(insertPath, insertElement)
+                        .then(function (res) {
+                            this.canvas.deactivateLoading();
+                            // stop loading
+                            this.toggleLoading(false);
 
-                    this.canvas.deactivateLoading();
+                        }.bind(this), function (err) {
 
-                    this.toggleLoading(false);
-                    this.toggleError(true);
-                    console.log(err);
-                    console.log('error! :(');
-                }.bind(this)).done();
+                            canvas.reload();
+                            this.canvas.deactivateLoading();
+
+                            this.toggleLoading(false);
+                            this.toggleError(true);
+                            console.log(err);
+                            console.log('error! :(');
+                        }.bind(this)).done();
+
+                }.bind(this))
+                .done();
 
             this.toggleLoading(true);
             this.toggleError(false);

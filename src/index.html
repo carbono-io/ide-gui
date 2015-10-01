@@ -15,6 +15,13 @@
     <!-- Source Sans Pro Font -->
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
 
+    <!--
+        javascript libraries come at the top, before elements so
+        that all elements may use them
+    -->
+    <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
+    <script type="text/javascript" src="bower_components/Keypress/keypress.js"></script>
+    
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="index.css">
 
@@ -77,116 +84,107 @@
                     </nav>
 
                 </carbo-header>
-                <carbo-body id="body">
+                <carbo-body
+                    id="body"
+                    ide-mode="{{ ideMode }}"
+                >
 
-                    <componentslist-content>
+                    <div body-section="left">
                         <carbo-panel
                             title="Componentes"
                             icon="backup"
-                            menu="{{ boxmenuitem }}"
+                            menu="{{ boxmenuitemComponents }}"
                         >
-                            <div class="box-content">
-                                <carbo-components-tree
-                                    component="{{ activePage }}"
-                                ></carbo-components-tree>
-                            </div>
+                            <carbo-components-tree
+                                component="{{ activePage }}"
+                            ></carbo-components-tree>
                         </carbo-panel>
 
                         <carbo-panel
                             title="Configurações"
                             icon="settings"
-                            menu="{{ boxmenuitem }}"
+                            menu="{{ boxmenuitemSettings }}"
                         >
-                            <div class="box-content">
-                                <carbo-component-settings></carbo-component-settings>
-                            </div>
+                            <carbo-component-settings></carbo-component-settings>
                         </carbo-panel>
 
-                    </componentslist-content>
+                    </div>
 
-                    <canvas-bar-content>
-                        <carbo-canvas-bar></carbo-canvas-bar>
-
-                    </canvas-bar-content>
-
-                    <canvas-container-content>
-                        <div id="canvas-control">
-
-                            <carbo-canvas
-                                id="canvas"
-                                class="has-shadow"
-                                project-url="{{ project.projectUrl }}"
-                                components="{{ components }}"
-
-                                context="{{ context }}"
-                            ></carbo-canvas>
-
-                        </div>
-                    </canvas-container-content>
-
-                    <addcomponents-content>
-
-                        <carbo-panel-box
-                            title="Adicionar componentes"
-                            icon="add"
-                            menu="{{ boxmenuitem }}"
+                    <div body-section="middle-bar">
+                        <!-- bar that controls the canvas -->
+                        <carbo-canvas-bar
+                            ide-mode="{{ ideMode }}"
                         >
-                            <div class="box-content">
-                                <carbo-components-palette
-                                    id="components-palette"
+                        </carbo-canvas-bar>
 
-                                    registry="{{ services.componentsRegistry }}"
+                    </div>
 
-                                    components="{{ paletteComponents }}"
-                                    code-machine="{{ services.codeMachine }}"
-                                    canvas="{{ components.canvas }}"
+                    <div body-section="canvas">
+                        <carbo-canvas
+                            id="canvas"
+                            project-url="{{ project.projectUrl }}"
+                            components="{{ components }}"
+                            code-machine="{{ services.codeMachine }}"
 
-                                    context-element="{{ contextElement }}"
-                                ></carbo-components-palette>
-                            </div>
-                        </carbo-panel-box>
+                            interaction-mode="{{ canvasInteractionMode }}"
+                            ide-mode="{{ ideMode }}"
 
-                    </addcomponents-content>
+                            context="{{ context }}"
+                        ></carbo-canvas>
+                    </div>
 
-                    <iron-pages 
-                        id="right-panel-contents" 
+                    <iron-pages body-section="floating-box" selected="0">
+
+                        <carbo-components-palette
+                            id="components-palette"
+
+                            registry="{{ services.componentsRegistry }}"
+
+                            components="{{ paletteComponents }}"
+                            code-machine="{{ services.codeMachine }}"
+                            canvas="{{ components.canvas }}"
+
+                            context-element="{{ contextElement }}"
+                        ></carbo-components-palette>
+
+                    </iron-pages>
+
+                    <iron-pages
+
+                        body-section="right"
+
                         attr-for-selected="data-section" 
                         selected="{{ section }}"
                     >
 
                         <!--Conteúdo box estilos-->
-                        <style-content data-section="style">
+                        <div data-section="style">
                             <carbo-panel
                                 title="Estilo"
                                 icon="image:palette"
-                                menu="{{ boxmenuitem }}"
+                                menu="{{ boxmenuitemStyle }}"
                             >
-                                <div class="box-content">
-                                    <carbo-styles-list
-                                    group="{{ styleGroups }}"
-                                    ></carbo-styles-list>
-                                </div>
+                                <carbo-styles-list
+                                group="{{ styleGroups }}"
+                                ></carbo-styles-list>
                             </carbo-panel>
-                        </style-content>
+                        </div>
 
                         <!--Conteúdo box dados-->
-                         <data-content data-section="data">
+                        <div data-section="data">
                             <carbo-panel
                                 title="Dados"
                                 icon="maps:layers"
                                 menu="{{ boxmenuitem }}"
                             >
-                                <div class="box-content">
-
-                                    <carbo-data-table  entity1="{{ entitydata }}">
-                                    </carbo-data-table>
-
-                                </div>
+                                <carbo-data-table
+                                    entity1="{{ entitydata }}"
+                                >
+                                </carbo-data-table>
                             </carbo-panel>
-                        </data-content>
+                        </div>
 
                     </iron-pages>
-
 
                 </carbo-body>
 
@@ -199,7 +197,6 @@
     </template>
     <!-- end of root Polymer binding object (carbo) -->
 
-    <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
     <script type="text/javascript" src="index.bundle.js"></script>
 </body>
 

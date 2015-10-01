@@ -12,8 +12,9 @@ var Q = require('q');
 var CONSTANTS = require('../constants');
 
 // constants
-var HOVER_ID = 'canvas_hover';
-var FOCUS_ID = 'canvas_focus';
+var HOVER_ID     = 'canvas_hover';
+var FOCUS_ID     = 'canvas_focus';
+var INSERTION_ID = 'canvas_insertion_focus';
 
 /**
  * Lifecycle callback for whenever the element has been created
@@ -48,9 +49,17 @@ exports.handleCanvasLoad = function () {
     };
     var focusHltPromise = this.executeInspectorOperation('createHighlighter', [focus]);
 
+    var insertion = {
+        id: INSERTION_ID,
+        surfaceStyle: {
+            border: 'none',
+        }
+    };
+    var insertionHltPromise = this.executeInspectorOperation('createHighlighter', [insertion]);
+
     // Wait for both highlighters to be created before
     // firing event of 'inspector-ready'
-    Q.all([hoverHltPromise, focusHltPromise])
+    Q.all([hoverHltPromise, focusHltPromise, insertionHltPromise])
         .then(function () {
 
             this.fire(CONSTANTS.INSPECTOR_READY_EVENT);
@@ -136,3 +145,42 @@ exports.hideFocus = function () {
 ///////////
 // FOCUS //
 ///////////
+
+
+// FOCUS AND HOVER //
+exports.areFocusAndHoverTogether = function () {
+
+    var focusedElementData = this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
+    var hoveredElementData = this.executeInspectorOperation('getHighlighterTargetData', [HOVER_ID])
+
+    return Q.all([focusedElementData, hoveredElementData])
+        .then(function (results) {
+            return results[0] && results[1] &&
+                results[0].attributes['carbono-uuid'] === results[1].attributes['carbono-uuid'];
+        });
+
+}
+
+
+///////////////
+// INSERTION //
+///////////////
+exports.setInsertionFocus = function (insertionContext) {
+
+    var focusedElementData = this.get('focusedElementData');
+
+    // force insertionContext to be at least an empty string
+    var insertionContextSelector = insertionContext[focusedElementData.tagName] || '';
+
+    insertionContextSelector = '[carbono-uuid="' + focusedElementData.attributes['carbono-uuid'] + '"] ' + insertionContextSelector;
+
+    console.log(insertionContext);
+
+    return this.executeInspectorOperation('highlightElementForSelector', [INSERTION_ID, insertionContextSelector])
+        .then(function () {
+            return this.executeInspectorOperation('getHighlighterTargetData', [INSERTION_ID]);
+        }.bind(this))
+        .then(function (insertionElementData) {
+            return insertionElementData;
+        });
+}

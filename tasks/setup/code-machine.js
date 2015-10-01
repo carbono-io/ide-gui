@@ -4,6 +4,7 @@ var exec = require('child_process').exec;
 
 var runSequence = require('run-sequence');
 var del         = require('del');
+var minimist    = require('minimist');
 
 var config = require('../config');
 var aux = require('../auxiliary');
@@ -18,28 +19,40 @@ module.exports = function (gulp, $) {
      * Clones code machine and sets up config files
      */
     gulp.task('cache:code-machine', ['tmp:create'], function (done) {
+        // delete the current 
+        $.util.log('cache:code-machine deleting old cache');
+        del.sync(path.join(cachePath, 'code-machine'));
+
         var repo   = 'git@bitbucket.org:carbonoio/code-machine.git';
+        var knownOptions = {
+            string: 'branch',
+            default: { branch: 'develop' }
+        };
+        var options = minimist(process.argv.slice(2), knownOptions);
 
         /**
          * Clones git repo
          */
         function clone(cb) {
-            return exec('git clone -b develop --single-branch ' + repo, {
-                cwd: cachePath,
-            }, cb);
+            $.util.log('cache:code-machine start cloning from branch ' + options.branch);
+            var cmd = [
+                'git clone -b',
+                options.branch,
+                '--single-branch',
+                repo
+            ].join(' ');
+
+            return exec(cmd, { cwd: cachePath }, cb);
         }
 
-        // delete
-        del.sync(path.join(cachePath, 'code-machine'));
-
         clone(function () {
-            $.util.log('backend:code-machine clone finished');
+            $.util.log('cache:code-machine clone finished');
 
-
+            $.util.log('cache:code-machine npm install started');
             var installProcess = exec('npm install', {
                 cwd: path.join(cachePath, 'code-machine')
             }, function () {
-                $.util.log('backend:code-machine npm install finished');
+                $.util.log('cache:code-machine npm install finished');
                 done();
             });
 
@@ -52,11 +65,13 @@ module.exports = function (gulp, $) {
     /**
      * Builds the code-machine
      */
-    gulp.task('copy:code-machine', function (done) {
+    gulp.task('reset:code-machine', function (done) {
 
         var cmPath = path.join(tmpPath, 'code-machine');
 
+        $.util.log('reset:code-machine removing old files');
         del.sync(cmPath);
+        $.util.log('reset:code-machine files removed');
 
         /**
          * Writes a config file for using with the IDE
@@ -76,8 +91,15 @@ module.exports = function (gulp, $) {
             });
         }
 
-        // Copy from cache
-        gulp.src(path.join(cachePath, 'code-machine/**/*'), {
+        // Copy from cache, all files but '.git and gulpfile'
+        var filesToCopy = [
+            path.join(cachePath, 'code-machine/**/*'),
+            '!' + path.join(cachePath, 'code-machine/.git/**/*'),
+            '!' + path.join(cachePath, 'code-machine/gulpfile.js')
+        ];
+
+        $.util.log('reset:code-machine copying files')
+        gulp.src(filesToCopy, {
                 base: cachePath, 
                 dot: true
             })
@@ -92,6 +114,6 @@ module.exports = function (gulp, $) {
     });
 
     gulp.task('setup:code-machine', function (done) {
-        runSequence('cache:code-machine', 'copy:code-machine', done);
+        runSequence('cache:code-machine', 'reset:code-machine', done);
     });
 };

@@ -19,11 +19,14 @@
 (function () {
 
     // Load behaviors
-    var IframeBehavior            = require('./scripts/behaviors/iframe');
-    var FrameMessagingBehavior    = require('./scripts/behaviors/frame-messaging');
-    var InspectorBehavior         = require('./scripts/behaviors/inspector');
-    var OverlayBehavior           = require('./scripts/behaviors/overlay');
-    var KeyboardShortcutsBehavior = require('./scripts/behaviors/keyboard-shortcuts');
+    var IframeBehavior         = require('./scripts/behaviors/iframe');
+    var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
+    var InspectorBehavior      = require('./scripts/behaviors/inspector');
+    var OverlayBehavior        = require('./scripts/behaviors/overlay');
+    var CodeMachineBehavior    = require('./scripts/behaviors/code-machine');
+
+    // Load constants
+    var CONSTANTS = require('./scripts/constants');
 
     /**
      * The char that deactivates the overlay.
@@ -39,15 +42,10 @@
             FrameMessagingBehavior,
             InspectorBehavior,
             OverlayBehavior,
-            KeyboardShortcutsBehavior
+            CodeMachineBehavior
         ],
 
         properties: {
-            mode: {
-                type: String,
-                notify: true,
-                value: 'inspect'
-            },
 
             components: {
                 type: Object,
@@ -99,7 +97,7 @@
             this.hideHover();
             
             // activate overlay
-            this.activateOverlay();
+            // this.activateOverlay();
         },
 
         /**
@@ -110,12 +108,25 @@
          */
         reload: function () {
 
+            var defer = Q.defer();
+
             var iframe = this.$.iframe;
 
             iframe.src = iframe.src;
 
-            // Does not work across domains
-            // this.$.iframe.contentWindow.location.reload();
+            // event handler for inspector ready
+            function handleReloadFinished() {
+                // resolve deferred object
+                defer.resolve();
+
+                // remove listener
+                this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+            }
+            
+            this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+
+            // return a promise for whenever the reloading is done
+            return defer.promise;
         }
     });
 

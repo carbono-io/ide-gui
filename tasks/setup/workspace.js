@@ -4,6 +4,7 @@ var exec = require('child_process').exec;
 
 var runSequence = require('run-sequence');
 var del         = require('del');
+var minimist    = require('minimist');
 
 var config = require('../config');
 var aux = require('../auxiliary');
@@ -18,14 +19,28 @@ module.exports = function (gulp, $) {
      * Clones the workspace repo into cache
      */
     gulp.task('cache:workspace', ['tmp:create'], function (done) {
-        var repo   = 'git@bitbucket.org:carbonoio/base-polymer-project.git';
-
+        $.util.log('cache:workspace removing files');
         del.sync(path.join(cachePath, 'workspace'));
 
-        var cloneProcess = exec('git clone -b ide-integration --single-branch ' + repo + ' workspace', {
-            cwd: cachePath,
-        }, function () {
+        var repo   = 'git@bitbucket.org:carbonoio/base-polymer-project.git';
+        var knownOptions = {
+            string: 'branch',
+            default: { branch: 'develop' }
+        };
+        var options = minimist(process.argv.slice(2), knownOptions);
+
+        // build the bash command string
+        var cloneCommand = [
+            'git clone -b',
+            options.branch,
+            '--single-branch',
+            repo,
+            'workspace'
+        ].join(' ');
+
+        var cloneProcess = exec(cloneCommand, { cwd: cachePath }, function () {
             $.util.log('cache:workspace clone finished');
+            $.util.log('cache:workspace start bower install');
 
             // -F for forcing latest on conflict resolution
             var installProcess = exec('bower install -F', {
@@ -48,12 +63,20 @@ module.exports = function (gulp, $) {
     /**
      * Builds up the workspace
      */
-    gulp.task('copy:workspace', function (done) {
+    gulp.task('reset:workspace', function (done) {
         var wkPath = path.join(tmpPath, 'workspace');
 
+        $.util.log('reset:workspace removing old files');
         del.sync(wkPath);
 
-        gulp.src(path.join(cachePath, 'workspace/**/*'), {
+        // Copy from cache, all files but '.git and gulpfile'
+        var filesToCopy = [
+            path.join(cachePath, 'workspace/**/*'),
+            '!' + path.join(cachePath, 'workspace/.git/**/*'),
+            '!' + path.join(cachePath, 'workspace/gulpfile.js')
+        ];
+
+        gulp.src(filesToCopy, {
                 base: cachePath, 
                 dot: true
             })
@@ -61,6 +84,6 @@ module.exports = function (gulp, $) {
     });
 
     gulp.task('setup:workspace', function (done) {
-        runSequence('cache:workspace', 'copy:workspace', done);
+        runSequence('cache:workspace', 'reset:workspace', done);
     });
 };

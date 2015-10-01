@@ -4,9 +4,10 @@
 require('./bower_components/webcomponentsjs/webcomponents-lite.js');
 
 // load initialization scripts
-var initServices   = require('./scripts/initialization/services');
-var initComponents = require('./scripts/initialization/components');
-var initRouter     = require('./scripts/initialization/router');
+var initServices    = require('./scripts/initialization/services');
+var initComponents  = require('./scripts/initialization/components');
+var initRouter      = require('./scripts/initialization/router');
+var initGlobalScope = require('./scripts/initialization/global-scope');
 
 // Read configurations
 var readConfig = require('./scripts/config');
@@ -28,6 +29,9 @@ window.addEventListener('WebComponentsReady', function () {
         var components = initComponents(carbo, config);
         // Router
         var router     = initRouter(carbo, config, services, components);
+        // Set up global scope
+        initGlobalScope(carbo, config, services, components);
+        
 
         // if configuration for env is 'development',
         // initialize developer tools

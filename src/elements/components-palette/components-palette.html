@@ -9,6 +9,9 @@
 <link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 
+<!-- internal -->
+<link rel="import" href="../panel-box/panel-box.html">
+
 <link rel="import" href="components-palette-styles.html">
 
 <dom-module id="carbo-components-palette">
@@ -17,61 +20,69 @@
 
     <template>
 
-        <div id="wrapper" state$="{{ state }}">
+        <carbo-panel-box
+            title="Adicionar componentes"
+            icon="add"
+            menu="{{ boxmenuitem }}"
+        >
+        
+            <div id="wrapper" state$="{{ state }}">
 
-            <paper-tabs selected="0" noink="false">
-                <paper-tab>Básicos</paper-tab>
-                <paper-tab>Avançados</paper-tab>
-            </paper-tabs>
+                <paper-tabs selected="0" noink="false">
+                    <paper-tab>Básicos</paper-tab>
+                    <paper-tab>Avançados</paper-tab>
+                </paper-tabs>
 
-            <paper-input-container no-label-float="true">
-                <div prefix id="prefix">
-                    <iron-icon icon="search"></iron-icon>
-                </div>
-                <label id="label-style">Buscar elementos</label>
-                <input is="iron-input" id="input">
-            </paper-input-container>
+                <paper-input-container no-label-float="true">
+                    <div prefix id="prefix">
+                        <iron-icon icon="search"></iron-icon>
+                    </div>
+                    <label id="label-style">Buscar elementos</label>
+                    <input is="iron-input" id="input">
+                </paper-input-container>
 
-            <div id="tabs-content">
-                <div class="tab">
-                    <template is="dom-repeat" items="{{ components }}">
-                        <div class="component" 
-                            on-mouseover="handleComponentMouseOver" 
-                            on-mouseout="hidePreview"
-                            on-click="handleComponentClick"
-                        >
-                            <div class="component-icon">
-                                <iron-icon icon="{{ item.icon }}"></iron-icon>
+                <div id="tabs-content">
+                    <div class="tab">
+                        <template is="dom-repeat" items="{{ components }}">
+                            <div class="component" 
+                                on-mouseover="handleComponentMouseOver" 
+                                on-mouseout="hidePreview"
+                                on-click="handleComponentClick"
+                            >
+                                <div class="component-icon">
+                                    <iron-icon icon="{{ item.icon }}"></iron-icon>
+                                </div>
+                                <div class="component-label">{{ item.title }}</div>
                             </div>
-                            <div class="component-label">{{ item.title }}</div>
-                        </div>
-                    </template>
+                        </template>
+                    </div>
+
+                </div>
+
+                <!-- TODO - resolver o problema do scroll-->
+                <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
+                    <div class="component-preview-container has-shadow-2">
+                        <div class="title">{{ title }}</div>
+                        <template is="dom-repeat" items="{{ screens }}">
+                            <div class="preview-screen"><img src="{{ item.url }}"></div>
+                            <div class="screen-caption">{{ item.screensCaption }}</div>
+                        </template>
+                    </div>
+                </div>
+
+                <div id="loading">
+                    <paper-spinner alt="Loading form" active></paper-spinner>
+                    <p>Carregando</p>
+                </div>
+
+                <div id="error">
+                    <p>erro!!!!! ;(</p>
                 </div>
 
             </div>
+            <!-- wrapper end -->
 
-            <!-- TODO - resolver o problema do scroll-->
-            <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
-                <div class="component-preview-container has-shadow-2">
-                    <div class="title">{{ title }}</div>
-                    <template is="dom-repeat" items="{{ screens }}">
-                        <div class="preview-screen"><img src="{{ item.url }}"></div>
-                        <div class="screen-caption">{{ item.screensCaption }}</div>
-                    </template>
-                </div>
-            </div>
-
-            <div id="loading">
-                <paper-spinner alt="Loading form" active></paper-spinner>
-                <p>Carregando</p>
-            </div>
-
-            <div id="error">
-                <p>erro!!!!! ;(</p>
-            </div>
-
-        </div>
-        <!-- wrapper end -->
+        </carbo-panel-box>
     </template>
 
     <script src="components-palette.js" ></script>

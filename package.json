@@ -39,6 +39,7 @@
     "jshint-stylish": "^2.0.1",
     "lodash": "^3.10.1",
     "merge-stream": "^1.0.0",
+    "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "polybuild": "^1.0.5",
     "run-sequence": "^1.1.2",

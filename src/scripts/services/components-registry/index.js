@@ -34,8 +34,16 @@ ComponentsRegistryClient.prototype.read = function (query) {
 
         var contextFilter = true;
 
-        if (query.context) {
+        // Check if component.context is an array
+        if (_.isArray(component.context)) {
+            // if it is an array perform direct comparison
             contextFilter = _.contains(component.context, query.context);
+
+        } else if (_.isArray(component.context.show)) {
+            // perform comparison agains the 'show' context
+            contextFilter = _.contains(component.context.show, query.context);
+        } else {
+            throw new Error('No context available for ' + component.title);
         }
 
         return contextFilter;

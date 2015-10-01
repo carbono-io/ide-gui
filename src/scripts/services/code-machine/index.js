@@ -6,6 +6,7 @@
 
 // native dependencies
 var util = require('util');
+var EventEmitter = require('events').EventEmitter;
 
 // external dependencies
 var socketIo = require('socket.io-client');
@@ -37,7 +38,23 @@ function CodeMachineClient(config) {
 
     // Instantiate socket request manager
     this.socketRequestManager = new SocketRequestManager(this.socket);
+
+    // inheritance
+    EventEmitter.call(this);
+
+    // listen to socket events
+    this.socket.on('control:contentUpdate', function (eventData) {
+
+        // parse json if needed
+        eventData = _.isString(eventData) ? JSON.parse(eventData) : eventData;
+        
+        // propagate event
+        this.emit('control:contentUpdate', eventData.data.items[0]);
+    }.bind(this));
 }
+
+// Let CodeMachineClient inherit from event emitter
+util.inherits(CodeMachineClient, EventEmitter);
 
 /**
  * Inserts an element
@@ -47,7 +64,7 @@ function CodeMachineClient(config) {
 //     var insert = {
 //         path: {
 //             file: 'src/index.html',
-//             xpath: path.xpath,
+//             uuid: path.uuid,
 //         },
 //         html: element.html,
 //         components: element.components || []
@@ -66,7 +83,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
         throw new Error('Code machine socket not found');
     }
 
-    console.info('[service] code-machine:insertElement(%s, %s)', path, JSON.stringify(element));
+    console.info('[service] code-machine:insertElement(%s, %s)', path);
 
     // Create a deferred object
     var defer = Q.defer();
@@ -74,7 +91,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
     var insert = {
         path: {
             file: '/index.html',
-            xpath: path.xpath,
+            uuid: path.uuid,
         },
         html: element.html,
         components: element.components || []

@@ -1,9 +1,5 @@
 @import '../../less/variables.less';
 
-:host {
-
-}
-
 #bar {
     width: 100%;
     height: 5 * @base-size;
@@ -62,7 +58,7 @@
                 color: @inactive-bar-icon-color;
             }
 
-            &:hover, &.active {
+            &:hover, &.iron-selected {
 
                 background-color: @item-panel-background-hover;
                 cursor: pointer;
@@ -75,12 +71,11 @@
         }
     }
 
-
     .zoom {
         display: flex;
         flex-direction: row;
         align-items: center;
-//        margin-left: 2 * @base-size;
+        margin-left: @base-size;
 
 
         &:hover {

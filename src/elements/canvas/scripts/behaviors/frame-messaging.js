@@ -30,6 +30,14 @@ exports.created = function () {
  * @return {Promise}          Promise to be resolved after the response.
  */
 exports.executeInspectorOperation = function (operation, args) {
+
+    if (!this.$.iframe || !this.$.iframe.contentWindow) {
+
+        console.warn('has not yet loaded. operation ' + operation + ' cannot be executed now');
+
+        return Q(false);
+    }
+
     // Create and id for the operation
     var opid = _.uniqueId(INSPECTOR_OPERATION_PREFIX);
 

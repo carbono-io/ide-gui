@@ -10,6 +10,4 @@ module.exports = function (carbo, config, services, components) {
     window.config = config;
     window.services = services;
     window.components = components;
-
-    console.log(Polymer);
 };

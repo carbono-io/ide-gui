@@ -1,15 +1,28 @@
 @import '../../less/variables.less';
 @import '../../bower_components/lesshat/build/lesshat.less';
 
-// #box-panel {
-//     &[state="shown"] {
-//         visibility: visible;
-//     }
+:host {
 
-//     &[state="hidden"] {
-//         visibility: hidden;
-//     }
-// }
+}
+
+#box-panel {
+
+    #overlay {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    &.disabled {
+        #overlay {
+            bottom: 0;
+            right: 0;
+
+            background-color: red;
+        }
+    }
+}
 
 // TODO: change class names
 .box-header-no-border {
