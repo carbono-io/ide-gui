@@ -9,29 +9,43 @@
 
         <div id="carbo-body">
 
-            <div id="left-panel" class="panel" state$="{{ state.leftPanel }}">
-                <content select="componentslist-content"></content>
-            </div>
+            <!-- the left panel -->
+            <section id="left-panel" state$="{{ state.leftPanel }}">
+                <content select="[body-section='left']"></content>
+            </section>
 
             <div id="workspace">
 
-                <div id="canvas-bar">
-                    <content select="canvas-bar-content"></content>
-                </div>
-
+                <!-- bar that stays in the middle -->
+                <section id="canvas-bar">
+                    <content select="[body-section='middle-bar']"></content>
+                </section>
 
                 <div id="canvas-area">
-                    <div id="canvas-container" class="panel" state$="{{ state.canvas }}">
-                        <content select="canvas-container-content"></content>
-                    </div>
-                    <div id="box" class="has-shadow panel" state$="{{ boxState }}">
-                        <content select="addcomponents-content"></content>
-                    </div>
+
+                    <!-- the floating canvas -->
+                    <section
+                        id="canvas-container"
+                        state$="{{ state.canvas }}"
+                    >
+                        <content select="[body-section='canvas']"></content>
+                    </section>
+
+                    <!-- the floating box -->
+                    <section 
+                        id="floating-box"
+                        class="has-shadow"
+                        state$="{{ boxState }}"
+                    >
+                        <content select="[body-section='floating-box']"></content>
+                    </section>
                 </div>
             </div>
-            <div id="right-panel" class="data panel" state$="{{ state.rightPanel }}">
-                <content select="#right-panel-contents"></content>
-            </div>
+
+            <!-- the right panel -->
+            <section id="right-panel" class="data" state$="{{ state.rightPanel }}">
+                <content select="[body-section='right']"></content>
+            </section>
 
         </div>
 
