@@ -26,12 +26,11 @@
         right: 0;
     }
 
-    &[mode="add"] {
-        cursor: copy;
-    }
+    // pointer cursor by default
+    cursor: pointer;
 
-    &[mode="inspect"] {
-        cursor: pointer;
+    &.insert-interaction {
+        cursor: copy;
     }
 }
 

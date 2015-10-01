@@ -84,7 +84,10 @@
                     </nav>
 
                 </carbo-header>
-                <carbo-body id="body">
+                <carbo-body
+                    id="body"
+                    edition-mode="{{ editionMode }}"
+                >
 
                     <div body-section="left">
                         <carbo-panel
@@ -110,7 +113,7 @@
                     <div body-section="middle-bar">
                         <!-- bar that controls the canvas -->
                         <carbo-canvas-bar
-                            mode="{{ canvasMode }}"
+                            edition-mode="{{ editionMode }}"
                         >
                         </carbo-canvas-bar>
 
@@ -119,11 +122,12 @@
                     <div body-section="canvas">
                         <carbo-canvas
                             id="canvas"
-                            class="has-shadow"
                             project-url="{{ project.projectUrl }}"
                             components="{{ components }}"
                             code-machine="{{ services.codeMachine }}"
-                            mode="{{ canvasMode }}"
+
+                            interaction-mode="{{ canvasInteractionMode }}"
+                            edition-mode="{{ editionMode }}"
 
                             context="{{ context }}"
                         ></carbo-canvas>
@@ -131,24 +135,17 @@
 
                     <iron-pages body-section="floating-box" selected="0">
 
-                        <carbo-panel-box
-                            id="components-palette-box"
-                            title="Adicionar componentes"
-                            icon="add"
-                            menu="{{ boxmenuitem }}"
-                        >
-                            <carbo-components-palette
-                                id="components-palette"
+                        <carbo-components-palette
+                            id="components-palette"
 
-                                registry="{{ services.componentsRegistry }}"
+                            registry="{{ services.componentsRegistry }}"
 
-                                components="{{ paletteComponents }}"
-                                code-machine="{{ services.codeMachine }}"
-                                canvas="{{ components.canvas }}"
+                            components="{{ paletteComponents }}"
+                            code-machine="{{ services.codeMachine }}"
+                            canvas="{{ components.canvas }}"
 
-                                context-element="{{ contextElement }}"
-                            ></carbo-components-palette>
-                        </carbo-panel-box>
+                            context-element="{{ contextElement }}"
+                        ></carbo-components-palette>
 
                     </iron-pages>
 

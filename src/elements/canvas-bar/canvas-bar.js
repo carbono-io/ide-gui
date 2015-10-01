@@ -4,7 +4,7 @@
 
     // MODES
     var CONSTANTS = {};
-    CONSTANTS.modes = {
+    CONSTANTS.editionModes = {
         graphicalEdition: 'graphical-edition',
         codeEdition: 'code-edition',
         navigation: 'navigation'
@@ -13,9 +13,9 @@
     Polymer({
         is: "carbo-canvas-bar",
         properties: {
-            mode: {
+            editionMode: {
                 type: String,
-                value: CONSTANTS.modes.graphicalEdition,
+                value: CONSTANTS.editionModes.graphicalEdition,
                 notify: true
             }
         },
@@ -25,26 +25,26 @@
          *
          * Set up event listeners for keyboard shortcuts
          * 
-         * Shift+G: graphical-edition-mode
-         * Shift+C: code-edition-mode
-         * Shift+N: navigation-mode
+         * Shift+G: graphical-edition-editionMode
+         * Shift+C: code-edition-editionMode
+         * Shift+N: navigation-editionMode
          */
         created: function () {
 
             // use keypress
             var listener = new window.keypress.Listener();
 
-            listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.modes.graphicalEdition));
-            listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.modes.codeEdition));
-            listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.modes.navigation));
+            listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.editionModes.graphicalEdition));
+            listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.editionModes.codeEdition));
+            listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.editionModes.navigation));
         },
 
         /**
          * Sets the canvas mode to a given mode
          */
-        setMode: function (mode) {
-            console.log('carbo-canvas-bar setting mode to ' + mode);
-            this.set('mode', mode);
+        setMode: function (editionMode) {
+            console.log('carbo-canvas-bar setting editionMode to ' + editionMode);
+            this.set('editionMode', editionMode);
         },
     });
 

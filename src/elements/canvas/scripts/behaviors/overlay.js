@@ -35,14 +35,21 @@ exports.properties = {
         notify: true
     },
 
-    /**
-     * The mode at which the canvas is
-     */
-    mode: {
+    interactionMode: {
         type: String,
         notify: true,
-        value: CONSTANTS.modes.graphicalEdition,
-        observer: '_modeChanged',
+        value: CONSTANTS.canvasInteractionModes.inspection,
+        observer: '_interactionModeChanged',
+    },
+
+    /**
+     * The editionMode at which the canvas is
+     */
+    editionMode: {
+        type: String,
+        notify: true,
+        value: CONSTANTS.editionModes.graphicalEdition,
+        observer: '_editionModeChanged',
     }
 };
 
@@ -70,23 +77,34 @@ exports.created = function () {
 };
 
 /**
- * Handles changes in the 'mode' property
+ * Handles changes in the 'editionMode' property
  */
-exports._modeChanged = function () {
-    var mode = this.get('mode');
+exports._editionModeChanged = function () {
+    var editionMode = this.get('editionMode');
 
-    if (mode === CONSTANTS.modes.navigation) {
-        // navigation mode, let overlay fade
+    if (editionMode === CONSTANTS.editionModes.navigation) {
+        // navigation editionMode, let overlay fade
         this.deactivateOverlay();
     } else if (
-        mode === CONSTANTS.modes.graphicalEdition || 
-        mode === CONSTANTS.modes.codeEdition) {
+        editionMode === CONSTANTS.editionModes.graphicalEdition || 
+        editionMode === CONSTANTS.editionModes.codeEdition) {
         // edition
         this.activateOverlay();
     } else {
         // default behaviour
         this.activateOverlay();
     }
+};
+
+exports._interactionModeChanged = function (interactionMode, oldInteractionMode) {
+
+    var insertionMode = (interactionMode === CONSTANTS.canvasInteractionModes.insertion);
+
+    Polymer.Base.toggleClass(
+        'insert-interaction',
+        insertionMode,
+        this.$.overlay
+    );
 };
 
 /**
@@ -152,9 +170,9 @@ exports.handleOverlayMousemove = function (event) {
         .then(function (areTogether) {
             
             if (areTogether) {
-                this.set('mode', 'add');
+                this.set('interactionMode', CONSTANTS.canvasInteractionModes.insertion);
             } else {
-                this.set('mode', 'inspect');
+                this.set('interactionMode', CONSTANTS.canvasInteractionModes.inspection);
             }
 
         }.bind(this))
@@ -181,7 +199,7 @@ exports.handleOverlayClick = function (event) {
     this.focusElementAtPoint(normalizedMousePos)
         .then(function (focusedElementData) {
 
-            this.set('mode', 'add');
+            this.set('interactionMode', CONSTANTS.canvasInteractionModes.insertion);
 
             // DEPRECATE
             this.context.set('contextElement', focusedElementData);

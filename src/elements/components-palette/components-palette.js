@@ -90,39 +90,6 @@
                             this.canvas.deactivateLoading();
                             // stop loading
                             this.toggleLoading(false);
-                            
-                            //         // stop loading
-                            //         this.toggleLoading(false);
-                            // canvas.reload()
-                            //     .then(function () {
-
-                            //         console.log('reloaded');
-
-
-
-                            //         // if there is a postInsertion and a focus on post insertion
-                            //         // registered on the component,
-                            //         // do the focusing
-                            //         if (component.postInsertion && component.postInsertion.focus) {
-
-                            //             // get focused element data
-                            //             var lastFocus = canvas.get('focusedElementData');
-
-                            //             // set focus on new elemeent
-                            //             var selector = [
-                            //                 '[carbono-uuid="',
-                            //                 lastFocus.attributes['carbono-uuid'],
-                            //                 '"]',
-                            //                 ' ',
-                            //                 component.postInsertion.focus
-                            //             ].join('');
-
-                            //             console.log(selector);
-
-                            //             canvas.focusElementForSelector(selector);
-                            //         }
-                            //     }.bind(this))
-                            //     .done();
 
                         }.bind(this), function (err) {
 

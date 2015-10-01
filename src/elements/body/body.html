@@ -10,24 +10,21 @@
         <div id="carbo-body">
 
             <!-- the left panel -->
-            <section id="left-panel" state$="{{ state.leftPanel }}">
+            <section id="left">
                 <content select="[body-section='left']"></content>
             </section>
 
             <div id="workspace">
 
                 <!-- bar that stays in the middle -->
-                <section id="canvas-bar">
+                <section id="middle-bar">
                     <content select="[body-section='middle-bar']"></content>
                 </section>
 
-                <div id="canvas-area">
+                <div id="middle-area">
 
                     <!-- the floating canvas -->
-                    <section
-                        id="canvas-container"
-                        state$="{{ state.canvas }}"
-                    >
+                    <section id="canvas-container">
                         <content select="[body-section='canvas']"></content>
                     </section>
 
@@ -35,15 +32,18 @@
                     <section 
                         id="floating-box"
                         class="has-shadow"
-                        state$="{{ boxState }}"
                     >
+                        <div
+                            class="overlay"
+                            on-tap="activateFloatingBox"
+                        ></div>
                         <content select="[body-section='floating-box']"></content>
                     </section>
                 </div>
             </div>
 
             <!-- the right panel -->
-            <section id="right-panel" class="data" state$="{{ state.rightPanel }}">
+            <section id="right" class="data">
                 <content select="[body-section='right']"></content>
             </section>
 

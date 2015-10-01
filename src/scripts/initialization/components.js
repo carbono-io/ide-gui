@@ -1,5 +1,7 @@
 'use strict';
 
+var CONSTANTS = require('../constants');
+
 /**
  * Components are already instantiated through the html
  * Thus, all we do in this initialization function is to 
@@ -20,12 +22,12 @@ module.exports = function (carbo, config) {
         var thereIsAFocusedElement = value ? true : false;
 
         // TODO: improve events and states
-        if ((thereIsAFocusedElement && canvas.get('mode') === 'add') || body.get('boxState') === 'open') {
+        if ((thereIsAFocusedElement && carbo.get('canvasInteractionMode') === CONSTANTS.canvasInteractionModes.insertion)) {
             // open box when value is not null
             body.openBox();
         } else {
             // close otherwise
-            body.closeBox();
+            // body.closeBox();
         }
 
 

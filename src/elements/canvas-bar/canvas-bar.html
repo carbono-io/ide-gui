@@ -24,12 +24,12 @@
                 <!-- selector start -->
                 <iron-selector
                     class="interaction-mode-toggle"
-                    attr-for-selected="mode"
-                    selected="{{ mode }}"
+                    attr-for-selected="edition-mode"
+                    selected="{{ editionMode }}"
                 >
                     <div
                          class="icon-container"
-                         mode="graphical-edition"
+                         edition-mode="graphical-edition"
                     >
                         <iron-icon
                             icon="create"
@@ -40,7 +40,7 @@
 
                     <div
                          class="icon-container"
-                         mode="code-edition"
+                         edition-mode="code-edition"
                     >
                         <iron-icon
                             icon="code"
@@ -51,7 +51,7 @@
 
                     <div
                          class="icon-container"
-                         mode="navigation"
+                         edition-mode="navigation"
                     >
                         <iron-icon
                             icon="visibility"
