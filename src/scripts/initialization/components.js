@@ -28,6 +28,9 @@ module.exports = function (carbo, config) {
             body.closeBox();
         }
 
+
+        // set focused element onto the componentsPalette
+        componentsPalette.set('contextElement', value);
     });
 
     carbo.set('components', {});

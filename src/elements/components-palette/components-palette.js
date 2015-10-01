@@ -14,6 +14,7 @@
             canvas: {
                 type: Object,
                 notify: true,
+                observer: '_handleCanvasComponentChange',
             },
 
             state: {
@@ -33,6 +34,12 @@
             }
         },
 
+        // Used for setting up event listeners onto the canvas component
+        _handleCanvasComponentChange: function (canvas, oldCanvas) {
+
+            console.log('canvas changed');
+        },
+
         _handleContextElementChange: function (contextElement, oldContext) {
 
             this.set('components', this.registry.read({
@@ -43,10 +50,6 @@
         handleComponentClick: function (event) {
 
             var component = event.model.item;
-
-            console.log(component);
-
-            return false;
 
             // Check for required services
             if (!this.codeMachine) {
@@ -59,35 +62,79 @@
             // Keep reference to the canvas element
             var canvas = this.canvas;
 
-            // Path data
-            var insertPath = {
-                xpath: this.contextElement.attributes['x-path'],
-            };
+            // retrieve the insertion context for the component
+            var insertionContext = component.context.insertion;
 
-            // Element data
-            var insertElement = {
-                html: component.html,
-                components: component.components
-            };
+            // TODO: handle errors
+            // set the insertion focus
+            canvas.setInsertionFocus(insertionContext)
+                .then(function (insertionElementData) {
+                    console.log(insertionElementData);
 
-            this.codeMachine
-                .insertElement(insertPath, insertElement)
-                .then(function (res) {
-                    this.canvas.deactivateLoading();
+                    // Path data
+                    var insertPath = {
+                        xpath: insertionElementData.attributes['x-path'],
+                    };
 
-                    canvas.reload();
+                    // Element data
+                    var insertElement = {
+                        html: component.html,
+                        components: component.components
+                    };
 
-                    this.toggleLoading(false);
+                    this.codeMachine
+                        .insertElement(insertPath, insertElement)
+                        .then(function (res) {
+                            this.canvas.deactivateLoading();
+                            // stop loading
+                            this.toggleLoading(false);
+                            
+                            //         // stop loading
+                            //         this.toggleLoading(false);
+                            // canvas.reload()
+                            //     .then(function () {
 
-                }.bind(this), function (err) {
+                            //         console.log('reloaded');
 
-                    this.canvas.deactivateLoading();
 
-                    this.toggleLoading(false);
-                    this.toggleError(true);
-                    console.log(err);
-                    console.log('error! :(');
-                }.bind(this)).done();
+
+                            //         // if there is a postInsertion and a focus on post insertion
+                            //         // registered on the component,
+                            //         // do the focusing
+                            //         if (component.postInsertion && component.postInsertion.focus) {
+
+                            //             // get focused element data
+                            //             var lastFocus = canvas.get('focusedElementData');
+
+                            //             // set focus on new elemeent
+                            //             var selector = [
+                            //                 '[x-path="',
+                            //                 lastFocus.attributes['x-path'],
+                            //                 '"]',
+                            //                 ' ',
+                            //                 component.postInsertion.focus
+                            //             ].join('');
+
+                            //             console.log(selector);
+
+                            //             canvas.focusElementForSelector(selector);
+                            //         }
+                            //     }.bind(this))
+                            //     .done();
+
+                        }.bind(this), function (err) {
+
+                            canvas.reload();
+                            this.canvas.deactivateLoading();
+
+                            this.toggleLoading(false);
+                            this.toggleError(true);
+                            console.log(err);
+                            console.log('error! :(');
+                        }.bind(this)).done();
+
+                }.bind(this))
+                .done();
 
             this.toggleLoading(true);
             this.toggleError(false);

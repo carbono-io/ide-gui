@@ -66,12 +66,11 @@ exports.created = function () {
         // read focusedElementData
         var focus = this.get('focusedElementData');
 
-        // retrieve _point (the point at which the focus was activated)
-        var activationPoint = (focus && focus._point) ?
-            focus._point : { x: 0, y: 0 };
+        if (focus) {
 
-        if (focus && focus._point) {
-            this.focusElementAtPoint(focus._point);
+            var selector = '[x-path="' + focus.attributes['x-path'] + '"]';
+
+            this.focusElementForSelector(selector);
         } else {
             // no focus
             // TODO: hard-coded
@@ -161,6 +160,12 @@ exports.handleOverlayClick = function (event) {
         .done();
 };
 
+var _wheelAux = _.throttle(function (normalizedMousePos) {
+    // Highlight element under the normalized mouse position
+    // Force the highlight to ensure the highlighter moves even
+    // if the highlighted element is still the same.
+    this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos]);
+}, 300);
 
 /**
  * Handles mousewheel events on the overlay layer.
@@ -185,10 +190,7 @@ exports.handleOverlayMousewheel = function (event) {
         y: event.clientY
     });
 
-    // Highlight element under the normalized mouse position
-    // Force the highlight to ensure the highlighter moves even
-    // if the highlighted element is still the same.
-    this.executeInspectorOperation('highlightElementAtPoint', ['hover', normalizedMousePos, true]);
+    _wheelAux.call(this, normalizedMousePos);
 };
 
 /**
