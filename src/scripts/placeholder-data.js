@@ -54,14 +54,21 @@ module.exports = function (carbo) {
         ]
     };
 
-    var menu = {
-        //        title: 'Menu',
-        //        icon: 'backup',
+    var menuComponentsTree = {
         items: [
-            { icon: 'backup', title: 'menu 1' },
-            { icon: 'close', title: 'menu 2' },
-            { icon: 'backup', title: 'menu 3' },
-            { icon: 'backup', title: 'menu 4' }
+            { icon: 'add', title: 'nova tela' },
+        ]
+    };
+
+    var menuSettings = {
+        items: [
+            { icon: 'code', title: 'editar código' },
+        ]
+    };
+
+    var menuStyle = {
+        items: [
+            { icon: 'code', title: 'editar código' },
         ]
     };
 
@@ -277,7 +284,11 @@ module.exports = function (carbo) {
 
     carbo.styleGroups = group;
 
-    carbo.boxmenuitem = menu;
+    carbo.boxmenuitemComponents = menuComponentsTree;
+
+    carbo.boxmenuitemSettings = menuSettings;
+
+    carbo.boxmenuitemStyle = menuStyle;
 
     // carbo.paletteComponents = components;
 
