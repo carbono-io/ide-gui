@@ -10,7 +10,7 @@ module.exports = function (carbo, config) {
     /**
      * The edition mode 
      */
-    carbo.set('editionMode', CONSTANTS.editionModes.graphicalEdition);
+    carbo.set('ideMode', CONSTANTS.ideModes.graphicalEdition);
 
     /**
      * The current active view

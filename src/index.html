@@ -86,7 +86,7 @@
                 </carbo-header>
                 <carbo-body
                     id="body"
-                    edition-mode="{{ editionMode }}"
+                    ide-mode="{{ ideMode }}"
                 >
 
                     <div body-section="left">
@@ -113,7 +113,7 @@
                     <div body-section="middle-bar">
                         <!-- bar that controls the canvas -->
                         <carbo-canvas-bar
-                            edition-mode="{{ editionMode }}"
+                            ide-mode="{{ ideMode }}"
                         >
                         </carbo-canvas-bar>
 
@@ -127,7 +127,7 @@
                             code-machine="{{ services.codeMachine }}"
 
                             interaction-mode="{{ canvasInteractionMode }}"
-                            edition-mode="{{ editionMode }}"
+                            ide-mode="{{ ideMode }}"
 
                             context="{{ context }}"
                         ></carbo-canvas>

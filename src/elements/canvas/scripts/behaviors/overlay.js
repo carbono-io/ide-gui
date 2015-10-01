@@ -45,11 +45,11 @@ exports.properties = {
     /**
      * The editionMode at which the canvas is
      */
-    editionMode: {
+    ideMode: {
         type: String,
         notify: true,
-        value: CONSTANTS.editionModes.graphicalEdition,
-        observer: '_editionModeChanged',
+        value: CONSTANTS.ideModes.graphicalEdition,
+        observer: '_ideModeChanged',
     }
 };
 
@@ -79,15 +79,14 @@ exports.created = function () {
 /**
  * Handles changes in the 'editionMode' property
  */
-exports._editionModeChanged = function () {
-    var editionMode = this.get('editionMode');
+exports._ideModeChanged = function (ideMode, oldIdeMode) {
 
-    if (editionMode === CONSTANTS.editionModes.navigation) {
-        // navigation editionMode, let overlay fade
+    if (ideMode === CONSTANTS.ideModes.navigation) {
+        // navigation ideMode, let overlay fade
         this.deactivateOverlay();
     } else if (
-        editionMode === CONSTANTS.editionModes.graphicalEdition || 
-        editionMode === CONSTANTS.editionModes.codeEdition) {
+        ideMode === CONSTANTS.ideModes.graphicalEdition || 
+        ideMode === CONSTANTS.ideModes.codeEdition) {
         // edition
         this.activateOverlay();
     } else {

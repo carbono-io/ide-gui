@@ -8,9 +8,12 @@
         'disabled'
     ];
 
-    var MODE_LAYOUTS = {
-
+    var IDE_MODES = {
+        graphicalEdition: 'graphical-edition',
+        codeEdition: 'code-edition',
+        navigation: 'navigation',
     };
+
 
     Polymer({
         is: 'carbo-body',
@@ -22,10 +25,10 @@
                 observer: '_canvasInteractionModeChanged'
             },
 
-            editionMode: {
+            ideMode: {
                 type: String,
                 notify: true,
-                observer: '_editionModeChanged'
+                observer: '_ideModeChanged'
             }
         },
 
@@ -83,8 +86,8 @@
             // }
         },
 
-        _editionModeChanged: function (editionMode, oldEditionMode) {
-            if (editionMode === 'navigation') {
+        _ideModeChanged: function (ideMode, oldEditionMode) {
+            if (ideMode === IDE_MODES.navigation) {
                 Polymer.Base.toggleClass('disabled', true, this.$['floating-box']);
 
             } else {
@@ -96,7 +99,7 @@
 
         // TODO: this is a very bad implementation
         activateFloatingBox: function () {
-            this.set('editionMode', 'graphical-edition');
+            this.set('ideMode', IDE_MODES.graphicalEdition);
         }
     });
 

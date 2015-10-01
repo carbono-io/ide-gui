@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Define constats throughout the application here
+ * Define constants throughout the application here
  */
 
-exports.editionModes = {
+exports.ideModes = {
     graphicalEdition: 'graphical-edition',
     codeEdition: 'code-edition',
     navigation: 'navigation',

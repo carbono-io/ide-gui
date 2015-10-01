@@ -4,7 +4,7 @@
 
     // MODES
     var CONSTANTS = {};
-    CONSTANTS.editionModes = {
+    CONSTANTS.ideModes = {
         graphicalEdition: 'graphical-edition',
         codeEdition: 'code-edition',
         navigation: 'navigation'
@@ -13,9 +13,9 @@
     Polymer({
         is: "carbo-canvas-bar",
         properties: {
-            editionMode: {
+            ideMode: {
                 type: String,
-                value: CONSTANTS.editionModes.graphicalEdition,
+                value: CONSTANTS.ideModes.graphicalEdition,
                 notify: true
             }
         },
@@ -34,17 +34,17 @@
             // use keypress
             var listener = new window.keypress.Listener();
 
-            listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.editionModes.graphicalEdition));
-            listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.editionModes.codeEdition));
-            listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.editionModes.navigation));
+            listener.simple_combo('shift g', this.setMode.bind(this, CONSTANTS.ideModes.graphicalEdition));
+            listener.simple_combo('shift c', this.setMode.bind(this, CONSTANTS.ideModes.codeEdition));
+            listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.ideModes.navigation));
         },
 
         /**
          * Sets the canvas mode to a given mode
          */
-        setMode: function (editionMode) {
-            console.log('carbo-canvas-bar setting editionMode to ' + editionMode);
-            this.set('editionMode', editionMode);
+        setMode: function (ideMode) {
+            console.log('carbo-canvas-bar setting ideMode to ' + ideMode);
+            this.set('ideMode', ideMode);
         },
     });
 
