@@ -5,6 +5,9 @@
  * This lightweight wrapper used the frame-messaging behavior for communication.
  */
 
+// native dependencies
+var util = require('util');
+
 // external dependencies
 var Q = require('q');
 
@@ -94,6 +97,26 @@ exports.hideHover = function () {
 ///////////
 
 /**
+ * Auxiliary function that sets the focusedElementData property
+ *
+ * It builds some meta data onto the original data object.
+ * @param {Object} data  
+ */
+function _setFocusedElementData(focusedElementData) {
+
+    // carbono-uuid selector
+    focusedElementData._uuidSelector = util.format(
+        '[carbono-uuid="%s"]',
+        focusedElementData.attributes['carbono-uuid']
+    );
+
+    // set 
+    this.set('focusedElementData', focusedElementData);
+
+    return focusedElementData;
+}
+
+/**
  * Sets the focus highlighter to a point
  */
 exports.focusElementAtPoint = function (point) {
@@ -102,12 +125,8 @@ exports.focusElementAtPoint = function (point) {
             return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
         }.bind(this))
         .then(function (focusedElementData) {
-            // add some meta data to the focusedElementData
-            // the point at which the focus was activated
-            focusedElementData._point = point;
 
-            // set the focusedElementData
-            this.set('focusedElementData', focusedElementData);
+            _setFocusedElementData.call(this, focusedElementData);
 
             return focusedElementData;
         }.bind(this));
@@ -127,12 +146,8 @@ exports.focusElementForSelector = function (selector, options) {
             return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
         }.bind(this))
         .then(function (focusedElementData) {
-            // add some meta data to the focusedElementData
-            // the selector at which the focus was activated
-            focusedElementData._selector = selector;
-
-            // set the focusedElementData
-            this.set('focusedElementData', focusedElementData);
+            
+            _setFocusedElementData.call(this, focusedElementData);
 
             return focusedElementData;
         }.bind(this));
@@ -183,4 +198,4 @@ exports.setInsertionFocus = function (insertionContext) {
         .then(function (insertionElementData) {
             return insertionElementData;
         });
-}
+};
