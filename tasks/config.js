@@ -46,5 +46,6 @@ exports.htmlDir = [
 // don't put trailing.js
 exports.browserifyEntries = [
     SRC_DIR + '/index',
-    SRC_DIR + '/elements/canvas/canvas'
+    SRC_DIR + '/elements/canvas/canvas',
+    SRC_DIR + '/elements/components-palette/components-palette',
 ];

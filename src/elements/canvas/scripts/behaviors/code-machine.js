@@ -54,17 +54,22 @@ exports._handleCodeMachineChange = function (codeMachine, oldCodeMachine) {
         this.executeInspectorOperation('getElementData', [selector])
             .then(function (elementData) {
 
-                if (elementData.tagName === 'HEAD') {
-                    console.log('modification on HEAD, reload required');
+                console.log('modification');
+                console.log(elementData);
 
-                } else if (elementData.tagName === 'BODY') {
-                    console.log('modification on BODY, reload required');
+                // setTimeout(this.reload.bind(this), 100);
 
-                    // TODO: improve this.
-                    setTimeout(this.reload.bind(this), 100);
-                } else {
-                    this.executeInspectorOperation('replaceInnerHTML', [selector, content]);
-                }
+                // if (elementData.tagName === 'HEAD') {
+                //     console.log('modification on HEAD, reload required');
+
+                // } else if (elementData.tagName === 'BODY') {
+                //     console.log('modification on BODY, reload required');
+
+                //     // TODO: improve this.
+                //     setTimeout(this.reload.bind(this), 100);
+                // } else {
+                //     this.executeInspectorOperation('replaceInnerHTML', [selector, content]);
+                // }
             }.bind(this))
             .done();
 

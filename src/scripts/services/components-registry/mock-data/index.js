@@ -13,7 +13,7 @@ registry.push({
     title: "Galeria",
     context: {
         show: ['PAGE', 'BODY'],
-        insertion: ''
+        insertion: false
     },
     html: '<paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
     icon: "view-stream",
@@ -30,7 +30,7 @@ registry.push({
     title: "Carousel",
     context: {
         show: ['PAGE', 'BODY'],
-        insertion: '',
+        insertion: false,
     },
     html: '<p>carousel de conteúdos</p>',
     icon: "view-carousel",
@@ -47,7 +47,7 @@ registry.push({
     title: "Tabela",
     context: {
         show: ['PAGE', 'BODY'],
-        insertion: '',
+        insertion: false,
     },
     html: '<p>tabela de conteúdos</p>',
     icon: "view-quilt",
@@ -64,7 +64,7 @@ registry.push({
     title: "Lista",
     context: {
         show: ['PAGE', 'BODY'],
-        insertion: '',
+        insertion: false,
     },
     html: '<p>lista de conteúdos</p>',
     icon: "view-headline",
@@ -81,7 +81,7 @@ registry.push({
     title: "Grid",
     context: {
         show: ['PAGE', 'BODY'],
-        insertion: '',
+        insertion: false,
     },
     html: '<p>grid de conteúdos</p>',
     icon: "view-module",
@@ -99,7 +99,7 @@ registry.push({
     context: {
         show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
         insertion: {
-            'CARBO-FORM-CONTROL': '',
+            'CARBO-FORM-CONTROL': false,
             'CARBO-FORM': 'carbo-form-control',
         }
     },
@@ -122,7 +122,7 @@ registry.push({
     context: {
         show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
         insertion: {
-            'CARBO-FORM-CONTROL': '',
+            'CARBO-FORM-CONTROL': false,
             'CARBO-FORM': 'carbo-form-control',
         }
     },
@@ -142,7 +142,7 @@ registry.push({
     context: {
         show: ['FORM', 'CARBO-FORM'],
         insertion: {
-            'FORM': '',
+            'FORM': false,
             'CARBO-FORM': 'form',
         }
     },
@@ -165,7 +165,7 @@ registry.push({
     context: {
         show: ['FORM', 'CARBO-FORM'],
         insertion: {
-            'FORM': '',
+            'FORM': false,
             'CARBO-FORM': 'form',
         }
     },
@@ -185,7 +185,7 @@ registry.push({
     context: {
         show: ['PAPER-TOOLBAR'],
         insertion: {
-            'PAPER-TOOLBAR': ''
+            'PAPER-TOOLBAR': false
         },
     },
     icon: "menu",
@@ -204,7 +204,7 @@ registry.push({
     context: {
         show: ['PAPER-TOOLBAR'],
         insertion: {
-            'PAPER-TOOLBAR': ''
+            'PAPER-TOOLBAR': false
         },
     },
     icon: "text-format",
@@ -217,7 +217,7 @@ registry.push({
     context: {
         show: ['PAPER-TOOLBAR'],
         insertion: {
-            'PAPER-TOOLBAR': ''
+            'PAPER-TOOLBAR': false
         },
     },
     icon: "more-vert",

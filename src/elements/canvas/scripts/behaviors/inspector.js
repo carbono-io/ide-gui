@@ -27,7 +27,10 @@ var INSERTION_ID = 'canvas_insertion_focus';
 exports.created = function () {
 
     // Add listener for canvas-iframe-load event
-    this.addEventListener(CONSTANTS.IFRAME_LOAD_EVENT, this.handleCanvasLoad.bind(this));
+    this.addEventListener(
+        CONSTANTS.IFRAME_LOAD_EVENT,
+        this.handleCanvasLoad.bind(this)
+    );
 };
 
 /**
@@ -70,63 +73,58 @@ exports.handleCanvasLoad = function () {
         }.bind(this));
 };
 
+/**
+ * Define all inspector methods
+ */
+var INSPECTOR_METHODS = [
+    'highlightElementAtPoint',
+    'highlightElementForSelector',
+    'hideHighlighter',
+    'showHighlighter',
+    'getHighlighterTargetData',
+    'getElementData',
+];
+
+INSPECTOR_METHODS.forEach(function (methodName) {
+    exports[methodName] = function () {
+        var args = Array.prototype.slice.call(arguments, 0);
+
+        return this.executeInspectorOperation(methodName, args);
+    };
+});
+
 ///////////
 // HOVER //
 ///////////
 
-/**
- * Sets the hover highlighter to a point
- */
 exports.hoverElementAtPoint = function (point) {
-    return this.executeInspectorOperation('highlightElementAtPoint', [HOVER_ID, point])
+    this.highlightElementAtPoint(HOVER_ID, point)
         .then(function () {
-            return this.executeInspectorOperation('getHighlighterTargetData', [HOVER_ID]);
+            return this.getHighlighterTargetData(HOVER_ID);
+        }.bind(this))
+        .then(function (hoveredElementData) {
+            _setElementData.call(this, 'hoveredElementData', hoveredElementData);
+
+            return hoveredElementData;
         }.bind(this));
 };
-
-exports.hideHover = function () {
-    return this.executeInspectorOperation('unHighlight', [HOVER_ID]);
-};
-
-///////////
-// HOVER //
-///////////
+exports.hideHover = _.partial(exports.hideHighlighter, HOVER_ID);
 
 ///////////
 // FOCUS //
 ///////////
 
 /**
- * Auxiliary function that sets the focusedElementData property
- *
- * It builds some meta data onto the original data object.
- * @param {Object} data  
- */
-function _setFocusedElementData(focusedElementData) {
-
-    // carbono-uuid selector
-    focusedElementData._uuidSelector = util.format(
-        '[carbono-uuid="%s"]',
-        focusedElementData.attributes['carbono-uuid']
-    );
-
-    // set 
-    this.set('focusedElementData', focusedElementData);
-
-    return focusedElementData;
-}
-
-/**
  * Sets the focus highlighter to a point
  */
 exports.focusElementAtPoint = function (point) {
-    return this.executeInspectorOperation('highlightElementAtPoint', [FOCUS_ID, point])
+    return this.highlightElementAtPoint(FOCUS_ID, point)
         .then(function () {
-            return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
+            return this.getHighlighterTargetData(FOCUS_ID);
         }.bind(this))
         .then(function (focusedElementData) {
 
-            _setFocusedElementData.call(this, focusedElementData);
+            _setElementData.call(this, 'focusedElementData', focusedElementData);
 
             return focusedElementData;
         }.bind(this));
@@ -138,29 +136,30 @@ exports.focusElementAtPoint = function (point) {
  * @param  {String} selector CSS selector
  * @return {POJO}
  */
-exports.focusElementForSelector = function (selector, options) {
-    options = options || {};
-
-    return this.executeInspectorOperation('highlightElementForSelector', [FOCUS_ID, selector])
+exports.focusElementForSelector = function (selector) {
+    return this.highlightElementForSelector(FOCUS_ID, selector)
         .then(function () {
-            return this.executeInspectorOperation('getHighlighterTargetData', [FOCUS_ID]);
+            return this.getHighlighterTargetData(FOCUS_ID);
         }.bind(this))
         .then(function (focusedElementData) {
-            
-            _setFocusedElementData.call(this, focusedElementData);
+
+            _setElementData.call(this, 'focusedElementData', focusedElementData);
 
             return focusedElementData;
         }.bind(this));
 };
 
 exports.hideFocus = function () {
-    return this.executeInspectorOperation('unHighlight', [FOCUS_ID]);
+    return this.hideHighlighter(FOCUS_ID);
+};
+
+exports.getFocusTargetData = function (selector) {
+    return this.getHighlighterTargetData(FOCUS_ID, selector);
 };
 
 ///////////
 // FOCUS //
 ///////////
-
 
 // FOCUS AND HOVER //
 exports.areFocusAndHoverTogether = function () {
@@ -174,13 +173,14 @@ exports.areFocusAndHoverTogether = function () {
                 results[0].attributes['carbono-uuid'] === results[1].attributes['carbono-uuid'];
         });
 
-}
-
+};
 
 ///////////////
 // INSERTION //
 ///////////////
 exports.setInsertionFocus = function (insertionContext) {
+
+    console.warn('<carbo-canvas>.setInsertionFocus is deprecated');
 
     var focusedElementData = this.get('focusedElementData');
 
@@ -199,3 +199,39 @@ exports.setInsertionFocus = function (insertionContext) {
             return insertionElementData;
         });
 };
+
+/**
+ * Retrieves data for an element
+ * @return {[type]} [description]
+ */
+exports.getElementData = function () {
+
+};
+
+
+
+
+
+
+
+
+
+/**
+ * Auxiliary function that sets the elementData
+ *
+ * It builds some meta data onto the original data object.
+ * @param {Object} data  
+ */
+function _setElementData(prop, elementData) {
+
+    // carbono-uuid selector
+    elementData._uuidSelector = util.format(
+        '[carbono-uuid="%s"]',
+        elementData.attributes['carbono-uuid']
+    );
+
+    // set 
+    this.set(prop, elementData);
+
+    return elementData;
+}
