@@ -5,6 +5,7 @@ var exec = require('child_process').exec;
 var browserSync = require('browser-sync');
 var browserify  = require('browserify');
 var watchify    = require('watchify');
+var brfs        = require('brfs');
 var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 var mergeStream = require('merge-stream');
@@ -34,6 +35,9 @@ module.exports = function (gulp, $) {
         var w = watchify(browserify({
             entries: [entry]
         }));
+
+        // set brfs transform
+        w.transform(brfs);
 
         w.on('update', watchifyBundle); // on any dep update, runs the bundler
         w.on('log', $.util.log); // output build logs to terminal

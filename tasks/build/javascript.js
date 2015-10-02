@@ -3,6 +3,7 @@ var path = require('path');
 var _           = require('lodash');
 var mergeStream = require('merge-stream');
 var browserify  = require('browserify');
+var brfs        = require('brfs');
 var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 
@@ -41,6 +42,8 @@ module.exports = function (gulp, $) {
                 // Set the entry option so that it browserifies
                 // only one file
                 entries: [entry],
+                // transforms
+                transform: [brfs]
             };
 
             // Build a file path for writing the resulting

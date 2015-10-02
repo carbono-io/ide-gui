@@ -75,6 +75,9 @@ util.inherits(CodeMachineClient, EventEmitter);
 
 var _requestsStore = {};
 
+/**
+ * Inserts element
+ */
 CodeMachineClient.prototype.insertElement = function (path, element) {
 
     var socket = this.socket;
@@ -83,7 +86,10 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
         throw new Error('Code machine socket not found');
     }
 
-    console.info('[service] code-machine:insertElement(%s, %s)', path);
+    console.info(
+        '[service] code-machine:insertElement(%s, %s)',
+        path
+    );
 
     // Create a deferred object
     var defer = Q.defer();
@@ -114,7 +120,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
 
     socket.emit('command:insertElement', request.toJSON());
 
-    socket.on('command:insertElement/success', function (res) {
+    socket.once('command:insertElement/success', function (res) {
 
         // Parse if is a string, else use the value
         res = typeof res === 'string' ? JSON.parse(res) : res;
@@ -129,7 +135,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
         }
     });
 
-    socket.on('command:insertElement/error', function (res) {
+    socket.once('command:insertElement/error', function (res) {
 
         /**
          * TODO: on error, original request id is not being returned.
@@ -143,6 +149,83 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
     });
 
     // Return the promise :)
+    return defer.promise;
+};
+
+
+
+/**
+ * Creates an entity entry in the entities.json file
+ * @return {Promise}
+ */
+CodeMachineClient.prototype.createEntityFromSchema = function (entityName, schema) {
+    
+    var defer = Q.defer();
+
+    console.info(
+        '[service] code-machine:createEntityFromSchema(%s, %s)',
+        entityName,
+        JSON.stringify(schema)
+    );
+
+    var socket = this.socket;
+
+    // data to be sent to codeMachine server
+    var data = {
+        entityName: entityName,
+        schema: schema
+    };
+
+    // Create request object
+    var request = new Message({ apiVersion: '1.0' });
+    request.setData({ items: [data] });
+
+    socket.emit('command:createEntityFromSchema', request.toJSON());
+
+    socket.once('command:createEntityFromSchema/success', function (res) {
+
+        // Parse if is a string, else use the value
+        res = typeof res === 'string' ? JSON.parse(res) : res;
+
+        // Retrieve corresponding defer
+        var requestData = _requestsStore[res.id];
+
+        if (!requestData) {
+            console.warn('code-machine:request not found ' + res.id);
+        } else {
+            requestData.defer.resolve(res);
+        }
+    });
+
+    socket.once('command:createEntityFromSchema/error', function (res) {
+
+        defer.reject(res);
+    });
+
+    setTimeout(function () {
+        defer.resolve();
+    }, 1000);
+
+    return defer.promise;
+};
+
+/**
+ * Binds a component to an entity
+ * @return {Promise} 
+ */
+CodeMachineClient.prototype.bindComponentToEntity = function () {
+    var defer = Q.defer();
+
+    console.info(
+        '[service] code-machine:bindComponentToEntity(%s, %s)',
+        entityName,
+        JSON.stringify(schema)
+    );
+
+    setTimeout(function () {
+        defer.resolve();
+    }, 1000);
+
     return defer.promise;
 };
 
