@@ -17,24 +17,6 @@ var CONSTANTS = require('../constants');
  */
 exports.properties = {
 
-    /**
-     * The element currently focused
-     * @type {Object}
-     */
-    focusedElementData: {
-        type: Object,
-        notify: true,
-    },
-
-    /**
-     * The element currently hovered
-     * @type {Object}
-     */
-    hoveredElementData: {
-        type: Object,
-        notify: true
-    },
-
     interactionMode: {
         type: String,
         notify: true,

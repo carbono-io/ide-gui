@@ -20,6 +20,31 @@ var FOCUS_ID     = 'canvas_focus';
 var INSERTION_ID = 'canvas_insertion_focus';
 
 /**
+ * Properties that define communication with external world
+ * @type {Object}
+ */
+exports.properties = {
+
+    /**
+     * The element currently focused
+     * @type {Object}
+     */
+    focusedElementData: {
+        type: Object,
+        notify: true,
+    },
+
+    /**
+     * The element currently hovered
+     * @type {Object}
+     */
+    hoveredElementData: {
+        type: Object,
+        notify: true
+    },
+};
+
+/**
  * Lifecycle callback for whenever the element has been created
  *
  * We'll start listening for events here

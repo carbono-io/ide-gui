@@ -4,19 +4,16 @@
 (function () {
 
     // Load behaviors
-    var CodeMachineBehavior = require('./scripts/behaviors/code-machine');
-    var ComponentPreview    = require('./scripts/behaviors/component-preview');
+    var CodeMachineIntegrationBehavior = require('./scripts/behaviors/code-machine-integration');
+    var ComponentPreview               = require('./scripts/behaviors/component-preview');
     
     Polymer({
         is: 'carbo-components-palette',
 
-        behaviors: [CodeMachineBehavior, ComponentPreview],
+        behaviors: [CodeMachineIntegrationBehavior, ComponentPreview],
 
         properties: {
-            codeMachine: {
-                type: Object,
-                notify: true
-            },
+
             canvas: {
                 type: Object,
                 notify: true,
@@ -28,15 +25,23 @@
                 notify: true,
             },
 
-            contextElement: {
+            /**
+             * The componentsRegistryClientService
+             * @type {Object}
+             */
+            componentsRegistry: {
+                type: Object,
+                notify: true
+            },
+
+            /**
+             * The element that has focus
+             * @type {Object}
+             */
+            focusedElementData: {
                 type: Object,
                 notify: true,
                 observer: '_handleContextElementChange'
-            },
-
-            registry: {
-                type: Object,
-                notify: true
             }
         },
 
@@ -45,115 +50,56 @@
             console.log('canvas changed');
         },
 
-        _handleContextElementChange: function (contextElement, oldContext) {
+        _handleContextElementChange: function (focusedElementData, oldContext) {
 
-            this.set('components', this.registry.read({
-                context: contextElement.tagName
-            }));
+            this.componentsRegistry.read({
+                context: focusedElementData.tagName
+            })
+            .then(function (components) {
+                this.set('components', components);
+            }.bind(this))
+            .fail(function (err) {
+                console.warn('failed to read components from registry');
+
+                throw err;
+            }.bind(this))
+            .done();
         },
 
         handleComponentClick: function (event) {
 
-            var component = event.model.item;
+            // get the component data related to the clicked item
+            var componentData = event.model.item;
 
-            // Check for required services
-            if (!this.codeMachine) {
-                throw new Error('No codeMachine for carbo-components-palette');
-            }
-
-            if (!this.canvas) {
-                throw new Error('No canvas for carbo-components-palette');
-            }
-            // Keep reference to the canvas element
+            // keep reference to canvas
             var canvas = this.canvas;
 
-            var focusedElementData = canvas.get('focusedElementData');
+            this.insertComponent(componentData)
+                .then(function happiness() {
+                    // now everything is finished
+                    canvas.deactivateLoading();
+                    canvas.reload();
+                    // stop loading
+                    this.toggleLoading(false);
+                }.bind(this))
 
-            // retrieve the insertion context for the component
-            var insertionContext = component.context.insertion;
+                // handle failures together for now
+                .fail(function sadness(err) {
 
-            console.log(insertionContext)
+                    canvas.reload();
+                    canvas.deactivateLoading();
 
-            // TODO: handle errors
-            // set the insertion focus
-            canvas.getFocusTargetData(insertionContext[focusedElementData.tagName])
-                .then(function insertElement(insertionElementData) {
-                    console.log(insertionElementData);
+                    this.toggleLoading(false);
+                    this.toggleError(true);
 
-                    // Path data
-                    var insertPath = {
-                        uuid: insertionElementData.attributes['carbono-uuid'],
-                    };
-
-                    console.log(insertPath);
-
-                    // Element data
-                    var insertElement = {
-                        html: component.html,
-                        components: component.components
-                    };
-
-
-                    // 
-                    var entityName = 'formulario_' + _.uniqueId();
-
-                    var entitySchema = {
-                        'campo1': 'String',
-                        'campo2': 'String'
-                    };
-
-                    this.codeMachine
-                        .insertElement(insertPath, insertElement)
-                        .then(function createEntityFromSchema(res) {
-                            // element html was inserted,
-                            // now create the entities.json entry if it is needed
-                            
-                            if (component.requiresEntity) {
-
-                                return this.codeMachine.createEntityFromSchema(entityName, entitySchema);
-                            }
-
-                        }.bind(this))
-                        // .then(function associateComponentToEntity(res) {
-                        //     // entity entry was created,
-                        //     // make association
-                            
-                        //     if (component.requiresEntity) {
-                        //         var path = {
-                        //             file: '/index.html',
-                        //             uuid: 'aaaa'
-                        //         }
-
-                        //         return this.codeMachine.bindComponentToEntity()
-                        //     }
-                        // })
-                        .then(function happiness() {
-                            // now everything is finished
-                            this.canvas.deactivateLoading();
-                            canvas.reload();
-                            // stop loading
-                            this.toggleLoading(false);
-                        }.bind(this))
-
-                        // handle failures together for now
-                        .fail(function sadness(err) {
-
-                            canvas.reload();
-                            this.canvas.deactivateLoading();
-
-                            this.toggleLoading(false);
-                            this.toggleError(true);
-                            console.log(err);
-                            console.log('error! :(');
-                        }.bind(this)).done();
-
+                    throw err;
                 }.bind(this))
                 .done();
 
             this.toggleLoading(true);
             this.toggleError(false);
 
-            this.canvas.activateLoading();
+            canvas.activateLoading();
         },
 
         /**

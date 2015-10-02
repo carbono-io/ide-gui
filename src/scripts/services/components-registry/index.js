@@ -9,6 +9,7 @@ var util = require('util');
 
 // external dependencies
 var _ = require('lodash');
+var Q = require('q');
 
 var REQUIRED_CONFIGS = ['location', 'userService'];
 
@@ -49,7 +50,7 @@ ComponentsRegistryClient.prototype.read = function (query) {
         return contextFilter;
     });
 
-    return res;
+    return Q(res);
 
 };
 

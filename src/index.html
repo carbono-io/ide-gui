@@ -130,6 +130,8 @@
                             ide-mode="{{ ideMode }}"
 
                             context="{{ context }}"
+
+                            focused-element-data="{{ focusedElementData }}"
                         ></carbo-canvas>
                     </div>
 
@@ -138,13 +140,13 @@
                         <carbo-components-palette
                             id="components-palette"
 
-                            registry="{{ services.componentsRegistry }}"
+                            components-registry="{{ services.componentsRegistry }}"
 
                             components="{{ paletteComponents }}"
                             code-machine="{{ services.codeMachine }}"
                             canvas="{{ components.canvas }}"
 
-                            context-element="{{ contextElement }}"
+                            focused-element-data="{{ focusedElementData }}"
                         ></carbo-components-palette>
 
                     </iron-pages>
