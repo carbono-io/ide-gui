@@ -12,46 +12,896 @@
 
 <dom-module id="carbo-styles-list">
     <style include="styles-list-styles"></style>
-<!--
-    <template is="dom-repeat" items="{{ components }}">
-        <div class="component" on-mouseover="handleComponentMouseOver" on-mouseout="hidePreview">
-            <div class="component-icon">
-                <iron-icon icon="{{ item.icon }}"></iron-icon>
-            </div>
-            <div class="component-label">{{ item.title }}</div>
-        </div>
-    </template>
 
-<template is="dom-repeat" items="{{ screens }}">
-                    <div class="preview-screen"><img src="{{ item.url }}"></div>
-                    <div class="screen-caption">{{ item.screensCaption }}</div>
-
-                </template>
--->
     <template>
-        <template is="dom-repeat" items="{{ group }}">
-            <!--componente start-->
-            <div id="group">
-                <div id="group-name" on-click="toggleClosedClass">
-                    <div class="item-id">
-                        <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
-                        <span>{{ item.title }}</span>
-                    </div>
-                </div>
-                <div id="hoverer"></div>
-                <template is="dom-repeat" items="{{ item.styles }}">
-                    <div id="style-name">
-                        <div class="item-id">
-                            <div class="style-preview-2" on-click="setClassName"><!--{{ item.icon }}--></div>
-                            <span>{{ item.name }}</span>
-                        </div>
-                    </div>
-                    <div id="hoverer"></div>
-                </template>
+
+
+        <div id="component-class">
+
+            <div id="component-class-id">
+                <iron-icon icon="hardware:keyboard-arrow-down" id="arrow" ></iron-icon>
+                <span>Paper-button-purple</span>
             </div>
-            <!--componente end-->
-        </template>
+
+            <!-- CLASS -->
+            <form class="component-class-properties">
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="background-group">
+
+                    <div class="property">
+
+                        <label class="property-name">Bg-color:</label>
+
+                        <div class="property-content">
+                            <input type="color"><p>#FFF</p>
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Bg-image:</label>
+
+                        <div class="property-content">
+                            <input type="text" id="image-value" placeholder="Insert image url">
+                        <div class="bg-image"><img src="http://www.imagenswhatsapp.com.br/wp-content/uploads/2015/02/Imagens-Flores.jpg"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="border-group">
+
+                    <div class="property">
+
+                         <label class="property-name">Border-width:</label>
+
+                        <div class="property-content">
+
+                            <input type="text" id="border-width-value">
+
+                            <select name="border-width">
+                                  <option value="valor1">medium</option>
+                                  <option value="valor2">thin</option>
+                                  <option value="valor3">thick</option>
+                                  <option value="valor4">initial</option>
+                                  <option value="valor5">inherit</option>
+                                  <option value="valor6">px</option>
+                                  <option value="valor7">pt</option>
+                                  <option value="valor8">cm</option>
+                                  <option value="valor9">em</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                         <label class="property-name">Border-color:</label>
+
+                        <div class="property-content">
+
+                            <input type="color"><p>#FFF</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Border-style:</label>
+
+                        <div class="property-content">
+
+                            <select name="border-style">
+                                  <option value="valor1">none</option>
+                                  <option value="valor2">hidden</option>
+                                  <option value="valor3">dotted</option>
+                                  <option value="valor4">dashed</option>
+                                  <option value="valor5">solid</option>
+                                  <option value="valor6">double</option>
+                                  <option value="valor7">groove</option>
+                                  <option value="valor8">ridge</option>
+                                  <option value="valor9">inset</option>
+                                  <option value="valor10">outset</option>
+                                  <option value="valor11">initial</option>
+                                  <option value="valor12">inherit</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="color-group">
+
+                    <div class="property">
+
+                        <label class="property-name">Color:</label>
+
+                        <div class="property-content">
+
+                            <input type="color"><p>#FFF</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Opacity:</label>
+
+                        <div class="property-content">
+
+                            <input type="text">
+                            <input id="slider1" type="range" min="0" max="1" step="0.1" />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="text-group">
+
+                    <div class="property">
+
+                        <label class="property-name">Text-align:</label>
+
+                        <div class="property-content">
+
+                            <select name="text-align">
+                                  <option value="valor1">left</option>
+                                  <option value="valor2">right</option>
+                                  <option value="valor3">center</option>
+                                  <option value="valor4">justify</option>
+                                  <option value="valor5">initial</option>
+                                  <option value="valor6">inherit</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Text-decoration:</label>
+
+                        <div class="property-content">
+
+                            <select name="text-decoration">
+                                  <option value="valor1"><iron-icon icon="hardware:keyboard-arrow-down"></iron-icon>normal</option>
+                                  <option value="valor2">italic</option>
+                                  <option value="valor3">oblique</option>
+                                  <option value="valor4">initial</option>
+                                  <option value="valor5">inherit</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Text-indent:</label>
+
+                        <div class="property-content">
+
+                            <input type="text" id="text-indent-value">
+
+                            <select name="text-indent">
+                                  <option value="valor1">initial</option>
+                                  <option value="valor2">inherit </option>
+                                  <option value="valor3">px</option>
+                                  <option value="valor4">pt</option>
+                                  <option value="valor5">cm</option>
+                                  <option value="valor6">em</option>
+                                  <option value="valor7">%</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Text-transform:</label>
+
+                        <div class="property-content">
+
+                            <select name="text-transform">
+                                  <option value="valor1">none</option>
+                                  <option value="valor2">capitalize</option>
+                                  <option value="valor3">uppercase</option>
+                                  <option value="valor4">lowercase</option>
+                                  <option value="valor5">initial</option>
+                                  <option value="valor6">inherit</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Line-height:</label>
+
+                        <div class="property-content">
+
+                            <input type="text" id="line-height-value">
+
+                            <select name="line-height">
+                                  <option value="valor1">normal</option>
+                                  <option value="valor2">initial</option>
+                                  <option value="valor3">inherit</option>
+                                  <option value="valor3">px</option>
+                                  <option value="valor4">pt</option>
+                                  <option value="valor5">cm</option>
+                                  <option value="valor6">em</option>
+                                  <option value="valor7">%</option>
+                            </select>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Vertical-align:</label>
+
+                        <div class="property-content">
+
+                            <input type="text" id="vertical-align-value">
+
+                            <select name="vertical-align">
+                                  <option value="valor1">baseline</option>
+                                  <option value="valor2">sub</option>
+                                  <option value="valor3">super</option>
+                                  <option value="valor3">top</option>
+                                  <option value="valor4">text-top</option>
+                                  <option value="valor5">middle</option>
+                                  <option value="valor6">bottom</option>
+                                  <option value="valor7">text-bottom</option>
+                                  <option value="valor7">initial</option>
+                                  <option value="valor3">px</option>
+                                  <option value="valor4">pt</option>
+                                  <option value="valor5">cm</option>
+                                  <option value="valor6">em</option>
+                                  <option value="valor7">%</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Letter-spacing:</label>
+
+                        <div class="property-content">
+
+                            <input type="text" id="letter-spacing-value">
+
+                            <select name="letter-spacing">
+                                  <option value="valor1">normal</option>
+                                  <option value="valor2">initial</option>
+                                  <option value="valor3">inherit</option>
+                                  <option value="valor3">px</option>
+                                  <option value="valor4">pt</option>
+                                  <option value="valor5">cm</option>
+                                  <option value="valor6">em</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="property">
+
+                        <label class="property-name">Word-spacing:</label>
+
+                        <div class="property-content">
+
+                            <input type="text" id="word-spacing-value">
+
+                            <select name="word-spacing">
+                                  <option value="valor1">normal</option>
+                                  <option value="valor2">initial</option>
+                                  <option value="valor3">inherit</option>
+                                  <option value="valor3">px</option>
+                                  <option value="valor4">pt</option>
+                                  <option value="valor5">cm</option>
+                                  <option value="valor6">em</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">White-space:</label>
+
+                        <div class="property-content">
+
+                            <select name="white-space">
+                                  <option value="valor1">normal</option>
+                                  <option value="valor2">nowrap</option>
+                                  <option value="valor3">pre</option>
+                                  <option value="valor3">pre-line</option>
+                                  <option value="valor5">pre-wrap</option>
+                                  <option value="valor6">initial</option>
+                                  <option value="valor7">inherit</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="property">
+
+                        <label class="property-name">Direction:</label>
+
+                        <div class="property-content">
+
+                            <select name="direction">
+                                  <option value="valor1">ltr</option>
+                                  <option value="valor2">rtl</option>
+                                  <option value="valor3">initial</option>
+                                  <option value="valor3">inherit</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="font-group">
+
+                        <div class="property">
+
+                            <label class="property-name">Font-family</label>
+
+                            <div class="property-content">
+
+                                <select name="font-family">
+                                      <option value="valor1">initial</option>
+                                      <option value="valor2">inherit</option>
+                                      <option value="valor3">--</option>
+                                      <option value="valor3">---</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="property">
+
+                            <label class="property-name">Font-style</label>
+
+                            <div class="property-content">
+
+                                <select name="font-style">
+                                      <option value="valor1">normal</option>
+                                      <option value="valor2">italic</option>
+                                      <option value="valor3">oblique</option>
+                                      <option value="valor3">initial</option>
+                                      <option value="valor3">inherit</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="property">
+
+                            <label class="property-name">Font-variant</label>
+
+                            <div class="property-content">
+
+                                <select name="font-variant">
+                                      <option value="valor1">normal</option>
+                                      <option value="valor2">small-caps</option>
+                                      <option value="valor3">initial</option>
+                                      <option value="valor3">inherit</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="property">
+
+                            <label class="property-name">Font-weight</label>
+
+                            <div class="property-content">
+
+                                <select name="font-weight">
+                                      <option value="valor1">normal</option>
+                                      <option value="valor2">bold</option>
+                                      <option value="valor3">bolder</option>
+                                      <option value="valor3">lighter</option>
+                                      <option value="valor3">initial</option>
+                                      <option value="valor3">inherit</option>
+                                      <option value="valor1">100</option>
+                                      <option value="valor2">200</option>
+                                      <option value="valor3">300</option>
+                                      <option value="valor3">400</option>
+                                      <option value="valor3">500</option>
+                                      <option value="valor3">600</option>
+                                      <option value="valor3">700</option>
+                                      <option value="valor3">800</option>
+                                      <option value="valor3">900</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="property">
+
+                            <label class="property-name">Font-size</label>
+
+                            <div class="property-content">
+
+                            <input type="text" id="font-size-value">
+
+
+                            <select name="font-size">
+                                  <option value="valor1">medium</option>
+                                  <option value="valor2">xx-small</option>
+                                  <option value="valor3">x-small</option>
+                                  <option value="valor4">small</option>
+                                  <option value="valor5">large</option>
+                                  <option value="valor6">x-large</option>
+                                  <option value="valor3">xx-large</option>
+                                  <option value="valor4">smaller</option>
+                                  <option value="valor5">larger</option>
+                                  <option value="valor4">initial</option>
+                                  <option value="valor5">inherit</option>
+                                  <option value="valor3">px</option>
+                                  <option value="valor4">pt</option>
+                                  <option value="valor5">cm</option>
+                                  <option value="valor6">em</option>
+                                  <option value="valor7">%</option>
+                            </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="margin-padding-group">
+
+                    <div class="property">
+
+                                <label class="property-name">Margin:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="margin-value">
+
+                                    <select name="margin">
+                                          <option value="valor1">auto</option>
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                    </div>
+
+
+                    <div class="property">
+
+                            <label class="property-name">Padding:</label>
+
+                            <div class="property-content">
+
+                                    <input type="text" id="padding-value">
+
+                                <select name="padding">
+                                      <option value="valor1">initial</option>
+                                      <option value="valor2">inherit</option>
+                                      <option value="valor1">px</option>
+                                      <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                      <option value="valor2">%</option>
+                                </select>
+
+                            </div>
+
+                </div>
+
+
+                </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="box-size-group">
+
+
+                    <div class="property">
+
+                                <label class="property-name">Width:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="width-value">
+
+                                    <select name="width">
+                                          <option value="valor1">auto</option>
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                    </div>
+
+                    <div class="property">
+
+                                <label class="property-name">Min-width:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="min-width-value">
+
+                                    <select name="min-width">
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                    </div>
+
+                    <div class="property">
+
+                                <label class="property-name">Max-width:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="max-width-value">
+
+                                    <select name="max-width">
+                                          <option value="valor1">none</option>
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                   </div>
+
+                    <div class="property">
+
+                                <label class="property-name">Height:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="height-value">
+
+                                    <select name="height">
+                                          <option value="valor1">auto</option>
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                  </div>
+
+                   <div class="property">
+
+                                <label class="property-name">Min-height:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="min-height-value">
+
+                                    <select name="min-height">
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                    </div>
+
+                    <div class="property">
+
+                                <label class="property-name">Max-height:</label>
+
+                                <div class="property-content">
+
+                                    <input type="text" id="max-height-value">
+
+                                    <select name="max-height">
+                                          <option value="valor1">none</option>
+                                          <option value="valor1">initial</option>
+                                          <option value="valor2">inherit</option>
+                                          <option value="valor1">px</option>
+                                          <option value="valor2">pt</option>                                                     <option value="valor2">cm</option>
+                                          <option value="valor2">%</option>
+                                    </select>
+
+                                </div>
+
+                   </div>
+
+                </div>
+
+                <!-- PROPERTIES GROUP -->
+                <div class="properties-group" id="visual-formatting-group">
+
+                    <div class="property">
+
+                            <label class="property-name">Display:</label>
+
+                            <div class="property-content">
+
+                                <select name="display">
+                                      <option value="valor1">inline</option>
+                                      <option value="valor2">block</option>
+                                      <option value="valor3">flex</option>
+                                      <option value="valor4">inline-block</option>
+                                      <option value="valor5">inline-flex</option>
+                                      <option value="valor6">inline-table</option>
+                                      <option value="valor7">list-item</option>
+                                      <option value="valor8">run-in</option>
+                                      <option value="valor9">table</option>
+                                      <option value="valor10">table-caption</option>
+                                      <option value="valor11">table-column-group</option>
+                                      <option value="valor12">table-header-group</option>
+                                      <option value="valor13">table-footer-group</option>
+                                      <option value="valor14">table-row-group</option>
+                                      <option value="valor15">table-cell</option>
+                                      <option value="valor16">table-column</option>
+                                      <option value="valor17">table-row</option>
+                                      <option value="valor18">none</option>
+                                      <option value="valor19">initial</option>
+                                      <option value="valor20">inherit</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Position:</label>
+
+                            <div class="property-content">
+
+                                <select name="position">
+                                      <option value="valor1">static</option>
+                                      <option value="valor2">absolute</option>
+                                      <option value="valor3">fixed</option>
+                                      <option value="valor4">relative</option>
+                                      <option value="valor5">initial</option>
+                                      <option value="valor6">inherit</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Top:</label>
+
+                            <div class="property-content">
+
+                                <input type="text" id="top-value">
+
+                                <select name="top">
+                                      <option value="valor1">auto</option>
+                                      <option value="valor2">initial</option>
+                                      <option value="valor3">inherit</option>
+                                      <option value="valor4">px</option>
+                                      <option value="valor5">pt</option>
+                                      <option value="valor6">cm</option>
+                                      <option value="valor7">em</option>
+                                      <option value="valor8">%</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Right:</label>
+
+                            <div class="property-content">
+
+                                <input type="text" id="right-value">
+
+                                <select name="right">
+                                      <option value="valor1">auto</option>
+                                      <option value="valor2">initial</option>
+                                      <option value="valor3">inherit</option>
+                                      <option value="valor4">px</option>
+                                      <option value="valor5">pt</option>
+                                      <option value="valor6">cm</option>
+                                      <option value="valor7">em</option>
+                                      <option value="valor8">%</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Bottom:</label>
+
+                            <div class="property-content">
+
+                                <input type="text" id="bottom-value">
+
+                                <select name="bottom">
+                                      <option value="valor1">auto</option>
+                                      <option value="valor2">initial</option>
+                                      <option value="valor3">inherit</option>
+                                      <option value="valor4">px</option>
+                                      <option value="valor5">pt</option>
+                                      <option value="valor6">cm</option>
+                                      <option value="valor7">em</option>
+                                      <option value="valor8">%</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Left:</label>
+
+                            <div class="property-content">
+
+                                <input type="text" id="left-value">
+
+                                <select name="left">
+                                      <option value="valor1">auto</option>
+                                      <option value="valor2">initial</option>
+                                      <option value="valor3">inherit</option>
+                                      <option value="valor4">px</option>
+                                      <option value="valor5">pt</option>
+                                      <option value="valor6">cm</option>
+                                      <option value="valor7">em</option>
+                                      <option value="valor8">%</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Float:</label>
+
+                            <div class="property-content">
+
+                                <select name="float">
+                                      <option value="valor1">none</option>
+                                      <option value="valor2">left</option>
+                                      <option value="valor3">right</option>
+                                      <option value="valor4">initial</option>
+                                      <option value="valor5">inherit</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Clear:</label>
+
+                            <div class="property-content">
+
+                                <select name="clear">
+                                      <option value="valor1">none</option>
+                                      <option value="valor2">left</option>
+                                      <option value="valor3">right</option>
+                                      <option value="valor4">both</option>
+                                      <option value="valor5">initial</option>
+                                      <option value="valor6">inherit</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Z-index:</label>
+
+                            <div class="property-content">
+
+                                <input type="text" id="z-index-value">
+
+                                <select name="z-index">
+                                      <option value="valor1">none</option>
+                                      <option value="valor2">initial</option>
+                                      <option value="valor3">inherit</option>
+                                      <option value="valor4">insert value</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                    <div class="property">
+
+                            <label class="property-name">Overflow:</label>
+
+                            <div class="property-content">
+
+                                <select name="overflow">
+                                      <option value="valor1">visible</option>
+                                      <option value="valor2">hidden</option>
+                                      <option value="valor3">scroll</option>
+                                      <option value="valor4">auto</option>
+                                      <option value="valor5">initial</option>
+                                      <option value="valor6">inherit</option>
+                                </select>
+
+                            </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+
     </template>
+
+
 
     <script src="styles-list.js"></script>
 

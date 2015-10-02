@@ -139,12 +139,15 @@
 		// no growing nor shrinking
 		flex-grow: 0;
 		flex-shrink: 0;
-
 		margin-left: 0;
 		border-left: solid 1px @border-bottom;
 
 		background-color: @panel-background-color;
-//      comentei o tamanho aqui para testar com tamanho maior           para os dados
+
+
+        //mudar de lugar depois
+        overflow: scroll;
+
         &.style {
             width: @panel-width;
         }
