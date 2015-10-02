@@ -107,7 +107,8 @@ var INSPECTOR_METHODS = [
     'hideHighlighter',
     'showHighlighter',
     'getHighlighterTargetData',
-    'getElementData',
+    'getHighlighterTargetChildrenData',
+    'getElementsData',
 ];
 
 INSPECTOR_METHODS.forEach(function (methodName) {
@@ -178,8 +179,17 @@ exports.hideFocus = function () {
     return this.hideHighlighter(FOCUS_ID);
 };
 
-exports.getFocusTargetData = function (selector) {
-    return this.getHighlighterTargetData(FOCUS_ID, selector);
+/**
+ * Focus inspection
+ * @param  {[type]} selector [description]
+ * @return {[type]}          [description]
+ */
+exports.getFocusTargetData = function () {
+    return this.getHighlighterTargetData(FOCUS_ID);
+};
+
+exports.getFocusTargetChildrenData = function (selector) {
+    return this.getHighlighterTargetChildrenData(FOCUS_ID, selector);
 };
 
 ///////////
@@ -224,22 +234,6 @@ exports.setInsertionFocus = function (insertionContext) {
             return insertionElementData;
         });
 };
-
-/**
- * Retrieves data for an element
- * @return {[type]} [description]
- */
-exports.getElementData = function () {
-
-};
-
-
-
-
-
-
-
-
 
 /**
  * Auxiliary function that sets the elementData
