@@ -5,12 +5,17 @@
 
     // Load behaviors
     var CodeMachineIntegrationBehavior = require('./scripts/behaviors/code-machine-integration');
+    var CanvasIntegrationBehavior      = require('./scripts/behaviors/canvas-integration');
     var ComponentPreview               = require('./scripts/behaviors/component-preview');
     
     Polymer({
         is: 'carbo-components-palette',
 
-        behaviors: [CodeMachineIntegrationBehavior, ComponentPreview],
+        behaviors: [
+            CodeMachineIntegrationBehavior,
+            CanvasIntegrationBehavior,
+            ComponentPreview
+        ],
 
         properties: {
 

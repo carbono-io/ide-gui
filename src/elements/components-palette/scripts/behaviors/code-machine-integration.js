@@ -58,21 +58,7 @@ exports.insertComponent = function (componentData) {
         throw new Error('No componentData for <carbo-components-palette>.insertComponent');
     }
 
-    // retrieve data about the insertion elements
-    var insertionElementDataPromise;
-    if (insertionElementSelector) {
-        // get children
-        insertionElementDataPromise = canvas.getFocusTargetChildrenData(insertionElementSelector);
-    } else {
-        // get target itself
-        insertionElementDataPromise = canvas.getFocusTargetData().then(function (d) {
-            // convert into array of data
-            return [d];
-        });
-    }
-
-
-    return insertionElementDataPromise
+    return this.getInsertionElementData(insertionElementSelector)
         // install bower dependencies and insert html
         .then(function (insertionElementData) {
 

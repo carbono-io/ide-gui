@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../panel/panel.html">
+<link rel="import" href="../components-tree/components-tree.html">
+<link rel="import" href="components-tree-panel-styles.html">
+
+<dom-module id="carbo-components-tree-panel">
+    <style include="components-tree-panel-styles"></style>
+
+    <template>
+
+        <carbo-panel
+            title="Componentes"
+            icon="backup"
+            menu="{{ boxmenuitemComponents }}"
+        >
+
+            <template is="dom-if" if="{{ tree }}">
+                <carbo-components-tree
+                    component="{{ tree }}"
+                ></carbo-components-tree>
+            </template>
+
+        </carbo-panel>
+
+    </template>
+    
+    <script src="components-tree-panel.js"></script>
+</dom-module>

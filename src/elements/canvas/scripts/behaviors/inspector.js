@@ -14,11 +14,6 @@ var Q = require('q');
 // internal dependencies
 var CONSTANTS = require('../constants');
 
-// constants
-var HOVER_ID     = 'canvas_hover';
-var FOCUS_ID     = 'canvas_focus';
-var INSERTION_ID = 'canvas_insertion_focus';
-
 /**
  * Properties that define communication with external world
  * @type {Object}
@@ -42,6 +37,15 @@ exports.properties = {
         type: Object,
         notify: true
     },
+
+    /**
+     * The current active element tree
+     * @type {Object}
+     */
+    activeElementTreeData: {
+        type: Object,
+        notify: true
+    }
 };
 
 /**
@@ -59,49 +63,11 @@ exports.created = function () {
 };
 
 /**
- * Handles 'canvas-iframe-load' events (fired whenever the iframe is loaded
- * with the application inside it)
- */
-exports.handleCanvasLoad = function () {
-    // instantiate highlighters
-    var hover = {
-        id: HOVER_ID,
-        surfaceStyle: {
-            border: '3px dashed green'
-        }
-    };
-    var hoverHltPromise = this.executeInspectorOperation('createHighlighter', [hover]);
-
-    var focus = {
-        id: FOCUS_ID,
-        surfaceStyle: {
-            border: '3px solid green'
-        }
-    };
-    var focusHltPromise = this.executeInspectorOperation('createHighlighter', [focus]);
-
-    var insertion = {
-        id: INSERTION_ID,
-        surfaceStyle: {
-            border: 'none',
-        }
-    };
-    var insertionHltPromise = this.executeInspectorOperation('createHighlighter', [insertion]);
-
-    // Wait for both highlighters to be created before
-    // firing event of 'inspector-ready'
-    Q.all([hoverHltPromise, focusHltPromise, insertionHltPromise])
-        .then(function () {
-
-            this.fire(CONSTANTS.INSPECTOR_READY_EVENT);
-
-        }.bind(this));
-};
-
-/**
  * Define all inspector methods
  */
 var INSPECTOR_METHODS = [
+    'createHighlighter',
+
     'highlightElementAtPoint',
     'highlightElementForSelector',
     'hideHighlighter',
@@ -119,6 +85,50 @@ INSPECTOR_METHODS.forEach(function (methodName) {
         return this.executeInspectorOperation(methodName, args);
     };
 });
+
+// list of highlighters to be created
+var HOVER_ID     = 'canvas_hover';
+var FOCUS_ID     = 'canvas_focus';
+var INSERTION_ID = 'canvas_insertion_focus';
+var HIGHLIGHTERS = [
+    {
+        id: HOVER_ID,
+        surfaceStyle: {
+            border: '3px dashed green'
+        }
+    },
+    {
+        id: FOCUS_ID,
+        surfaceStyle: {
+            border: '3px solid green'
+        }
+    }
+];
+
+/**
+ * Handles 'canvas-iframe-load' events (fired whenever the iframe is loaded
+ * with the application inside it)
+ */
+exports.handleCanvasLoad = function () {
+    // instantiate highlighters
+    var highlightersPromise = HIGHLIGHTERS.map(this.createHighlighter.bind(this));
+
+    // Wait for both highlighters to be created before
+    // firing event of 'inspector-ready'
+    Q.all(highlightersPromise)
+        .then(function () {
+            this.fire(CONSTANTS.INSPECTOR_READY_EVENT);
+        }.bind(this))
+        .done();
+
+    // get active element tree data ('body' for now)
+    // TODO: make this dynamic
+    this.getElementTreeData('body')
+        .then(function (bodyTreeData) {
+            this.set('activeElementTreeData', bodyTreeData);
+        }.bind(this))
+        .done();
+};
 
 ///////////
 // HOVER //
