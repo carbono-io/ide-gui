@@ -71,9 +71,11 @@ exports.insertComponent = function (componentData) {
             };
 
             // Element data
+            var html = componentData.renderHtml ? componentData.renderHtml() : componentData.html;
+            
             var insertElement = {
-                html: componentData.html,
-
+                // html to be inserted
+                html: html,
                 // bower dependencies
                 components: componentData.components
             };
