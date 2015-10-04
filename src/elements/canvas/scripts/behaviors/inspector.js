@@ -109,6 +109,7 @@ var INSPECTOR_METHODS = [
     'getHighlighterTargetData',
     'getHighlighterTargetChildrenData',
     'getElementsData',
+    'getElementTreeData',
 ];
 
 INSPECTOR_METHODS.forEach(function (methodName) {

@@ -43,7 +43,7 @@ module.exports = function (gulp, $) {
             $.util.log('cache:workspace start bower install');
 
             // -F for forcing latest on conflict resolution
-            var installProcess = exec('bower install -F', {
+            var installProcess = exec('bower install -F --production', {
                 cwd: path.join(cachePath, 'workspace'),
             }, function () {
 
