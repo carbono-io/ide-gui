@@ -6,141 +6,304 @@
 
 }
 
-#group {
-    &.closed {
-        #arrow {
-            .rotate(-90deg);
-        }
-        #style-name {
-            max-height: 0;
-//          overflow: hidden;
 
-            .item-id {
-                visibility: hidden;
-                transition: visibility 0s linear 0.2s;
-            }
-        }
-    }
-}
+#component-class {
 
+    #component-class-id {
 
-
-// TODO: documentation of hoverer
-#hoverer {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 5 * @base-size;
-    left: 0;
-    margin: 0;
-    .translateY(-100%);
-    border-bottom: solid 1px @item-border-bottom;
-    box-sizing: border-box;
-    //consider border on height size
-    &:hover, &.active {
-        background-color: @item-panel-background-hover;
-        transition: all ease 0.3s;
-        cursor: pointer;
-    }
-}
-
-
-#group-name {
-    position:relative;
-    z-index: 4;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 5 * @base-size;
-    padding-left: @base-size;
-    padding-right: @base-size;
-
-    .item-id {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
+        height: 5 * @base-size;
+        padding-left: @base-size;
+//        background-color: @item-panel-background-hover;
+        border-bottom: 1px solid @border-bottom;
+        cursor: pointer;
 
         #arrow {
             width: 16px;
             height: 16px;
             margin-right: 0;
-            padding-left: - 8;
+            padding-left: -8;
             transition: all 0.3s ease;
         }
-
-        iron-icon {
-            width: 18px;
-            height: 18px;
-            margin-right: @base-size/2;
-
-        }
-
     }
 
-    &:hover, &.active {
-        cursor: pointer;
-        .item-id {
-            color: @item-panel-color-hover;
-        }
-        &+#hoverer {
-            background-color: @item-panel-background-hover;
-            transition: all ease 0.3s;
-            cursor: pointer;
-        }
-    }
-}
 
-#style-name {
-    position:relative;
-    z-index: 4;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 5 * @base-size;
-    padding-left: 3 * @base-size;
-    padding-right: @base-size;
-    max-height: 800px;
-    transition: max-height 0.2s ease;
-
-    .item-id {
+    .component-class-properties {
+        padding: 0 2*@base-size 0 2*@base-size;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        transition: visibility 0s linear 0s;
-        visibility: visible;
+        flex-direction: column;
 
-        .style-preview {
-            height: 3 * @base-size;
-            width: 3 * @base-size;
-            background-color: forestgreen;
-            margin-right: @base-size;
-        }
+        .properties-group{
+            padding-top: @base-size;
+            padding-bottom: @base-size;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            border-bottom: 1px solid @border-bottom-light;
 
-        .style-preview-2 {
-            height: 3 * @base-size;
-            width: 3 * @base-size;
-            background-color: blue;
-            margin-right: @base-size;
-            border-radius: 3px;
-            box-shadow: 0 2px 1px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            .property {
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                height: 32px;
+
+                .property-name {
+
+                    margin-right: @base-size;
+
+                }
+
+                .property-content {
+
+                    width: 172px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+
+                    #image-value {
+                        width: auto;
+
+                    }
+
+                    .bg-image {
+                        width:32px;
+                        height: 24px;
+                        margin-left: @base-size/2;
+                        overflow:hidden;
+
+
+
+                        img {
+
+//calcular dinamicamente qual a menor dimensão da foto para fazer ela ficar no minimo preenchendo o espaco todo do bg-image
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+                    }
+
+                    input[type="color"] {
+                        width:32px;
+                        height:24px;
+                        padding: 0;
+                        border: none;
+                        background-color: white;
+                        cursor: pointer;
+                        outline: none;
+                    }
+
+                    input[type="text"] {
+                        width:40px;
+                        height: 24px;
+                        outline: none;
+                        box-sizing: border-box;
+                        padding: 0;
+                        background-color: #f8f8f8;
+                        border: none;
+                        padding-left: @base-size/2;
+                        box-sizing: border-box;
+
+
+                        &:focus, &:hover {
+                            border: 1px solid @border-bottom;
+                        }
+
+                    }
+
+                    input[type="range"] {
+                        width:100px;
+                        outline: none;
+                    }
+
+                    select {
+                        //colocar icones
+                        height: 24px;
+                        width: 104px;
+                        border: none;
+                        cursor: pointer;
+                        outline: none;
+                        border-radius: 0;
+                        background-color: #f8f8f8;
+//                        appearance:none;
+
+                    }
+
+                    input, select {
+
+                        &:nth-child(2), &:nth-child(3) {
+                            margin-left: @base-size/2;
+
+                        }
+
+                    }
+
+
+                    p {
+                        margin-left: @base-size/2;
+
+                    }
+
+
+                }
+
+
+                &:hover {
+//                        background-color: @item-panel-background-hover;
+
+                    }
+
+
+            }
+
+
         }
 
     }
 
-    &:hover, &.active {
-        cursor: pointer;
-        .item-id {
-            color: @item-panel-color-hover;
-        }
-        &+#hoverer {
-            background-color: @item-panel-background-hover;
-            transition: all ease 0.3s;
-            cursor: pointer;
-        }
-    }
 }
 
+
+
+//
+//#group {
+//    &.closed {
+//        #arrow {
+//            .rotate(-90deg);
+//        }
+//        #style-name {
+//            max-height: 0;
+////          overflow: hidden;
+//
+//            .item-id {
+//                visibility: hidden;
+//                transition: visibility 0s linear 0.2s;
+//            }
+//        }
+//    }
+//}
+
+
+
+// TODO: documentation of hoverer
+//#hoverer {
+//    position: absolute;
+//    z-index: 1;
+//    width: 100%;
+//    height: 5 * @base-size;
+//    left: 0;
+//    margin: 0;
+//    .translateY(-100%);
+//    border-bottom: solid 1px @item-border-bottom;
+//    box-sizing: border-box;
+//    //consider border on height size
+//    &:hover, &.active {
+//        background-color: @item-panel-background-hover;
+//        transition: all ease 0.3s;
+//        cursor: pointer;
+//    }
+//}
+//
+//
+//#group-name {
+//    position:relative;
+//    z-index: 4;
+//    display: flex;
+//    flex-direction: row;
+//    align-items: center;
+//    justify-content: space-between;
+//    height: 5 * @base-size;
+//    padding-left: @base-size;
+//    padding-right: @base-size;
+//
+//    .item-id {
+//        display: flex;
+//        flex-direction: row;
+//        align-items: center;
+//        justify-content: flex-start;
+//
+//        #arrow {
+//            width: 16px;
+//            height: 16px;
+//            margin-right: 0;
+//            padding-left: - 8;
+//            transition: all 0.3s ease;
+//        }
+//
+//        iron-icon {
+//            width: 18px;
+//            height: 18px;
+//            margin-right: @base-size/2;
+//
+//        }
+//
+//    }
+//
+//    &:hover, &.active {
+//        cursor: pointer;
+//        .item-id {
+//            color: @item-panel-color-hover;
+//        }
+//        &+#hoverer {
+//            background-color: @item-panel-background-hover;
+//            transition: all ease 0.3s;
+//            cursor: pointer;
+//        }
+//    }
+//}
+//
+//#style-name {
+//    position:relative;
+//    z-index: 4;
+//    display: flex;
+//    flex-direction: row;
+//    align-items: center;
+//    justify-content: space-between;
+//    height: 5 * @base-size;
+//    padding-left: 3 * @base-size;
+//    padding-right: @base-size;
+//    max-height: 800px;
+//    transition: max-height 0.2s ease;
+//
+//    .item-id {
+//        display: flex;
+//        flex-direction: row;
+//        align-items: center;
+//        justify-content: flex-start;
+//        transition: visibility 0s linear 0s;
+//        visibility: visible;
+//
+//        .style-preview {
+//            height: 3 * @base-size;
+//            width: 3 * @base-size;
+//            background-color: forestgreen;
+//            margin-right: @base-size;
+//        }
+//
+//        .style-preview-2 {
+//            height: 3 * @base-size;
+//            width: 3 * @base-size;
+//            background-color: blue;
+//            margin-right: @base-size;
+//            border-radius: 3px;
+//            box-shadow: 0 2px 1px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+//        }
+//
+//    }
+//
+//    &:hover, &.active {
+//        cursor: pointer;
+//        .item-id {
+//            color: @item-panel-color-hover;
+//        }
+//        &+#hoverer {
+//            background-color: @item-panel-background-hover;
+//            transition: all ease 0.3s;
+//            cursor: pointer;
+//        }
+//    }
+//}
