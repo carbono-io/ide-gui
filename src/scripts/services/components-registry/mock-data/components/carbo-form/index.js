@@ -11,7 +11,7 @@ var uuid = require('node-uuid');
 var firebaseBaseURL = 'https://torrid-torch-9505.firebaseio.com';
 
 function buildFirebaseLocation() {
-    return firebaseBaseURL + '/' + uuid.v4() + '.json';
+    return firebaseBaseURL + '/carbo-form-' + uuid.v4() + '.json';
 }
 
 // title of the component, to be shown at the palette
