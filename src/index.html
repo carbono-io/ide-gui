@@ -3,203 +3,200 @@
 <html>
 
 <head>
-    <title>carbono</title>
-    <meta charset="UTF-8">
-    
-    <script>
-        window.Polymer = window.Polymer || {};
-        // o default será com isso sem estar comentado :)
-        window.Polymer.dom = 'shadow';
-    </script>
+  <title>carbono</title>
+  <meta charset="UTF-8">
+  
+  <script>
+    window.Polymer = window.Polymer || {};
+    // o default será com isso sem estar comentado :)
+    window.Polymer.dom = 'shadow';
+  </script>
 
-    <!-- Source Sans Pro Font -->
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
+  <!-- Source Sans Pro Font -->
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
 
-    <!--
-        javascript libraries come at the top, before elements so
-        that all elements may use them
-    -->
-    <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
-    <script type="text/javascript" src="bower_components/Keypress/keypress.js"></script>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="index.css">
+  <!--
+    javascript libraries come at the top, before elements so
+    that all elements may use them
+  -->
+  <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
+  <script type="text/javascript" src="bower_components/Keypress/keypress.js"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="index.css">
 
-    <!-- Carbo components -->
-    <link rel="import" href="elements.html">
+  <!-- Carbo components -->
+  <link rel="import" href="elements.html">
 
 </head>
 
 <body>
 
-    <!-- create a root for Polymer data binding -->
-    <template id="carbo" is="dom-bind">
+  <!-- create a root for Polymer data binding -->
+  <template id="carbo" is="dom-bind">
 
-        <!-- pages for navigation -->
-        <iron-pages attr-for-selected="data-route" selected="{{route}}">
+    <!-- pages for navigation -->
+    <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-            <div data-route="start" id="start">
-                <h1>Você ainda não possui nenhum projeto!</h1>
-                <a id="new-button" href="/project/new">
-                    <iron-icon icon="editor:mode-edit"></iron-icon>
-                    <h2>criar novo projeto</h2>
-                </a>
+      <div data-route="start" id="start">
+        <h1>Você ainda não possui nenhum projeto!</h1>
+        <a id="new-button" href="/project/new">
+          <iron-icon icon="editor:mode-edit"></iron-icon>
+          <h2>criar novo projeto</h2>
+        </a>
+      </div>
+
+      <!-- loading -->
+      <div data-route="loading" id="loading">
+        <div>loading ...</div>
+      </div>
+      <!-- loading -->
+
+      <!-- project -->
+      <div data-route="project" id="container">
+
+        <carbo-header sections="{{appsections}}">
+          <nav>
+            <iron-selector
+              id="header-nav"
+              attr-for-selected="section"
+              selected="{{ section }}"
+            >
+              <a section="style" href="/projects/340987612301/style">
+                <iron-icon icon="image:palette"></iron-icon>
+                <span>ESTILO</span>
+              </a>
+              <a section="data" href="/projects/340987612301/data">
+                <iron-icon icon="maps:layers"></iron-icon>
+                <span>DADOS</span>
+              </a>
+              <a section="actions" href="/projects/340987612301/actions">
+                <iron-icon icon="image:flash-on"></iron-icon>
+                <span>AÇÕES</span>
+              </a>
+
+              <a section="publish" href="/projects/340987612301/publish">
+                <iron-icon icon="editor:publish"></iron-icon>
+
+                <span>PUBLICAÇÃO</span>
+              </a>
+            </iron-selector>
+          </nav>
+
+        </carbo-header>
+        <carbo-body
+          id="body"
+          ide-mode="{{ ideMode }}"
+        >
+
+          <div body-section="left">
+            <carbo-components-tree-panel
+              active-element-tree-data="{{ activeElementTreeData }}"
+              focused-element-data="{{ focusedElementData }}"
+            >
+            </carbo-components-tree-panel>
+
+            <carbo-panel
+              title="Configurações"
+              icon="settings"
+              menu="{{ boxmenuitemSettings }}"
+            >
+              <carbo-component-settings></carbo-component-settings>
+            </carbo-panel>
+
+          </div>
+
+          <div body-section="middle-bar">
+            <!-- bar that controls the canvas -->
+            <carbo-canvas-bar
+              ide-mode="{{ ideMode }}"
+            >
+            </carbo-canvas-bar>
+
+          </div>
+
+          <div body-section="canvas">
+            <carbo-canvas
+              id="canvas"
+              project-url="{{ project.projectUrl }}"
+              components="{{ components }}"
+              code-machine="{{ services.codeMachine }}"
+
+              interaction-mode="{{ canvasInteractionMode }}"
+              ide-mode="{{ ideMode }}"
+
+              context="{{ context }}"
+
+              focused-element-data="{{ focusedElementData }}"
+              active-element-tree-data="{{ activeElementTreeData }}"
+            ></carbo-canvas>
+          </div>
+
+          <iron-pages body-section="floating-box" selected="0">
+
+            <carbo-components-palette
+              id="components-palette"
+
+              components-registry="{{ services.componentsRegistry }}"
+
+              components="{{ paletteComponents }}"
+              code-machine="{{ services.codeMachine }}"
+              canvas="{{ components.canvas }}"
+
+              focused-element-data="{{ focusedElementData }}"
+            ></carbo-components-palette>
+
+          </iron-pages>
+
+          <iron-pages
+
+            body-section="right"
+
+            attr-for-selected="data-section" 
+            selected="{{ section }}"
+          >
+
+            <!--Conteúdo box estilos-->
+            <div data-section="style">
+              <carbo-panel
+                title="Estilo"
+                icon="image:palette"
+                menu="{{ boxmenuitemStyle }}"
+              >
+                <carbo-styles-list
+                group="{{ styleGroups }}"
+                ></carbo-styles-list>
+              </carbo-panel>
             </div>
 
-            <!-- loading -->
-            <div data-route="loading" id="loading">
-                <div>loading ...</div>
-            </div>
-            <!-- loading -->
-
-            <!-- project -->
-            <div data-route="project" id="container">
-
-                <carbo-header sections="{{appsections}}">
-                    <nav>
-                        <iron-selector
-                            id="header-nav"
-                            attr-for-selected="section"
-                            selected="{{ section }}"
-                        >
-                            <a section="style" href="/projects/340987612301/style">
-                                <iron-icon icon="image:palette"></iron-icon>
-                                <span>ESTILO</span>
-                            </a>
-                            <a section="data" href="/projects/340987612301/data">
-                                <iron-icon icon="maps:layers"></iron-icon>
-                                <span>DADOS</span>
-                            </a>
-                            <a section="actions" href="/projects/340987612301/actions">
-                                <iron-icon icon="image:flash-on"></iron-icon>
-                                <span>AÇÕES</span>
-                            </a>
-
-                            <a section="publish" href="/projects/340987612301/publish">
-                                <iron-icon icon="editor:publish"></iron-icon>
-
-                                <span>PUBLICAÇÃO</span>
-                            </a>
-                        </iron-selector>
-                    </nav>
-
-                </carbo-header>
-                <carbo-body
-                    id="body"
-                    ide-mode="{{ ideMode }}"
+            <!--Conteúdo box dados-->
+            <div data-section="data">
+              <carbo-panel
+                title="Dados"
+                icon="maps:layers"
+                menu="{{ boxmenuitem }}"
+              >
+                <carbo-data-table
+                  entity1="{{ entitydata }}"
                 >
-
-                    <div body-section="left">
-                        <carbo-panel
-                            title="Componentes"
-                            icon="backup"
-                            menu="{{ boxmenuitemComponents }}"
-                        >
-                            <carbo-components-tree
-                                component="{{ activePage }}"
-                            ></carbo-components-tree>
-                        </carbo-panel>
-
-                        <carbo-panel
-                            title="Configurações"
-                            icon="settings"
-                            menu="{{ boxmenuitemSettings }}"
-                        >
-                            <carbo-component-settings></carbo-component-settings>
-                        </carbo-panel>
-
-                    </div>
-
-                    <div body-section="middle-bar">
-                        <!-- bar that controls the canvas -->
-                        <carbo-canvas-bar
-                            ide-mode="{{ ideMode }}"
-                        >
-                        </carbo-canvas-bar>
-
-                    </div>
-
-                    <div body-section="canvas">
-                        <carbo-canvas
-                            id="canvas"
-                            project-url="{{ project.projectUrl }}"
-                            components="{{ components }}"
-                            code-machine="{{ services.codeMachine }}"
-
-                            interaction-mode="{{ canvasInteractionMode }}"
-                            ide-mode="{{ ideMode }}"
-
-                            context="{{ context }}"
-
-                            focused-element-data="{{ focusedElementData }}"
-                        ></carbo-canvas>
-                    </div>
-
-                    <iron-pages body-section="floating-box" selected="0">
-
-                        <carbo-components-palette
-                            id="components-palette"
-
-                            components-registry="{{ services.componentsRegistry }}"
-
-                            components="{{ paletteComponents }}"
-                            code-machine="{{ services.codeMachine }}"
-                            canvas="{{ components.canvas }}"
-
-                            focused-element-data="{{ focusedElementData }}"
-                        ></carbo-components-palette>
-
-                    </iron-pages>
-
-                    <iron-pages
-
-                        body-section="right"
-
-                        attr-for-selected="data-section" 
-                        selected="{{ section }}"
-                    >
-
-                        <!--Conteúdo box estilos-->
-                        <div data-section="style">
-                            <carbo-panel
-                                title="Estilo"
-                                icon="image:palette"
-                                menu="{{ boxmenuitemStyle }}"
-                            >
-                                <carbo-styles-list
-                                group="{{ styleGroups }}"
-                                ></carbo-styles-list>
-                            </carbo-panel>
-                        </div>
-
-                        <!--Conteúdo box dados-->
-                        <div data-section="data">
-                            <carbo-panel
-                                title="Dados"
-                                icon="maps:layers"
-                                menu="{{ boxmenuitem }}"
-                            >
-                                <carbo-data-table
-                                    entity1="{{ entitydata }}"
-                                >
-                                </carbo-data-table>
-                            </carbo-panel>
-                        </div>
-
-                    </iron-pages>
-
-                </carbo-body>
-
+                </carbo-data-table>
+              </carbo-panel>
             </div>
-            <!-- project -->
 
-        </iron-pages>
-        <!-- end of the pages container -->
+          </iron-pages>
 
-    </template>
-    <!-- end of root Polymer binding object (carbo) -->
+        </carbo-body>
 
-    <script type="text/javascript" src="index.bundle.js"></script>
+      </div>
+      <!-- project -->
+
+    </iron-pages>
+    <!-- end of the pages container -->
+
+  </template>
+  <!-- end of root Polymer binding object (carbo) -->
+
+  <script type="text/javascript" src="index.bundle.js"></script>
 </body>
 
 </html>

@@ -49,7 +49,7 @@ module.exports = function (gulp, $) {
             $.util.log('cache:code-machine clone finished');
 
             $.util.log('cache:code-machine npm install started');
-            var installProcess = exec('npm install', {
+            var installProcess = exec('npm install --production', {
                 cwd: path.join(cachePath, 'code-machine')
             }, function () {
                 $.util.log('cache:code-machine npm install finished');
@@ -65,7 +65,7 @@ module.exports = function (gulp, $) {
     /**
      * Builds the code-machine
      */
-    gulp.task('reset:code-machine', function (done) {
+    gulp.task('reset:code-machine', ['cache:carbo-inspector'], function (done) {
 
         var cmPath = path.join(tmpPath, 'code-machine');
 
@@ -91,6 +91,19 @@ module.exports = function (gulp, $) {
             });
         }
 
+        /**
+         * Deletes carbo inspector that comes with code-machine
+         * and links the new one
+         */
+        function linkCarboInspector() {
+
+            var carboInspectorPath   = path.join(cachePath, 'carbo-inspector');
+            var cmCarboInspectorPath = path.join(tmpPath, 'code-machine/node_modules/carbo-inspector');
+            
+            del.sync(cmCarboInspectorPath);
+            fs.symlinkSync(carboInspectorPath, cmCarboInspectorPath);
+        }
+
         // Copy from cache, all files but '.git and gulpfile'
         var filesToCopy = [
             path.join(cachePath, 'code-machine/**/*'),
@@ -108,6 +121,9 @@ module.exports = function (gulp, $) {
 
                 // write configurations
                 writeConfig();
+
+                // link carbo-inspector
+                linkCarboInspector();
 
                 done();
             });

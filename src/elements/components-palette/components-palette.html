@@ -55,6 +55,11 @@
                                 <div class="component-label">{{ item.title }}</div>
                             </div>
                         </template>
+
+                        <template is="dom-if" if="{{ !components.length }}">
+                            não há componentes disponíveis
+                        </template>
+
                     </div>
 
                 </div>

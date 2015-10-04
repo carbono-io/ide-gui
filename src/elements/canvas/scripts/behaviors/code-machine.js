@@ -51,18 +51,18 @@ exports._handleCodeMachineChange = function (codeMachine, oldCodeMachine) {
         var content = _extractInnerHTML(data.content);
 
         // first get data on the target element
-        this.executeInspectorOperation('getElementData', [selector])
-            .then(function (elementData) {
+        this.getElementsData(selector)
+            .then(function (elementsData) {
 
                 console.log('modification');
-                console.log(elementData);
+                console.log(elementsData);
 
                 // setTimeout(this.reload.bind(this), 100);
 
-                // if (elementData.tagName === 'HEAD') {
+                // if (elementsData[0].tagName === 'HEAD') {
                 //     console.log('modification on HEAD, reload required');
 
-                // } else if (elementData.tagName === 'BODY') {
+                // } else if (elementsData[0].tagName === 'BODY') {
                 //     console.log('modification on BODY, reload required');
 
                 //     // TODO: improve this.

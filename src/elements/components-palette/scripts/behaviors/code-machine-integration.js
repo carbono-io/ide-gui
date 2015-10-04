@@ -58,12 +58,12 @@ exports.insertComponent = function (componentData) {
         throw new Error('No componentData for <carbo-components-palette>.insertComponent');
     }
 
-
-    return canvas
-        // get the UUID of the insertionElement
-        .getFocusTargetData(insertionElementSelector)
+    return this.getInsertionElementData(insertionElementSelector)
         // install bower dependencies and insert html
         .then(function (insertionElementData) {
+
+            // get the first. we still do not have multiple insertion points
+            insertionElementData = insertionElementData[0];
 
             // Path data
             var insertPath = {

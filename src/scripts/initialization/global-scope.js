@@ -28,6 +28,11 @@ module.exports = function (carbo, config) {
     carbo.set('hoveredElementData', false);
 
     /**
+     * The current active element tree data
+     */
+    carbo.set('activeElementTreeData', false);
+
+    /**
      * The canvas interaction mode
      */
     carbo.set('canvasInteractionMode', CONSTANTS.canvasInteractionModes.inspection);
