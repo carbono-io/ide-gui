@@ -5,11 +5,14 @@
     position: fixed;
     bottom: 0;
     background-color: @commands-container;
+
     height: @base-size*6;
-    width: 100%;
+    width: 360px;
+
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
 
 
     button {
@@ -17,7 +20,13 @@
         height: @base-size*4;
         text-transform: uppercase;
         background-color: @commands-container;
-        padding: 0 @base-size;
+        margin: 0 @base-size;
+        z-index: 2000;
+
+        &:last-child {
+            margin-right: @base-size*2;
+
+        }
 
     }
 
