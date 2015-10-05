@@ -296,5 +296,30 @@ CodeMachineClient.prototype.writeCSS = function (editionPath, value) {
     return defer.promise;  
 };
 
+CodeMachineClient.prototype.removeElement = function (editionPath) {
+    var defer = Q.defer();
+
+    var socket = this.socket;
+
+    var data = {
+        path: editionPath,
+    }
+
+    var request = new Message({ apiVersion: '1.0' });
+    request.setData({ items: [data] });
+
+    socket.emit('command:removeElement', request.toJSON());
+
+    socket.once('command:removeElement/success', function () {
+        defer.resolve();
+    });
+
+    socket.once('command:removeElement/error', function (err) {
+        defer.reject(err);
+    });
+
+    return defer.promise;
+}
+
 // export the class
 module.exports = CodeMachineClient;
