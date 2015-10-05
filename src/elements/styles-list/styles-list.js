@@ -50,7 +50,11 @@ Polymer({
 
     _handleDeclarationsChange: function (declarations, old) {
 
+        console.log(declarations);
+
         var groups = groupDeclarations(declarations);
+
+        console.log(groups);
 
         this.set('declarationGroups', groups);
     },

@@ -27,6 +27,8 @@ exports.renderHtml = function () {
 
     var inputName = 'campo-' + uuid.v4().substring(0, 3);
 
+    // inputName = prompt('qual o noem do campo?');
+
     return template({
         name: inputName
     });

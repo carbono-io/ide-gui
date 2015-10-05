@@ -123,6 +123,28 @@ da aplicação.
                                     <td></td>
                                 </tr>
                             </template>
+
+                            <tr>
+                                <!-- repete colunas de cada linha-->
+                                <template 
+                                    is="dom-repeat" 
+                                    items="{{ entityProperties }}" 
+                                    as="property"
+                                >
+                                    <td>
+                                        
+                                        <iron-autogrow-textarea
+                                            max-rows="3"
+                                            placeholder="Adicione dado"
+                                        >
+                                        </iron-autogrow-textarea>
+                                    </td>
+                                </template>
+                                <!-- fim do repete colunas -->
+
+                                <!-- td somente para manter o tamanho da table certo -->
+                                <td></td>
+                            </tr>
                             <!-- fim do repete das linhas -->
                         </tbody>
                     </table>
