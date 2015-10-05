@@ -12,17 +12,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    transition: max-height 0.2s ease;
 
 
     button {
         visibility: hidden;
-
         border:none;
         height: @base-size*6;
         text-transform: uppercase;
         background-color: @commands-container;
         margin: 0 @base-size;
         cursor: pointer;
+        transition: visibility 0s linear 0s;
+        outline: none;
 
         &:last-child {
             margin-right: @base-size*2;
@@ -34,7 +36,7 @@
 
     &.active {
         max-height: @base-size*6;
-        transition: max-height 0.2s ease;
+
 
         button {
             visibility: visible;

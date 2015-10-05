@@ -54,6 +54,10 @@ Polymer({
     },
 
     writeCSS: function () {
+
+        //TODO: isso ficaria aqui mesmo? não é muito semantico mas é no momento em que clicamos no botão
+        Polymer.Base.toggleClass('active', false, this.$$('#commands-container'));
+
         this.codeMachine
             .writeCSS({
                 file: 'index.css'
