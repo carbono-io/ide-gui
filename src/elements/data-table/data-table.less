@@ -94,7 +94,7 @@
             min-width: 80px;
             border-bottom: 1px solid @mediumgrey;
             box-sizing: border-box;
-            font-weight: @regular;
+            font-weight: @bold !important;
             text-align: left;
             
             .associate-property-button {
@@ -106,6 +106,7 @@
                 border: none;
                 overflow: scroll;
                 font-weight: @bold;
+
             }
             
             iron-icon {
@@ -165,6 +166,7 @@
         overflow-y: hidden;
         max-height:800px;
         transition: max-height 0.2s ease;
+
     }
 
     table {
@@ -250,7 +252,8 @@
     
         th {
             height: 7 * @base-size;
-            
+            font-weight: @bold !important;
+
             &:hover, &.active {
                 background-color: @item-panel-background-hover;
                 transition: all ease 0.3s;
