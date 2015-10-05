@@ -101,6 +101,21 @@
                                 </div>
                                 <!-- OPACITY -->
 
+                                <!-- GENERAL -->
+                                <div 
+                                    class="property-content"
+                                    hidden$="[[ !isDeclarationOfType(declaration, 'general') ]]"
+                                >
+
+                                    <input
+                                        type="text"
+                                        value="{{ declaration.value::keyup }}"
+                                        on-keyup="handleInputChange"
+                                    >
+                                </div>
+                                <!-- GENERAL -->
+
+
 
                                 <!-- FONT-FAMILY -->
 <!--                                 <div
