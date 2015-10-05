@@ -17,7 +17,8 @@
         justify-content: flex-start;
         height: 5 * @base-size;
         padding-left: @base-size;
-//        background-color: @item-panel-background-hover;
+        background-color: @item-panel-background-hover;
+//        font-weight: 800;
         border-bottom: 1px solid @border-bottom;
         cursor: pointer;
 
@@ -44,6 +45,11 @@
             flex-wrap: wrap;
             border-bottom: 1px solid @border-bottom-light;
 
+            &:last-child {
+                border: none;
+                background-color: aqua;
+            }
+
             .property {
 
                 display: flex;
@@ -60,7 +66,7 @@
 
                 .property-content {
 
-                    width: 172px;
+                    width: 200px;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
@@ -81,7 +87,6 @@
 
                         img {
 
-//calcular dinamicamente qual a menor dimensão da foto para fazer ela ficar no minimo preenchendo o espaco todo do bg-image
                             max-width: 100%;
                             max-height: 100%;
                         }
