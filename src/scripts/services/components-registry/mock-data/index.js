@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 // TODO: create mock server based on json-database
 
 var registry = [];
