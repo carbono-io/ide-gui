@@ -12,6 +12,7 @@ var EventEmitter = require('events').EventEmitter;
 var socketIo = require('socket.io-client');
 var Message  = require('carbono-json-messages');
 var Q        = require('q');
+var request  = require('superagent');
 
 // internal dependencies
 var SocketRequestManager = require('./lib/socket-request-manager');
@@ -238,6 +239,61 @@ CodeMachineClient.prototype.bindComponentToEntity = function () {
     }, 1000);
 
     return defer.promise;
+};
+
+/**
+ * Reads a stylesheetJSON
+ * @param  {String} stylesheetPath [description]
+ * @return {Promise -> CSSJSON}                [description]
+ */
+CodeMachineClient.prototype.getCSSJSON = function (stylesheetPath) {
+
+    var defer = Q.defer();
+
+    var url = this.config.location + '/resources/marked/' + stylesheetPath + '.json';
+
+    request
+        .get(url)
+        .set('Accept', 'application/json')
+        .end(function (err, res) {
+            if (err) {
+                defer.reject(err);
+            } else {
+                defer.resolve(res.body);
+            }
+        });
+
+    return defer.promise;
+};
+
+CodeMachineClient.prototype.writeCSS = function (editionPath, value) {
+    
+    var defer = Q.defer();
+
+    var socket = this.socket;
+
+    // data to be sent to codeMachine server
+    var data = {
+        path: editionPath,
+        value: value,
+    };
+
+    // Create request object
+    var request = new Message({ apiVersion: '1.0' });
+    request.setData({ items: [data] });
+
+    socket.emit('command:writeCSS', request.toJSON());
+
+    socket.once('command:writeCSS/success', function () {
+        defer.resolve();
+    });
+
+    socket.once('command:writeCSS/error', function (err) {
+        defer.reject(err);
+    });
+
+
+    return defer.promise;  
 };
 
 // export the class
