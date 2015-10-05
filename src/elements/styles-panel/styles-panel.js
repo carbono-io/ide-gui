@@ -2,7 +2,7 @@
 
 Polymer({
     is: 'carbo-styles-panel',
-
+//    var componentContext = this;
     properties: {
 
         // Services
@@ -35,6 +35,10 @@ Polymer({
     },
 
     handleStyleDeclarationChanged: function (event) {
+
+        //TODO: melhorar o modo que pega o commands container se preciso - fiz rapidamente e sem entender exatamente as partes do codigo referentes ao polymer (pat)
+
+        Polymer.Base.toggleClass('active', true, this.$$('#commands-container'));
 
         var canvas = this.get('canvas');
 

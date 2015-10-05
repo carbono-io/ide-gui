@@ -5,8 +5,7 @@
     position: fixed;
     bottom: 0;
     background-color: @commands-container;
-
-    height: @base-size*6;
+    max-height: 0;
     width: 360px;
 
     display: flex;
@@ -16,12 +15,14 @@
 
 
     button {
+        visibility: hidden;
+
         border:none;
-        height: @base-size*4;
+        height: @base-size*6;
         text-transform: uppercase;
         background-color: @commands-container;
         margin: 0 @base-size;
-        z-index: 2000;
+        cursor: pointer;
 
         &:last-child {
             margin-right: @base-size*2;
@@ -30,14 +31,24 @@
 
     }
 
+
+    &.active {
+        max-height: @base-size*6;
+        transition: max-height 0.2s ease;
+
+        button {
+            visibility: visible;
+            transition: visibility 0s linear 0s;
+        }
+    }
+
     #cancel-command {
-        color:white;
+        color: @secondary-button;
     }
 
     #save-command {
-        color:aqua;
+        color: @primary-button;
     }
-
 
 
 }
