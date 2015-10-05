@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 // TODO: create mock server based on json-database
 
 var registry = [];
@@ -18,7 +20,7 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false
     },
-    html: '<paper-card heading="Galeria" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+    html: fs.readFileSync(__dirname + '/components/galeria/template.html', 'utf-8'),
 //    icon: "view-stream",
     icon: "view-module",
     components: [

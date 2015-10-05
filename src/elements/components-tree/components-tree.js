@@ -10,28 +10,53 @@
             // console.log(arrow);
             var componentContext = this;
 
-            var isClosed = !this.closed;
+            // var isClosed = !this.closed;
 
-            if (isClosed) {
-                Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
-                isClosed = false;
-            } else {
-                Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
-                isClosed = true;
-            }
+            // if (isClosed) {
+            //     Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
+
+            //     this.set('component.closed', false);
+
+            //     isClosed = false;
+            // } else {
+            //     Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
+
+            //     this.set('component.closed', true);
+
+            //     isClosed = true;
+            // }
 
             arrow.addEventListener('click', function(event) {
 
+                console.log('hwehqrjhwekqwe')
+
                 event.stopPropagation();
 
-                if (isClosed) {
-                    Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
-                    isClosed = false;
+                console.log(this.get('component.closed'));
+
+                var closed = this.get('component.closed') || false;
+
+                if (closed) {
+                    this.set('component.closed', false);
                 } else {
-                    Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
-                    isClosed = true;
+                    this.set('component.closed', true);
                 }
-            });
+
+
+                // if (this.get('component.closed')) {
+                //     // Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
+
+                //     this.set('component.closed', false);
+
+                //     // isClosed = false;
+                // } else {
+                //     Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
+
+                //     this.set('component.closed', true);
+
+                //     isClosed = true;
+                // }
+            }.bind(this));
         },
 
         properties: {
@@ -50,6 +75,21 @@
         listeners: {
             'mouseover': '_handleMouseover',
             'click': '_handleClick',
+            'component-selected': '_handleComponentSelected'
+        },
+
+        observers: [
+            '_componentSelectedChanged(component.selected)',
+            '_componentClosedChanged(component.closed)',
+        ],
+
+        _componentSelectedChanged: function (isSelected) {
+            Polymer.Base.toggleClass('active', isSelected, this.$$('#hoverer'));
+        },
+
+        _componentClosedChanged: function (isClosed) {
+            console.log('_componentClosedChanged' + isClosed);
+            Polymer.Base.toggleClass('closed', isClosed, this.$$('#component'));
         },
 
         /**
