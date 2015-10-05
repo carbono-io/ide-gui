@@ -16,7 +16,7 @@
         },
 
         _handleDataChange: function (event) {
-            console.log('data changed!!!!!!');
+            // console.log('data changed!!!!!!');
         },
 
         /**

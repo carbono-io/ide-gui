@@ -95,9 +95,16 @@
                     canvas.deactivateLoading();
 
                     this.toggleLoading(false);
-                    this.toggleError(true);
 
-                    throw err;
+                    // TODO: remove this
+                    // this was done only for user-testing purposes
+                    err = _.isString(err) ? JSON.parse(err) : err;
+                    if (err.error.code === 999) {
+                        console.warn('that 999 error happened, but we\'ll just ignore ;)')
+                    } else {
+                        this.toggleError(true);
+                        throw err;
+                    }
                 }.bind(this))
                 .done();
 
@@ -131,7 +138,7 @@
 
             var matches = true;
 
-            console.log(component);
+            // console.log(component);
 
             return matches;
         },
