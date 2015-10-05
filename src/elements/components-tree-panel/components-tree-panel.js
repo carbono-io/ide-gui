@@ -70,6 +70,16 @@
             }
         },
 
+        ready: function () {
+
+
+            this.boxmenuitemComponents = {
+                items: [
+                    { icon: 'add', title: 'nova tela' },
+                ]
+            };
+        },
+
         _handleActiveElementTreeDataChange: function (activeElementTreeData, oldActiveElementTreeDataChange) {
 
             if (activeElementTreeData) {
@@ -114,7 +124,7 @@
 
             // set focus
             canvas.focusElementForSelector(e.detail.componentData.uuidCSSSelector);
-        }
+        },
     });
 
 })();
