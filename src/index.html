@@ -171,16 +171,11 @@
 
             <!--Conteúdo box dados-->
             <div data-section="data">
-              <carbo-panel
-                title="Dados"
-                icon="maps:layers"
-                menu="{{ boxmenuitem }}"
+              <carbo-data-panel
+                code-machine="{{ services.codeMachine }}"
+                canvas="{{ components.canvas }}"
               >
-                <carbo-data-table
-                  entity1="{{ entitydata }}"
-                >
-                </carbo-data-table>
-              </carbo-panel>
+              </carbo-data-panel>
             </div>
 
           </iron-pages>

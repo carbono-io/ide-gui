@@ -6,6 +6,38 @@
     Polymer({
         is: 'carbo-data-table',
 
+        properties: {
+            entity: {
+                type: Object,
+                notify: true,
+                observer: '_handleEntityChange',
+            },
+        },
+
+        /**
+         * Changes the firebase source
+         * @param  {[type]} entity    [description]
+         * @param  {[type]} oldEntity [description]
+         * @return {[type]}           [description]
+         */
+        _handleEntityChange: function (entity, oldEntity) {
+            this.set('entityProperties', entity.properties);
+        },
+
+        retrieveFirebaseLocation: function (entity) {
+            return entity.location.replace(/\.json$/, '');
+        },
+
+        /**
+         * Used for computedBinding the value
+         * @param  {[type]} entityItem [description]
+         * @param  {[type]} property   [description]
+         * @return {[type]}            [description]
+         */
+        readPropertyFromEntityItem: function (entityItem, property) {
+            return entityItem[property];
+        },
+
         // TODO: 
         // refatorar para colocar em métodos mais separados
         // e utilizar "inline event listeners"

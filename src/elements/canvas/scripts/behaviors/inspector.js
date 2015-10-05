@@ -235,8 +235,6 @@ exports.setInsertionFocus = function (insertionContext) {
 
     insertionContextSelector = '[carbono-uuid="' + focusedElementData.attributes['carbono-uuid'] + '"] ' + insertionContextSelector;
 
-    console.log(insertionContext);
-
     return this.executeInspectorOperation('highlightElementForSelector', [INSERTION_ID, insertionContextSelector])
         .then(function () {
             return this.executeInspectorOperation('getHighlighterTargetData', [INSERTION_ID]);

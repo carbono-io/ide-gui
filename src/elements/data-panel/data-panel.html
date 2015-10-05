@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../panel/panel.html">
+<link rel="import" href="../data-table/data-table.html">
+<link rel="import" href="data-panel-styles.html">
+
+<dom-module id="carbo-data-panel">
+    <style include="data-panel-styles"></style>
+
+    <template>
+
+        <carbo-panel
+          title="Dados"
+          icon="maps:layers"
+          menu="{{ boxmenuitem }}"
+        >
+            <template is="dom-repeat" items="{{ entities }}">
+                <carbo-data-table
+                    entity="{{ item }}"
+                >
+                </carbo-data-table>
+            </template>
+            <template is="dom-if" if="{{ !entities.length }}">
+
+                Não há dados em sua aplicação
+
+            </template>
+        </carbo-panel>
+
+    </template>
+        
+    <script src="../../bower_components/q/q.js"></script>
+    <script src="data-panel.js"></script>
+</dom-module>

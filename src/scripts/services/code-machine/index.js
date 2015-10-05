@@ -41,7 +41,7 @@ function CodeMachineClient(config) {
 
     // inheritance
     EventEmitter.call(this);
-
+    
     // listen to socket events
     this.socket.on('control:contentUpdate', function (eventData) {
 
@@ -88,7 +88,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
 
     console.info(
         '[service] code-machine:insertElement(%s, %s)',
-        path
+        JSON.stringify(path)
     );
 
     // Create a deferred object
@@ -153,6 +153,8 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
 };
 
 
+var ENTITIES = [];
+
 
 /**
  * Creates an entity entry in the entities.json file
@@ -187,6 +189,15 @@ CodeMachineClient.prototype.createEntityFromSchema = function (entityName, schem
         // Parse if is a string, else use the value
         res = typeof res === 'string' ? JSON.parse(res) : res;
 
+        console.log(res);
+
+        // TODO: improve
+        ENTITIES.push({
+            name: entityName,
+            schema: schema
+        });
+        this.emit('entities-changed', ENTITIES);
+
         // Retrieve corresponding defer
         var requestData = _requestsStore[res.id];
 
@@ -195,7 +206,7 @@ CodeMachineClient.prototype.createEntityFromSchema = function (entityName, schem
         } else {
             requestData.defer.resolve(res);
         }
-    });
+    }.bind(this));
 
     socket.once('command:createEntityFromSchema/error', function (res) {
 
