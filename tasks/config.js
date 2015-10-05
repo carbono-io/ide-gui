@@ -48,4 +48,5 @@ exports.browserifyEntries = [
     SRC_DIR + '/index',
     SRC_DIR + '/elements/canvas/canvas',
     SRC_DIR + '/elements/components-palette/components-palette',
+    SRC_DIR + '/elements/styles-panel/styles-panel',
 ];

@@ -1,0 +1,25 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../panel/panel.html">
+<link rel="import" href="../styles-list/styles-list.html">
+<link rel="import" href="styles-panel-styles.html">
+
+<dom-module id="carbo-styles-panel">
+    <style include="styles-panel-styles"></style>
+
+    <template>
+
+        <carbo-panel
+            title="Estilo"
+            icon="image:palette"
+            menu="{{ boxmenuitemStyle }}"
+        >
+            <carbo-styles-list
+            group="{{ styleGroups }}"
+            ></carbo-styles-list>
+        </carbo-panel>
+
+    </template>
+    
+    <script src="styles-panel.bundle.js"></script>
+</dom-module>
