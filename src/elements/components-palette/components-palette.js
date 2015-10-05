@@ -126,6 +126,15 @@
         handleComponentMouseOver: function(event) {
             // this.showPreview(event);
         },
+
+        matchesSearch: function (component) {
+
+            var matches = true;
+
+            console.log(component);
+
+            return matches;
+        },
     });
 
 })();

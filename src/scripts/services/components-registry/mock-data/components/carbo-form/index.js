@@ -34,9 +34,6 @@ exports.postInsertion = {
 // icon to be shown on palette
 exports.icon = "assignment";
 
-// the html string
-exports.html = fs.readFileSync(__dirname + '/template.html', 'utf-8');
-
 // build the template function
 var template = _.template(fs.readFileSync(__dirname + '/template.html', 'utf-8'));
 

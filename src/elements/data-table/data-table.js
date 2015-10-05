@@ -14,6 +14,28 @@
             },
         },
 
+        listeners: {
+            // See
+            // https://github.com/GoogleWebComponents/firebase-element/blob/master/firebase-collection.html#L229-L234
+            'firebase.firebase-child-added': '_handleFirebaseChildAdded'
+        },
+
+        /**
+         * Executed whenever child entries are added to firebase collection
+         */
+        _handleFirebaseChildAdded: function (event) {
+
+            event.stopPropagation();
+
+            var entityItems = this.get('entityItems');
+            var lastEntry = _.last(entityItems);
+
+            // TODO: check if entry is a recent entry
+            // and only fire the event if so.
+
+            this.fire('data-changed');
+        },
+
         /**
          * Changes the firebase source
          * @param  {[type]} entity    [description]

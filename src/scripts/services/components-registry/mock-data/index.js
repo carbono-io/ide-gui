@@ -7,6 +7,9 @@ var registry = [];
 // CARBO-FORM
 registry.push(require('./components/carbo-form'));
 
+// PAPER-INPUT
+registry.push(require('./components/paper-input'));
+
 
 // CARBO-GALERIA
 registry.push({
@@ -134,29 +137,6 @@ registry.push({
             repository: 'PolymerElements/paper-button',
         },
     ],
-});
-
-// PAPER-INPUT
-registry.push({
-    title: 'Input de texto',
-    context: {
-        show: ['FORM', 'CARBO-FORM'],
-        insertion: {
-            'FORM': false,
-            'CARBO-FORM': 'form',
-        }
-    },
-    postInsertion: {
-        focus: 'paper-input',
-    },
-    icon: "text-format",
-    html: '<paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input>',
-    components: [
-        {
-            name: 'paper-input',
-            repository: 'PolymerElements/paper-input'
-        }
-    ]
 });
 
 // CARBO-GEO

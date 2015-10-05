@@ -43,7 +43,12 @@
 
                 <div id="tabs-content">
                     <div class="tab">
-                        <template is="dom-repeat" items="{{ components }}">
+                        <template
+                            is="dom-repeat"
+                            items="{{ components }}"
+
+                            filter="matchesSearch"
+                        >
                             <div class="component" 
                                 on-mouseover="handleComponentMouseOver" 
                                 on-mouseout="hidePreview"

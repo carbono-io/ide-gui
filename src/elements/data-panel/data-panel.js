@@ -11,6 +11,14 @@
             }
         },
 
+        listeners: {
+            'data-changed': '_handleDataChange',
+        },
+
+        _handleDataChange: function (event) {
+            console.log('data changed!!!!!!');
+        },
+
         /**
          * Set up event listeners onto the
          * canvas component
