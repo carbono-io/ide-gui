@@ -158,8 +158,11 @@
 
             <!--Conteúdo box estilos-->
             <div data-section="style">
-              <carbo-styles-panel>
-
+              <carbo-styles-panel
+                focused-element-data="{{ focusedElementData }}"
+                code-machine="{{ services.codeMachine }}"
+                canvas="{{ components.canvas }}"
+              >
               </carbo-styles-panel>
             </div>
 

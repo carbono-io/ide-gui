@@ -14,12 +14,20 @@
             icon="image:palette"
             menu="{{ boxmenuitemStyle }}"
         >
-            <carbo-styles-list
-            group="{{ styleGroups }}"
-            ></carbo-styles-list>
+            <template is="dom-repeat" items="{{ editableRules }}" as="rule">
+                <carbo-styles-list
+                    selector-string="{{ rule.selectorString }}"
+                    selectors="{{ rule.selectors }}"
+                    declarations="{{ rule.declarations }}"
+                ></carbo-styles-list>
+            </template>
+
         </carbo-panel>
+
+        <button on-tap="writeCSS">save</button>
 
     </template>
     
+    <script src="../../bower_components/lodash/lodash.js"></script>
     <script src="styles-panel.bundle.js"></script>
 </dom-module>

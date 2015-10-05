@@ -256,7 +256,33 @@ CodeMachineClient.prototype.getCSSJSON = function (stylesheetPath) {
 };
 
 CodeMachineClient.prototype.writeCSS = function (editionPath, value) {
+    
+    var defer = Q.defer();
 
+    var socket = this.socket;
+
+    // data to be sent to codeMachine server
+    var data = {
+        path: editionPath,
+        value: value,
+    };
+
+    // Create request object
+    var request = new Message({ apiVersion: '1.0' });
+    request.setData({ items: [data] });
+
+    socket.emit('command:writeCSS', request.toJSON());
+
+    socket.once('command:writeCSS/success', function () {
+        defer.resolve();
+    });
+
+    socket.once('command:writeCSS/error', function (err) {
+        defer.reject(err);
+    });
+
+
+    return defer.promise;  
 };
 
 // export the class
