@@ -18,8 +18,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false
     },
-    html: '<paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
-    icon: "view-stream",
+    html: '<paper-card heading="Galeria" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-stream",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -28,6 +29,42 @@ registry.push({
     ]
 });
 
+
+// PARAGRAFO
+registry.push({
+    title: "Parágrafo",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<p>Insira o conteúdo do seu parágrafo</p>',
+    icon: "text-format",
+});
+
+// TÍTULO 1
+registry.push({
+    title: "Título 1",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<h1>Insira o conteúdo do seu título 1</h1>',
+    icon: "text-format",
+});
+
+
+// TÍTULO 2
+registry.push({
+    title: "Título 2",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<h2>Insira o conteúdo do seu título 2</h2>',
+    icon: "text-format",
+});
+
+
 // CARBO-CAROUSEL
 registry.push({
     title: "Carousel",
@@ -35,8 +72,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>carousel de conteúdos</p>',
-    icon: "view-carousel",
+    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-carousel",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -52,8 +90,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>tabela de conteúdos</p>',
-    icon: "view-quilt",
+    html: '<paper-card heading="Tabela" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-quilt",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -69,8 +108,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>lista de conteúdos</p>',
-    icon: "view-headline",
+    html: '<paper-card heading="Lista" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-headline",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -86,7 +126,7 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>grid de conteúdos</p>',
+    html: '<paper-card heading="Grid" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
     icon: "view-module",
     components: [
         {
