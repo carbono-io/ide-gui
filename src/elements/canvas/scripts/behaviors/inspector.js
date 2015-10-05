@@ -145,6 +145,17 @@ exports.hoverElementAtPoint = function (point) {
             return hoveredElementData;
         }.bind(this));
 };
+exports.hoverElementForSelector = function (selector) {
+    this.highlightElementForSelector(HOVER_ID, selector)
+        .then(function () {
+            return this.getHighlighterTargetData(HOVER_ID);
+        }.bind(this))
+        .then(function (hoveredElementData) {
+            _setElementData.call(this, 'hoveredElementData', hoveredElementData);
+
+            return hoveredElementData;
+        }.bind(this));
+};
 exports.hideHover = _.partial(exports.hideHighlighter, HOVER_ID);
 
 ///////////

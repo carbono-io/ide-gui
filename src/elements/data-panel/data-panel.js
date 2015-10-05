@@ -25,7 +25,8 @@
         },
 
         /**
-         * 
+         * Retrieves data about the entities
+         * from the html
          */
         handleCanvasInspectorReady: function () {
             var canvas = this.get('canvas');
