@@ -27,6 +27,7 @@
                 if (isClosed) {
                     Polymer.Base.toggleClass('closed', false, componentContext.$$('#component'));
                     isClosed = false;
+//                    this._handleClick();
                 } else {
                     Polymer.Base.toggleClass('closed', true, componentContext.$$('#component'));
                     isClosed = true;
