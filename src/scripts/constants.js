@@ -10,7 +10,6 @@ exports.ideModes = {
     navigation: 'navigation',
 };
 
-
 exports.canvasInteractionModes = {
     inspection: 'inspection',
     insertion: 'insertion',

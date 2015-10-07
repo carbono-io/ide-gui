@@ -1,0 +1,10 @@
+{
+    "env": "development",
+    "protocol": "http",
+    "apiLocation": "http://hom.api.carbono.io",
+
+    "codeMachineLocation": "http://hom.api.carbono.io/code-machine",
+    "componentsRegistryLocation": "http://localhost:8001",
+    "userServiceLocation": "http://localhost:8002",
+    "projectsServiceLocation": "http://hom.api.carbono.io/localhost:8003"
+}

@@ -21,12 +21,7 @@ module.exports = function (carbo, config) {
     var userService = new UserServiceClient({
         location: config.userServiceLocation
     });
-
-    var codeMachineService = new CodeMachineClient({
-        location: config.codeMachineLocation,
-        userService: userService
-    });
-
+    
     var componentsRegistryService = new ComponentsRegistryClient({
         location: config.componentsRegistryLocation,
         userService: userService,
@@ -41,7 +36,7 @@ module.exports = function (carbo, config) {
     // all components may have access to them.
     carbo.set('services', {});
     carbo.set('services.user', userService);
-    carbo.set('services.codeMachine', codeMachineService);
+    // carbo.set('services.codeMachine', codeMachineService);
     carbo.set('services.componentsRegistry', componentsRegistryService);
     carbo.set('services.projectsService', projectsService);
 
