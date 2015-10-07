@@ -28,16 +28,17 @@
 
             arrow.addEventListener('click', function(event) {
 
-                console.log('hwehqrjhwekqwe')
-
                 event.stopPropagation();
 
-                console.log(this.get('component.closed'));
+
 
                 var closed = this.get('component.closed') || false;
 
                 if (closed) {
                     this.set('component.closed', false);
+                    this.fire('component-click', {
+                        componentData: this.component
+                    });
                 } else {
                     this.set('component.closed', true);
                 }
@@ -56,6 +57,7 @@
 
                 //     isClosed = true;
                 // }
+
             }.bind(this));
         },
 
@@ -88,7 +90,6 @@
         },
 
         _componentClosedChanged: function (isClosed) {
-            console.log('_componentClosedChanged' + isClosed);
             Polymer.Base.toggleClass('closed', isClosed, this.$$('#component'));
         },
 
