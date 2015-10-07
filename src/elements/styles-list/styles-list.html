@@ -16,9 +16,12 @@
     <template>
 
 
-        <div id="component-class">
 
-            <div id="component-class-id">
+
+
+        <div id="component-class" >
+
+            <div id="component-class-id" on-click="toggleClosedClass">
                 <iron-icon icon="hardware:keyboard-arrow-down" id="arrow" ></iron-icon>
                 <span>[[ selectorString ]]</span>
             </div>
@@ -81,7 +84,7 @@
                                 <!-- IMAGE -->
 
                                 <!-- OPACITY -->
-                                <div 
+                                <div
                                     class="property-content"
                                     hidden$="[[ !isDeclarationOfType(declaration, 'opacity') ]]"
                                 >
@@ -102,7 +105,7 @@
                                 <!-- OPACITY -->
 
                                 <!-- GENERAL -->
-                                <div 
+                                <div
                                     class="property-content"
                                     hidden$="[[ !isDeclarationOfType(declaration, 'general') ]]"
                                 >
@@ -133,7 +136,7 @@
                                 </div>
  -->
                             </div>
-                            
+
                         </template>
 
                     </div>

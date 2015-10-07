@@ -24,8 +24,6 @@ Polymer({
 
     toggleClosedClass: function (event) {
 
-        console.log('hey')
-
         var groupNode = event.currentTarget.parentNode;
         var isClosed = groupNode.matches(".closed");
 
