@@ -182,7 +182,7 @@ exports.focusElementAtPoint = function (point) {
 };
 
 /**
- * Sets the focus highlighter to a selector and returns data o the 
+ * Sets the focus highlighter to a selector and returns data o the
  * focused element.
  * @param  {String} selector CSS selector
  * @return {POJO}
@@ -262,7 +262,7 @@ exports.setInsertionFocus = function (insertionContext) {
  * Auxiliary function that sets the elementData
  *
  * It builds some meta data onto the original data object.
- * @param {Object} data  
+ * @param {Object} data
  */
 function _setElementData(prop, elementData) {
 
@@ -272,7 +272,7 @@ function _setElementData(prop, elementData) {
         elementData.attributes['carbono-uuid']
     );
 
-    // set 
+    // set
     this.set(prop, elementData);
 
     return elementData;

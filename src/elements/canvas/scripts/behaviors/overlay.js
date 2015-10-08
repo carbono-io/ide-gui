@@ -40,7 +40,7 @@ exports.properties = {
  * @type {Object}
  */
 exports.listeners = {
-    'overlay.mousemove': 'handleOverlayMousemove',    
+    'overlay.mousemove': 'handleOverlayMousemove',
     'overlay.click': 'handleOverlayClick',
 
     'overlay.mousewheel': 'handleOverlayMousewheel',
@@ -67,7 +67,7 @@ exports._ideModeChanged = function (ideMode, oldIdeMode) {
         // navigation ideMode, let overlay fade
         this.deactivateOverlay();
     } else if (
-        ideMode === CONSTANTS.ideModes.graphicalEdition || 
+        ideMode === CONSTANTS.ideModes.graphicalEdition ||
         ideMode === CONSTANTS.ideModes.codeEdition) {
         // edition
         this.activateOverlay();
@@ -125,10 +125,10 @@ exports.activateOverlay = function () {
  */
 exports.deactivateOverlay = function () {
     var overlay = this.$.overlay;
-    
+
     // remove 'active' class from overlay
     this.toggleClass('active', false, overlay);
-    
+
     // Unhighlight whatever is highlighted.
     this.hideHover();
     this.hideFocus();
@@ -138,7 +138,7 @@ exports.deactivateOverlay = function () {
 /**
  * Whenever the mouse moves on the overlay, highlight the
  * element at the point
- * @param  {Event} event 
+ * @param  {Event} event
  */
 exports.handleOverlayMousemove = function (event) {
     var normalizedMousePos = this.normalizeMousePosition({
@@ -149,7 +149,7 @@ exports.handleOverlayMousemove = function (event) {
     // check if hovered element is the same as the focused element
     this.areFocusAndHoverTogether()
         .then(function (areTogether) {
-            
+
             if (areTogether) {
                 this.set('interactionMode', CONSTANTS.canvasInteractionModes.insertion);
             } else {
@@ -165,7 +165,7 @@ exports.handleOverlayMousemove = function (event) {
 
 /**
  * Handles click events on the overlay
- * 
+ *
  * @param  {Event} event
  */
 exports.handleOverlayClick = function (event) {
@@ -194,7 +194,7 @@ exports.handleOverlayClick = function (event) {
  * Handles mousewheel events on the overlay layer.
  * Basically makes the scroll on the overlay
  * become the scroll within the iframe.
- * 
+ *
  * @param  {Event} event
  */
 exports.handleOverlayMousewheel = function (event) {
@@ -215,7 +215,7 @@ exports.handleOverlayMousewheel = function (event) {
 };
 
 /**
- * Normalizes the mouse position by eliminating the 
+ * Normalizes the mouse position by eliminating the
  * distance of the overlay from top and left of the client window.
  * @param  {{x: Number, y: Number} Object} pos Original position
  * @return {{x: Numver, y: Number} Object} pos Normalized position
@@ -223,7 +223,7 @@ exports.handleOverlayMousewheel = function (event) {
 exports.normalizeMousePosition = function (pos) {
     // Calculate the rect of the overlay
     var overlayRect = this.$.overlay.getBoundingClientRect();
-    
+
     // Calculate the position of the mouse
     // relative to the rect of the overlay
     var normalized =  {
