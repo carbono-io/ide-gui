@@ -45,12 +45,16 @@ Polymer({
         if (!canvas) {
             throw new Error('No canvas for handleStyleDeclarationChanged');
         }
+        
+        //valida a existencia do declaration
+        if (event.detail.declaration) {
+            var selectorString = event.detail.selectorString;
+            var property = event.detail.declaration.property;
+            var value    = event.detail.declaration.value;
+            canvas.applyStyle(selectorString, property, value);
+        }
 
-        var selectorString = event.detail.selectorString;
-        var property = event.detail.declaration.property;
-        var value    = event.detail.declaration.value;
 
-        canvas.applyStyle(selectorString, property, value);
     },
 
     writeCSS: function () {

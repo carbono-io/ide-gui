@@ -1,156 +1,85 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link href="../../bower_components/polymer/polymer.html" rel="import">
 <!-- TODO: import iron-icons -->
 
 <!--polymer - iron icon - essencial para todos os ícones funcionarem-->
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link href="../../bower_components/iron-icon/iron-icon.html" rel="import">
 
 <!--polymer - icon sets - sets específicos de ícones - necessário para utilizar ícones destes sets -->
-<link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
-<link rel="import" href="../../bower_components/iron-icons/image-icons.html">
+<link href="../../bower_components/iron-icons/hardware-icons.html" rel="import">
+<link href="../../bower_components/iron-icons/image-icons.html" rel="import">
 
-<link rel="import" href="styles-list-styles.html">
+<link href="styles-list-styles.html" rel="import">
 
 <dom-module id="carbo-styles-list">
-    <style include="styles-list-styles"></style>
+  <style include="styles-list-styles"></style>
 
-    <template>
+  <template>
 
+    <div id="component-class">
 
-        <div id="component-class">
+      <div id="component-class-id" on-click="toggleClosedClass">
+        <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
+        <span>[[ selectorString ]]</span>
+      </div>
 
-            <div id="component-class-id">
-                <iron-icon icon="hardware:keyboard-arrow-down" id="arrow" ></iron-icon>
-                <span>[[ selectorString ]]</span>
-            </div>
+      <!-- CLASS -->
+      <form class="component-class-properties">
 
-            <!-- CLASS -->
-            <form class="component-class-properties">
+        <!-- REPEATS THE DECLARATION GROUP -->
+        <template as="group" is="dom-repeat" items="{{ declarationGroups }}">
 
-                <!-- REPEATS THE DECLARATION GROUP -->
-                <template
-                    is="dom-repeat"
-                    items="{{ declarationGroups }}"
-                    as="group"
-                >
+          <!-- PROPERTIES GROUP -->
+          <div class="properties-group" id$="{{ group.name }}">
+            <template as="declaration" is="dom-repeat" items="{{ group.declarations }}">
+              <div class="property">
+                  <label class="property-name"><span>{{ declaration.property }}</span>:</label>
+                  <!-- COLOR -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'color') ]]">
+                    <input on-change="handleInputChange" type="color" value="{{ declaration.value::change }}">
+                    <p>{{ declaration.value }}</p>
+                  </div>
+                  <!-- COLOR -->
 
-                    <!-- PROPERTIES GROUP -->
-                    <div
-                        id$="{{ group.name }}"
-                        class="properties-group"
-                    >
-                        <!-- REPEATS THE DECLARATIONS -->
-                        <template
-                            is="dom-repeat"
-                            items="{{ group.declarations }}"
-                            as="declaration"
-                        >
-                            <div class="property">
-                                <label class="property-name">
-                                    <span>{{ declaration.property }}</span>
-                                    :
-                                </label>
-
-                                <!-- COLOR -->
-                                <div
-                                    class="property-content"
-                                    hidden$="[[ !isDeclarationOfType(declaration, 'color') ]]"
-                                >
-                                    <input
-                                        type="color"
-                                        value="{{ declaration.value::change }}"
-                                        on-change="handleInputChange"
-                                    ><p>{{ declaration.value }}</p>
-                                </div>
-                                <!-- COLOR -->
-
-                                <!-- IMAGE -->
-                                <div
-                                    class="property-content"
-                                    hidden$="[[ !isDeclarationOfType(declaration, 'image') ]]"
-                                >
-                                    <input
-                                        type="text"
-                                        id="image-value"
-                                        placeholder="Insert image url"
-                                    >
-                                    <div class="bg-image">
-                                        <img src="http://www.imagenswhatsapp.com.br/wp-content/uploads/2015/02/Imagens-Flores.jpg">
-                                    </div>
-
-                                </div>
-                                <!-- IMAGE -->
-
-                                <!-- OPACITY -->
-                                <div 
-                                    class="property-content"
-                                    hidden$="[[ !isDeclarationOfType(declaration, 'opacity') ]]"
-                                >
-
-                                    <input
-                                        type="text"
-                                        value="{{ declaration.value::keyup }}"
-                                        on-keyup="handleInputChange"
-                                    >
-                                    <input
-                                        id="slider1"
-                                        value="{{ declaration.value::input }}"
-                                        on-input="handleInputChange"
-                                        type="range" min="0" max="1" step="0.1"
-                                    >
-
-                                </div>
-                                <!-- OPACITY -->
-
-                                <!-- GENERAL -->
-                                <div 
-                                    class="property-content"
-                                    hidden$="[[ !isDeclarationOfType(declaration, 'general') ]]"
-                                >
-
-                                    <input
-                                        type="text"
-                                        value="{{ declaration.value::keyup }}"
-                                        on-keyup="handleInputChange"
-                                    >
-                                </div>
-                                <!-- GENERAL -->
-
-
-
-                                <!-- FONT-FAMILY -->
-<!--                                 <div
-                                    class="property-content"
-                                    hidden$="[[ !isDeclarationOfType(declaration, 'font-family') ]]"
-                                >
-
-                                    <select selected="{{ declaration.value }}">
-                                          <option value="Roboto">initial</option>
-                                          <option value="valor2">inherit</option>
-                                          <option value="valor3">--</option>
-                                          <option value="valor3">---</option>
-                                    </select>
-
-                                </div>
- -->
-                            </div>
-                            
-                        </template>
-
+                  <!-- IMAGE -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'image') ]]">
+                    <input id="image-value" placeholder="Insert image url" type="text">
+                    <div class="bg-image">
+                      <img src="http://www.imagenswhatsapp.com.br/wp-content/uploads/2015/02/Imagens-Flores.jpg">
                     </div>
-                    <!-- PROPERTIES GROUP -->
 
-                </template>
-            </form>
+                  </div>
+                  <!-- IMAGE -->
+
+                  <!-- OPACITY -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'opacity') ]]">
+
+                    <input on-keyup="handleInputChange" type="text" value="{{ declaration.value::keyup }}">
+                    <input id="slider1" max="1" min="0" on-input="handleInputChange" step="0.1" type="range" value="{{ declaration.value::input }}">
+
+                  </div>
+                  <!-- OPACITY -->
+                  <!-- DEFAULT -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'general') ]]">
+                    <carbo-input-unit on-change="handleInputChange"  value="{{ declaration.value }}" property="{{ declaration.property }}">
+                    </carbo-input-unit>
+                  </div>
+                  <!-- DEFAULT -->
+
+              </div>
+              
+            </template>
+          </div>
+          <!-- PROPERTIES GROUP -->
+
+        </template>
 
 
-        </div>
+      </form>
 
+    </div>
 
+  </template>
 
-    </template>
-
-
-
-    <script src="styles-list.bundle.js"></script>
+  <script src="styles-list.bundle.js"></script>
 
 </dom-module>

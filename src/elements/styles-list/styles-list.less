@@ -8,7 +8,6 @@
 
 
 #component-class {
-
     #component-class-id {
 
         display: flex;
@@ -36,6 +35,9 @@
         padding: 0 2*@base-size 0 2*@base-size;
         display: flex;
         flex-direction: column;
+        // max-height:800px;
+        transition: max-height .2s ease;
+
 
         .properties-group{
             padding-top: @base-size;
@@ -174,23 +176,20 @@
 
 
 
+
+
 //
-//#group {
-//    &.closed {
-//        #arrow {
-//            .rotate(-90deg);
-//        }
-//        #style-name {
-//            max-height: 0;
-////          overflow: hidden;
-//
-//            .item-id {
-//                visibility: hidden;
-//                transition: visibility 0s linear 0.2s;
-//            }
-//        }
-//    }
-//}
+#component-class.closed {
+
+       #arrow {
+           .rotate(-90deg);
+       }
+       .component-class-properties {
+          overflow-y: hidden;
+          max-height: 0px;
+       }
+     }
+
 
 
 

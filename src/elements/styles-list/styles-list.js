@@ -5,6 +5,7 @@ var getDeclarationType = require('./scripts/lib/get-declaration-type');
 var groupDeclarations  = require('./scripts/lib/group-declarations');
 
 Polymer({
+
     is: 'carbo-styles-list',
 
     properties: {
@@ -23,8 +24,6 @@ Polymer({
     },
 
     toggleClosedClass: function (event) {
-
-        console.log('hey')
 
         var groupNode = event.currentTarget.parentNode;
         var isClosed = groupNode.matches(".closed");
