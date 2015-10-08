@@ -131,7 +131,7 @@
         },
 
         handleComponentMouseOver: function(event) {
-            // this.showPreview(event);
+            this.showPreview(event);
         },
 
         matchesSearch: function (component) {
