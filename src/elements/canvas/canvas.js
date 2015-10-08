@@ -8,12 +8,12 @@
  * application frame within it.
  *
  * There are multiple events that we must intercept at this module:
- * the clicks on the application, scroll, mousemove. 
+ * the clicks on the application, scroll, mousemove.
  *
- * All these events are intercepted by a sub-component we call the 
+ * All these events are intercepted by a sub-component we call the
  * `overlay`, which is an opacity-0-div that is over the application iframe.
  *
- * All events are detected on the overlay and passed onto the application if 
+ * All events are detected on the overlay and passed onto the application if
  * necessary.
  */
 (function () {
@@ -64,6 +64,8 @@
         listeners: {
             'canvas.mouseenter': 'handleCanvasMouseenter',
             'canvas.mouseleave': 'handleCanvasMouseleave',
+            'canvas.DOMMouseScroll': 'cancelScrollPropagation',
+            'canvas.mousewheel': 'cancelScrollPropagation',
         },
 
         activateLoading: function () {
@@ -73,7 +75,14 @@
         deactivateLoading: function () {
             this.executeInspectorOperation('deactivateLoading');
         },
-        
+
+        cancelScrollPropagation: function(e){
+            // Prevent event from being captured by outer nodes
+            // (I am looking at you, window)
+            e.stopPropagation();
+            // e.preventDefault();
+        },
+
         /**
          * Whenever the mouse enters the canva element area,
          * let the overlay handle keydown events for shortcut detection.
@@ -85,17 +94,17 @@
         },
 
         /**
-         * Whenever the mouse leaves the canvas, 
+         * Whenever the mouse leaves the canvas,
          * make sure the overlay is activated and the inspector unhighlighted.
          */
         handleCanvasMouseleave: function (event) {
-               
+
             // unfocus the overlay
             this.$.overlay.blur();
-            
+
             // unHighlight
             this.hideHover();
-            
+
             // activate overlay
             // this.activateOverlay();
         },
@@ -122,7 +131,7 @@
                 // remove listener
                 this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
             }
-            
+
             this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
 
             // return a promise for whenever the reloading is done

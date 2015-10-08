@@ -1,5 +1,6 @@
 'use strict';
 
+/* globals _, Q */
 /**
  * Deals with canvas-context elements
  * and clicking them.
@@ -42,7 +43,6 @@ exports.properties = {
 exports.listeners = {
     'overlay.mousemove': 'handleOverlayMousemove',
     'overlay.click': 'handleOverlayClick',
-
     'overlay.mousewheel': 'handleOverlayMousewheel',
     'overlay.DOMMouseScroll': 'handleOverlayMousewheel',
 };
@@ -176,6 +176,7 @@ exports.handleOverlayClick = function (event) {
         y: event.clientY
     });
 
+
     // Set the focus to the element under the cursor
     this.focusElementAtPoint(normalizedMousePos)
         .then(function (focusedElementData) {
@@ -197,14 +198,13 @@ exports.handleOverlayClick = function (event) {
  *
  * @param  {Event} event
  */
-exports.handleOverlayMousewheel = function (event) {
-    // Prevent event from being captured by outer nodes
-    // (I am looking at you, window)
-    event.preventDefault();
-    event.stopPropagation();
 
+
+exports.handleOverlayMousewheel = _.debounce(function (event) {
     // Let the iframe scroll the same as the mousewheel
-    this.executeInspectorOperation('scrollBy', [-1 * event.wheelDeltaX, -1 * event.wheelDeltaY]);
+    this.executeInspectorOperation('scrollBy', [event.wheelDeltaX * -0.4, event.wheelDeltaY* -0.4]);
+
+    // this.$.iframe.contentWindow.scrollBy(event.wheelDeltaX , event.wheelDeltaY);
 
     // Normalize the mouse position from clientX and clientY
     // to overlayX and overlayY
@@ -212,7 +212,9 @@ exports.handleOverlayMousewheel = function (event) {
         x: event.clientX,
         y: event.clientY
     });
-};
+}, 0.5);
+
+
 
 /**
  * Normalizes the mouse position by eliminating the
