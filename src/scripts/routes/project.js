@@ -13,9 +13,6 @@ var CONFIG            = require('../config');
  */
 module.exports = function (carbo, config, services, components) {
 
-
-    console.log(services);
-
     var projectsService = services.projectsService;
 
     // route for creating new project
@@ -43,25 +40,21 @@ module.exports = function (carbo, config, services, components) {
         carbo.set('route', 'project');
         carbo.set('section', section);
 
-        console.log(CONFIG);
-
         // instantiate new code machine client
         var codeMachineService = new CodeMachineClient({
-            location: CONFIG.codeMachine.getSocketIOConnectionLocation(projectId),
-            userService: services.user
+            location: CONFIG.codeMachine.getBaseLocation(projectId),
+            socketIoPath: '/mc/cm/' + projectId,
+            userService: services.userService,
         });
 
-        console.log('hey')
-
+        // set it onto the main scope and notify 
+        // that the entryFileLocation has changed
         carbo.set('services.codeMachine', codeMachineService);
-        carbo.set(
-            'services.codeMachine.markedResourcesLocation', 
-            CONFIG.codeMachine.getMarkedResourcesBaseLocation(projectId)
-        );
+        carbo.notifyPath('services.codeMachine.entryFileLocation', codeMachineService.entryFileLocation);
 
         projectsService.readById(projectId)
             .then(function (project) {
-                carbo.set('project', project);
+                // carbo.set('project', project);
             })
             // Call done to interrupt promise chain and throw errors.
             .done();
