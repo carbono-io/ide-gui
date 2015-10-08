@@ -5,6 +5,7 @@ var getDeclarationType = require('./scripts/lib/get-declaration-type');
 var groupDeclarations  = require('./scripts/lib/group-declarations');
 
 Polymer({
+
     is: 'carbo-styles-list',
 
     properties: {

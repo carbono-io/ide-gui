@@ -1,0 +1,18 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link href="input-unit-styles.html" rel="import">
+
+
+<dom-module id="carbo-input-unit">
+  <style include="input-unit-styles"></style>
+
+    <template>
+      <div id="input-unit">
+        <input type="number" value="{{number::keyup}}">
+        <select id="selector" name="border-width">
+        </select>
+      </template>
+    </div>
+  <script src="input-unit.js"></script>
+
+</dom-module>

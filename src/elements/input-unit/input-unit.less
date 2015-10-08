@@ -1,0 +1,50 @@
+@import '../../less/variables.less';
+@import '../../bower_components/lesshat/build/lesshat.less';
+
+#input-unit{
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
+  select {
+      //colocar icones
+      height: 24px;
+      width: 104px;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      border-radius: 0;
+      background-color: #f8f8f8;
+      transition: width 0.3s ease;
+      // appearance:none;
+
+    &:nth-child(2), &:nth-child(3) {
+        margin-left: @base-size/2;
+    }
+  }
+  select.full{
+      width: 148px;
+      margin-left: 0;
+  }
+  input[type="number"]:disabled{
+    display: none;
+  }
+  input[type="number"] {
+      width:40px;
+      height: 24px;
+      outline: none;
+      box-sizing: border-box;
+      padding: 0;
+      background-color: #f8f8f8;
+      border: none;
+      padding-left: @base-size/2;
+      box-sizing: border-box;
+
+      &:focus, &:hover {
+          border: 1px solid @border-bottom;
+      }
+  }
+
+}
