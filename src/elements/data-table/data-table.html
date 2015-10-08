@@ -6,6 +6,12 @@ da aplicação.
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<!-- TODO: remove firebase -->
+<link
+    rel="import" 
+    href="../../bower_components/firebase-element/firebase-collection.html"
+>
+
 
 <!-- DIALOG PARA USAR NO DATA TABLE NO FUTURO (no momento de editar o conteúdo da célula)
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
@@ -18,6 +24,14 @@ da aplicação.
 <dom-module id="carbo-data-table">
     <style include="data-table-styles"></style>
     <template>
+        <!-- firebase connection -->
+        <firebase-collection
+            id="firebase"
+            location="{{ retrieveFirebaseLocation(entity) }}"
+            data="{{ entityItems }}"
+        >
+        </firebase-collection>
+
 
         <!--componente start-->
 
@@ -38,13 +52,13 @@ da aplicação.
                         <input type="radio" class="associate-entity-button">
                     </div>
                     <iron-icon icon="hardware:keyboard-arrow-down" id="arrow" ></iron-icon>
-                    <span>Respostas ao formulário 1</span>
+                    <span>Formulário</span>
                 </div>
                     
                 <div id="entity-action-message">   
                     <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->             
                     <p id="entity-associated-message" class="active">
-                        Os dados das respostas ao "Formulário 1" estarão associados à "Respostas ao Formulário 1"
+                        Os dados coletados em "Formulário" estarão associados à "Formulário"
                     </p>
 
                     <!--MENSAGEM PARA ASSOCIAR COMPONENTE A PROPROEDADE DE ENTIDADE-->
@@ -58,12 +72,15 @@ da aplicação.
                         <thead>
                             <tr>
                                 <!-- repete colunas para cada propriedade-->
-                                <template is="dom-repeat" items="{{ entity1.properties }}" as="property">
+                                <template
+                                    is="dom-repeat"
+                                    items="{{ entityProperties }}"
+                                    as="property">
     <!--                                    <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>-->
                                     
                                     <th>
                                         <input type="radio" class="associate-property-button" class="active">
-                                        <iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="Add nome">
+                                        <iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="Adicione título">
                                         </iron-autogrow-textarea>
                                     </th>
                                     
@@ -80,22 +97,22 @@ da aplicação.
                             <!-- repete linhas de cada entidade -->
                             <template 
                                 is="dom-repeat"
-                                items="{{ entity1.items }}" 
-                                as="dataitem"
+                                items="{{ entityItems }}" 
+                                as="item"
                             >
                                 <tr>
                                     <!-- repete colunas de cada linha-->
                                     <template 
                                         is="dom-repeat" 
-                                        items="{{ dataitem.properties }}" 
-                                        as="propertycontent"
+                                        items="{{ entityProperties }}" 
+                                        as="property"
                                     >
                                         <td>
                                             
                                             <iron-autogrow-textarea 
-                                                bind-value="{{ propertycontent.content }}"
+                                                bind-value="{{ readPropertyFromEntityItem(item, property.name) }}"
                                                 max-rows="3"
-                                                placeholder="Add dado"
+                                                placeholder="Adicione dado"
                                             >
                                             </iron-autogrow-textarea>
                                         </td>
@@ -106,6 +123,28 @@ da aplicação.
                                     <td></td>
                                 </tr>
                             </template>
+
+                            <tr>
+                                <!-- repete colunas de cada linha-->
+                                <template 
+                                    is="dom-repeat" 
+                                    items="{{ entityProperties }}" 
+                                    as="property"
+                                >
+                                    <td>
+                                        
+                                        <iron-autogrow-textarea
+                                            max-rows="3"
+                                            placeholder="Adicione dado"
+                                        >
+                                        </iron-autogrow-textarea>
+                                    </td>
+                                </template>
+                                <!-- fim do repete colunas -->
+
+                                <!-- td somente para manter o tamanho da table certo -->
+                                <td></td>
+                            </tr>
                             <!-- fim do repete das linhas -->
                         </tbody>
                     </table>
@@ -125,6 +164,8 @@ da aplicação.
         </div>
         <!--componente end-->
     </template>
+
+    <script src="../../bower_components/lodash/lodash.js"></script>
     <script src="data-table.js"></script>
 
 </dom-module>

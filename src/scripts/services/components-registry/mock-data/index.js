@@ -1,11 +1,63 @@
 'use strict';
 
+var fs = require('fs');
+
 // TODO: create mock server based on json-database
 
 var registry = [];
 
+
+// PARAGRAFO
+registry.push({
+    title: "Parágrafo",
+    context: {
+        show: ['PAGE', 'BODY', 'FORM'],
+        insertion: false
+    },
+    html: '<p>Insira o conteúdo do seu parágrafo</p>',
+    icon: "text-format",
+});
+
+// Texto
+registry.push({
+    title: "Texto",
+    context: {
+        show: ['PAGE', 'BODY', 'FORM'],
+        insertion: false
+    },
+    html: '<p>Insira o conteúdo do seu parágrafo</p>',
+    icon: "text-format",
+});
+
+// TÍTULO 1
+registry.push({
+    title: "Título 1",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<h1>Insira o conteúdo do seu título 1</h1>',
+    icon: "text-format",
+});
+
+
+// TÍTULO 2
+registry.push({
+    title: "Título 2",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<h2>Insira o conteúdo do seu título 2</h2>',
+    icon: "text-format",
+});
+
+
 // CARBO-FORM
 registry.push(require('./components/carbo-form'));
+
+// PAPER-INPUT
+registry.push(require('./components/paper-input'));
 
 
 // CARBO-GALERIA
@@ -15,8 +67,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false
     },
-    html: '<paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
-    icon: "view-stream",
+    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
+//    icon: "view-stream",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -25,6 +78,7 @@ registry.push({
     ]
 });
 
+
 // CARBO-CAROUSEL
 registry.push({
     title: "Carousel",
@@ -32,8 +86,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>carousel de conteúdos</p>',
-    icon: "view-carousel",
+    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-carousel",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -49,8 +104,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>tabela de conteúdos</p>',
-    icon: "view-quilt",
+    html: '<table> <tr> <th>Campo 1</th> <th>Campo 2</th> </tr> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr><tr>    <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr></table>',
+//    icon: "view-quilt",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -66,8 +122,9 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>lista de conteúdos</p>',
-    icon: "view-headline",
+    html: '<ul> <li>Conteúdo 1</li> <li>Conteúdo 2</li> <li>Conteúdo 3</li> </ul>',
+//    icon: "view-headline",
+    icon: "view-module",
     components: [
         {
             name: 'paper-card',
@@ -83,7 +140,7 @@ registry.push({
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    html: '<p>grid de conteúdos</p>',
+    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
     icon: "view-module",
     components: [
         {
@@ -134,29 +191,6 @@ registry.push({
             repository: 'PolymerElements/paper-button',
         },
     ],
-});
-
-// PAPER-INPUT
-registry.push({
-    title: 'Input de texto',
-    context: {
-        show: ['FORM', 'CARBO-FORM'],
-        insertion: {
-            'FORM': false,
-            'CARBO-FORM': 'form',
-        }
-    },
-    postInsertion: {
-        focus: 'paper-input',
-    },
-    icon: "text-format",
-    html: '<paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input>',
-    components: [
-        {
-            name: 'paper-input',
-            repository: 'PolymerElements/paper-input'
-        }
-    ]
 });
 
 // CARBO-GEO

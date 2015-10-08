@@ -50,6 +50,7 @@ module.exports = function (gulp, $) {
     gulp.task('serve:src', 'Serve the source code (for development)', ['serve:code-machine'], function () {
 
         var bs = browserSync({
+            ghostMode: false,
             port: 4000,
             server: {
                 baseDir: 'src',
@@ -71,6 +72,7 @@ module.exports = function (gulp, $) {
     gulp.task('serve:stage', 'Serve the staging environment', ['serve:code-machine'], function () {
 
         var bs = browserSync({
+            ghostMode: false,
             port: 4001,
             server: {
                 baseDir: 'stage',
@@ -94,6 +96,7 @@ module.exports = function (gulp, $) {
     gulp.task('serve:dist', 'Serve the distribution environment', ['serve:code-machine'], function () {
 
         var bs = browserSync({
+            ghostMode: false,
             port: 4002,
             server: {
                 baseDir: 'dist',

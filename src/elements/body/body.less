@@ -13,7 +13,7 @@
 
         &.closed {
             // width: 0px !important;
-            
+
             display: none;
         }
 
@@ -130,6 +130,9 @@
                 margin-right: 2 * @base-size;
 
                 background-color: @panel-background-color;
+
+                max-height: 550px;
+//                overflow-y: scroll;
             }
         }
     }
@@ -139,22 +142,25 @@
 		// no growing nor shrinking
 		flex-grow: 0;
 		flex-shrink: 0;
-
 		margin-left: 0;
 		border-left: solid 1px @border-bottom;
 
 		background-color: @panel-background-color;
-//      comentei o tamanho aqui para testar com tamanho maior           para os dados
+
+
+        //mudar de lugar depois
+        overflow: scroll;
+
         &.style {
             width: @panel-width;
         }
 
         &.data {
-            
-            width:320px;
+
+            width: 360px;
 //            min-width: 224px;
 //            max-width: 448px;
-            
+
         }
 	}
 }

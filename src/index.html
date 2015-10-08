@@ -70,10 +70,12 @@
                 <iron-icon icon="maps:layers"></iron-icon>
                 <span>DADOS</span>
               </a>
+<!--
               <a section="actions" href="/projects/340987612301/actions">
                 <iron-icon icon="image:flash-on"></iron-icon>
                 <span>AÇÕES</span>
               </a>
+-->
 
               <a section="publish" href="/projects/340987612301/publish">
                 <iron-icon icon="editor:publish"></iron-icon>
@@ -91,8 +93,11 @@
 
           <div body-section="left">
             <carbo-components-tree-panel
+              id="components-tree-panel"
               active-element-tree-data="{{ activeElementTreeData }}"
               focused-element-data="{{ focusedElementData }}"
+
+              canvas="{{ components.canvas }}"
             >
             </carbo-components-tree-panel>
 
@@ -158,29 +163,21 @@
 
             <!--Conteúdo box estilos-->
             <div data-section="style">
-              <carbo-panel
-                title="Estilo"
-                icon="image:palette"
-                menu="{{ boxmenuitemStyle }}"
+              <carbo-styles-panel
+                focused-element-data="{{ focusedElementData }}"
+                code-machine="{{ services.codeMachine }}"
+                canvas="{{ components.canvas }}"
               >
-                <carbo-styles-list
-                group="{{ styleGroups }}"
-                ></carbo-styles-list>
-              </carbo-panel>
+              </carbo-styles-panel>
             </div>
 
             <!--Conteúdo box dados-->
             <div data-section="data">
-              <carbo-panel
-                title="Dados"
-                icon="maps:layers"
-                menu="{{ boxmenuitem }}"
+              <carbo-data-panel
+                code-machine="{{ services.codeMachine }}"
+                canvas="{{ components.canvas }}"
               >
-                <carbo-data-table
-                  entity1="{{ entitydata }}"
-                >
-                </carbo-data-table>
-              </carbo-panel>
+              </carbo-data-panel>
             </div>
 
           </iron-pages>

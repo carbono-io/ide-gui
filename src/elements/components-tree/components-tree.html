@@ -44,7 +44,9 @@
 
             <div id="component-children-container">
                 <template is="dom-repeat" items="{{ component.children }}">
-                    <carbo-components-tree closed component="{{ item }}"></carbo-components-tree>
+                    <carbo-components-tree
+                        closed component="{{ item }}"
+                    ></carbo-components-tree>
                 </template>
             </div>
         </div>

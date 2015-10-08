@@ -3,6 +3,17 @@
 // native dependencies
 var fs = require('fs');
 
+// external dependencies
+var uuid = require('node-uuid');
+
+
+// TODO: hacks
+var firebaseBaseURL = 'https://torrid-torch-9505.firebaseio.com';
+
+function buildFirebaseLocation() {
+    return firebaseBaseURL + '/carbo-form-' + uuid.v4() + '.json';
+}
+
 // title of the component, to be shown at the palette
 exports.title = "Formulário";
 
@@ -23,8 +34,18 @@ exports.postInsertion = {
 // icon to be shown on palette
 exports.icon = "assignment";
 
-// the html string
-exports.html = fs.readFileSync(__dirname + '/template.html', 'utf-8');
+// build the template function
+var template = _.template(fs.readFileSync(__dirname + '/template.html', 'utf-8'));
+
+
+// the templating function
+exports.renderHtml = function () {
+    var data = {
+        resourceLocation: buildFirebaseLocation()
+    };
+
+    return template(data);
+};
 
 // bower components the component depends upon
 exports.components = [

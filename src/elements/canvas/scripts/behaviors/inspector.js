@@ -76,6 +76,9 @@ var INSPECTOR_METHODS = [
     'getHighlighterTargetChildrenData',
     'getElementsData',
     'getElementTreeData',
+    'elementMatches',
+
+    'applyStyle',
 ];
 
 INSPECTOR_METHODS.forEach(function (methodName) {
@@ -94,13 +97,13 @@ var HIGHLIGHTERS = [
     {
         id: HOVER_ID,
         surfaceStyle: {
-            border: '3px dashed green'
+            border: '2px dashed #FF00FF',
         }
     },
     {
         id: FOCUS_ID,
         surfaceStyle: {
-            border: '3px solid green'
+            border: '2px solid #00FF00'
         }
     }
 ];
@@ -145,6 +148,17 @@ exports.hoverElementAtPoint = function (point) {
             return hoveredElementData;
         }.bind(this));
 };
+exports.hoverElementForSelector = function (selector) {
+    this.highlightElementForSelector(HOVER_ID, selector)
+        .then(function () {
+            return this.getHighlighterTargetData(HOVER_ID);
+        }.bind(this))
+        .then(function (hoveredElementData) {
+            _setElementData.call(this, 'hoveredElementData', hoveredElementData);
+
+            return hoveredElementData;
+        }.bind(this));
+};
 exports.hideHover = _.partial(exports.hideHighlighter, HOVER_ID);
 
 ///////////
@@ -168,7 +182,7 @@ exports.focusElementAtPoint = function (point) {
 };
 
 /**
- * Sets the focus highlighter to a selector and returns data o the 
+ * Sets the focus highlighter to a selector and returns data o the
  * focused element.
  * @param  {String} selector CSS selector
  * @return {POJO}
@@ -235,8 +249,6 @@ exports.setInsertionFocus = function (insertionContext) {
 
     insertionContextSelector = '[carbono-uuid="' + focusedElementData.attributes['carbono-uuid'] + '"] ' + insertionContextSelector;
 
-    console.log(insertionContext);
-
     return this.executeInspectorOperation('highlightElementForSelector', [INSERTION_ID, insertionContextSelector])
         .then(function () {
             return this.executeInspectorOperation('getHighlighterTargetData', [INSERTION_ID]);
@@ -250,7 +262,7 @@ exports.setInsertionFocus = function (insertionContext) {
  * Auxiliary function that sets the elementData
  *
  * It builds some meta data onto the original data object.
- * @param {Object} data  
+ * @param {Object} data
  */
 function _setElementData(prop, elementData) {
 
@@ -260,7 +272,7 @@ function _setElementData(prop, elementData) {
         elementData.attributes['carbono-uuid']
     );
 
-    // set 
+    // set
     this.set(prop, elementData);
 
     return elementData;

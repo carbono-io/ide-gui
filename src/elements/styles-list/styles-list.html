@@ -1,58 +1,85 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link href="../../bower_components/polymer/polymer.html" rel="import">
 <!-- TODO: import iron-icons -->
 
 <!--polymer - iron icon - essencial para todos os ícones funcionarem-->
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link href="../../bower_components/iron-icon/iron-icon.html" rel="import">
 
 <!--polymer - icon sets - sets específicos de ícones - necessário para utilizar ícones destes sets -->
-<link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
-<link rel="import" href="../../bower_components/iron-icons/image-icons.html">
+<link href="../../bower_components/iron-icons/hardware-icons.html" rel="import">
+<link href="../../bower_components/iron-icons/image-icons.html" rel="import">
 
-<link rel="import" href="styles-list-styles.html">
+<link href="styles-list-styles.html" rel="import">
 
 <dom-module id="carbo-styles-list">
-    <style include="styles-list-styles"></style>
-<!--
-    <template is="dom-repeat" items="{{ components }}">
-        <div class="component" on-mouseover="handleComponentMouseOver" on-mouseout="hidePreview">
-            <div class="component-icon">
-                <iron-icon icon="{{ item.icon }}"></iron-icon>
-            </div>
-            <div class="component-label">{{ item.title }}</div>
-        </div>
-    </template>
+  <style include="styles-list-styles"></style>
 
-<template is="dom-repeat" items="{{ screens }}">
-                    <div class="preview-screen"><img src="{{ item.url }}"></div>
-                    <div class="screen-caption">{{ item.screensCaption }}</div>
+  <template>
 
-                </template>
--->
-    <template>
-        <template is="dom-repeat" items="{{ group }}">
-            <!--componente start-->
-            <div id="group">
-                <div id="group-name" on-click="toggleClosedClass">
-                    <div class="item-id">
-                        <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
-                        <span>{{ item.title }}</span>
+    <div id="component-class">
+
+      <div id="component-class-id" on-click="toggleClosedClass">
+        <iron-icon icon="hardware:keyboard-arrow-down" id="arrow"></iron-icon>
+        <span>[[ selectorString ]]</span>
+      </div>
+
+      <!-- CLASS -->
+      <form class="component-class-properties">
+
+        <!-- REPEATS THE DECLARATION GROUP -->
+        <template as="group" is="dom-repeat" items="{{ declarationGroups }}">
+
+          <!-- PROPERTIES GROUP -->
+          <div class="properties-group" id$="{{ group.name }}">
+            <template as="declaration" is="dom-repeat" items="{{ group.declarations }}">
+              <div class="property">
+                  <label class="property-name"><span>{{ declaration.property }}</span>:</label>
+                  <!-- COLOR -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'color') ]]">
+                    <input on-change="handleInputChange" type="color" value="{{ declaration.value::change }}">
+                    <p>{{ declaration.value }}</p>
+                  </div>
+                  <!-- COLOR -->
+
+                  <!-- IMAGE -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'image') ]]">
+                    <input id="image-value" placeholder="Insert image url" type="text">
+                    <div class="bg-image">
+                      <img src="http://www.imagenswhatsapp.com.br/wp-content/uploads/2015/02/Imagens-Flores.jpg">
                     </div>
-                </div>
-                <div id="hoverer"></div>
-                <template is="dom-repeat" items="{{ item.styles }}">
-                    <div id="style-name">
-                        <div class="item-id">
-                            <div class="style-preview-2" on-click="setClassName"><!--{{ item.icon }}--></div>
-                            <span>{{ item.name }}</span>
-                        </div>
-                    </div>
-                    <div id="hoverer"></div>
-                </template>
-            </div>
-            <!--componente end-->
+
+                  </div>
+                  <!-- IMAGE -->
+
+                  <!-- OPACITY -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'opacity') ]]">
+
+                    <input on-keyup="handleInputChange" type="text" value="{{ declaration.value::keyup }}">
+                    <input id="slider1" max="1" min="0" on-input="handleInputChange" step="0.1" type="range" value="{{ declaration.value::input }}">
+
+                  </div>
+                  <!-- OPACITY -->
+                  <!-- DEFAULT -->
+                  <div class="property-content" hidden$="[[ !isDeclarationOfType(declaration, 'general') ]]">
+                    <carbo-input-unit on-change="handleInputChange"  value="{{ declaration.value }}" property="{{ declaration.property }}">
+                    </carbo-input-unit>
+                  </div>
+                  <!-- DEFAULT -->
+
+              </div>
+              
+            </template>
+          </div>
+          <!-- PROPERTIES GROUP -->
+
         </template>
-    </template>
 
-    <script src="styles-list.js"></script>
+
+      </form>
+
+    </div>
+
+  </template>
+
+  <script src="styles-list.bundle.js"></script>
 
 </dom-module>

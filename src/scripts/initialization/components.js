@@ -13,6 +13,7 @@ module.exports = function (carbo, config) {
     var canvas               = document.querySelector('#canvas');
     var componentsPalette    = document.querySelector('#components-palette');
     var componentsPaletteBox = document.querySelector('#components-palette-box');
+    var componentsTreePanel  = document.querySelector('#components-tree-panel');
 
     // TODO: check if this is a good approach.
     canvas.addEventListener('focused-element-data-changed', function (event) {
@@ -39,6 +40,7 @@ module.exports = function (carbo, config) {
     carbo.set('components.body', body);
     carbo.set('components.canvas', canvas);
     carbo.set('components.componentsPalette', componentsPalette);
+    carbo.set('components.componentsTreePanel', componentsTreePanel);
 
     return carbo.get('components');
 };

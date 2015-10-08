@@ -28,10 +28,12 @@
         
             <div id="wrapper" state$="{{ state }}">
 
+<!--
                 <paper-tabs selected="0" noink="false">
                     <paper-tab>Básicos</paper-tab>
                     <paper-tab>Avançados</paper-tab>
                 </paper-tabs>
+-->
 
                 <paper-input-container no-label-float="true">
                     <div prefix id="prefix">
@@ -43,7 +45,12 @@
 
                 <div id="tabs-content">
                     <div class="tab">
-                        <template is="dom-repeat" items="{{ components }}">
+                        <template
+                            is="dom-repeat"
+                            items="{{ components }}"
+
+                            filter="matchesSearch"
+                        >
                             <div class="component" 
                                 on-mouseover="handleComponentMouseOver" 
                                 on-mouseout="hidePreview"
@@ -57,7 +64,7 @@
                         </template>
 
                         <template is="dom-if" if="{{ !components.length }}">
-                            não há componentes disponíveis
+                            <div style="padding-left: 8px;">não há componentes disponíveis para adicionar</div>
                         </template>
 
                     </div>

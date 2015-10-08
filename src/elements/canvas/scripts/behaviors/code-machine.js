@@ -54,9 +54,6 @@ exports._handleCodeMachineChange = function (codeMachine, oldCodeMachine) {
         this.getElementsData(selector)
             .then(function (elementsData) {
 
-                console.log('modification');
-                console.log(elementsData);
-
                 // setTimeout(this.reload.bind(this), 100);
 
                 // if (elementsData[0].tagName === 'HEAD') {

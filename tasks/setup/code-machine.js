@@ -19,7 +19,7 @@ module.exports = function (gulp, $) {
      * Clones code machine and sets up config files
      */
     gulp.task('cache:code-machine', ['tmp:create'], function (done) {
-        // delete the current 
+        // delete the current
         $.util.log('cache:code-machine deleting old cache');
         del.sync(path.join(cachePath, 'code-machine'));
 
@@ -99,7 +99,7 @@ module.exports = function (gulp, $) {
 
             var carboInspectorPath   = path.join(cachePath, 'carbo-inspector');
             var cmCarboInspectorPath = path.join(tmpPath, 'code-machine/node_modules/carbo-inspector');
-            
+
             del.sync(cmCarboInspectorPath);
             fs.symlinkSync(carboInspectorPath, cmCarboInspectorPath);
         }
@@ -111,9 +111,9 @@ module.exports = function (gulp, $) {
             '!' + path.join(cachePath, 'code-machine/gulpfile.js')
         ];
 
-        $.util.log('reset:code-machine copying files')
+        $.util.log('reset:code-machine copying files');
         gulp.src(filesToCopy, {
-                base: cachePath, 
+                base: cachePath,
                 dot: true
             })
             .pipe(gulp.dest(tmpPath))
