@@ -50,6 +50,7 @@
             }
         },
 
+
         // Used for setting up event listeners onto the canvas component
         _handleCanvasComponentChange: function (canvas, oldCanvas) {
             console.log('canvas changed');
@@ -70,6 +71,15 @@
             }.bind(this))
             .done();
         },
+
+        /**
+         * Make a uniqueId to handle hover for paper tooltip 
+         * @param  {index} index of element in dom-repeat 
+         */
+        computeUniqueId: function(index){
+            return ("component" + index);
+        },
+
 
         handleComponentClick: function (event) {
 
@@ -131,7 +141,18 @@
         },
 
         handleComponentMouseOver: function(event) {
-            this.showPreview(event);
+            //find the tooltip and image inside component 
+            var tooltip = event.currentTarget.querySelector(".preview");
+            var image = tooltip.querySelector("img");
+            
+            //wait for image to load
+            _.delay(function(){
+                if(tooltip.style.top === "auto"){
+                    //make the bottom of tooltip to be half of image size to allwas show up.
+                    tooltip.style.bottom = (parseInt(image.height) / 2) + "px" ;
+                }
+             }, 200); 
+
         },
 
         matchesSearch: function (component) {

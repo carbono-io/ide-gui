@@ -21,7 +21,6 @@
     <template>
 
         <carbo-panel-box
-            title="Adicionar componentes"
             icon="add"
             menu="{{ boxmenuitem }}"
         >
@@ -48,10 +47,9 @@
                         <template
                             is="dom-repeat"
                             items="{{ components }}"
-
                             filter="matchesSearch"
                         >
-                            <div class="component" 
+                            <div class="component" id="{{computeUniqueId(index)}}"
                                 on-mouseover="handleComponentMouseOver" 
                                 on-mouseout="hidePreview"
                                 on-click="handleComponentClick"
@@ -60,7 +58,22 @@
                                     <iron-icon icon="{{ item.icon }}"></iron-icon>
                                 </div>
                                 <div class="component-label">{{ item.title }}</div>
+                                <paper-tooltip 
+                                    hidden$="{{!item.preview}}" 
+                                    id="previewTooltip"
+                                    for="{{ computeUniqueId(index) }}" 
+                                    position="right"
+                                    fit-to-visible-bounds
+                                    class="preview has-shadow-2" 
+                                >
+                                    <div class="component-preview-container ">
+                                        <div class="title">{{ item.title }}</div>    
+                                        <div class="preview-screen"><img src="{{item.preview}}"></div>
+                                    </div>
+                                </paper-tooltip>
                             </div>
+                            
+ 
                         </template>
 
                         <template is="dom-if" if="{{ !components.length }}">
@@ -72,7 +85,7 @@
                 </div>
 
                 <!-- TODO - resolver o problema do scroll-->
-                <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
+                <!-- <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
                     <div class="component-preview-container has-shadow-2">
                         <div class="title">{{ title }}</div>
                         <template is="dom-repeat" items="{{ screens }}">
@@ -80,7 +93,7 @@
                             <div class="screen-caption">{{ item.screensCaption }}</div>
                         </template>
                     </div>
-                </div>
+                </div> -->
 
                 <div id="loading">
                     <paper-spinner alt="Loading form" active></paper-spinner>
