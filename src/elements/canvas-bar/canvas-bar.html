@@ -12,12 +12,20 @@
         <div id="bar">
 
             <div id="left">
+
+<!-- Icones desfazer e refazer
+
                 <span>
                     <iron-icon icon="undo" class="active"></iron-icon>
                 </span>
                 <span>
                     <iron-icon icon="redo"></iron-icon>
                 </span>
+-->
+                <div class="icon-container">
+                    <img src="../../img/icons/add_page.svg">
+                </div>
+
             </div>
 
             <div id="right">
@@ -50,7 +58,7 @@
                     </div>
 
                     <div
-                         class="icon-container"
+                         class="icon-container dropdown"
                          ide-mode="navigation"
                     >
                         <iron-icon
@@ -58,16 +66,19 @@
                             title="Navegação (Shift+N)"
                             alt="Navigation mode (Shift+N)"
                         ></iron-icon>
+                        <iron-icon icon="arrow-drop-down"></iron-icon>
                     </div>
 
                 </iron-selector>
                 <!-- selector end -->
                 
+<!--
                 <svg height="40" width="17">
 
                     <line x1="8" y1="6" x2="8" y2="34" style="stroke:#D2D2D2; stroke-width:1"/>
 
                 </svg>
+-->
 
 <!--                 <div class="zoom">
                     Zoom: 100%
@@ -75,7 +86,7 @@
                 </div>
  -->
                 <div id="canvas-panel-toggle" class="icon-container" on-tap="toggleCanvasPanel">
-                    <iron-icon icon="arrow-drop-down"></iron-icon>
+                    <img src="../../img/icons/components_tree-06-06.svg">
                 </div>
 
             </div>
