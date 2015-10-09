@@ -24,6 +24,15 @@ var ROUTER_INITIALIZED = false;
 function initializeRouter(carbo, config, services, components) {
 
     if (!ROUTER_INITIALIZED) {
+
+        // add #! before urls
+        page({
+            hashbang: true
+        });
+
+        // force the starting route to be 'start';
+        carbo.set('route', 'start');
+        
         // We use Page.js for routing. This is a Micro
         // client-side router inspired by the Express router
         // More info: https://visionmedia.github.io/page.js/
@@ -34,11 +43,6 @@ function initializeRouter(carbo, config, services, components) {
         // project routes
         // must pass on all other parameters
         require('../routes/project')(carbo, config, services, components);
-
-        // add #! before urls
-        page({
-            hashbang: true
-        });
 
         // set router onto carbo
         carbo.set('router', page);
