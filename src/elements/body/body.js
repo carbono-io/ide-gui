@@ -25,11 +25,22 @@
                 observer: '_canvasInteractionModeChanged'
             },
 
-            ideMode: {
-                type: String,
-                notify: true,
-                observer: '_ideModeChanged'
-            }
+            // ideMode: {
+            //     type: String,
+            //     notify: true,
+            //     observer: '_ideModeChanged'
+            // }
+        },
+
+        ready: function () {
+            this.set('sectionStates', {});
+
+            this.openLeftPanel();
+            this.openCanvas();
+            this.closeCanvasPanel();
+            this.openRightPanel();
+
+            this.setSectionState('middle-bar', 'open');
         },
 
         setSectionState: function (sectionName, state) {
@@ -50,13 +61,8 @@
             });
         },
 
-        ready: function () {
-            this.openLeftPanel();
-            this.openCanvas();
-            this.closeBox();
-            this.openRightPanel();
-
-            this.setSectionState('middle-bar', 'open');
+        getSectionState: function (sectionName) {
+            return this.get('sectionStates')[sectionName];
         },
 
         openLeftPanel: function () {
@@ -67,12 +73,20 @@
             this.setSectionState('canvas-container', 'open');
         },
 
-        openBox: function () {
-            this.setSectionState('floating-box', 'open');
+        openCanvasPanel: function () {
+            this.setSectionState('canvas-panel', 'open');
+
+            this.fire('change-sections-layout', {
+                canvasPanel: 'open',
+            });
         },
 
-        closeBox: function () {
-            this.setSectionState('floating-box', 'closed');
+        closeCanvasPanel: function () {
+            this.setSectionState('canvas-panel', 'closed');
+
+            this.fire('change-sections-layout', {
+                canvasPanel: 'closed',
+            });
         },
 
         openRightPanel: function () {
@@ -80,27 +94,27 @@
         },
 
 
-        _canvasInteractionModeChanged: function (interactionMode, oldInteractionMode) {
-            // if (interactionMode === 'insertion') {
-            //     this.
-            // }
-        },
+        // _canvasInteractionModeChanged: function (interactionMode, oldInteractionMode) {
+        //     // if (interactionMode === 'insertion') {
+        //     //     this.
+        //     // }
+        // },
 
-        _ideModeChanged: function (ideMode, oldEditionMode) {
-            if (ideMode === IDE_MODES.navigation) {
-                Polymer.Base.toggleClass('disabled', true, this.$['floating-box']);
+        // _ideModeChanged: function (ideMode, oldEditionMode) {
+        //     if (ideMode === IDE_MODES.navigation) {
+        //         Polymer.Base.toggleClass('disabled', true, this.$['canvas-panel']);
 
-            } else {
+        //     } else {
 
-                Polymer.Base.toggleClass('disabled', false, this.$['floating-box']);
-                // this.setSectionState('floating-box', 'open');
-            }
-        },
+        //         Polymer.Base.toggleClass('disabled', false, this.$['canvas-panel']);
+        //         // this.setSectionState('canvas-panel', 'open');
+        //     }
+        // },
 
-        // TODO: this is a very bad implementation
-        activateFloatingBox: function () {
-            this.set('ideMode', IDE_MODES.graphicalEdition);
-        }
+        // // TODO: this is a very bad implementation
+        // activateFloatingBox: function () {
+        //     this.set('ideMode', IDE_MODES.graphicalEdition);
+        // }
     });
 
 })();
