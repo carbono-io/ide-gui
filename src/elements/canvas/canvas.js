@@ -64,8 +64,6 @@
         listeners: {
             'canvas.mouseenter': 'handleCanvasMouseenter',
             'canvas.mouseleave': 'handleCanvasMouseleave',
-            'canvas.DOMMouseScroll': 'cancelScrollPropagation',
-            'canvas.mousewheel': 'cancelScrollPropagation',
         },
 
         activateLoading: function () {
@@ -76,13 +74,7 @@
             this.executeInspectorOperation('deactivateLoading');
         },
 
-        cancelScrollPropagation: function(e){
-            // Prevent event from being captured by outer nodes
-            // (I am looking at you, window)
-            e.stopPropagation();
-            // e.preventDefault();
-        },
-
+        
         /**
          * Whenever the mouse enters the canva element area,
          * let the overlay handle keydown events for shortcut detection.

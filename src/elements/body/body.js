@@ -31,7 +31,7 @@
                 observer: '_ideModeChanged'
             }
         },
-
+        
         setSectionState: function (sectionName, state) {
 
             // get the section

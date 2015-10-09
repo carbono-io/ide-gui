@@ -40,7 +40,6 @@ Polymer({
 
     setClassName: function () {
         var iconName = this.$$('.style-preview-2');
-        console.log(iconName);
     },
 
     isDeclarationOfType: function (declaration, type) {
@@ -49,11 +48,7 @@ Polymer({
 
     _handleDeclarationsChange: function (declarations, old) {
 
-        console.log(declarations);
-
         var groups = groupDeclarations(declarations);
-
-        console.log(groups);
 
         this.set('declarationGroups', groups);
     },

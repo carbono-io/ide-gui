@@ -447,7 +447,7 @@ Polymer({
 
       var matchRes = this.get('value').match(/(\d+)(.*$)/);
       if(matchRes){
-        console.log(matchRes);
+        
         this.set( "number" , matchRes[1]);
         this.set( "unit" , matchRes[2]);
         select.value = matchRes[2];
