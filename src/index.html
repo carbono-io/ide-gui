@@ -27,7 +27,7 @@
 
   <!-- Carbo components -->
   <link rel="import" href="elements.html">
-  
+
 </head>
 
 <body>
@@ -56,7 +56,7 @@
       <div data-route="project" id="container">
 
         <carbo-header sections="{{appsections}}">
-          <nav>
+          <!-- <nav>
             <iron-selector
               id="header-nav"
               attr-for-selected="section"
@@ -70,20 +70,17 @@
                 <iron-icon icon="maps:layers"></iron-icon>
                 <span>DADOS</span>
               </a>
-<!--
               <a section="actions" href="/projects/340987612301/actions">
                 <iron-icon icon="image:flash-on"></iron-icon>
                 <span>AÇÕES</span>
               </a>
--->
-
               <a section="publish" href="/projects/340987612301/publish">
                 <iron-icon icon="editor:publish"></iron-icon>
 
                 <span>PUBLICAÇÃO</span>
               </a>
             </iron-selector>
-          </nav>
+          </nav> -->
 
         </carbo-header>
         <carbo-body
@@ -167,7 +164,7 @@
  -->
           </iron-pages>
 
-          <div body-section="right">
+          <div id="edition-panel" body-section="right">
 
             <paper-tabs
               attr-for-selected="data-section"
