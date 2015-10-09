@@ -27,7 +27,7 @@
 
   <!-- Carbo components -->
   <link rel="import" href="elements.html">
-
+  
 </head>
 
 <body>
@@ -167,34 +167,55 @@
  -->
           </iron-pages>
 
-          <iron-pages
+          <div body-section="right">
 
-            body-section="right"
+            <paper-tabs
+              attr-for-selected="data-section"
+              selected="{{ section }}"
+            >
+              <paper-tab
+                link
+                data-section="configurations"
+              >Configurações</paper-tab>
+              <paper-tab
+                link
+                data-section="style"
+              >Estilos</paper-tab>
+              <paper-tab
+                link
+                data-section="data"
+              >Dados</paper-tab>
+            </paper-tabs>
 
-            attr-for-selected="data-section" 
-            selected="{{ section }}"
-          >
+            <iron-pages
+              attr-for-selected="data-section"
+              selected="{{ section }}"
+            >
 
-            <!--Conteúdo box estilos-->
-            <div data-section="style">
+              <div data-section="configurations">
+                configurações
+              </div>
+
+              <!--Conteúdo box estilos-->
               <carbo-styles-panel
+                data-section="style"
                 focused-element-data="{{ focusedElementData }}"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
               >
               </carbo-styles-panel>
-            </div>
 
-            <!--Conteúdo box dados-->
-            <div data-section="data">
+              <!--Conteúdo box dados-->
               <carbo-data-panel
+                data-section="data"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
               >
               </carbo-data-panel>
-            </div>
 
-          </iron-pages>
+            </iron-pages>
+
+          </div>
 
         </carbo-body>
 
