@@ -30,6 +30,11 @@
             }
         },
 
+
+        animation:{ 
+            "entry": [{"name": "fade-in-animation", "timing": {"delay": 0}}]
+         },
+
         observers: [
             '_handleCanvasPanelStateChange(canvasPanelState)'
         ],
