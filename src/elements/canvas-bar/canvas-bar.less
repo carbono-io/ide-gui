@@ -19,14 +19,14 @@
         margin-right: @base-size;
     }
 
-     iron-icon {
-         color: @inactive-bar-icon-color;
+    iron-icon {
+        color: @inactive-bar-icon-color;
 
-         &.active {
+        &.active {
             color: @active-bar-icon-color;
             cursor: pointer;
-         }
-     }
+        }
+    }
 }
 
 #right {
@@ -43,45 +43,49 @@
         margin-right: @base-size;
         height: 100%;
 
-        .icon-container {
-            height: 32px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-//            box-sizing: border-box;
-//            border-bottom: solid @border-bottom 1px;
-//
-            iron-icon {
-
-                color: @inactive-bar-icon-color;
-            }
-
-            &:hover, &.iron-selected {
-
-                background-color: @canvas-bar-selected;
-                cursor: pointer;
-
-                iron-icon {
-                    color: @active-bar-icon-color;
-                }
-            }
-
-        }
     }
 
-    .zoom {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: @base-size;
+    // .zoom {
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-items: center;
+    //     margin-left: @base-size;
 
 
-        &:hover {
-                color: @active-bar-icon-color;
-                cursor: pointer;
-            }
+    //     &:hover {
+    //             color: @active-bar-icon-color;
+    //             cursor: pointer;
+    //         }
+    // }
+
+}
+
+
+
+// this is generic enough for the whole bar, thus
+// it should not be inside any parent selector
+.icon-container {
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+//            box-sizing: border-box;
+//            border-bottom: solid @border-bottom 1px;
+    iron-icon {
+
+        color: @inactive-bar-icon-color;
+    }
+
+    &:hover, &.iron-selected, &.active {
+
+        background-color: @canvas-bar-selected;
+        cursor: pointer;
+
+        iron-icon {
+            color: @active-bar-icon-color;
+        }
     }
 
 }

@@ -12,8 +12,6 @@
         overflow: hidden;
 
         &.closed {
-            // width: 0px !important;
-
             display: none;
         }
 
@@ -117,22 +115,31 @@
                 }
             }
 
-            #floating-box {
+            // #floating-box {
+            //     width: @panel-width;
+
+            //     // no growing nor shrinking
+            //     flex-grow: 0;
+            //     flex-shrink: 0;
+
+            //     margin-top: 2 * @base-size;
+            //     margin-bottom: 2 * @base-size;
+            //     margin-left: @base-size;
+            //     margin-right: 2 * @base-size;
+
+            //     background-color: @panel-background-color;
+
+            //     max-height: 550px;
+            // }
+            
+            #canvas-panel {
                 width: @panel-width;
 
                 // no growing nor shrinking
                 flex-grow: 0;
                 flex-shrink: 0;
 
-                margin-top: 2 * @base-size;
-                margin-bottom: 2 * @base-size;
-                margin-left: @base-size;
-                margin-right: 2 * @base-size;
-
-                background-color: @panel-background-color;
-
-                max-height: 550px;
-//                overflow-y: scroll;
+                background-color: #F2F2F2;
             }
         }
     }

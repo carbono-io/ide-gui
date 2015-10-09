@@ -10,6 +10,7 @@ var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 var mergeStream = require('merge-stream');
 var runSequence = require('run-sequence');
+var del         = require('del');
 
 var config = require('../config');
 var aux = require('../auxiliary');
