@@ -6,6 +6,9 @@
 @import './less/shadows.less';
 @import './less/reset.less';
 
+// polymer resets
+@import './less/polymer-resets/paper-tabs.less';
+
 body {
     background-color: darken(@background-color, 5%);
     font-family: @font-family;
@@ -81,6 +84,13 @@ body {
 
         min-width: @min-screen-width;
         min-height: @min-application-height;
+    }
+
+    // styles for the panel at the right
+    #edition-panel {
+        paper-tabs {
+            height: 5 * @base-size;
+        }
     }
 }
 

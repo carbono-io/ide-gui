@@ -17,8 +17,22 @@
                 type: String,
                 value: CONSTANTS.ideModes.graphicalEdition,
                 notify: true
+            },
+
+            /**
+             * The body component
+             * @type {Object}
+             */
+            body: {
+                type: Object,
+                notify: true,
+                observer: '_handleBodyChange',
             }
         },
+
+        observers: [
+            '_handleCanvasPanelStateChange(canvasPanelState)'
+        ],
 
         /**
          * Function to be executed once the component is ready
@@ -39,12 +53,47 @@
             listener.simple_combo('shift n', this.setMode.bind(this, CONSTANTS.ideModes.navigation));
         },
 
+        _handleBodyChange: function (body, old) {
+            body.addEventListener('change-sections-layout', function (event) {
+                this.set('canvasPanelState', event.detail.canvasPanel);
+            }.bind(this));
+        },
+
         /**
          * Sets the canvas mode to a given mode
          */
         setMode: function (ideMode) {
             console.log('carbo-canvas-bar setting ideMode to ' + ideMode);
             this.set('ideMode', ideMode);
+        },
+
+        /**
+         * Toggles the open and close of canvasPanel
+         */
+        toggleCanvasPanel: function () {
+
+            if (!this.body) {
+                throw new Error('No body available for <carbo-canvas-bar>.toggleCanvasPanel');
+            }
+
+            if (this.get('canvasPanelState') === 'open') {
+                this.body.closeCanvasPanel();
+            } else {
+                this.body.openCanvasPanel();
+            }
+        },
+
+        /**
+         * Handles changes on the canvasPanelState
+         *
+         * TODO: not good implementation yet.
+         */
+        _handleCanvasPanelStateChange: function (canvasPanelState) {
+
+            var toggle = this.$['canvas-panel-toggle'];
+            var isActive = (canvasPanelState === 'open');
+
+            Polymer.Base.toggleClass('active', isActive, toggle);
         },
     });
 

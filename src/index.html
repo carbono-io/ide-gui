@@ -56,7 +56,7 @@
       <div data-route="project" id="container">
 
         <carbo-header sections="{{appsections}}">
-          <nav>
+          <!-- <nav>
             <iron-selector
               id="header-nav"
               attr-for-selected="section"
@@ -70,20 +70,17 @@
                 <iron-icon icon="maps:layers"></iron-icon>
                 <span>DADOS</span>
               </a>
-<!--
               <a section="actions" href="/projects/340987612301/actions">
                 <iron-icon icon="image:flash-on"></iron-icon>
                 <span>AÇÕES</span>
               </a>
--->
-
               <a section="publish" href="/projects/340987612301/publish">
                 <iron-icon icon="editor:publish"></iron-icon>
 
                 <span>PUBLICAÇÃO</span>
               </a>
             </iron-selector>
-          </nav>
+          </nav> -->
 
         </carbo-header>
         <carbo-body
@@ -92,22 +89,26 @@
         >
 
           <div body-section="left">
-            <carbo-components-tree-panel
+<!--             <carbo-components-tree-panel
               id="components-tree-panel"
               active-element-tree-data="{{ activeElementTreeData }}"
               focused-element-data="{{ focusedElementData }}"
 
               canvas="{{ components.canvas }}"
             >
-            </carbo-components-tree-panel>
+            </carbo-components-tree-panel> -->
 
-            <carbo-panel
-              title="Configurações"
-              icon="settings"
-              menu="{{ boxmenuitemSettings }}"
-            >
-              <carbo-component-settings></carbo-component-settings>
-            </carbo-panel>
+            <carbo-components-palette
+              id="components-palette"
+
+              components-registry="{{ services.componentsRegistry }}"
+
+              components="{{ paletteComponents }}"
+              code-machine="{{ services.codeMachine }}"
+              canvas="{{ components.canvas }}"
+
+              focused-element-data="{{ focusedElementData }}"
+            ></carbo-components-palette>
 
           </div>
 
@@ -115,6 +116,7 @@
             <!-- bar that controls the canvas -->
             <carbo-canvas-bar
               ide-mode="{{ ideMode }}"
+              body="{{ components.body }}"
             >
             </carbo-canvas-bar>
 
@@ -139,7 +141,16 @@
 
           <iron-pages body-section="floating-box" selected="0">
 
-            <carbo-components-palette
+            <carbo-components-tree-panel
+              id="components-tree-panel"
+              active-element-tree-data="{{ activeElementTreeData }}"
+              focused-element-data="{{ focusedElementData }}"
+
+              canvas="{{ components.canvas }}"
+            >
+            </carbo-components-tree-panel>
+
+<!--             <carbo-components-palette
               id="components-palette"
 
               components-registry="{{ services.componentsRegistry }}"
@@ -150,37 +161,58 @@
 
               focused-element-data="{{ focusedElementData }}"
             ></carbo-components-palette>
-
+ -->
           </iron-pages>
 
-          <iron-pages
+          <div id="edition-panel" body-section="right">
 
-            body-section="right"
+            <paper-tabs
+              attr-for-selected="data-section"
+              selected="{{ section }}"
+            >
+              <paper-tab
+                link
+                data-section="configurations"
+              >Configurações</paper-tab>
+              <paper-tab
+                link
+                data-section="style"
+              >Estilos</paper-tab>
+              <paper-tab
+                link
+                data-section="data"
+              >Dados</paper-tab>
+            </paper-tabs>
 
-            attr-for-selected="data-section" 
-            selected="{{ section }}"
-          >
+            <iron-pages
+              attr-for-selected="data-section"
+              selected="{{ section }}"
+            >
 
-            <!--Conteúdo box estilos-->
-            <div data-section="style">
+              <div data-section="configurations">
+                configurações
+              </div>
+
+              <!--Conteúdo box estilos-->
               <carbo-styles-panel
+                data-section="style"
                 focused-element-data="{{ focusedElementData }}"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
               >
               </carbo-styles-panel>
-            </div>
 
-            <!--Conteúdo box dados-->
-            <div data-section="data">
+              <!--Conteúdo box dados-->
               <carbo-data-panel
+                data-section="data"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
               >
               </carbo-data-panel>
-            </div>
 
-          </iron-pages>
+            </iron-pages>
+
+          </div>
 
         </carbo-body>
 

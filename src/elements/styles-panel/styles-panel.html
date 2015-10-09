@@ -8,21 +8,13 @@
     <style include="styles-panel-styles"></style>
 
     <template>
-
-        <carbo-panel
-            title="Estilo"
-            icon="image:palette"
-            menu="{{ boxmenuitemStyle }}"
-        >
-            <template is="dom-repeat" items="{{ editableRules }}" as="rule">
-                <carbo-styles-list
-                    selector-string="{{ rule.selectorString }}"
-                    selectors="{{ rule.selectors }}"
-                    declarations="{{ rule.declarations }}"
-                ></carbo-styles-list>
-            </template>
-
-        </carbo-panel>
+        <template is="dom-repeat" items="{{ editableRules }}" as="rule">
+            <carbo-styles-list
+                selector-string="{{ rule.selectorString }}"
+                selectors="{{ rule.selectors }}"
+                declarations="{{ rule.declarations }}"
+            ></carbo-styles-list>
+        </template>
 
         <div id="commands-container">
 <!--            <button on-tap="writeCSS" id="cancel-command">Cancel</button>-->

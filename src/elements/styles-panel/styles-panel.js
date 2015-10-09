@@ -36,9 +36,7 @@ Polymer({
 
     handleStyleDeclarationChanged: function (event) {
 
-        //TODO: melhorar o modo que pega o commands container se preciso - fiz rapidamente e sem entender exatamente as partes do codigo referentes ao polymer (pat)
 
-        Polymer.Base.toggleClass('active', true, this.$$('#commands-container'));
 
         var canvas = this.get('canvas');
 
@@ -48,6 +46,12 @@ Polymer({
         
         //valida a existencia do declaration
         if (event.detail.declaration) {
+
+            // only activate commands container if actual styles were changed
+            //TODO: melhorar o modo que pega o commands container se preciso - fiz rapidamente e sem entender exatamente as partes do codigo referentes ao polymer (pat)
+            Polymer.Base.toggleClass('active', true, this.$$('#commands-container'));
+
+
             var selectorString = event.detail.selectorString;
             var property = event.detail.declaration.property;
             var value    = event.detail.declaration.value;

@@ -1,22 +1,6 @@
 @import '../../less/variables.less';
 @import '../../bower_components/lesshat/build/lesshat.less';
-
-paper-tabs {
-    --paper-tabs-selection-bar-color: @text-color;
-    height: 32px;
-    border-bottom: 1px solid @border-bottom;
-    box-sizing: border-box;
-    font-family: "Source Sans Pro";
-    font-size: 12px;
-    background-color: @box-header-background;
-}
-
-paper-tab {
-    --paper-tab {
-        background-color: @box-header-background;
-        color: @text-color;
-    }
-}
+@import '../../less/polymer-resets/paper-tabs.less';
 
 paper-input-container {
     padding: 16px 0;
