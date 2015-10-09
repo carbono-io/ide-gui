@@ -30,9 +30,7 @@ exports.created = function () {
  * @return {Promise}          Promise to be resolved after the response.
  */
 exports.executeInspectorOperation = function (operation, args) {
-    if(operation == "scrollBy")
-    console.log("executeInspectorOperation");
-
+ 
     if (!this.$.iframe || !this.$.iframe.contentWindow) {
 
         console.warn('has not yet loaded. operation ' + operation + ' cannot be executed now');

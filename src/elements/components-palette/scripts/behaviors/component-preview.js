@@ -47,7 +47,7 @@ exports.showPreview = function (event) {
     // component and right of screen
     var spaceToRight = windowWidth - componentTargetLeftPosition - componentTargetWidth;
 
-    // x-axis
+    // x-axisp
     // calculate dynamically
     // left-position of preview box
     // according to space to right available
