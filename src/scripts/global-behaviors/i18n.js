@@ -45,3 +45,16 @@ exports.handleI18nServiceChange = function (i18nService, old) {
 exports.handleLanguageChange = function () {
     this.i18nService.translateObject(this.root);
 };
+
+/**
+ * Translates a key
+ * @param  {String} key
+ * @return {String}     The translated value
+ */
+exports.i18nTranslate = function (key) {
+    return this.i18nService.t(key);
+};
+
+exports.i18nGetLng = function () {
+    return this.i18nService.getLng();
+};

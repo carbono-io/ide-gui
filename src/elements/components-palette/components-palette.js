@@ -50,7 +50,6 @@ Polymer({
         }
     },
 
-
     // Used for setting up event listeners onto the canvas component
     _handleCanvasComponentChange: function (canvas, oldCanvas) {
         console.log('canvas changed');
@@ -162,5 +161,21 @@ Polymer({
         // console.log(component);
 
         return matches;
+    },
+
+    /**
+     * Internationalization related functions
+     */
+    retrieveTranslatedPropertyValue: function (item, property) {
+
+        // get language
+        var lng = this.i18nGetLng();
+
+        // check if item has an .i18n property
+        if (item.i18n && item.i18n[lng] && item.i18n[lng][property]) {
+            return item.i18n[lng][property];
+        } else {
+            return item[property];
+        }
     },
 });
