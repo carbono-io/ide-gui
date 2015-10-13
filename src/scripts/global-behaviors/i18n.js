@@ -5,6 +5,10 @@
  * Used in carbo-components that are aware of the main application scope
  */
 
+/**
+ * Properties that are required
+ * @type {Object}
+ */
 exports.properties = {
     i18nService: {
         type: Object,
@@ -13,12 +17,19 @@ exports.properties = {
     }
 };
 
+/**
+ * Callback to be executed whenever the component is ready
+ * @return {[type]} [description]
+ */
 exports.ready = function () {
     if (this.i18nService) {
         this.handleLanguageChange(this.i18nService);
     }
 }
 
+/**
+ * Set event listeners onto the i18nService
+ */
 exports.handleI18nServiceChange = function (i18nService, old) {
     i18nService.on('i18n-initialized', this.handleLanguageChange.bind(this));
 
