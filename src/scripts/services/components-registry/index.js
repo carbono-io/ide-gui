@@ -11,7 +11,7 @@ var util = require('util');
 var _ = require('lodash');
 var Q = require('q');
 
-var REQUIRED_CONFIGS = ['location', 'userService'];
+var REQUIRED_CONFIGS = ['location', 'userService', 'i18nService'];
 
 function ComponentsRegistryClient(config) {
 
@@ -49,6 +49,18 @@ ComponentsRegistryClient.prototype.read = function (query) {
 
         return contextFilter;
     });
+
+    // internationalization of component registry
+    var lng = this.config.i18nService.getLng();
+
+    if (lng) {
+        // check for translation keys
+        res.forEach(function (component) {
+            if (component.i18n && component.i18n[lng]) {
+                component.title = component.i18n[lng].title || component.title;
+            }
+        });
+    }
 
     return Q(res);
 

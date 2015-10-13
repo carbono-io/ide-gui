@@ -17,6 +17,8 @@ var I18NService              = require('../services/i18n');
  */
 module.exports = function (carbo, config) {
     
+    var i18nService = new I18NService();
+
     // instantiate a user service client,
     // as it is a requirement for all other services
     var userService = new UserServiceClient({
@@ -31,14 +33,13 @@ module.exports = function (carbo, config) {
     var componentsRegistryService = new ComponentsRegistryClient({
         location: config.componentsRegistryLocation,
         userService: userService,
+        i18nService: i18nService,
     });
 
     var projectsService = new ProjectsService({
         location: config.projectsServiceLocation,
         userService: userService,
     });
-
-    var i18nService = new I18NService();
 
     // set services onto carbo main scope, so that
     // all components may have access to them.
