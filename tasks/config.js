@@ -43,20 +43,33 @@ exports.htmlDir = [
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
-var elementsDirs = fs.readdirSync(SRC_DIR + '/elements');
-
-// remove .DS_Store, if it exists
-var DSStoreIndex = elementsDirs.indexOf('.DS_Store');
-if (DSStoreIndex !== -1) {
-    elementsDirs.splice(DSStoreIndex, 1);
-}
-
-elementsDirs = elementsDirs.map(function (d) {
-    return path.join(SRC_DIR, 'elements', d, path.basename(d));
-});
-
 // js files that require browserifying
 // don't put trailing.js
 exports.browserifyEntries = [
     SRC_DIR + '/index',
-].concat(elementsDirs);
+].concat(_retrieveElementsJSPath());
+
+/**
+ * Auxiliary functions
+ */
+
+/**
+ * Reads all directories within 'src/elements' dir
+ * and builds up the 
+ * @return {Array} array with all source js files to be browserified
+ */
+function _retrieveElementsJSPath() {
+    var elementsDirs = fs.readdirSync(SRC_DIR + '/elements');
+
+    // remove .DS_Store, if it exists
+    var DSStoreIndex = elementsDirs.indexOf('.DS_Store');
+    if (DSStoreIndex !== -1) {
+        elementsDirs.splice(DSStoreIndex, 1);
+    }
+
+    elementsDirs = elementsDirs.map(function (d) {
+        return path.join(SRC_DIR, 'elements', d, path.basename(d));
+    });
+
+    return elementsDirs;
+}

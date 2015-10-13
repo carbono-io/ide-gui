@@ -3,6 +3,9 @@
 /**
  * Behavior for internationalization
  * Used in carbo-components that are aware of the main application scope
+ *
+ * DO NOT CHANGE THIS FILE WITHOUT CHANGING IT AT THE OTHER PROJECT (brl-portal) AS WELL
+ * This will be moved into a separate repo
  */
 
 /**
@@ -39,6 +42,6 @@ exports.handleI18nServiceChange = function (i18nService, old) {
 /**
  * Handles language changes
  */
-exports.handleLanguageChange = function (i18nService) {
-    i18nService.translateObject(this.root);
+exports.handleLanguageChange = function () {
+    this.i18nService.translateObject(this.root);
 };
