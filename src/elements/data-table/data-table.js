@@ -1,6 +1,8 @@
 'use strict';
 // jshint unused:false
 
+var I18N = require('../../scripts/global-behaviors/i18n');
+
 Polymer({
     is: 'carbo-data-table',
 
@@ -11,6 +13,10 @@ Polymer({
             observer: '_handleEntityChange',
         },
     },
+
+    behaviors: [
+        I18N,
+    ],
 
     listeners: {
         // See
