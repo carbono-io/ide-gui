@@ -3,5 +3,6 @@
     "configurations": "configurações",
     "searchElements": "buscar elementos",
     "editionModeTooltip": "Modo de edição (Shift+G)",
-    "form": "Formulário"
+    "form": "Formulário",
+    "app": "App"
 }
