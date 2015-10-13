@@ -66,6 +66,16 @@ I18NService.prototype.getLng = function () {
     return this._i18n.lng();
 };
 
+// Define some dinamic properties
+Object.defineProperty(I18NService.prototype, 'language', {
+    get: function () {
+        return this.getLng();
+    },
+    set: function () {
+        throw new Error('not possible to set I18NService language property');
+    }
+});
+
 /**
  * Auxiliary functions
  */

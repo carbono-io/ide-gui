@@ -50,18 +50,6 @@ ComponentsRegistryClient.prototype.read = function (query) {
         return contextFilter;
     });
 
-    // internationalization of component registry
-    var lng = this.config.i18nService.getLng();
-
-    if (lng) {
-        // check for translation keys
-        res.forEach(function (component) {
-            if (component.i18n && component.i18n[lng]) {
-                component.title = component.i18n[lng].title || component.title;
-            }
-        });
-    }
-
     return Q(res);
 
 };

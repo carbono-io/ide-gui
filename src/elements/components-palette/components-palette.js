@@ -22,7 +22,6 @@ Polymer({
         canvas: {
             type: Object,
             notify: true,
-            observer: '_handleCanvasComponentChange',
         },
 
         state: {
@@ -46,16 +45,17 @@ Polymer({
         focusedElementData: {
             type: Object,
             notify: true,
-            observer: '_handleContextElementChange'
+            observer: 'reloadComponents'
         }
     },
 
-    // Used for setting up event listeners onto the canvas component
-    _handleCanvasComponentChange: function (canvas, oldCanvas) {
-        console.log('canvas changed');
-    },
+    /**
+     * Reloads the components
+     * @return {[type]} [description]
+     */
+    reloadComponents: function () {
 
-    _handleContextElementChange: function (focusedElementData, oldContext) {
+        var focusedElementData = this.get('focusedElementData');
 
         this.componentsRegistry.read({
             context: focusedElementData.tagName
@@ -161,5 +161,24 @@ Polymer({
         // console.log(component);
 
         return matches;
+    },
+
+    /**
+     * Retrieves translated value for component registry entries.
+     */
+    getTranslatedValue: function (item, language, key) {
+
+        var i18n = item.i18n;
+
+        if (
+            language &&
+            i18n && 
+            i18n[language] &&
+            i18n[language][key]
+        ) {
+            return i18n[language][key];
+        } else {
+            return item[key];
+        }
     },
 });

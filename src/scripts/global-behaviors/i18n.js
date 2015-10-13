@@ -44,6 +44,9 @@ exports.handleI18nServiceChange = function (i18nService, old) {
  */
 exports.handleLanguageChange = function () {
     this.i18nService.translateObject(this.root);
+
+    // notify the component about language changes
+    this.notifyPath('i18nService.language', this.i18nService.language);
 };
 
 /**
