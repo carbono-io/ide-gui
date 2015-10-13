@@ -1,4 +1,5 @@
 var path = require('path');
+var fs   = require('fs');
 
 var _ = require('lodash');
 
@@ -42,12 +43,20 @@ exports.htmlDir = [
     '!' + SRC_DIR + '/bower_components/**/*',
 ];
 
+var elementsDirs = fs.readdirSync(SRC_DIR + '/elements');
+
+// remove .DS_Store, if it exists
+var DSStoreIndex = elementsDirs.indexOf('.DS_Store');
+if (DSStoreIndex !== -1) {
+    elementsDirs.splice(DSStoreIndex, 1);
+}
+
+elementsDirs = elementsDirs.map(function (d) {
+    return path.join(SRC_DIR, 'elements', d, path.basename(d));
+});
+
 // js files that require browserifying
 // don't put trailing.js
 exports.browserifyEntries = [
     SRC_DIR + '/index',
-    SRC_DIR + '/elements/canvas/canvas',
-    SRC_DIR + '/elements/components-palette/components-palette',
-    SRC_DIR + '/elements/styles-list/styles-list',
-    SRC_DIR + '/elements/styles-panel/styles-panel',
-];
+].concat(elementsDirs);

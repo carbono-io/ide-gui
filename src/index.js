@@ -31,7 +31,6 @@ window.addEventListener('WebComponentsReady', function () {
         var router     = initRouter(carbo, config, services, components);
         // Set up global scope
         initGlobalScope(carbo, config, services, components);
-        
 
         // if configuration for env is 'development',
         // initialize developer tools
