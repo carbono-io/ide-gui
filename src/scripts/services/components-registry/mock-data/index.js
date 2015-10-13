@@ -17,6 +17,15 @@ registry.push({
     preview:'http://3.bp.blogspot.com/-nruVnUeHaDA/VQHyLOsVMII/AAAAAAAANPI/6JOOHH_NZqE/s1600/Pok%C3%A9mon%2B2.gif',
     html: '<p>Insira o conteúdo do seu parágrafo</p>',
     icon: "text-format",
+
+    i18n: {
+        en: {
+            title: 'Paragraph'
+        },
+        pt: {
+
+        }
+    }
 });
 
 // Texto

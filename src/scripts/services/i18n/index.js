@@ -6,6 +6,9 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
+/**
+ * I18N Service class
+ */
 function I18NService() {
     var i18nextOptions = {
         fallbackLng: 'en',
@@ -13,7 +16,12 @@ function I18NService() {
         lngWhitelist: ['pt', 'en']
     };
 
+    this._i18n = window.i18n;
+
     i18n.init(i18nextOptions, this._handleI18NextInitializeReady.bind(this));
+
+    // handle language change events
+    this.on('language-changed', _handleLanguageChange.bind(this));
 }
 
 // Let I18NService inherit from event emitter
@@ -21,22 +29,48 @@ util.inherits(I18NService, EventEmitter);
 
 /**
  * The callback called immediately after the i18n init is done
- * @param  {[type]} err [description]
- * @param  {[type]} t   [description]
- * @return {[type]}     [description]
  */
 I18NService.prototype._handleI18NextInitializeReady = function (err, t) {
 
 
     // set methods
-    this.translateObject = i18n.translateObject;
+    this.translateObject = this._i18n.translateObject;
     this.t = t;
 
-    this.translateObject(document);
+    // handle language changing
+    _handleLanguageChange.call(this);
     
     this.emit('i18n-initialized', this);
 };
 
+/**
+ * Changes the language
+ */
+I18NService.prototype.setLng = function (lng) {
+    var defer = Q.defer();
 
+    this._i18n.setLng(lng, function () {
+
+        this.emit('language-changed', this);
+
+    }.bind(this));
+
+    return defer.promise;
+};
+
+/**
+ * Retrieves the current language
+ */
+I18NService.prototype.getLng = function () {
+
+    return this._i18n.lng();
+};
+
+/**
+ * Auxiliary functions
+ */
+function _handleLanguageChange() {
+    this.translateObject(document);
+}
 
 module.exports = I18NService;

@@ -58,7 +58,7 @@
 
         <carbo-header
           sections="{{appsections}}"
-          i18n="{{ services.i18n }}"
+          i18n-service="{{ services.i18nService }}"
         >
           <!-- <nav>
             <iron-selector
@@ -91,7 +91,7 @@
           id="body"
           ide-mode="{{ ideMode }}"
 
-          i18n="{{ services.i18n }}"
+          i18n-service="{{ services.i18nService }}"
         >
 
           <div body-section="left">
@@ -109,7 +109,7 @@
 
               components-registry="{{ services.componentsRegistry }}"
 
-              i18n="{{ services.i18n }}"
+              i18n-service="{{ services.i18nService }}"
 
               code-machine="{{ services.codeMachine }}"
               canvas="{{ components.canvas }}"
@@ -125,7 +125,7 @@
               ide-mode="{{ ideMode }}"
               body="{{ components.body }}"
 
-              i18n="{{ services.i18n }}"
+              i18n-service="{{ services.i18nService }}"
             >
             </carbo-canvas-bar>
 
@@ -155,7 +155,7 @@
               active-element-tree-data="{{ activeElementTreeData }}"
               focused-element-data="{{ focusedElementData }}"
 
-              i18n="{{ services.i18n }}"
+              i18n-service="{{ services.i18nService }}"
 
               canvas="{{ components.canvas }}"
             >
@@ -184,14 +184,17 @@
               <paper-tab
                 link
                 data-section="configurations"
+                data-i18n="configurations"
               >Configurações</paper-tab>
               <paper-tab
                 link
                 data-section="style"
+                data-i18n="styles"
               >Estilos</paper-tab>
               <paper-tab
                 link
                 data-section="data"
+                data-i18n="data"
               >Dados</paper-tab>
             </paper-tabs>
 
@@ -215,7 +218,7 @@
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
 
-                i18n="{{ services.i18n }}"
+                i18n-service="{{ services.i18nService }}"
               >
               </carbo-styles-panel>
 
@@ -225,7 +228,7 @@
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
 
-                i18n="{{ services.i18n }}"
+                i18n-service="{{ services.i18nService }}"
               >
               </carbo-data-panel>
 

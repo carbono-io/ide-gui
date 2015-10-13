@@ -47,7 +47,7 @@ module.exports = function (carbo, config) {
     carbo.set('services.codeMachine', codeMachineService);
     carbo.set('services.componentsRegistry', componentsRegistryService);
     carbo.set('services.projectsService', projectsService);
-    carbo.set('services.i18n', i18nService);
+    carbo.set('services.i18nService', i18nService);
 
     // return all services as a result of the initialization
     return carbo.get('services');

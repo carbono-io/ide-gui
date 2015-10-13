@@ -6,19 +6,22 @@
  */
 
 exports.properties = {
-    i18n: {
+    i18nService: {
         type: Object,
         notify: true,
         observer: 'handleI18nServiceChange',
     }
 };
 
-exports.handleI18nServiceChange = function (i18n, old) {
-    i18n.on('i18n-initialized', function () {
-        i18n.translateObject(this.root);
-    }.bind(this))
+exports.handleI18nServiceChange = function (i18nService, old) {
+    i18nService.on('i18n-initialized', this.handleLanguageChange.bind(this));
+
+    i18nService.on('language-changed', this.handleLanguageChange.bind(this));
 };
 
-exports.handleLanguageChange = function () {
-    i18n.translateObject(this.root);
+exports.handleLanguageChange = function (i18nService) {
+
+    console.log('language-changed')
+    console.log(i18nService.getLng());
+    i18nService.translateObject(this.root);
 };
