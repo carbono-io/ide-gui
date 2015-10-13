@@ -474,13 +474,32 @@ Polymer({
     _makeList:function(){
       var select =  this.$["input-unit"].children[1];
       var options = OPTIONS_BY_PROPERTIES[this.get("property")];
+      
+      var optionGroupFixeds = document.createElement("optgroup");
+      optionGroupFixeds.label = "Fixas"; 
+            
+
+      var optionGroupUnits = document.createElement("optgroup");
+      optionGroupUnits.label = "Unidades"; 
+
+
       if(options){
         options.forEach(function (item) {
             var option = document.createElement('option');
             option.textContent = item;
             option.value = item;
-            select.appendChild(option);
+
+            if(!_.includes(NOT_FIXED_OPTIONS, item)){
+              optionGroupFixeds.appendChild(option)
+            }
+            else{
+              optionGroupUnits.appendChild(option)
+            }
         });
+
+        select.appendChild(optionGroupFixeds);   
+        select.appendChild(optionGroupUnits);   
+        
       }
     },
 
