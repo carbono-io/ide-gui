@@ -1,0 +1,29 @@
+@import '../../less/variables.less';
+@import '../../bower_components/lesshat/build/lesshat.less';
+ 
+
+:host {
+    display: block;
+    min-height: 6 * @base-size;
+    line-height: 6 * @base-size;
+    padding: 0px 8px;
+    box-sizing: border-box;    
+    font-size: @font-size-4;
+    color: @text-color;
+    outline: none;
+    background-color: @panel-background-color;
+    min-width: 180px;
+}
+
+.icon{
+    --iron-icon-height: @font-size-6;
+    --iron-icon-width: @font-size-6;
+    padding: 3px 10px 5px 10px;
+}
+
+
+:host(.hover){
+    background-color: @item-panel-background-hover;
+    color: @item-panel-color-hover;
+    border-color: @item-border-bottom;
+}
