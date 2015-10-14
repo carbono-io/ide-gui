@@ -6,20 +6,15 @@
 <g id="Layer_2">
 </g>
 <g id="Layer_1">
+	<rect x="7" y="10" width="1" height="1"/>
+	<rect x="10" y="10" width="1" height="1"/>
+	<rect x="7" y="12" width="1" height="1"/>
+	<rect x="10" y="12" width="1" height="1"/>
+	<rect x="3" y="7" width="12" height="1"/>
+	<rect x="5" y="2" width="1" height="4"/>
+	<rect x="12" y="2" width="1" height="4"/>
 	<g>
-		<g>
-			<path fill="#3F3F3F" d="M14,4v2H4V4H14 M15,3H3v4h12V3L15,3z"/>
-		</g>
-	</g>
-	<g>
-		<g>
-			<path fill="#3F3F3F" d="M14,9v2H4V9H14 M15,8H3v4h12V8L15,8z"/>
-		</g>
-	</g>
-	<g>
-		<rect x="3" y="13" fill="#3F3F3F" width="1" height="2"/>
-		<rect x="14" y="13" fill="#3F3F3F" width="1" height="2"/>
-		<rect x="3" y="13" fill="#3F3F3F" width="12" height="1"/>
+		<path d="M14,4v10H4V4H14 M15,3H3v12h12V3L15,3z"/>
 	</g>
 </g>
 <g id="mapa_do_projeto" display="none">
