@@ -50,7 +50,7 @@ Polymer({
             throw new Error('No section in carbo body named ' + sectionName);
         }
 
-        console.log('body set section ' + sectionName + ' to ' + state);
+        // console.log('body set section ' + sectionName + ' to ' + state);
 
         STATE_CLASSES.forEach(function (stateClass) {
             var toggle = stateClass === state;

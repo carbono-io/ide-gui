@@ -150,17 +150,12 @@ Polymer({
             this.set('currentSelectedPath', cp.path);
 
             var split = cp.path.split('.children');
-            console.log(split);
 
             var pathToOpen = '';
 
             split.forEach(function (item, index) {
 
                 pathToOpen += index > 0 ? '.children' + item : item;
-
-                console.log(pathToOpen);
-
-                console.log(this.get(pathToOpen + '.closed'));
 
                 this.set(pathToOpen + '.closed', false);
 
