@@ -2,8 +2,16 @@
   "name": "ide-gui",
   "version": "0.0.0",
   "authors": [
-    "Simon <simonxd@gmail.com>"
+    "Leonardo <leonardo.ferreira@carbono.io>",
+    "Luciana <luciana.heuko@carbono.io>",
+    "Patricia <patricia.jenny@carbono.io>",
+    "Simon <simon.fan@carbono.io>"
   ],
+  "homepage": "carbono.io",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:carbonoio/ide-gui.git"
+  },
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -39,10 +47,10 @@
     "polymer": "1.0.9",
     "q": "1.4.1",
     "semantic-ui": "2.0.8",
-    "socket.io-client": "1.3.6"
-  },
-  "devDependencies": {
-    "polymer-starter-kit": "https://github.com/PolymerElements/polymer-starter-kit.git#1.0.3"
+    "socket.io-client": "1.3.6",
+    "paper-tooltip": "PolymerElements/paper-tooltip#~1.1.1",
+    "iron-dropdown": "PolymerElements/iron-dropdown#~1.0.6",
+    "iron-menu-behavior": "PolymerElements/iron-menu-behavior#~1.0.5"
   },
   "resolutions": {
     "iron-form": "~1.0.9"

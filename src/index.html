@@ -29,6 +29,9 @@
   <!-- Carbo components -->
   <link rel="import" href="elements.html">
 
+  <style is="custom-style">
+    --paper-tabs-selection-bar-color: blue;
+  </style>
 </head>
 
 <body>
@@ -181,21 +184,24 @@
               attr-for-selected="data-section"
               selected="{{ section }}"
             >
-              <paper-tab
-                link
-                data-section="configurations"
-                data-i18n="configurations"
-              >Configurações</paper-tab>
-              <paper-tab
-                link
-                data-section="style"
-                data-i18n="styles"
-              >Estilos</paper-tab>
-              <paper-tab
-                link
-                data-section="data"
-                data-i18n="data"
-              >Dados</paper-tab>
+                <paper-tab
+                  link
+                  data-section="configurations">
+                  <img src="img/icons/configure_cinza-c.svg">
+                  <span data-i18n="configurations">Configurações</span>
+                </paper-tab>
+                <paper-tab
+                  link
+                  data-section="style">
+                  <img src="img/icons/style-16.svg">
+                  <span data-i18n="styles">Estilos</span>
+                </paper-tab>
+                <paper-tab
+                  link
+                  data-section="data">
+                  <img src="img/icons/data_cinza-c.svg">
+                  <span data-i18n="data">Dados</span>
+                </paper-tab>
             </paper-tabs>
 
             <iron-pages

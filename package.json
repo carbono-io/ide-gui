@@ -13,7 +13,6 @@
     "brfs": "^1.4.1",
     "browser-sync": "^2.8.2",
     "browserify": "^11.0.1",
-    "code-machine": "git+ssh://git@bitbucket.org/carbonoio/code-machine.git",
     "del": "^2.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
@@ -50,8 +49,7 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
-    "carbono-json-messages": "git+ssh://git@bitbucket.org/carbonoio/carbono-json-messages.git",
-    "code-machine": "git+ssh://git@bitbucket.org/carbonoio/code-machine.git",
+    "carbono-json-messages": "git+https://bitbucket.org/carbonoio/carbono-json-messages.git",
     "lodash": "^3.10.1",
     "node-uuid": "^1.4.3",
     "page": "^1.6.3",
