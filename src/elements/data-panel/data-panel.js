@@ -1,78 +1,76 @@
-(function () {
+'use strict';
 
-    Polymer({
-        is: 'carbo-data-panel',
+Polymer({
+    is: 'carbo-data-panel',
 
-        properties: {
-            canvas: {
-                type: Object,
-                notify: true,
-                observer: '_handleCanvasChange',
-            }
-        },
+    properties: {
+        canvas: {
+            type: Object,
+            notify: true,
+            observer: '_handleCanvasChange',
+        }
+    },
 
-        listeners: {
-            'data-changed': '_handleDataChange',
-        },
+    listeners: {
+        'data-changed': '_handleDataChange',
+    },
 
-        _handleDataChange: function (event) {
-            // console.log('data changed!!!!!!');
-        },
+    _handleDataChange: function (event) {
+        // console.log('data changed!!!!!!');
+    },
 
-        /**
-         * Set up event listeners onto the
-         * canvas component
-         */
-        _handleCanvasChange: function (canvas, oldCanvas) {
+    /**
+     * Set up event listeners onto the
+     * canvas component
+     */
+    _handleCanvasChange: function (canvas, oldCanvas) {
 
-            // whenever the inspector is ready
-            canvas.addEventListener(
-                'canvas-inspector-ready',
-                this.handleCanvasInspectorReady.bind(this)
-            );
-        },
+        // whenever the inspector is ready
+        canvas.addEventListener(
+            'canvas-inspector-ready',
+            this.handleCanvasInspectorReady.bind(this)
+        );
+    },
 
-        /**
-         * Retrieves data about the entities
-         * from the html
-         */
-        handleCanvasInspectorReady: function () {
-            var canvas = this.get('canvas');
+    /**
+     * Retrieves data about the entities
+     * from the html
+     */
+    handleCanvasInspectorReady: function () {
+        var canvas = this.get('canvas');
 
-            canvas.getElementsData('form').then(function (data) {
+        canvas.getElementsData('form').then(function (data) {
 
-                // get schema from forms
-                var entitiesPromise = data.map(function (d) {
+            // get schema from forms
+            var entitiesPromise = data.map(function (d) {
 
-                    var inputSelector = [
-                        '[carbono-uuid="',
-                        d.attributes['carbono-uuid'],
-                        '"]',
-                        ' [name]'
-                    ].join('');
+                var inputSelector = [
+                    '[carbono-uuid="',
+                    d.attributes['carbono-uuid'],
+                    '"]',
+                    ' [name]'
+                ].join('');
 
-                    return canvas.getElementsData(inputSelector)
-                        .then(function (inputsData) {
+                return canvas.getElementsData(inputSelector)
+                    .then(function (inputsData) {
 
-                            return {
-                                location: d.attributes.action,
-                                properties: inputsData.map(function (i) {
-                                    return {
-                                        name: i.attributes.name,
-                                        type: 'String',
-                                    }
-                                }),
-                            };
-                        });
-                });
+                        return {
+                            location: d.attributes.action,
+                            properties: inputsData.map(function (i) {
+                                return {
+                                    name: i.attributes.name,
+                                    type: 'String',
+                                }
+                            }),
+                        };
+                    });
+            });
 
-                return Q.all(entitiesPromise);
-            }.bind(this))
-            .then(function (entities) {
-                this.set('entities', entities);
-            }.bind(this))
-            .done();
-        },
-    });
-
-})();
+            return Q.all(entitiesPromise);
+        }.bind(this))
+        .then(function (entities) {
+            this.set('entities', entities);
+        }.bind(this))
+        .done();
+    },
+});

@@ -19,20 +19,19 @@
     javascript libraries come at the top, before elements so
     that all elements may use them
   -->
-  <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
-  <script type="text/javascript" src="bower_components/Keypress/keypress.js"></script>
-  
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/Keypress/keypress.js"></script>
+  <script src="bower_components/i18next/i18next.js"></script>
+
   <!-- Styles -->
   <link rel="stylesheet" type="text/css" href="index.css">
 
   <!-- Carbo components -->
   <link rel="import" href="elements.html">
 
-
-    <style is="custom-style">
-        --paper-tabs-selection-bar-color: blue;
-    </style>
-
+  <style is="custom-style">
+    --paper-tabs-selection-bar-color: blue;
+  </style>
 </head>
 
 <body>
@@ -60,7 +59,10 @@
       <!-- project -->
       <div data-route="project" id="container">
 
-        <carbo-header sections="{{appsections}}">
+        <carbo-header
+          sections="{{appsections}}"
+          i18n-service="{{ services.i18nService }}"
+        >
           <!-- <nav>
             <iron-selector
               id="header-nav"
@@ -91,6 +93,8 @@
         <carbo-body
           id="body"
           ide-mode="{{ ideMode }}"
+
+          i18n-service="{{ services.i18nService }}"
         >
 
           <div body-section="left">
@@ -108,7 +112,8 @@
 
               components-registry="{{ services.componentsRegistry }}"
 
-              components="{{ paletteComponents }}"
+              i18n-service="{{ services.i18nService }}"
+
               code-machine="{{ services.codeMachine }}"
               canvas="{{ components.canvas }}"
 
@@ -122,6 +127,8 @@
             <carbo-canvas-bar
               ide-mode="{{ ideMode }}"
               body="{{ components.body }}"
+
+              i18n-service="{{ services.i18nService }}"
             >
             </carbo-canvas-bar>
 
@@ -151,6 +158,8 @@
               active-element-tree-data="{{ activeElementTreeData }}"
               focused-element-data="{{ focusedElementData }}"
 
+              i18n-service="{{ services.i18nService }}"
+
               canvas="{{ components.canvas }}"
             >
             </carbo-components-tree-panel>
@@ -176,25 +185,23 @@
               selected="{{ section }}"
             >
                 <paper-tab
-                link
-                data-section="configurations"
-
-                >
-                    <img src="img/icons/configure_cinza-c.svg">
-                Configurações
+                  link
+                  data-section="configurations">
+                  <img src="img/icons/configure_cinza-c.svg">
+                  <span data-i18n="configurations">Configurações</span>
                 </paper-tab>
                 <paper-tab
-                link
-                data-section="style"
-                >
-                    <img src="img/icons/style-16.svg">
-                    Estilos</paper-tab>
+                  link
+                  data-section="style">
+                  <img src="img/icons/style-16.svg">
+                  <span data-i18n="styles">Estilos</span>
+                </paper-tab>
                 <paper-tab
-                link
-                data-section="data"
-                >
-                    <img src="img/icons/data_cinza-c.svg">
-                    Dados</paper-tab>
+                  link
+                  data-section="data">
+                  <img src="img/icons/data_cinza-c.svg">
+                  <span data-i18n="data">Dados</span>
+                </paper-tab>
             </paper-tabs>
 
             <iron-pages
@@ -202,7 +209,11 @@
               selected="{{ section }}"
             >
 
-              <div data-section="configurations">
+              <div
+                id="test"
+                data-section="configurations"
+                data-i18n="configurations"
+              >
                 configurações
               </div>
 
@@ -212,6 +223,8 @@
                 focused-element-data="{{ focusedElementData }}"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
+
+                i18n-service="{{ services.i18nService }}"
               >
               </carbo-styles-panel>
 
@@ -220,6 +233,8 @@
                 data-section="data"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
+
+                i18n-service="{{ services.i18nService }}"
               >
               </carbo-data-panel>
 
@@ -238,7 +253,7 @@
   </template>
   <!-- end of root Polymer binding object (carbo) -->
 
-  <script type="text/javascript" src="index.bundle.js"></script>
+  <script src="index.bundle.js"></script>
 </body>
 
 </html>

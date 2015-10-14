@@ -39,7 +39,10 @@
                     <div prefix id="prefix">
                         <iron-icon icon="search"></iron-icon>
                     </div>
-                    <label id="label-style">Buscar elementos</label>
+                    <label
+                        id="label-style"
+                        data-i18n="searchElements"
+                    >Buscar elementos</label>
                     <input is="iron-input" id="input">
                 </paper-input-container>
 
@@ -48,10 +51,9 @@
                         <template
                             is="dom-repeat"
                             items="{{ components }}"
-
                             filter="matchesSearch"
                         >
-                            <div class="component" 
+                            <div class="component" id="{{computeUniqueId(index)}}"
                                 on-mouseover="handleComponentMouseOver" 
                                 on-mouseout="hidePreview"
                                 on-click="handleComponentClick"
@@ -60,8 +62,23 @@
 <!--                                    <iron-icon icon="{{ item.icon }}"></iron-icon>-->                                      <img src="{{ item.img }}">
 
                                 </div>
-                                <div class="component-label">{{ item.title }}</div>
+                                <div class="component-label">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>
+                                <paper-tooltip 
+                                    hidden$="{{!item.preview}}" 
+                                    id="previewTooltip"
+                                    for="{{ computeUniqueId(index) }}" 
+                                    position="right"
+                                    fit-to-visible-bounds
+                                    class="preview has-shadow-2" 
+                                >
+                                    <div class="component-preview-container ">
+                                        <div class="title">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>    
+                                        <div class="preview-screen"><img src="{{item.preview}}"></div>
+                                    </div>
+                                </paper-tooltip>
                             </div>
+                            
+ 
                         </template>
 
                         <template is="dom-if" if="{{ !components.length }}">
@@ -73,7 +90,7 @@
                 </div>
 
                 <!-- TODO - resolver o problema do scroll-->
-                <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
+                <!-- <div id="preview" on-mouseover="handlePreviewMouseOver" on-mouseout="hidePreview">
                     <div class="component-preview-container has-shadow-2">
                         <div class="title">{{ title }}</div>
                         <template is="dom-repeat" items="{{ screens }}">
@@ -81,7 +98,7 @@
                             <div class="screen-caption">{{ item.screensCaption }}</div>
                         </template>
                     </div>
-                </div>
+                </div> -->
 
                 <div id="loading">
                     <paper-spinner alt="Loading form" active></paper-spinner>

@@ -140,81 +140,62 @@ iron-icon {
 }
 
 
-#preview {
-    visibility: hidden;
-//    display: none;
-//    max-height: 0;
-    opacity: 0;
-//    overflow: hidden;
-    position: absolute;
-//    transition: visibility ease 0.3s 0.5s, opacity 0.3s ease 0.5s, max-height 0.3s ease;
-
-    .component-preview-container {
-        visibility: hidden;
-        max-height: 0;
-        padding-top: 3 * @base-size;
-        padding-right: 3 * @base-size;
-        padding-bottom: 3 * @base-size;
-        padding-left: 3 * @base-size;
-        background-color: @white;
-        text-align: left;
-
-        .title {
-            visibility: hidden;
-            max-height: 0;
-            font-size: @font-size-4;
-            margin-bottom: @base-size;
-        }
-
-        .preview-screen {
-            visibility: hidden;
-//            max-height: @phone-proportion * @phone-frame-width/ 1.5;
-//            width: @phone-frame-width/ 1.5;
-            background-color: @white;
-        }
-
-        .screen-caption {
-            visibility: hidden;
-            max-height: 0;
-            margin-top: @base-size;
-        }
-
-    }
+paper-tooltip{
+    z-index: 100000;
 }
 
 
-#preview.show {
-    visibility: visible;
-//    display: block;
-//    max-height: 420px;
-    opacity: 1;
-    transition: visibility ease 0.3s 0.8s, opacity 0.3s ease 0.8s, max-height 0.3s ease;
+.preview {
+    // visibility: hidden;
+//    display: none;
+//    max-height: 0;
+    // opacity: 0;
+//    overflow: hidden;
+    // position: absolute;
+//    transition: visibility ease 0.3s 0.5s, opacity 0.3s ease 0.5s, max-height 0.3s ease;
+    margin-left: -10px;
+    --paper-tooltip-background:@white;
+    --paper-tooltip-opacity:1;
+    --paper-tooltip-text-color:@text-color;
 
     .component-preview-container {
-        visibility: visible;
-        max-height: 600px;
 
+        padding-top: 1.5 * @base-size;
+        padding-right: 1.5 * @base-size;
+        padding-bottom: 1.5 * @base-size;
+        padding-left: 1.5 * @base-size;
+        text-align: left;
+        max-height: @phone-proportion * @phone-frame-width/ 1.5;
         .title {
-            visibility: visible;
+            font-size: @font-size-4;
+            margin-bottom: @base-size;
             max-height: 60px;
             width: @phone-frame-width/ 1.5;
+            color:@text-color;
         }
 
         .preview-screen {
-            visibility: visible;
-//            height: @phone-proportion * @phone-frame-width/ 1.5;
+            height: auto;
             max-height: @phone-proportion * @phone-frame-width/ 1.5;
-            overflow: hidden;
+            overflow: hidden;   
             img {
+
                 width: @phone-frame-width/ 1.5;
                 border: solid 1px @mediumgrey;
                 box-sizing: border-box; //consider border on height size
             }
+          
         }
 
-        .screen-caption {
-            visibility: visible;
-            max-height: 20px;
-        }
+    
+
     }
+
+    .screen-caption {
+        visibility: visible;
+        max-height: 20px;
+    }
+
 }
+
+
