@@ -1,16 +1,23 @@
 'use strict';
 
-(function () {
+Polymer({
+    is: 'carbo-panel-box',
+    
+    properties: {
+        state: {
+            type: String,
+            notify: true,
+            value: 'hidden',
+        }
+    },
 
-    Polymer({
-        is: 'carbo-panel-box',
+    listeners:{
+        'menuButton.click':'openMenu'
+    },
 
-        properties: {
-            state: {
-                type: String,
-                notify: true,
-                value: 'hidden',
-            }
-        },
-    });
-})();
+    openMenu: function(){
+        this.$.menu.open();
+        // this.set("menuOpened" , (this.get("menuOpened")) ? false : true );
+    }
+
+});

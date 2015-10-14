@@ -1,9 +1,5 @@
 'use strict';
 
-(function () {
-
-    Polymer({
-        is: "carbo-panel"
-    });
-
-})();
+Polymer({
+    is: "carbo-panel"
+});

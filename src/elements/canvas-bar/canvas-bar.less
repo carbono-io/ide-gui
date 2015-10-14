@@ -2,7 +2,7 @@
 
 #bar {
     width: 100%;
-    height: 5 * @base-size;
+    height: 6 * @base-size;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -14,18 +14,34 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+//
+//    span {
+//        margin-right: @base-size;
+//    }
+//
+//    iron-icon {
+//        color: @inactive-bar-icon-color;
+//
+//        &:hover {
+//            color: @active-bar-icon-color;
+//            cursor: pointer;
+//        }
+//    }
+//
+    .icon-container {
+        height: 32px;
+        width: 32px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
 
-    span {
-        margin-right: @base-size;
-    }
+        &:hover {
 
-    iron-icon {
-        color: @inactive-bar-icon-color;
-
-        &.active {
-            color: @active-bar-icon-color;
+            background-color: @canvas-bar-selected;
             cursor: pointer;
         }
+
     }
 }
 
@@ -40,8 +56,8 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-right: @base-size;
         height: 100%;
+        margin-right: @base-size;
 
     }
 
@@ -61,17 +77,16 @@
 }
 
 
-
 // this is generic enough for the whole bar, thus
 // it should not be inside any parent selector
 .icon-container {
     height: 32px;
+    width: 32px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 32px;
-
 //            box-sizing: border-box;
 //            border-bottom: solid @border-bottom 1px;
     iron-icon {
@@ -89,7 +104,12 @@
         }
     }
 
-    paper-tooltip{
+    // specific for dropdown
+    &.dropdown {
+        width: 48px;
+    }
+
+    paper-tooltip {
         --paper-tooltip-background:transparent;
         --paper-tooltip-opacity:1;
         --paper-tooltip-text-color:@text-color;
@@ -97,7 +117,7 @@
         margin-left: 72px;
         margin-top: 10px;
 
-        .tool-tip-area{
+        .tool-tip-area {
             background-color: @white;
             height: 24px;
             line-height: 24px;       
@@ -107,6 +127,7 @@
             text-align: center;
             white-space: nowrap;
         }
+
         .tool-tip-area:before {
             content: '';
             width: 0px;
@@ -122,9 +143,7 @@
             transform: rotate(-90deg);
 
         }
-
     }
-
 }
 
 iron-icon {

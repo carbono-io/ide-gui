@@ -22,12 +22,14 @@
             <div id="carbo-header">
                 <div id="header-left">
                     <img id="img-logo" src="../../img/logo-carbono.svg" alt="carbono logo">
-                    <span>App <span>{{ app }}</span></span>
+                    <span data-i18n="app">App</span><span>{{ app }}</span></span>
+<!--
                     <iron-icon icon="hardware:keyboard-arrow-right"></iron-icon>
                     <div id="header-left-section" on-click="togglePanel">
                         <span>Seção 1</span>
                         <iron-icon icon="arrow-drop-down"></iron-icon>
                     </div>
+-->
                 </div>
 
                 <div id="header-center">
@@ -35,12 +37,14 @@
                 </div>
 
                 <div id="header-right">
+<!--
 
                     <div id="header-right-preview">
                         <iron-icon icon="av:play-circle-outline" class="play"></iron-icon>
                         <span>Preview</span>
-                        <iron-icon icon="arrow-drop-down"></iron-icon>
+                        <iron-icon icon="arrow-drop-down"></iron-icon>                         
                     </div>
+-->
 
                     <div>
                         <iron-icon icon="settings"></iron-icon>
@@ -80,9 +84,9 @@
                                     <iron-icon icon="add-circle"></iron-icon>
 
                                     <div class="button-caption">
-                                        adicionar tela
+                                        <span>adicionar tela</span>
                                         <br>
-                                        nesta seção
+                                        <span>nesta seção</span>
                                     </div>
                                 </div>
                             </div>
@@ -97,12 +101,10 @@
             </div>
             <!-- #carbo-header-panel finish -->
 
-            <div id="close-header-panel" on-click="togglePanel">
-                layer
-            </div>
+            <div id="close-header-panel" on-click="togglePanel"></div>
         </div>
     </template>
 
-    <script src="header.js"></script>
+    <script src="header.bundle.js"></script>
 
 </dom-module>
