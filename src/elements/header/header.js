@@ -5,14 +5,6 @@
     Polymer({
         is: 'carbo-header',
 
-        listeners:{
-            "header-right-preview.click":"_openMenuPreview"
-        },
-
-        _openMenuPreview: function(){
-            this.$["menu-preview"].open();
-        },
-
         /**
          * Toggles the header panel open or close
          * Called both on the overlay click and the title click
