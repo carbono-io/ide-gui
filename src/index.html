@@ -116,6 +116,7 @@
 
               code-machine="{{ services.codeMachine }}"
               canvas="{{ components.canvas }}"
+              inquirer="{{ components.inquirer }}"
 
               focused-element-data="{{ focusedElementData }}"
             ></carbo-components-palette>
@@ -149,6 +150,11 @@
               focused-element-data="{{ focusedElementData }}"
               active-element-tree-data="{{ activeElementTreeData }}"
             ></carbo-canvas>
+
+            <carbo-inquirer
+              id="inquirer"
+              canvas="{{ components.canvas }}">
+            </carbo-inquirer>
           </div>
 
           <iron-pages body-section="floating-box" selected="0">

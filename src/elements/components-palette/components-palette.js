@@ -4,6 +4,7 @@
 // Load behaviors
 var CodeMachineIntegrationBehavior = require('./scripts/behaviors/code-machine-integration');
 var CanvasIntegrationBehavior      = require('./scripts/behaviors/canvas-integration');
+var InquirerIntegrationBehavior    = require('./scripts/behaviors/inquirer-integration');
 var ComponentPreview               = require('./scripts/behaviors/component-preview');
 var I18N                           = require('../../scripts/global-behaviors/i18n');
 
@@ -13,6 +14,7 @@ Polymer({
     behaviors: [
         CodeMachineIntegrationBehavior,
         CanvasIntegrationBehavior,
+        InquirerIntegrationBehavior,
         ComponentPreview,
         I18N,
     ],
