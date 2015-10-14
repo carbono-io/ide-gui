@@ -12,5 +12,16 @@
                 value: 'hidden',
             }
         },
+
+        listeners:{
+            'menuButton.click':'openMenu'
+        },
+
+        openMenu: function(){
+            this.$.menu.open();
+            // this.set("menuOpened" , (this.get("menuOpened")) ? false : true );
+        }
+
+
     });
 })();

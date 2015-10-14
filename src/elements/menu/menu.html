@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link href="menu-styles.html" rel="import">
+
+
+<dom-module id="carbo-menu">
+  	<template>
+  		<style include="menu-styles"></style>
+	  	<iron-dropdown
+	      id="dropdown"
+	      opened="{{opened}}"
+	      horizontal-align="[[horizontalAlign]]"
+	      vertical-align="[[verticalAlign]]"
+	      horizontal-offset="[[horizontalOffset]]"
+	      vertical-offset="[[verticalOffset]]"
+	      open-animation-config="[[openAnimationConfig]]"
+	      close-animation-config="[[closeAnimationConfig]]"
+	      no-animations="[[noAnimations]]"
+	      focus-target="[[_dropdownContent]]">
+		    <paper-material class="dropdown-content menu">
+		    	<div class="selectable-content">
+		        	<content id="content"></content>
+			    </div>
+			</paper-material> 
+		</iron-dropdown>
+  	</template>
+
+  <script src="menu.js"></script>
+
+</dom-module>
