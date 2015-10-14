@@ -28,10 +28,10 @@
                      id="add-new-screen" 
                      on-mouseenter="changeTooltipMargin">
                     <img src="../../img/icons/add_page.svg">
-                    <paper-tooltip animation-config="{{animation}}" offset="0" for="add-new-screen" position="top" animation-delay="0">
-                        <div class="tool-tip-area has-shadow-2">Adicionar nova tela</div>
-                    </paper-tooltip>
                 </div>
+                <paper-tooltip animation-config="{{animation}}" offset="0" for="add-new-screen" position="top" animation-delay="0">
+                    <div class="tool-tip-area has-shadow-2">Adicionar nova tela</div>
+                </paper-tooltip>    
 
             </div>
 
@@ -52,14 +52,14 @@
                             icon="create"
                             alt="Graphic edition mode (Shift+G)"
                         ></iron-icon>
-                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top" animation-delay="0">
-                            <div
-                                class="tool-tip-area has-shadow-2"
-                                data-i18n="editionModeTooltip"
-                            >Modo Edição (Shift+G)</div>
-                        </paper-tooltip>
+                        
                     </div>
-
+                    <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top" animation-delay="0">
+                        <div
+                            class="tool-tip-area has-shadow-2"
+                            data-i18n="editionModeTooltip"
+                        >Modo Edição (Shift+G)</div>
+                    </paper-tooltip>    
                     <div
                          id="icon-code"  
                          class="icon-container"
@@ -70,11 +70,11 @@
                             icon="code"
                             alt="Code edition mode (Shift+C)"
                         ></iron-icon>
-                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top" animation-delay="0">
-                            <div class="tool-tip-area has-shadow-2">Modo Código (Shift+C)</div>
-                        </paper-tooltip>
+                        
                     </div>
-
+                    <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top" animation-delay="0">
+                        <div class="tool-tip-area has-shadow-2">Modo Código (Shift+C)</div>
+                    </paper-tooltip>
                     <div
                         id="icon-nav"   
                         class="icon-container dropdown"
@@ -85,11 +85,12 @@
                             icon="visibility"
                             alt="Navigation mode (Shift+N)"
                         ></iron-icon>
-                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top" animation-delay="0">
-                            <div class="tool-tip-area has-shadow-2">Modo Navegação (Shift+N)</div>
-                        </paper-tooltip>
                         <iron-icon icon="arrow-drop-down"></iron-icon>
                     </div>
+                    <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top" animation-delay="0">
+                            <div class="tool-tip-area has-shadow-2">Modo Navegação (Shift+N)</div>
+                    </paper-tooltip>
+                        
 
                 </iron-selector>
                 <!-- selector end -->
@@ -111,10 +112,10 @@
                      on-tap="toggleCanvasPanel"
                      on-mouseenter="changeTooltipMargin">
                     <img src="../../img/icons/components_tree-06.svg">
-                    <paper-tooltip animation-config="{{animation}}" offset="0" for="canvas-panel-toggle" position="top" animation-delay="0">
-                        <div class="tool-tip-area has-shadow-2">Ver mapa do projeto</div>
-                    </paper-tooltip>
                 </div>
+                <paper-tooltip animation-config="{{animation}}" offset="0" for="canvas-panel-toggle" position="top" animation-delay="0">
+                    <div class="tool-tip-area has-shadow-2">Ver mapa do projeto</div>
+                </paper-tooltip>
 
             </div>
         </div>

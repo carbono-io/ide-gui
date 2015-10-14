@@ -45,7 +45,7 @@ Polymer({
 
     
     changeTooltipMargin: function(event){
-        var tooltip = event.target.children[1];
+        var tooltip = event.target.parentElement.querySelector("[for='"+event.target.id+"']");
         var btn = event.target;
         setTimeout(function(){
             tooltip.setAttribute("style", "left:"+btn.offsetLeft+"px;top:-32px;");
