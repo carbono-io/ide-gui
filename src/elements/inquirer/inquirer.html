@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
 
 <link href="inquirer-styles.html" rel="import">
 
@@ -8,64 +9,72 @@
 
     <template>
       <div id="wrapper">
+        
+        <iron-pages
+          attr-for-selected="question-index"
+          selected="{{ currentQuestionIndex }}">
 
-        <!-- a form that comprehends all questions -->
-        <!-- <form id="form"> -->
-          <iron-pages
-            attr-for-selected="question-index"
-            selected="{{ currentQuestionIndex }}">
+          <template
+            is="dom-repeat"
+            items="{{ questions }}"
+            as="question">
 
-            <template
-              is="dom-repeat"
-              items="{{ questions }}"
-              as="question">
+            <!-- question start -->
+            <div
+              class="question"
+              question-index$="{{ index }}">
+              <h2>{{ index }}</h2>
+              <h1>{{ question.message }}</h1>
 
-              <!-- question start -->
-              <div
-                class="question"
-                question-index$="{{ index }}">
-                <h2>{{ index }}</h2>
-                <h1>{{ question.message }}</h1>
-
-                <!-- question inputs -->
-                <div hidden$="[[ isQuestionNotOfType(question, 'input') ]]">
-                  <input
-                    type="text"
-                    placholder="{{ question.label }}">
-                </div>
-
-                <div hidden$="[[ isQuestionNotOfType(question, 'list') ]]">
-                  <select>
-                    <option>ola</option>
-                  </select>
-                </div>
-
-                <div hidden$="[[ isQuestionNotOfType(question, 'password') ]]">
-                  <input
-                    type="password"
-                    placholder="{{ question.label }}">
-                </div>
-                <!-- question inputs -->
-
-                <button
-                  hidden$="{{ isAtFirstQuestion }}"
-                  on-tap="gotoPreviousQuestion">
-                  previous
-                </button>
-
-                <button
-                  hidden$="{{ isAtLastQuestion }}"
-                  on-tap="gotoNextQuestion">
-                  next
-                </button>
+              <!-- question inputs -->
+              <!-- simple input -->
+              <div hidden$="[[ isQuestionNotOfType(question, 'input') ]]">
+                <input
+                  type="text"
+                  value="{{ question.answer::keyup }}"
+                  placholder="{{ question.label }}">
               </div>
-              <!-- question end -->
 
-            </template>
+              <!-- list -->
+              <div hidden$="[[ isQuestionNotOfType(question, 'list') ]]">
+                <select
+                  value="{{ question.answer::change }}">
+                  <template
+                    is="dom-repeat"
+                    items="{{ question.choices }}"
+                    as="choice">
+                    <option
+                      value="{{ choice.value }}">{{ choice.label }}</option>
+                  </template>
+                </select>
+              </div>
 
-          </iron-pages>
+              <!-- password -->
+              <div hidden$="[[ isQuestionNotOfType(question, 'password') ]]">
+                <input
+                  type="password"
+                  value="{{ question.answer::keyup }}"
+                  placholder="{{ question.label }}">
+              </div>
+              <!-- question inputs -->
 
-        <!-- </form> -->
+              <button
+                hidden$="{{ isAtFirstQuestion }}"
+                on-tap="gotoPreviousQuestion">
+                previous
+              </button>
+
+              <button
+                hidden$="{{ isAtLastQuestion }}"
+                on-tap="gotoNextQuestion">
+                next
+              </button>
+            </div>
+            <!-- question end -->
+
+          </template>
+
+        </iron-pages>
       </div>
     </template>
   <script src="inquirer.bundle.js"></script>
