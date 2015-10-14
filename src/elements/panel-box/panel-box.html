@@ -22,19 +22,38 @@
                 <div class="icon-name">
                     <span>{{ title }}</span>
                 </div>
-                <div class="menu">
+                <div class="menu">  
 
-                    <paper-menu-button>
+
+                    <paper-icon-button icon="more-vert" id="menuButton">
+
+                    </paper-icon-button>
+
+                    
+                     <!-- opened="{{menuOpened}}" -->
+                    <carbo-menu id="menu" > 
+                        <carbo-menu-item icon="offline-pin" text="teste 1">
+                        </carbo-menu-item>
+                        <carbo-menu-item icon="mail" text="teste 2">
+                        </carbo-menu-item>
+                        <carbo-menu-item icon="input" text="teste 3">
+                        </carbo-menu-item>
+                        <carbo-menu-item icon="help" text="teste 4">
+                        </carbo-menu-item>
+                    </carbo-menu> 
+
+                    <!-- <paper-menu-button>
 
                         <paper-icon-button icon="more-vert" id="icon-style" class="dropdown-trigger"></paper-icon-button>
 
+                        
 
                         <paper-menu class="dropdown-content">
                             <template is="dom-repeat" items="{{ menu.items }}">
                                 <paper-item><iron-icon icon="{{ item.icon }}"></iron-icon>{{ item.title }}</paper-item>
                             </template>
                         </paper-menu>
-                    </paper-menu-button>
+                    </paper-menu-button> -->
 
                 </div>
             </div>
@@ -42,5 +61,5 @@
         </div>
     </template>
 
-    <script src="panel-box.js"></script>
+    <script src="panel-box.bundle.js"></script>
 </dom-module>

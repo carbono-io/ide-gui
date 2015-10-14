@@ -11,7 +11,7 @@ var util = require('util');
 var _ = require('lodash');
 var Q = require('q');
 
-var REQUIRED_CONFIGS = ['location', 'userService'];
+var REQUIRED_CONFIGS = ['location', 'userService', 'i18nService'];
 
 function ComponentsRegistryClient(config) {
 

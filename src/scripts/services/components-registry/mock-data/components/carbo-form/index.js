@@ -34,6 +34,8 @@ exports.postInsertion = {
 // icon to be shown on palette
 exports.icon = "assignment";
 
+exports.img = "../../../../img/icons/components/form-39.svg";
+
 // build the template function
 var template = _.template(fs.readFileSync(__dirname + '/template.html', 'utf-8'));
 

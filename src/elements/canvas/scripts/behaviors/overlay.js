@@ -200,16 +200,10 @@ exports.handleOverlayClick = function (event) {
  */
 
 
-exports.handleOverlayMousewheel =
-    function (event) {
+exports.handleOverlayMousewheel = function (event) {
 
-
-    event = event ? event : window.event;
-    if (event.stopPropagation) event.stopPropagation();
-    if (event.preventDefault) event.preventDefault();
-    event.cancelBubble = true;
-    event.cancel = true;
-    event.returnValue = false;
+    event.stopPropagation();
+    event.preventDefault();
 
     // remove 'active' class from overlay
     this.$.overlay.style.display = 'none';
@@ -218,19 +212,6 @@ exports.handleOverlayMousewheel =
         this.$.overlay.style.display = 'block';
         this.executeInspectorOperation('scrollBy', [event.wheelDeltaX * -0.4, event.wheelDeltaY* -0.4]);
     }.bind(this), 1 );
-
-
-    // Let the iframe scroll the same as the mousewheel
-
-    // Normalize the mouse position from clientX and clientY
-    // to overlayX and overlayY
-    var normalizedMousePos = this.normalizeMousePosition({
-        x: event.clientX,
-        y: event.clientY
-    });
-
-
-    return false;
 
 };
 

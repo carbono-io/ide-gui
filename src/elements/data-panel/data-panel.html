@@ -17,6 +17,7 @@
  -->            <template is="dom-repeat" items="{{ entities }}">
                 <carbo-data-table
                     entity="{{ item }}"
+                    i18n-service="{{ i18nService }}"
                 >
                 </carbo-data-table>
             </template>
@@ -30,5 +31,5 @@
     </template>
         
     <script src="../../bower_components/q/q.js"></script>
-    <script src="data-panel.js"></script>
+    <script src="data-panel.bundle.js"></script>
 </dom-module>

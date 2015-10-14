@@ -4,12 +4,13 @@
 
 #carbo-body {
     // section styling
+
     section {
         display: block;
         position: relative;
-
-        transition: width ease 0.4s, opacity ease 0.4s;
         overflow: hidden;
+        transition: width ease 0.4s, opacity ease 0.4s;
+        
 
         &.closed {
             display: none;
@@ -52,29 +53,33 @@
 
 	#left {
 		background-color: @panel-background-color;
-		width: @panel-width;
+		width: @panel-width;     
 
-		// no growing nor shrinking
+        // to tooltips show if it are out of the section
+        overflow: visible;  
+		
+        // no growing nor shrinking
 		flex-grow: 0;
 		flex-shrink: 0;
 
 		margin-right: 0;
 		border-right: solid 1px @border-bottom;
+
+
 	}
 
     #workspace {
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: stretch;
-
+        overflow: visible;
         flex-grow: 1;
 
         #middle-bar {
-
+            overflow: visible;
             padding: 0 @base-size;
-            height: 5 * @base-size;
+            height: 6 * @base-size;
             border-bottom: 1px solid @border-bottom;
             background-color: @box-header-background;
             vertical-align: center;
@@ -145,7 +150,6 @@
     }
 
 	#right {
-
 		// no growing nor shrinking
 		flex-grow: 0;
 		flex-shrink: 0;
