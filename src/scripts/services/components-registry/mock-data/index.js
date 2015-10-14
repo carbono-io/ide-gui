@@ -18,6 +18,14 @@ registry.push({
     html: '<p>Insira o conteúdo do seu parágrafo</p>',
     icon: "text-format",
     img: "../../../img/icons/components/paragraph-41.svg",
+    i18n: {
+        en: {
+            title: 'Paragraph'
+        },
+        pt: {
+            title: 'Parágrafo'
+        }
+    }
 });
 
 // Texto

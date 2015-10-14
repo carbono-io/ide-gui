@@ -39,7 +39,10 @@
                     <div prefix id="prefix">
                         <iron-icon icon="search"></iron-icon>
                     </div>
-                    <label id="label-style">Buscar elementos</label>
+                    <label
+                        id="label-style"
+                        data-i18n="searchElements"
+                    >Buscar elementos</label>
                     <input is="iron-input" id="input">
                 </paper-input-container>
 
@@ -59,7 +62,7 @@
 <!--                                    <iron-icon icon="{{ item.icon }}"></iron-icon>-->                                      <img src="{{ item.img }}">
 
                                 </div>
-                                <div class="component-label">{{ item.title }}</div>
+                                <div class="component-label">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>
                                 <paper-tooltip 
                                     hidden$="{{!item.preview}}" 
                                     id="previewTooltip"
@@ -69,7 +72,7 @@
                                     class="preview has-shadow-2" 
                                 >
                                     <div class="component-preview-container ">
-                                        <div class="title">{{ item.title }}</div>    
+                                        <div class="title">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>    
                                         <div class="preview-screen"><img src="{{item.preview}}"></div>
                                     </div>
                                 </paper-tooltip>

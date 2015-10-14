@@ -16,119 +16,116 @@
  * All events are detected on the overlay and passed onto the application if
  * necessary.
  */
-(function () {
 
-    // Load behaviors
-    var IframeBehavior         = require('./scripts/behaviors/iframe');
-    var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
-    var InspectorBehavior      = require('./scripts/behaviors/inspector');
-    var OverlayBehavior        = require('./scripts/behaviors/overlay');
-    var CodeMachineBehavior    = require('./scripts/behaviors/code-machine');
+// Load behaviors
+var IframeBehavior         = require('./scripts/behaviors/iframe');
+var FrameMessagingBehavior = require('./scripts/behaviors/frame-messaging');
+var InspectorBehavior      = require('./scripts/behaviors/inspector');
+var OverlayBehavior        = require('./scripts/behaviors/overlay');
+var CodeMachineBehavior    = require('./scripts/behaviors/code-machine');
 
-    // Load constants
-    var CONSTANTS = require('./scripts/constants');
+// Load constants
+var CONSTANTS = require('./scripts/constants');
+
+/**
+ * The char that deactivates the overlay.
+ * @type {String}
+ */
+var OVERLAY_DEACTIVATE_KEY = 'a';
+
+Polymer({
+    is: 'carbo-canvas',
+
+    behaviors: [
+        IframeBehavior,
+        FrameMessagingBehavior,
+        InspectorBehavior,
+        OverlayBehavior,
+        CodeMachineBehavior
+    ],
+
+    properties: {
+
+        components: {
+            type: Object,
+            notify: true
+        },
+
+        context: {
+            type: Object,
+            notify: true
+        }
+    },
 
     /**
-     * The char that deactivates the overlay.
-     * @type {String}
+     * Hash of event listeners for the DOM
      */
-    var OVERLAY_DEACTIVATE_KEY = 'a';
+    listeners: {
+        'canvas.mouseenter': 'handleCanvasMouseenter',
+        'canvas.mouseleave': 'handleCanvasMouseleave',
+    },
 
-    Polymer({
-        is: 'carbo-canvas',
+    activateLoading: function () {
+        this.executeInspectorOperation('activateLoading');
+    },
 
-        behaviors: [
-            IframeBehavior,
-            FrameMessagingBehavior,
-            InspectorBehavior,
-            OverlayBehavior,
-            CodeMachineBehavior
-        ],
+    deactivateLoading: function () {
+        this.executeInspectorOperation('deactivateLoading');
+    },
 
-        properties: {
+    
+    /**
+     * Whenever the mouse enters the canva element area,
+     * let the overlay handle keydown events for shortcut detection.
+     */
+    handleCanvasMouseenter: function (event) {
+        // Set focus onto the overlay so that it can handle keydown events
+        this.$.overlay.focus();
+        this.$.overlay.addEventListener('keydown', this.handleOverlayKeydown);
+    },
 
-            components: {
-                type: Object,
-                notify: true
-            },
+    /**
+     * Whenever the mouse leaves the canvas,
+     * make sure the overlay is activated and the inspector unhighlighted.
+     */
+    handleCanvasMouseleave: function (event) {
 
-            context: {
-                type: Object,
-                notify: true
-            }
-        },
+        // unfocus the overlay
+        this.$.overlay.blur();
 
-        /**
-         * Hash of event listeners for the DOM
-         */
-        listeners: {
-            'canvas.mouseenter': 'handleCanvasMouseenter',
-            'canvas.mouseleave': 'handleCanvasMouseleave',
-        },
+        // unHighlight
+        this.hideHover();
 
-        activateLoading: function () {
-            this.executeInspectorOperation('activateLoading');
-        },
+        // activate overlay
+        // this.activateOverlay();
+    },
 
-        deactivateLoading: function () {
-            this.executeInspectorOperation('deactivateLoading');
-        },
+    /**
+     * Reloads the iframe
+     *
+     * See second response:
+     * http://stackoverflow.com/questions/86428/whats-the-best-way-to-reload-refresh-an-iframe-using-javascript
+     */
+    reload: function () {
 
-        
-        /**
-         * Whenever the mouse enters the canva element area,
-         * let the overlay handle keydown events for shortcut detection.
-         */
-        handleCanvasMouseenter: function (event) {
-            // Set focus onto the overlay so that it can handle keydown events
-            this.$.overlay.focus();
-            this.$.overlay.addEventListener('keydown', this.handleOverlayKeydown);
-        },
+        var defer = Q.defer();
 
-        /**
-         * Whenever the mouse leaves the canvas,
-         * make sure the overlay is activated and the inspector unhighlighted.
-         */
-        handleCanvasMouseleave: function (event) {
+        var iframe = this.$.iframe;
 
-            // unfocus the overlay
-            this.$.overlay.blur();
+        iframe.src = iframe.src;
 
-            // unHighlight
-            this.hideHover();
+        // event handler for inspector ready
+        function handleReloadFinished() {
+            // resolve deferred object
+            defer.resolve();
 
-            // activate overlay
-            // this.activateOverlay();
-        },
-
-        /**
-         * Reloads the iframe
-         *
-         * See second response:
-         * http://stackoverflow.com/questions/86428/whats-the-best-way-to-reload-refresh-an-iframe-using-javascript
-         */
-        reload: function () {
-
-            var defer = Q.defer();
-
-            var iframe = this.$.iframe;
-
-            iframe.src = iframe.src;
-
-            // event handler for inspector ready
-            function handleReloadFinished() {
-                // resolve deferred object
-                defer.resolve();
-
-                // remove listener
-                this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
-            }
-
-            this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
-
-            // return a promise for whenever the reloading is done
-            return defer.promise;
+            // remove listener
+            this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
         }
-    });
 
-})();
+        this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+
+        // return a promise for whenever the reloading is done
+        return defer.promise;
+    }
+});

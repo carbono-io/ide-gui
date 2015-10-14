@@ -22,6 +22,7 @@
   ],
   "dependencies": {
     "firebase-element": "GoogleWebComponents/firebase-element#~1.0.6",
+    "i18next": "~1.10.2",
     "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#~1.0.5",
     "iron-form": "PolymerElements/iron-form#1.0.8",
     "iron-image": "PolymerElements/iron-image#1.0.2",
@@ -42,6 +43,7 @@
     "paper-styles": "PolymerElements/paper-styles#1.0.11",
     "paper-tabs": "https://github.com/PolymerElements/paper-tabs.git#1.0.1",
     "paper-toast": "PolymerElements/paper-toast#1.0.0",
+    "paper-tooltip": "PolymerElements/paper-tooltip#~1.1.1",
     "polymer": "1.0.9",
     "q": "1.4.1",
     "semantic-ui": "2.0.8",
