@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
 <link href="inquirer-styles.html" rel="import">
 
@@ -6,7 +7,66 @@
   <style include="inquirer-styles"></style>
 
     <template>
-      inquirer
+      <div id="wrapper">
+
+        <!-- a form that comprehends all questions -->
+        <!-- <form id="form"> -->
+          <iron-pages
+            attr-for-selected="question-index"
+            selected="{{ currentQuestionIndex }}">
+
+            <template
+              is="dom-repeat"
+              items="{{ questions }}"
+              as="question">
+
+              <!-- question start -->
+              <div
+                class="question"
+                question-index$="{{ index }}">
+                <h2>{{ index }}</h2>
+                <h1>{{ question.message }}</h1>
+
+                <!-- question inputs -->
+                <div hidden$="[[ isQuestionNotOfType(question, 'input') ]]">
+                  <input
+                    type="text"
+                    placholder="{{ question.label }}">
+                </div>
+
+                <div hidden$="[[ isQuestionNotOfType(question, 'list') ]]">
+                  <select>
+                    <option>ola</option>
+                  </select>
+                </div>
+
+                <div hidden$="[[ isQuestionNotOfType(question, 'password') ]]">
+                  <input
+                    type="password"
+                    placholder="{{ question.label }}">
+                </div>
+                <!-- question inputs -->
+
+                <button
+                  hidden$="{{ isAtFirstQuestion }}"
+                  on-tap="gotoPreviousQuestion">
+                  previous
+                </button>
+
+                <button
+                  hidden$="{{ isAtLastQuestion }}"
+                  on-tap="gotoNextQuestion">
+                  next
+                </button>
+              </div>
+              <!-- question end -->
+
+            </template>
+
+          </iron-pages>
+
+        <!-- </form> -->
+      </div>
     </template>
   <script src="inquirer.bundle.js"></script>
 
