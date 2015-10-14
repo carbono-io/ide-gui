@@ -42,6 +42,15 @@ Polymer({
         '_handleCanvasPanelStateChange(canvasPanelState)'
     ],
 
+
+    
+    changeTooltipMargin: function(event){
+        var tooltip = event.target.children[1];
+        var btn = event.target;
+        setTimeout(function(){
+            tooltip.setAttribute("style", "left:"+btn.offsetLeft+"px;top:-32px;");
+        }, 1);
+    },
     /**
      * Function to be executed once the component is ready
      *
