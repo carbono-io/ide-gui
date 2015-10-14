@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/carbo-spotlighter/carbo-spotlighter.html">
 <link rel="import" href="canvas-styles.html">
 
 <dom-module id="carbo-canvas">
@@ -15,8 +16,12 @@
                 tabindex="1"
                 class="active"
             ></div>
-            <div id="clickedarea"></div>
         </div>
+
+        <carbo-spotlighter
+            id="spotlighter"
+            padding="5">
+        </carbo-spotlighter>        
     </template>
 
     <script src="../../bower_components/q/q.js"></script>

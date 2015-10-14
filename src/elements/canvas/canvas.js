@@ -24,6 +24,7 @@
     var InspectorBehavior      = require('./scripts/behaviors/inspector');
     var OverlayBehavior        = require('./scripts/behaviors/overlay');
     var CodeMachineBehavior    = require('./scripts/behaviors/code-machine');
+    var SpotligtherBehavior    = require('./scripts/behaviors/spotlighter');
 
     // Load constants
     var CONSTANTS = require('./scripts/constants');
@@ -42,7 +43,8 @@
             FrameMessagingBehavior,
             InspectorBehavior,
             OverlayBehavior,
-            CodeMachineBehavior
+            CodeMachineBehavior,
+            SpotligtherBehavior
         ],
 
         properties: {
