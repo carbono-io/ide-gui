@@ -30,7 +30,17 @@
   <link rel="import" href="elements.html">
 
   <style is="custom-style">
-    --paper-tabs-selection-bar-color: blue;
+
+      paper-tabs {
+          --paper-tabs-selection-bar-color: #3f3f3f;
+      }
+
+      paper-tab {
+          --paper-tab-ink: #E0E0E3;
+      }
+
+
+
   </style>
 </head>
 
@@ -181,8 +191,8 @@
           <div id="edition-panel" body-section="right">
 
             <paper-tabs
-              attr-for-selected="data-section"
-              selected="{{ section }}"
+                attr-for-selected="data-section"
+                selected="{{ section }}"
             >
                 <paper-tab
                   link
