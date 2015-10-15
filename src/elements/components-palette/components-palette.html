@@ -21,7 +21,6 @@
     <template>
 
         <carbo-panel-box
-            title="Biblioteca de componentes"
             icon="add"
             menu="{{ boxmenuitem }}"
         >
@@ -63,7 +62,9 @@
 
                                 </div>
                                 <div class="component-label">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>
-                                <paper-tooltip 
+                                
+                            </div>
+                            <paper-tooltip 
                                     hidden$="{{!item.preview}}" 
                                     id="previewTooltip"
                                     for="{{ computeUniqueId(index) }}" 
@@ -75,8 +76,8 @@
                                         <div class="title">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>    
                                         <div class="preview-screen"><img src="{{item.preview}}"></div>
                                     </div>
-                                </paper-tooltip>
-                            </div>
+                            </paper-tooltip>    
+                            
                             
  
                         </template>
