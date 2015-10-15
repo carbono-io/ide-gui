@@ -62,17 +62,20 @@
         
         .table-container {
 
-            max-height: 0;    
+            max-height: 0;
+            margin: 0;
 
             table {
                 visibility: hidden;
-                transition: visibility 0s linear 0.2s;
+                transition: visibility 0s linear 0.1s;
+                margin:0;
             }        
         }
 
         #entity-action-message {
             max-height: 0;
             padding: 0;
+            margin: 0;
             
             p {
                 visibility: hidden;
@@ -90,8 +93,8 @@
             height: 6 * @base-size;
             padding: 0 @base-size 0 @base-size;
             width: auto;
-            max-width: 96px;
-            min-width: 80px;
+            min-width: 88px;
+            max-width: 104px;
             border-bottom: 1px solid @mediumgrey;
             box-sizing: border-box;
             font-weight: @bold !important;
@@ -118,14 +121,10 @@
 
 
             iron-autogrow-textarea {
-//              width: 100%;
+                width: 100%;
                 border: none;
                 overflow: scroll;
                 font-weight: @bold;
-
-//                &:hover, &.active {
-//                    background-color:
-//                }
 
             }
             
@@ -148,7 +147,7 @@
         padding: @base-size @base-size 0 @base-size;
         font-size: @font-size-2;
         box-sizing: border-box;
-        border-top: 1px solid @mediumgrey; 
+//        border-top: 1px solid @mediumgrey;
 //        border-bottom: 1px solid @mediumgrey;
         display: none;
         
@@ -166,6 +165,8 @@
         height: 5 * @base-size;
         padding-left: @base-size;
         padding-right: @base-size;
+        font-size: 13px;
+        font-weight: @bold;
 
         #arrow {
             width: 16px;
@@ -202,17 +203,6 @@
 
         tr {
             max-height: 6 * @base-size;
-
-
-
-//            &:last-child {
-//                td {
-//                    border: none;
-//
-//                }
-//
-//            }
-
 
             &:hover, &.active {
                 background-color: @item-panel-background-hover;
