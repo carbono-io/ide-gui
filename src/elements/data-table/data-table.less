@@ -87,7 +87,7 @@
         font-size: @font-size-3;
 
         th {
-            height: 5 * @base-size;
+            height: 6 * @base-size;
             padding: 0 @base-size 0 @base-size;
             width: auto;
             max-width: 96px;
@@ -97,15 +97,35 @@
             font-weight: @bold !important;
             text-align: left;
             
+            &#add-column {
+                text-align: center;
+            }
+
+
             .associate-property-button {
                 display: none;
             }
+
+            &:hover, &.active {
+                background-color: @item-panel-background-hover;
+                transition: all ease 0.3s;
+
+                iron-autogrow-textarea {
+                    background-color: white;
+                }
+
+            }
+
 
             iron-autogrow-textarea {
 //              width: 100%;
                 border: none;
                 overflow: scroll;
                 font-weight: @bold;
+
+//                &:hover, &.active {
+//                    background-color:
+//                }
 
             }
             
@@ -125,11 +145,11 @@
     }
     
     #entity-action-message {
-        padding: @base-size;
+        padding: @base-size @base-size 0 @base-size;
         font-size: @font-size-2;
         box-sizing: border-box;
         border-top: 1px solid @mediumgrey; 
-        border-bottom: 1px solid @mediumgrey;
+//        border-bottom: 1px solid @mediumgrey;
         display: none;
         
         p {
@@ -166,14 +186,16 @@
         overflow-y: hidden;
         max-height:800px;
         transition: max-height 0.2s ease;
+        margin: 2*@base-size 0;
 
     }
 
     table {
         border-spacing:0;
-        padding: 0 2 * @base-size;
+        margin: 0 2 * @base-size;
         visibility: visible;
         transition: visibility 0s linear 0s;
+        border: 1px solid @border-bottom;
     }
 
     tbody {
@@ -276,24 +298,32 @@
 }
 
 .data-alert {
-    background-color: #F9F0CD;
-    padding: @base-size;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    box-sizing: border-box;
     
-    p {
-        margin: @base-size;
-        font-size: @font-size-2;
+    display: none;
+
+    &.active {
+        background-color: #F9F0CD;
+        padding: @base-size;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
         box-sizing: border-box;
+
+        p {
+            margin: @base-size;
+            font-size: @font-size-2;
+            box-sizing: border-box;
+        }
+
+        iron-icon {
+            width: 18px;
+            height: 18px;
+        }
     }
 
-    iron-icon {
-        width: 18px;
-        height: 18px;
-    }
+
+
 }
 
 
