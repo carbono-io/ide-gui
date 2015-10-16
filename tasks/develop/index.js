@@ -15,7 +15,7 @@ module.exports = function (gulp, $) {
     gulp.task('develop', 'Set up development environment. If you are in doubt, try this one ;)', function (done) {
         // First compile less, run code-machine and watch
         // then serve.
-        runSequence(['less', 'javascript'], 'serve:src', 'watch', done);
+        runSequence(['less', 'javascript', 'iconsets'], 'serve:src', 'watch', done);
     });
 
 };
