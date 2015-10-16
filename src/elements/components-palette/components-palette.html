@@ -21,10 +21,7 @@
     <template>
 
         <carbo-panel-box
-            icon="command:library"
-            title="biblioteca de componentes"
-            menu="{{ boxmenuitem }}"
-        >
+            icon="command:library">
         
             <div id="wrapper" state$="{{ state }}">
 
@@ -53,8 +50,8 @@
                             items="{{ components }}"
                             filter="matchesSearch"
                         >
-                            <div class="component" id="{{computeUniqueId(index)}}"
-                                on-mouseover="handleComponentMouseOver" 
+                            <div class="component" id="{{ computeUniqueId( 'component-' , index) }}"
+                                on-mouseenter="handleComponentMouseEnter" 
                                 on-mouseout="hidePreview"
                                 on-click="handleComponentClick"
                             >
@@ -66,11 +63,10 @@
                                 
                             </div>
                             <paper-tooltip 
-                                    hidden$="{{!item.preview}}" 
-                                    id="previewTooltip"
-                                    for="{{ computeUniqueId(index) }}" 
+                                    if="{{!item.preview}}" 
+                                    id="{{ computeUniqueId( 'tooltip-for-component-' , index) }}"
+                                    for="{{ computeUniqueId( 'component-' , index) }}" 
                                     position="right"
-                                    fit-to-visible-bounds
                                     class="preview has-shadow-2" 
                                 >
                                     <div class="component-preview-container ">
