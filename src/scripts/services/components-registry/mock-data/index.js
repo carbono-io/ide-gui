@@ -22,7 +22,9 @@ registry.push({
     img: "../../../img/icons/components/paragraph-41.svg",
     i18n: {
         en: {
-            title: 'Paragraph'
+            title: 'Paragraph',
+            description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas."
+
         },
         pt: {
             title: 'Parágrafo',
