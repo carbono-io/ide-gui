@@ -43,7 +43,8 @@
             justify-content: center;
             align-items: center;
             
-        } 
+        }
+
     } 
 }    
 
@@ -58,27 +59,18 @@
         #arrow {
             .rotate(-90deg);
         }
-
         
-        .table-container {
-
+        .entity-container {
             max-height: 0;
-            margin: 0;
+            transition: all 0s linear 0.2s;
 
-            table {
+            table, p {
                 visibility: hidden;
-                transition: visibility 0s linear 0.1s;
                 margin:0;
-            }        
-        }
-
-        #entity-action-message {
-            max-height: 0;
-            padding: 0;
-            margin: 0;
+            }
             
-            p {
-                visibility: hidden;
+            * {
+                margin: 0;
             }
         }
             
@@ -90,18 +82,24 @@
         font-size: @font-size-3;
 
         th {
-            height: 6 * @base-size;
+            height: 8 * @base-size;
             padding: 0 @base-size 0 @base-size;
             width: auto;
             min-width: 80px;
             max-width: 104px;
             border-bottom: 1px solid @mediumgrey;
             box-sizing: border-box;
-            font-weight: @bold !important;
             text-align: left;
             
+            p {
+                margin: 0;
+                color: @secondarytext-color;
+                font-weight: @regular;
+            }
+
             &#add-column {
                 text-align: center;
+                cursor: pointer;
             }
 
 
@@ -124,7 +122,6 @@
                 width: 100%;
                 border: none;
                 overflow: scroll;
-                font-weight: @bold;
 
             }
             
@@ -166,7 +163,6 @@
         padding-left: @base-size;
         padding-right: @base-size;
         font-size: 13px;
-        font-weight: @bold;
 
         #arrow {
             width: 16px;
@@ -180,6 +176,7 @@
             background-color: @item-panel-background-hover;
             transition: all ease 0.3s;
             cursor: pointer;
+            border-bottom: 1px solid white;
         }
     }
     
@@ -229,10 +226,6 @@
                     width: 18px;
                     height: 18px;
                 }
-
-                &:hover, &.active {
-                    font-weight: @bold;
-                }
                 
                 iron-autogrow-textarea {
                     width: 100%;
@@ -263,12 +256,13 @@
     &.associate-property-mode {
     
         th {
-            height: 7 * @base-size;
-            font-weight: @bold !important;
+            height: 10 * @base-size;
+            cursor: pointer;
 
             &:hover, &.active {
                 background-color: @item-panel-background-hover;
                 transition: all ease 0.3s;
+
             }    
             
             .associate-property-button {

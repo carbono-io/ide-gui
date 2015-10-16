@@ -56,52 +56,80 @@ da aplicação.
                         data-i18n="form"
                     ></span>
                 </div>
+
+                <div class="entity-container">
                     
-                <div id="entity-action-message">   
-                    <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->             
-                    <p id="entity-associated-message" class="active">
-                        Os dados coletados em "Formulário" estarão associados à "Formulário"
-                    </p>
+                    <div id="entity-action-message">
+                        <!--MENSAGEM DE COMPONENTE JÁ ASSOCIADO À ENTIDADE-->
+                        <p id="entity-associated-message">
+                            Os dados coletados em "Formulário" estarão associados à "Formulário"
+                        </p>
 
-                    <!--MENSAGEM PARA ASSOCIAR COMPONENTE A PROPROEDADE DE ENTIDADE-->
-                    <p id="associate-property-message">
-                        Associe o componente à uma propriedade exibida abaixo, ou crie uma nova.
-                    </p>
-                </div>
+                        <!--MENSAGEM PARA ASSOCIAR COMPONENTE A PROPROEDADE DE ENTIDADE-->
+                        <p id="associate-property-message">
+                            Associe o componente à uma propriedade exibida abaixo, ou crie uma nova.
+                        </p>
+                    </div>
 
-                <div class="table-container">
-                    <table on-click="handleClick">
-                        <thead>
-                            <tr>
-                                <!-- repete colunas para cada propriedade-->
+                    <div class="table-container">
+                        <table on-click="handleClick">
+                            <thead>
+                                <tr>
+                                    <!-- repete colunas para cada propriedade-->
+                                    <template
+                                        is="dom-repeat"
+                                        items="{{ entityProperties }}"
+                                        as="property">
+        <!--                                    <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>-->
+
+                                        <th>
+                                            <input type="radio" class="associate-property-button">
+                                            <iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="adicione título">
+                                            </iron-autogrow-textarea>
+    <!--                                        <p bind-value="{{ property.type }}"></p>-->
+                                            <p>(text)</p>
+                                        </th>
+
+                                    </template>
+                                    <!-- fim do repete colunas -->
+
+                                    <th id="add-column">
+                                        <iron-icon icon="add"></iron-icon>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- repete linhas de cada entidade -->
                                 <template
                                     is="dom-repeat"
-                                    items="{{ entityProperties }}"
-                                    as="property">
-    <!--                                    <th><input type="radio" class="associate-property-button" class="active">{{ property.name }}</th>-->
-                                    
-                                    <th>
-                                        <input type="radio" class="associate-property-button">
-                                        <iron-autogrow-textarea bind-value="{{ property.name }}" max-rows="2" placeholder="Adicione título">
-                                        </iron-autogrow-textarea>
-                                    </th>
-                                    
+                                    items="{{ entityItems }}"
+                                    as="item"
+                                >
+                                    <tr>
+                                        <!-- repete colunas de cada linha-->
+                                        <template
+                                            is="dom-repeat"
+                                            items="{{ entityProperties }}"
+                                            as="property"
+                                        >
+                                            <td>
+
+                                                <iron-autogrow-textarea
+                                                    bind-value="{{ readPropertyFromEntityItem(item, property.name) }}"
+                                                    max-rows="3"
+                                                    placeholder="adicione dado"
+                                                >
+                                                </iron-autogrow-textarea>
+                                            </td>
+                                        </template>
+                                        <!-- fim do repete colunas -->
+
+                                        <!-- td somente para manter o tamanho da table certo -->
+                                        <td></td>
+                                    </tr>
                                 </template>
-                                <!-- fim do repete colunas -->
 
-                                <th id="add-column">
-                                    <iron-icon icon="add"></iron-icon>
-                                </th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <!-- repete linhas de cada entidade -->
-                            <template 
-                                is="dom-repeat"
-                                items="{{ entityItems }}" 
-                                as="item"
-                            >
                                 <tr>
                                     <!-- repete colunas de cada linha-->
                                     <template 
@@ -110,9 +138,8 @@ da aplicação.
                                         as="property"
                                     >
                                         <td>
-                                            
-                                            <iron-autogrow-textarea 
-                                                bind-value="{{ readPropertyFromEntityItem(item, property.name) }}"
+
+                                            <iron-autogrow-textarea
                                                 max-rows="3"
                                                 placeholder="Adicione dado"
                                             >
@@ -124,33 +151,12 @@ da aplicação.
                                     <!-- td somente para manter o tamanho da table certo -->
                                     <td></td>
                                 </tr>
-                            </template>
-
-                            <tr>
-                                <!-- repete colunas de cada linha-->
-                                <template 
-                                    is="dom-repeat" 
-                                    items="{{ entityProperties }}" 
-                                    as="property"
-                                >
-                                    <td>
-                                        
-                                        <iron-autogrow-textarea
-                                            max-rows="3"
-                                            placeholder="Adicione dado"
-                                        >
-                                        </iron-autogrow-textarea>
-                                    </td>
-                                </template>
-                                <!-- fim do repete colunas -->
-
-                                <!-- td somente para manter o tamanho da table certo -->
-                                <td></td>
-                            </tr>
-                            <!-- fim do repete das linhas -->
-                        </tbody>
-                    </table>
+                                <!-- fim do repete das linhas -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </div>
 
             <div class="data-alert">
