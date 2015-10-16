@@ -106,13 +106,15 @@ Polymer({
      * See second response:
      * http://stackoverflow.com/questions/86428/whats-the-best-way-to-reload-refresh-an-iframe-using-javascript
      */
-    reload: function () {
+    reload: function (url) {
 
         var defer = Q.defer();
 
         var iframe = this.$.iframe;
 
-        iframe.src = iframe.src;
+
+
+        iframe.src = url || iframe.src;
 
         // event handler for inspector ready
         function handleReloadFinished() {

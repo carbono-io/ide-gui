@@ -13,6 +13,7 @@ var I18N = require('../../scripts/global-behaviors/i18n');
 Polymer({
     is: "carbo-canvas-bar",
     properties: {
+
         ideMode: {
             type: String,
             value: CONSTANTS.ideModes.graphicalEdition,
@@ -27,12 +28,49 @@ Polymer({
             type: Object,
             notify: true,
             observer: '_handleBodyChange',
-        }
+        },
+
+        canvas: {
+            type: Object,
+            notify: true,
+        },
+
+        codeMachine: {
+            type: Object,
+            notify: true,
+        },
     },
 
     behaviors: [
         I18N,
     ],
+
+    addNewPage: function(){
+
+        var page  = prompt("qual o nome da nova pagina?"); 
+        var param  = prompt("qual o nome da nova pagina?"); 
+        var paramteste  = prompt("qual o nome da nova pagina?"); 
+        this.canvas.getElementsData("iron-pages")
+        .then(function(ironPagesData){
+            
+            
+        var parentUuid    = ironPagesData[0].attributes['carbono-uuid'],
+            html          ='<div page="'+page+'" param="'+param+'"><h3>Pages</h3><span> nome:'+page+'</span><span> paramentro:{{'+param+'}}</span></div>';
+           
+            return this.codeMachine.insertElement(
+                {uuid:ironPagesData[0].attributes['carbono-uuid']} , {html:html});
+
+        }.bind(this))
+        .then(function(res){
+
+            components.canvas.reload("http://localhost:8000/resources/marked/index.html").then(function(){
+
+                components.canvas.reload("http://localhost:8000/resources/marked/index.html#/"+page+"/"+paramteste);
+            
+            });
+
+        }.bind(this));
+    },
 
     animation:{ 
         "entry": [{"name": "fade-in-animation", "timing": {"delay": 0}}]
