@@ -120,6 +120,17 @@ Polymer({
         };
     },
 
+    update: function () {
+
+        if (this.activeElementTreeData) {
+
+            // parse the tree
+            var tree = convertToComponentTree(this.activeElementTreeData);
+
+            this.set('tree', tree);
+        }
+    },
+
     _handleActiveElementTreeDataChange: function (activeElementTreeData, oldActiveElementTreeDataChange) {
 
         if (activeElementTreeData) {

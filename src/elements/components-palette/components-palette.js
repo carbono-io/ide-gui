@@ -75,8 +75,8 @@ Polymer({
      * Make a uniqueId to handle hover for paper tooltip 
      * @param  {index} index of element in dom-repeat 
      */
-    computeUniqueId: function(index){
-        return ("component" + index);
+    computeUniqueId: function( id , index){
+        return (id + index);
     },
 
 
@@ -139,16 +139,29 @@ Polymer({
         Polymer.Base.toggleClass('error', error, this.$.wrapper);
     },
 
-    handleComponentMouseOver: function(event) {
+    handleComponentMouseEnter: function(event) {
         //find the tooltip and image inside component 
-        var tooltip = event.currentTarget.querySelector(".preview");
+
+        var targetId = event.currentTarget.id;
+        var tooltip = event.currentTarget.parentElement.querySelector("#tooltip-for-"+event.currentTarget.id);
         var image = tooltip.querySelector("img");
-        
+
+        var doit = (parseInt(image.height) / 2) > (window.innerHeight - event.target.offsetTop);
+        console.log("doit", doit);
         //wait for image to load
         _.delay(function(){
-            if(tooltip.style.top === "auto"){
+            if(doit){
+
+                var top = ((tooltip.offsetHeight - window.innerHeight )>0) ? 
+                          (tooltip.offsetHeight - window.innerHeight ):
+                          (tooltip.offsetHeight - window.innerHeight )*-1;
+
                 //make the bottom of tooltip to be half of image size to allwas show up.
-                tooltip.style.bottom = (parseInt(image.height) / 2) + "px" ;
+                var newStyle = tooltip.attributes.style.value.split(';')[0]+";"+
+                                "top:"+(top - 50)+"px;";
+                console.log(newStyle);
+                tooltip.setAttribute("style", newStyle);
+               
             }
          }, 200); 
 
