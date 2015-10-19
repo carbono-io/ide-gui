@@ -55,7 +55,7 @@ Polymer({
             
             
         var parentUuid    = ironPagesData[0].attributes['carbono-uuid'],
-            html          ='<div page="'+page+'" param="'+param+'"><h3>Pages</h3><span> nome:'+page+'</span><span> paramentro:{{'+param+'}}</span></div>';
+            html          ='<page page="'+page+'" param="'+param+'"></page>';
            
             return this.codeMachine.insertElement(
                 {uuid:ironPagesData[0].attributes['carbono-uuid']} , {html:html});
@@ -63,11 +63,7 @@ Polymer({
         }.bind(this))
         .then(function(res){
 
-            components.canvas.reload("http://localhost:8000/resources/marked/index.html").then(function(){
-
-                components.canvas.reload("http://localhost:8000/resources/marked/index.html#/"+page+"/"+paramteste);
-            
-            });
+            components.canvas.reload("http://localhost:8000/resources/marked/index.html#/"+page+"/"+paramteste);
 
         }.bind(this));
     },

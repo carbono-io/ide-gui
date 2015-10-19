@@ -65,6 +65,10 @@ Polymer({
         'canvas.mouseleave': 'handleCanvasMouseleave',
     },
 
+    domChange:function(){
+        this.reload("http://localhost:8000/resources/marked/index.html#/home");
+    },
+
     activateLoading: function () {
         this.executeInspectorOperation('activateLoading');
     },
@@ -73,7 +77,13 @@ Polymer({
         this.executeInspectorOperation('deactivateLoading');
     },
 
-    
+    updateTreeData: function () {
+        this.getElementTreeData('body')
+        .then(function (bodyTreeData) {
+            this.set('activeElementTreeData', bodyTreeData);
+        }.bind(this))
+        .done();
+    },
     /**
      * Whenever the mouse enters the canva element area,
      * let the overlay handle keydown events for shortcut detection.
@@ -124,6 +134,8 @@ Polymer({
             // remove listener
             this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
         }
+
+        this.updateTreeData();
 
         this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
 

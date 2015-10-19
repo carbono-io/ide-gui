@@ -9,12 +9,43 @@
  * @type {Constant}
  */
 var INSPECTOR_OPERATION_PREFIX = 'canvas_inspector_operation_';
+var IFRAME_OPERATION_PREFIX = 'canvas_iframe_operation_';
 
 exports.created = function () {
     // Hash to store the deferred
     // for opertaions invoked on the inspector (inside iframe)
     // Keys are uniqueIds and values are the deferred;
     this._inspectorOperationDefers = {};
+};
+
+
+
+/**
+ * Method called whenever the component is ready
+ */
+exports.ready = function () {
+    // Listen to `message` events on the iframe object.
+    window.addEventListener('message', this.handleFrameRequestMessage.bind(this), false);
+};
+
+/**
+ * Handles messages from the parent frame.
+ * @param  {Event} event the event object
+ */
+exports.handleFrameRequestMessage = function (event) {
+    // método JSON.parse() converte string para JSON
+    var request = JSON.parse(event.data);
+
+
+    // testa se a mensagem vem do iframe
+    if(request.id.match(IFRAME_OPERATION_PREFIX)){
+
+        //executa a operação que vem do iframe
+        //TODO: implementar um whitelist de operações.
+        var res = this[request.operation].apply(this, request.args);
+    }
+  
+    //TODO: implementar o retorno ao iframe
 };
 
 /**
@@ -78,3 +109,6 @@ exports.executeInspectorOperation = function (operation, args) {
     // Return the promise of the deferred object
     return deferred.promise;
 };
+
+
+

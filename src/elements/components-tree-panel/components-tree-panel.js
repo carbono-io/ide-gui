@@ -6,6 +6,12 @@ function convertToComponentTree(data, parent) {
     // name
     tree.name = data.tagName;
 
+    if(data.tagName === 'DIV' && parent.name == "IRON-PAGES"){
+        tree.name = "PAGE";
+        tree.page = data.attributes.page;
+    }
+
+
     tree.selected = false;
     tree.closed = true;
 
@@ -120,6 +126,7 @@ Polymer({
         };
     },
 
+   
     _handleActiveElementTreeDataChange: function (activeElementTreeData, oldActiveElementTreeDataChange) {
 
         if (activeElementTreeData) {
@@ -169,6 +176,15 @@ Polymer({
         // console.log(hoveredElementData);
     },
 
+    
+    _changeProjectPage: function(page ){
+        var canvas = this.get('canvas');
+        canvas.executeInspectorOperation('changeRoute' , [page]);
+    },
+
+    
+
+
     listeners: {
         'component-mouseover': 'handleComponentMouseover',
         'component-click': 'handleComponentClick'
@@ -191,6 +207,13 @@ Polymer({
         if (!canvas) {
             throw new Error('No canvas for <components-tree-panel>');
         }
+
+        if(typeof e.detail.componentData.page !== 'undefined'){
+            this._changeProjectPage(e.detail.componentData.page);
+            console.log(e.detail.componentData);
+        }
+
+
 
         // set focus
         canvas.focusElementForSelector(e.detail.componentData.uuidCSSSelector);
