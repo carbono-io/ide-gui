@@ -24,17 +24,29 @@ require('./scripts/placeholder-data')(carbo);
 //PAT INSERIU ISSO AQUI PARA INSERIR O LOADING
 window.toggleLoadingComponent =  function(loading) {
 
-    // Canvas wrapper
     var canvasWrapper = document.getElementById('canvaswrapper');
+    var ideContainer = document.getElementById('container');
+    var loadingComponent = canvasWrapper.querySelector('#loading');
 
-    // Container
-    var ideContainer = document.getElementById('container')
-
-    canvasWrapper.classList.toggle("loadingcomponent", loading);
     ideContainer.classList.toggle("loadingcomponent", loading);
 
-};
+    loadingComponent.style.visibility= "visible";
 
+    if (loading) {
+
+        canvasWrapper.classList.toggle("loadingcomponent", loading);
+
+    } else {
+
+        canvasWrapper.classList.toggle("loadingcomponent", loading);
+
+        setTimeout(function(){
+            loadingComponent.style.visibility= "hidden";
+        },1502);
+
+    }
+
+};
 
 // Only start setting up thing when WebComponentsReady event is fired
 window.addEventListener('WebComponentsReady', function () {
