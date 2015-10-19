@@ -2,6 +2,8 @@
 
 var fs = require('fs');
 
+var _ = require('lodash');
+
 // TODO: create mock server based on json-database
 
 var registry = [];

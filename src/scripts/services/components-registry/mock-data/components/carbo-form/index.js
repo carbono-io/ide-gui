@@ -5,6 +5,7 @@ var fs = require('fs');
 
 // external dependencies
 var uuid = require('node-uuid');
+var _    = require('lodash');
 
 
 // TODO: hacks
