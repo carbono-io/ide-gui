@@ -46,7 +46,7 @@ exports.htmlDir = [
 // js files that require browserifying
 // don't put trailing.js
 exports.browserifyEntries = [
-    SRC_DIR + '/index',
+    SRC_DIR + '/index.js',
 ].concat(_retrieveElementsJSPath());
 
 /**
@@ -59,17 +59,33 @@ exports.browserifyEntries = [
  * @return {Array} array with all source js files to be browserified
  */
 function _retrieveElementsJSPath() {
-    var elementsDirs = fs.readdirSync(SRC_DIR + '/elements');
-
-    // remove .DS_Store, if it exists
-    var DSStoreIndex = elementsDirs.indexOf('.DS_Store');
-    if (DSStoreIndex !== -1) {
-        elementsDirs.splice(DSStoreIndex, 1);
-    }
-
-    elementsDirs = elementsDirs.map(function (d) {
-        return path.join(SRC_DIR, 'elements', d, path.basename(d));
+    var elementsJSPath = [];
+    
+    // retrieve the directory for each of the elements
+    var elementsDirs = fs.readdirSync(SRC_DIR + '/elements').map(function (d) {
+        return path.join(SRC_DIR, 'elements', d);
     });
 
-    return elementsDirs;
+    elementsDirs.forEach(function (elementsDir) {
+        var candidateJSPath = path.join(elementsDir, path.basename(elementsDir) + '.js');
+
+
+        // node has no function to check whether file exists
+        // we must attempt to read it
+        try {
+            fs.statSync(candidateJSPath);
+
+            // console.log('yes:'+ candidateJSPath);
+
+            // if successful, simply add to elementsJSPath
+            elementsJSPath.push(candidateJSPath);
+
+        } catch (e) {
+            // not successful, the file does not exist
+            // console.log('nope:'+ candidateJSPath);
+            
+        }
+    });
+
+    return elementsJSPath;
 }

@@ -43,12 +43,18 @@ module.exports = function (gulp, $) {
         w.on('update', watchifyBundle); // on any dep update, runs the bundler
         w.on('log', $.util.log); // output build logs to terminal
 
+        // Build a file path for writing the resulting
+        // browserified file
+        var gulpEntryFilePath = entry
+            .replace(srcDirRegExp, '')
+            .replace(/\.js$/, '');
+
         /**
          * Bundles browserify stack using watchify
          */
         function watchifyBundle() {
             return w.bundle()
-                .pipe(vinylSource(entry.replace(srcDirRegExp, '') + '.bundle.js'))
+                .pipe(vinylSource(gulpEntryFilePath + '.bundle.js'))
                 .pipe(vinylBuffer())
                 .on('end', browserSync.reload)
                 .pipe($.header(message))
