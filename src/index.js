@@ -18,6 +18,24 @@ var carbo = document.querySelector('#carbo');
 // Set placeholder data onto the main scope of the application
 require('./scripts/placeholder-data')(carbo);
 
+// Canvas wrapper
+var canvasWrapper = document.getElementById('canvaswrapper');
+
+// Container
+var ideContainer = document.getElementById('container')
+
+
+//PAT INSERIU ISSO AQUI PARA INSERIR O LOADING
+window.toggleLoadingComponent =  function(loading) {
+
+    canvasWrapper.classList.toggle("loadingcomponent", loading);
+
+    ideContainer.classList.toggle("loadingcomponent", loading);
+
+
+};
+
+
 // Only start setting up thing when WebComponentsReady event is fired
 window.addEventListener('WebComponentsReady', function () {
 
