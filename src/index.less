@@ -123,18 +123,17 @@ body {
             align-items: center;
             align-content: center;
 
-            visibility: hidden;
-            opacity:0;
-            transition:opacity .5s ease;
-
             position: absolute;
 
             z-index: 5000000;
 
             background: rgb(255, 255, 255);
             background: rgba(255, 255, 255, .9);
-            height: 100%;
-            width: 100%;
+            transition:all 1.5s ease;
+
+            opacity:0;
+            transition:opacity .5s ease;
+
 
             .spinner {
                   width: 40px;
@@ -174,10 +173,18 @@ body {
             #loading {
                 visibility: visible;
                 opacity:1;
-                transition:opacity 1.5s ease;
+                transition:all 1.5s ease;
 
             }
         }
+
+//        &.endloadingcomponent {
+//
+//            #loading {
+//                opacity:0;
+//                transition:opacity .5s ease;
+//            }
+//        }
 
 
         &.error {
