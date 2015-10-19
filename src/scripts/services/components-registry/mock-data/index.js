@@ -10,6 +10,8 @@ var registry = [];
 // PARAGRAFO
 registry.push({
     title: "Parágrafo",
+    tag: "<carbo-p>",
+    description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas.",
     context: {
         show: ['PAGE', 'BODY', 'FORM'],
         insertion: false
@@ -20,10 +22,14 @@ registry.push({
     img: "../../../img/icons/components/paragraph-41.svg",
     i18n: {
         en: {
-            title: 'Paragraph'
+            title: 'Paragraph',
+            description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas."
+
         },
         pt: {
-            title: 'Parágrafo'
+            title: 'Parágrafo',
+            description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas."
+
         }
     }
 });
@@ -42,7 +48,9 @@ registry.push({
 
 // TÍTULO 1
 registry.push({
-    title: "Título 1",
+    title: "Título principal",
+    tag: "<carbo-h1>",
+    description:"Título de maior nível hierárquico da aplicação.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false
@@ -116,6 +124,8 @@ registry.push(require('./components/paper-input'));
 // CARBO-TABELA
 registry.push({
     title: "Tabela",
+    tag: "<carbo-table>",
+    description:"Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false,
@@ -137,6 +147,8 @@ registry.push({
 // CARBO-LISTA
 registry.push({
     title: "Lista",
+    tag: "<carbo-list>",
+    description:"Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false,

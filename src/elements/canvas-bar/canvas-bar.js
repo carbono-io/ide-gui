@@ -50,22 +50,29 @@ Polymer({
         var page  = prompt("qual o nome da nova pagina?"); 
         var param  = prompt("qual o nome da nova pagina?"); 
         var paramteste  = prompt("qual o nome da nova pagina?"); 
-        this.canvas.getElementsData("iron-pages")
-        .then(function(ironPagesData){
+
+        var canvas = this.get('canvas'),
+            codeMachine = this.get('codeMachine');
+
+
+
+        canvas.getElementsData("iron-pages")
+            .then(function(ironPagesData){
             
-            
-        var parentUuid    = ironPagesData[0].attributes['carbono-uuid'],
-            html          ='<page page="'+page+'" param="'+param+'"></page>';
-           
-            return this.codeMachine.insertElement(
-                {uuid:ironPagesData[0].attributes['carbono-uuid']} , {html:html});
+                var parentUuid    = ironPagesData[0].attributes['carbono-uuid'],
+                    html          ='<page page="'+page+'" param="'+param+'"></page>';
+                   
+                return codeMachine.insertElement(
+                       {uuid:ironPagesData[0].attributes['carbono-uuid']} , {html:html});
 
-        }.bind(this))
-        .then(function(res){
+            })
+            .then(function(res){
+                
+                canvas.reload();
+                canvas.executeInspectorOperation('changeRoute' , [page]);
+                
+            });
 
-            components.canvas.reload("http://localhost:8000/resources/marked/index.html#/"+page+"/"+paramteste);
-
-        }.bind(this));
     },
 
     animation:{ 

@@ -165,13 +165,26 @@ paper-tooltip{
         padding-bottom: 1.5 * @base-size;
         padding-left: 1.5 * @base-size;
         text-align: left;
-        max-height: @phone-proportion * @phone-frame-width/ 1.5;
-        .title {
+        // max-height: @phone-proportion * @phone-frame-width/ 1.5;
+
+        .component-id {
+            display: flex;
+            flex-direction: column;
+            border-bottom: solid 1px @mediumgrey;
+            padding-bottom: @base-size;
             font-size: @font-size-4;
-            margin-bottom: @base-size;
+
+        }
+
+        .title {
             max-height: 60px;
-            width: @phone-frame-width/ 1.5;
+//            width: @phone-frame-width/ 1.5;
             color:@text-color;
+            margin-bottom: @base-size;
+        }
+        .tag {
+            color: @secondarytext-color;
+
         }
 
         .preview-screen {
@@ -185,6 +198,12 @@ paper-tooltip{
                 box-sizing: border-box; //consider border on height size
             }
           
+        }
+
+        .description, .page-description {
+            font-size: @font-size-3;
+            line-height: normal;
+            margin: @base-size 0;
         }
 
     

@@ -66,7 +66,7 @@ Polymer({
     },
 
     domChange:function(){
-        this.reload("http://localhost:8000/resources/marked/index.html#/home");
+        this.updateTreeData();
     },
 
     activateLoading: function () {
@@ -116,30 +116,31 @@ Polymer({
      * See second response:
      * http://stackoverflow.com/questions/86428/whats-the-best-way-to-reload-refresh-an-iframe-using-javascript
      */
-    reload: function (url) {
+    reload: function () {
 
-        var defer = Q.defer();
+        // var defer = Q.defer();
 
-        var iframe = this.$.iframe;
+        // var iframe = this.$.iframe;
 
 
+        // perguntar pro simon o porque do add and remove eventListener
+        // // event handler for inspector ready
+        // function handleReloadFinished() {
+        //     // resolve deferred object
+        //     defer.resolve();
 
-        iframe.src = url || iframe.src;
+        //     // remove listener
+        //     this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+        // }
 
-        // event handler for inspector ready
-        function handleReloadFinished() {
-            // resolve deferred object
-            defer.resolve();
 
-            // remove listener
-            this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
-        }
+        // this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
 
         this.updateTreeData();
 
-        this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+        return this.executeInspectorOperation('reloadFrame');
 
         // return a promise for whenever the reloading is done
-        return defer.promise;
+        // return defer.promise;
     }
 });

@@ -6,7 +6,7 @@ function convertToComponentTree(data, parent) {
     // name
     tree.name = data.tagName;
 
-    if(data.tagName === 'DIV' && parent.name == "IRON-PAGES"){
+    if(data.tagName === 'PAGE' && parent.name == "IRON-PAGES"){
         tree.name = "PAGE";
         tree.page = data.attributes.page;
     }
@@ -126,7 +126,17 @@ Polymer({
         };
     },
 
-   
+    update: function () {
+
+        if (this.activeElementTreeData) {
+
+            // parse the tree
+            var tree = convertToComponentTree(this.activeElementTreeData);
+
+            this.set('tree', tree);
+        }
+    },
+
     _handleActiveElementTreeDataChange: function (activeElementTreeData, oldActiveElementTreeDataChange) {
 
         if (activeElementTreeData) {
@@ -177,7 +187,7 @@ Polymer({
     },
 
     
-    _changeProjectPage: function(page ){
+    _changeProjectPage: function(page){
         var canvas = this.get('canvas');
         canvas.executeInspectorOperation('changeRoute' , [page]);
     },
@@ -210,7 +220,6 @@ Polymer({
 
         if(typeof e.detail.componentData.page !== 'undefined'){
             this._changeProjectPage(e.detail.componentData.page);
-            console.log(e.detail.componentData);
         }
 
 
