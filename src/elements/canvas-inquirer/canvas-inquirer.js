@@ -7,12 +7,17 @@ Polymer({
         canvas: {
             type: Object,
             notify: true,
+
+            observer: '_handleCanvasChange',
         }
     },
 
-    ready: function () {
-        console.log('i am canvas inquirer');
+    _handleCanvasChange: function (canvas, old) {
 
-        
     },
+
+    prompt: function (questions) {
+        return this.$.inquirer.prompt(questions);
+    }
+
 });
