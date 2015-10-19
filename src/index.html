@@ -62,12 +62,14 @@
 
       <!-- loading -->
       <div data-route="loading" id="loading">
-        <div>loading ...</div>
+          <div>loading ...</div>
       </div>
       <!-- loading -->
 
       <!-- project -->
       <div data-route="project" id="container">
+
+        <div id="ide-blocker"></div>
 
         <carbo-header
           sections="{{appsections}}"
@@ -145,8 +147,14 @@
 
           </div>
 
-          <div body-section="canvas">
-            <carbo-canvas
+          <div body-section="canvas" id="canvaswrapper">
+
+              <div id="loading">
+                  <div class="spinner"></div>
+                  <p>inserindo componente...</p>
+              </div>
+
+              <carbo-canvas
               id="canvas"
               project-url="{{ project.projectUrl }}"
               components="{{ components }}"

@@ -66,6 +66,8 @@ body {
         align-items: center;
     }
 
+
+
     /**
      * Sets the height and width of the whole application.
      * (html/body is temperamental)
@@ -84,6 +86,122 @@ body {
 
         min-width: @min-screen-width;
         min-height: @min-application-height;
+
+        #ide-blocker {
+            background: rgb(255, 255, 255);
+            background: rgba(255, 255, 255, .0);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 40000;
+
+            visibility: hidden;
+        }
+
+        &.loadingcomponent {
+
+            #ide-blocker {
+                visibility: visible;
+
+            }
+        }
+
+
+    }
+
+    #canvaswrapper {
+
+        position: relative;
+
+        /**
+         * States
+         */
+        #loading, #error {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            visibility: hidden;
+            opacity:0;
+            transition:opacity .5s ease;
+
+            position: absolute;
+
+            z-index: 5000000;
+
+            background: rgb(255, 255, 255);
+            background: rgba(255, 255, 255, .9);
+            height: 100%;
+            width: 100%;
+
+            .spinner {
+                  width: 40px;
+                  height: 40px;
+                  background-color: #333;
+
+                  margin: 24px;
+                  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+                  animation: sk-rotateplane 1.2s infinite ease-in-out;
+                }
+
+
+                @-webkit-keyframes sk-rotateplane {
+                  0% { -webkit-transform: perspective(120px) }
+                  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+                  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+                }
+
+                @keyframes sk-rotateplane {
+                  0% {
+                    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+                  } 50% {
+                    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+                  } 100% {
+                    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                  }
+                }
+
+        }
+
+
+        &.loadingcomponent {
+
+            #loading {
+                visibility: visible;
+                opacity:1;
+                transition:opacity 1.5s ease;
+
+            }
+        }
+
+
+        &.error {
+
+            #error {
+                visibility: visible;
+                background-color: red;
+                color: white;
+            }
+        }
+
+//  TO DO - SIMON - O QUE DEVO FAZER COM ISSO?
+
+//        #canvaswrapper[state="hidden"] {
+//            display: none;
+//        }
+//
+//        #canvaswrapper[state="shown"] {
+//            display: block;
+//        }
+
+
+
+
     }
 
     // styles for the panel at the right

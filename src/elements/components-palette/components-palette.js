@@ -94,7 +94,10 @@ Polymer({
                 canvas.deactivateLoading();
                 canvas.reload();
                 // stop loading
-                this.toggleLoading(false);
+//                this.toggleLoading(false);
+                window.toggleLoadingComponent(false);
+
+
             }.bind(this))
 
             // handle failures together for now
@@ -103,7 +106,9 @@ Polymer({
                 canvas.reload();
                 canvas.deactivateLoading();
 
-                this.toggleLoading(false);
+//                this.toggleLoading(false);
+                window.toggleLoadingComponent(false);
+
 
                 // TODO: remove this
                 // this was done only for user-testing purposes
@@ -117,7 +122,9 @@ Polymer({
             }.bind(this))
             .done();
 
-        this.toggleLoading(true);
+//        this.toggleLoading(true);
+        window.toggleLoadingComponent(true);
+
         this.toggleError(false);
 
         canvas.activateLoading();
@@ -127,9 +134,13 @@ Polymer({
      * Toggles loading status
      * @param  {Boolean} loading 
      */
-    toggleLoading: function (loading) {
-        Polymer.Base.toggleClass('loading', loading, this.$.wrapper);
-    },
+
+// PAT COMENTOU ISSO PARA COLOCAR NO INDEX:
+
+//    toggleLoading: function (loading) {
+//        Polymer.Base.toggleClass('loading', loading, this.$.wrapper);
+//        Polymer.Base.toggleClass('');
+//    },
 
     /**
      * Toggles error status
