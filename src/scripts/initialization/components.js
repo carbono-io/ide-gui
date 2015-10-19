@@ -11,7 +11,7 @@ module.exports = function (carbo, config) {
 
     var body                 = document.querySelector('#body');
     var canvas               = document.querySelector('#canvas');
-    var inquirer             = document.querySelector('#inquirer');
+    var canvasInquirer       = document.querySelector('#canvas-inquirer');
     var componentsPalette    = document.querySelector('#components-palette');
     var componentsPaletteBox = document.querySelector('#components-palette-box');
     var componentsTreePanel  = document.querySelector('#components-tree-panel');
@@ -19,7 +19,7 @@ module.exports = function (carbo, config) {
     carbo.set('components', {});
     carbo.set('components.body', body);
     carbo.set('components.canvas', canvas);
-    carbo.set('components.inquirer', inquirer);
+    carbo.set('components.canvasInquirer', canvasInquirer);
     carbo.set('components.componentsPalette', componentsPalette);
     carbo.set('components.componentsTreePanel', componentsTreePanel);
 
