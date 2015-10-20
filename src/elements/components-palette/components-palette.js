@@ -92,10 +92,15 @@ Polymer({
             .then(function happiness() {
                 // now everything is finished
                 canvas.deactivateLoading();
-                canvas.reload();
+                 
+                canvas.reload().then(function(){
+                    setTimeout(function(){
+                        window.toggleLoadingComponent(false); 
+                    },1000);
+                });
                 // stop loading
 //                this.toggleLoading(false);
-                window.toggleLoadingComponent(false);
+               
 
 
             }.bind(this))

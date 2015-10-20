@@ -6,11 +6,10 @@ function convertToComponentTree(data, parent) {
     // name
     tree.name = data.tagName;
 
+    //if page inside iron-pages set page atributte
     if(data.tagName === 'PAGE' && parent.name == "IRON-PAGES"){
-        tree.name = "PAGE";
         tree.page = data.attributes.page;
     }
-
 
     tree.selected = false;
     tree.closed = true;
@@ -39,7 +38,9 @@ function convertToComponentTree(data, parent) {
         }
     });
 
+    
     return tree;
+
 }
 
 function searchTree(element, uuid){
@@ -118,12 +119,12 @@ Polymer({
 
     ready: function () {
 
-
         this.boxmenuitemComponents = {
             items: [
                 { icon: 'add', title: 'nova tela' },
             ]
         };
+        
     },
 
     update: function () {

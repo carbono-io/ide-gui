@@ -122,8 +122,8 @@ Polymer({
 
         // var iframe = this.$.iframe;
 
+        // iframe.src = iframe.src;
 
-        // perguntar pro simon o porque do add and remove eventListener
         // // event handler for inspector ready
         // function handleReloadFinished() {
         //     // resolve deferred object
@@ -133,14 +133,22 @@ Polymer({
         //     this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
         // }
 
-
         // this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
 
-        this.updateTreeData();
+        // // return a promise for whenever the reloading is done
+        // return defer.promise;
 
-        return this.executeInspectorOperation('reloadFrame');
+        var defer = Q.defer();
+
+        this.executeInspectorOperation('reloadFrame').then(function(){
+            
+            this.updateTreeData();
+            // resolve deferred object
+            defer.resolve();
+
+        }.bind(this));
 
         // return a promise for whenever the reloading is done
-        // return defer.promise;
+        return defer.promise;
     }
 });

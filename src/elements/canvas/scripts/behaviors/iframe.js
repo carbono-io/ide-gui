@@ -41,6 +41,7 @@ exports.handleIframeLoad = function (event) {
 
     var iframeSrcUrl = iframe.getAttribute('src');
 
+
     // Check if the load event was fired for a valid src
     // If so, fire an 'canvas-load' event on the canvas object
     // This check is performed because the iframe fires a load event

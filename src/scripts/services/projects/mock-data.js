@@ -13,5 +13,5 @@ exports.project = {
         '8000': '32772'
     },
     // projectUrl: '/sandbox/base-polymer-project/src/index.html',
-    projectUrl: 'http://localhost:8000/resources/marked/index.html',
+    projectUrl: 'http://localhost:8000/resources/marked/index.html#/home',
 };

@@ -47,20 +47,18 @@ Polymer({
 
     addNewPage: function(){
 
-        var page  = prompt("qual o nome da nova pagina?"); 
-        var param  = prompt("qual o nome da nova pagina?"); 
-        var paramteste  = prompt("qual o nome da nova pagina?"); 
-
-        var canvas = this.get('canvas'),
+        var page        = _.uniqueId("PAGE_"), 
+            param       = _.uniqueId("PAGE_PARAM_"),
+            canvas      = this.get('canvas'),
             codeMachine = this.get('codeMachine');
 
 
-
+        window.toggleLoadingComponent(true);
         canvas.getElementsData("iron-pages")
             .then(function(ironPagesData){
             
                 var parentUuid    = ironPagesData[0].attributes['carbono-uuid'],
-                    html          ='<page page="'+page+'" param="'+param+'"></page>';
+                    html          ='<page page="'+page+'" param="'+param+'" page-title="Nova Página" ></page>';
                    
                 return codeMachine.insertElement(
                        {uuid:ironPagesData[0].attributes['carbono-uuid']} , {html:html});
@@ -68,9 +66,20 @@ Polymer({
             })
             .then(function(res){
                 
-                canvas.reload();
+                canvas.reload().then(function(){
+                    
+                    canvas.executeInspectorOperation('changeRoute' , [page]);
+
+                    setTimeout(function() {
+                        window.toggleLoadingComponent(false);
+                    }, 500);
+
+                }.bind(this));
+
+
                 canvas.executeInspectorOperation('changeRoute' , [page]);
-                
+        
+
             });
 
     },

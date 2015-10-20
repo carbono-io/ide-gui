@@ -288,7 +288,7 @@ registry.push({
     
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
     icon: "text-format",
-    html: '<div class="title">Title</div>',
+    html: '<div class="title">{{pageTitle}}</div>',
 });
 
 // PAPER-ICON-BUTTON
