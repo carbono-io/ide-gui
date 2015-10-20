@@ -8,11 +8,13 @@
     <style include="components-tree-panel-styles"></style>
 
     <template>
-        <template is="dom-if" if="{{ tree }}">
-            <carbo-components-tree
-                component="{{ tree }}"
-            ></carbo-components-tree>
-        </template>
+        <div class="content-container">
+            <template is="dom-if" if="{{ tree }}">
+                <carbo-components-tree
+                    component="{{ tree }}"
+                ></carbo-components-tree>
+            </template>
+        </div>
     </template>
     
     <script src="components-tree-panel.bundle.js"></script>
