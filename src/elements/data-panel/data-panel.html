@@ -14,21 +14,27 @@
           icon="maps:layers"
           menu="{{ boxmenuitem }}"
         >
- -->            <template is="dom-repeat" items="{{ entities }}">
-                <carbo-data-table
-                    entity="{{ item }}"
-                    i18n-service="{{ i18nService }}"
-                >
-                </carbo-data-table>
+ -->
+        <div class="content-container">
+        
+            <template is="dom-repeat" items="{{ entities }}">
+                    <carbo-data-table
+                        entity="{{ item }}"
+                        i18n-service="{{ i18nService }}"
+                    >
+                    </carbo-data-table>
             </template>
             <template is="dom-if" if="{{ !entities.length }}">
 
-                Não há dados em sua aplicação
+                    Não há dados em sua aplicação
 
             </template>
-        <!-- </carbo-panel> -->
+            <!-- </carbo-panel> -->
 
+        </div>
+            
     </template>
+    
         
     <script src="../../bower_components/q/q.js"></script>
     <script src="data-panel.bundle.js"></script>
