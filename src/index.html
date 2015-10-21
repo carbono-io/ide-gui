@@ -38,9 +38,7 @@
       paper-tab {
           --paper-tab-ink: #E0E0E3;
       }
-
-
-
+      
   </style>
 </head>
 
@@ -183,18 +181,19 @@
             >
             </carbo-components-tree-panel>
 
-<!--             <carbo-components-palette
-              id="components-palette"
+            <!--  <carbo-components-palette
+            id="components-palette"
 
-              components-registry="{{ services.componentsRegistry }}"
+            components-registry="{{ services.componentsRegistry }}"
 
-              components="{{ paletteComponents }}"
-              code-machine="{{ services.codeMachine }}"
-              canvas="{{ components.canvas }}"
+            components="{{ paletteComponents }}"
+            code-machine="{{ services.codeMachine }}"
+            canvas="{{ components.canvas }}"
 
-              focused-element-data="{{ focusedElementData }}"
+            focused-element-data="{{ focusedElementData }}"
             ></carbo-components-palette>
- -->
+            -->
+
           </iron-pages>
 
           <div id="edition-panel" body-section="right">
@@ -252,7 +251,7 @@
                 data-section="data"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
-
+                                
                 i18n-service="{{ services.i18nService }}"
               >
               </carbo-data-panel>

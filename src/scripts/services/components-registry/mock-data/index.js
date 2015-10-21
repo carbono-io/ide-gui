@@ -63,16 +63,16 @@ registry.push({
 
 
 // TÍTULO 2
-//registry.push({
-//    title: "Título 2",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false
-//    },
-//    html: '<h2>Insira o conteúdo do seu título 2</h2>',
-//    icon: "text-format",
-//    img: "../../../img/icons/components/list-21.svg",
-//});
+registry.push({
+    title: "Título 2",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<h2>Insira o conteúdo do seu título 2</h2>',
+    icon: "text-format",
+    img: "../../../img/icons/components/list-21.svg",
+});
 
 
 // CARBO-FORM
@@ -83,43 +83,43 @@ registry.push(require('./components/paper-input'));
 
 
 // CARBO-GALERIA
-//registry.push({
-//    title: "Galeria",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false
-//    },
-//    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
-////    icon: "view-stream",
-//    icon: "view-module",
-//    img: "../../../img/icons/components/list-21.svg",
-//    components: [
-//        {
-//            name: 'paper-card',
-//            repository: 'PolymerElements/paper-card'
-//        }
-//    ]
-//});
+registry.push({
+    title: "Galeria",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
+//    icon: "view-stream",
+    icon: "view-module",
+    img: "../../../img/icons/components/list-21.svg",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
 
 
 // CARBO-CAROUSEL
-//registry.push({
-//    title: "Carousel",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false,
-//    },
-//    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
-////    icon: "view-carousel",
-//    icon: "view-module",
-//    img: "../../../img/icons/components/list-21.svg",
-//    components: [
-//        {
-//            name: 'paper-card',
-//            repository: 'PolymerElements/paper-card'
-//        }
-//    ]
-//});
+registry.push({
+    title: "Carousel",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false,
+    },
+    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-carousel",
+    icon: "view-module",
+    img: "../../../img/icons/components/list-21.svg",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
 
 // CARBO-TABELA
 registry.push({
@@ -167,22 +167,22 @@ registry.push({
 });
 
 // CARBO-GRID
-//registry.push({
-//    title: "Grid",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false,
-//    },
-//    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
-//    icon: "view-module",
-//    img: "../../../img/icons/components/list-21.svg",
-//    components: [
-//        {
-//            name: 'paper-card',
-//            repository: 'PolymerElements/paper-card'
-//        }
-//    ]
-//});
+registry.push({
+    title: "Grid",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false,
+    },
+    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
+    icon: "view-module",
+    img: "../../../img/icons/components/list-21.svg",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
 
 // CARBO-SUBMIT-BUTTON
 registry.push({
