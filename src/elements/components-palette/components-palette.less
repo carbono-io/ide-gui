@@ -45,9 +45,15 @@ paper-input-container {
         height: 10 * @base-size;
 
         &:hover , &.mousehover{
-            background-color: @mediumgrey;
+            background-color: @lightgrey;
             cursor: pointer;
             transition: background-color ease 0.3s;
+            color:@dark-blue;
+
+            iron-icon {
+            color:@dark-blue;
+
+            }
 
             &>.component-preview-on-hover {
                 visibility: visible;
