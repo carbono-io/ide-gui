@@ -46,7 +46,7 @@ exports.htmlDir = [
 // js files that require browserifying
 // don't put trailing.js
 exports.browserifyEntries = [
-    SRC_DIR + '/index',
+    SRC_DIR + '/index.js',
 ].concat(_retrieveElementsJSPath());
 
 /**
