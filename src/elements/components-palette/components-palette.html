@@ -21,10 +21,7 @@
     <template>
 
         <carbo-panel-box
-            title="Biblioteca de componentes"
-            icon="add"
-            menu="{{ boxmenuitem }}"
-        >
+            icon="command:library">
         
             <div id="wrapper" state$="{{ state }}">
 
@@ -53,8 +50,8 @@
                             items="{{ components }}"
                             filter="matchesSearch"
                         >
-                            <div class="component" id="{{computeUniqueId(index)}}"
-                                on-mouseover="handleComponentMouseOver" 
+                            <div class="component" id="{{ computeUniqueId( 'component-' , index) }}"
+                                on-mouseenter="handleComponentMouseEnter" 
                                 on-mouseout="hidePreview"
                                 on-click="handleComponentClick"
                             >
@@ -63,20 +60,28 @@
 
                                 </div>
                                 <div class="component-label">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>
-                                <paper-tooltip 
-                                    hidden$="{{!item.preview}}" 
-                                    id="previewTooltip"
-                                    for="{{ computeUniqueId(index) }}" 
+                                
+                            </div>
+                            <paper-tooltip 
+                                    if="{{!item.preview}}" 
+                                    id="{{ computeUniqueId( 'tooltip-for-component-' , index) }}"
+                                    for="{{ computeUniqueId( 'component-' , index) }}" 
                                     position="right"
-                                    fit-to-visible-bounds
                                     class="preview has-shadow-2" 
                                 >
                                     <div class="component-preview-container ">
-                                        <div class="title">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>    
+                                        <div class="component-id">
+                                            <div class="title">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>
+                                            <div class="tag">{{ getTranslatedValue(item, i18nService.language, 'tag') }}</div>
+                                        </div>
+
+                                        <div class="description">{{ getTranslatedValue(item, i18nService.language, 'description') }}</div>
+
                                         <div class="preview-screen"><img src="{{item.preview}}"></div>
+                                        <div class="page-description">Tela 1 de 2: listagem de informações</div>
                                     </div>
-                                </paper-tooltip>
-                            </div>
+                            </paper-tooltip>    
+                            
                             
  
                         </template>
@@ -100,14 +105,18 @@
                     </div>
                 </div> -->
 
+<!-- PAT COMENTOU ISSO PARA COLOCAR NO INDEX
                 <div id="loading">
                     <paper-spinner alt="Loading form" active></paper-spinner>
                     <p>Carregando</p>
                 </div>
+-->
 
+<!-- VERIFICAR SE ISSO CONTINUA AQUI POR ALGUM MOTIVO
                 <div id="error">
                     <p>erro!!!!! ;(</p>
                 </div>
+-->
 
             </div>
             <!-- wrapper end -->

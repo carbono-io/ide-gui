@@ -75,8 +75,8 @@ Polymer({
      * Make a uniqueId to handle hover for paper tooltip 
      * @param  {index} index of element in dom-repeat 
      */
-    computeUniqueId: function(index){
-        return ("component" + index);
+    computeUniqueId: function( id , index){
+        return (id + index);
     },
 
 
@@ -92,9 +92,17 @@ Polymer({
             .then(function happiness() {
                 // now everything is finished
                 canvas.deactivateLoading();
-                canvas.reload();
+                 
+                canvas.reload().then(function(){
+                    setTimeout(function(){
+                        window.toggleLoadingComponent(false); 
+                    },1000);
+                });
                 // stop loading
-                this.toggleLoading(false);
+//                this.toggleLoading(false);
+               
+
+
             }.bind(this))
 
             // handle failures together for now
@@ -103,7 +111,9 @@ Polymer({
                 canvas.reload();
                 canvas.deactivateLoading();
 
-                this.toggleLoading(false);
+//                this.toggleLoading(false);
+                window.toggleLoadingComponent(false);
+
 
                 // TODO: remove this
                 // this was done only for user-testing purposes
@@ -117,7 +127,9 @@ Polymer({
             }.bind(this))
             .done();
 
-        this.toggleLoading(true);
+//        this.toggleLoading(true);
+        window.toggleLoadingComponent(true);
+
         this.toggleError(false);
 
         canvas.activateLoading();
@@ -127,9 +139,13 @@ Polymer({
      * Toggles loading status
      * @param  {Boolean} loading 
      */
-    toggleLoading: function (loading) {
-        Polymer.Base.toggleClass('loading', loading, this.$.wrapper);
-    },
+
+// PAT COMENTOU ISSO PARA COLOCAR NO INDEX:
+
+//    toggleLoading: function (loading) {
+//        Polymer.Base.toggleClass('loading', loading, this.$.wrapper);
+//        Polymer.Base.toggleClass('');
+//    },
 
     /**
      * Toggles error status
@@ -139,16 +155,29 @@ Polymer({
         Polymer.Base.toggleClass('error', error, this.$.wrapper);
     },
 
-    handleComponentMouseOver: function(event) {
+    handleComponentMouseEnter: function(event) {
         //find the tooltip and image inside component 
-        var tooltip = event.currentTarget.querySelector(".preview");
+
+        var targetId = event.currentTarget.id;
+        var tooltip = event.currentTarget.parentElement.querySelector("#tooltip-for-"+event.currentTarget.id);
         var image = tooltip.querySelector("img");
-        
+
+        var doit = (parseInt(image.height) / 2) > (window.innerHeight - event.target.offsetTop);
+        console.log("doit", doit);
         //wait for image to load
         _.delay(function(){
-            if(tooltip.style.top === "auto"){
+            if(doit){
+
+                var top = ((tooltip.offsetHeight - window.innerHeight )>0) ? 
+                          (tooltip.offsetHeight - window.innerHeight ):
+                          (tooltip.offsetHeight - window.innerHeight )*-1;
+
                 //make the bottom of tooltip to be half of image size to allwas show up.
-                tooltip.style.bottom = (parseInt(image.height) / 2) + "px" ;
+                var newStyle = tooltip.attributes.style.value.split(';')[0]+";"+
+                                "top:"+(top - 50)+"px;";
+                console.log(newStyle);
+                tooltip.setAttribute("style", newStyle);
+               
             }
          }, 200); 
 

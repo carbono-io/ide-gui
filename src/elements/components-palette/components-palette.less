@@ -39,7 +39,7 @@ paper-input-container {
         width: 10 * @base-size;
         height: 10 * @base-size;
 
-        &:hover{
+        &:hover , &.mousehover{
             background-color: @mediumgrey;
             cursor: pointer;
             transition: background-color ease 0.3s;
@@ -67,45 +67,45 @@ paper-input-container {
 }
 
 /**
- * States
+ * States PATRICIA COMENTOU ISSO PARA COLOCAR NO INDEX.LESS
  */
-#loading, #error {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-
-    visibility: hidden;
-
-    position: absolute;
-
-    top: 200px;
-    left: 40%;
-    z-index: 5000000;
-}
-
-#wrapper.loading {
-    #loading {
-        visibility: visible;
-    }
-}
-
-#wrapper.error {
-    #error {
-        visibility: visible;
-        background-color: red;
-        color: white;
-    }
-}
-
-#wrapper[state="hidden"] {
-    display: none;
-}
-
-#wrapper[state="shown"] {
-    display: block;
-}
+//#loading, #error {
+//    display: flex;
+//    flex-direction: column;
+//    justify-content: center;
+//    align-items: center;
+//    align-content: center;
+//
+//    visibility: hidden;
+//
+//    position: absolute;
+//
+//    top: 200px;
+//    left: 40%;
+//    z-index: 5000000;
+//}
+//
+//#wrapper.loading {
+//    #loading {
+//        visibility: visible;
+//    }
+//}
+//
+//#wrapper.error {
+//    #error {
+//        visibility: visible;
+//        background-color: red;
+//        color: white;
+//    }
+//}
+//
+//#wrapper[state="hidden"] {
+//    display: none;
+//}
+//
+//#wrapper[state="shown"] {
+//    display: block;
+//}
 /**
  * States
  */
@@ -165,13 +165,26 @@ paper-tooltip{
         padding-bottom: 1.5 * @base-size;
         padding-left: 1.5 * @base-size;
         text-align: left;
-        max-height: @phone-proportion * @phone-frame-width/ 1.5;
-        .title {
+        // max-height: @phone-proportion * @phone-frame-width/ 1.5;
+
+        .component-id {
+            display: flex;
+            flex-direction: column;
+            border-bottom: solid 1px @mediumgrey;
+            padding-bottom: @base-size;
             font-size: @font-size-4;
-            margin-bottom: @base-size;
+
+        }
+
+        .title {
             max-height: 60px;
-            width: @phone-frame-width/ 1.5;
+//            width: @phone-frame-width/ 1.5;
             color:@text-color;
+            margin-bottom: @base-size;
+        }
+        .tag {
+            color: @secondarytext-color;
+
         }
 
         .preview-screen {
@@ -185,6 +198,12 @@ paper-tooltip{
                 box-sizing: border-box; //consider border on height size
             }
           
+        }
+
+        .description, .page-description {
+            font-size: @font-size-3;
+            line-height: normal;
+            margin: @base-size 0;
         }
 
     

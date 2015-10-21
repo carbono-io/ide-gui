@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/iron-icons/hardware-icons.html">
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="canvas-bar-styles.html">
+<link rel="import" href="../icons/actions.html">
 
 <dom-module id="carbo-canvas-bar">
     <style include="canvas-bar-styles"></style>
@@ -24,14 +25,22 @@
                 </span>
 -->
 
-                <div class="icon-container">
-                    <img src="../../img/icons/add_page.svg">
+                <div class="icon-container" 
+                     id="add-new-screen" 
+                     on-click="addNewPage"
+                     on-mouseenter="changeTooltipMargin">
+                    <img src="../../img/icons/add_page-05.svg">
+
                 </div>
+                <paper-tooltip animation-config="{{animation}}" offset="0" for="add-new-screen" position="top" animation-delay="0">
+                    <div class="tool-tip-area has-shadow-2">Adicionar nova tela</div>
+                </paper-tooltip>    
 
             </div>
 
-            <div id="right">
-                <!-- selector start -->
+
+            <div id="center">
+            <!-- selector start -->
                 <iron-selector
                     class="interaction-mode-toggle"
                     attr-for-selected="ide-mode"
@@ -41,12 +50,13 @@
                         id="icon-create"
                         class="icon-container"
                         ide-mode="graphical-edition"
+                        on-mouseenter="changeTooltipMargin"
                     >
                         <iron-icon
                             icon="create"
                             alt="Graphic edition mode (Shift+G)"
                         ></iron-icon>
-                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top"> 
+                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top" animation-delay="0">
                             <div
                                 class="tool-tip-area has-shadow-2"
                                 data-i18n="editionModeTooltip"
@@ -55,29 +65,32 @@
                     </div>
 
                     <div
-                         id="icon-code"  
+                         id="icon-code"
                          class="icon-container"
                          ide-mode="code-edition"
+                         on-mouseenter="changeTooltipMargin"
                     >
                         <iron-icon
                             icon="code"
                             alt="Code edition mode (Shift+C)"
                         ></iron-icon>
-                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top"> 
+
+                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top" animation-delay="0">
                             <div class="tool-tip-area has-shadow-2">Modo Código (Shift+C)</div>
                         </paper-tooltip>
                     </div>
 
                     <div
-                        id="icon-nav"   
+                        id="icon-nav"
                         class="icon-container dropdown"
                         ide-mode="navigation"
+                        on-mouseenter="changeTooltipMargin"
                     >
                         <iron-icon
                             icon="visibility"
                             alt="Navigation mode (Shift+N)"
                         ></iron-icon>
-                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top"> 
+                        <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top" animation-delay="0">
                             <div class="tool-tip-area has-shadow-2">Modo Navegação (Shift+N)</div>
                         </paper-tooltip>
                         <iron-icon icon="arrow-drop-down"></iron-icon>
@@ -85,11 +98,75 @@
 
                 </iron-selector>
                 <!-- selector end -->
+            </div>
+
+
+            <div id="right">
+                <!-- selector start -->
+<!--
+                <iron-selector
+                    class="interaction-mode-toggle"
+                    attr-for-selected="ide-mode"
+                    selected="{{ ideMode }}"
+                >
+                    <div
+                        id="icon-create"
+                        class="icon-container"
+                        ide-mode="graphical-edition"
+                        on-mouseenter="changeTooltipMargin"
+                    >
+                        <iron-icon
+                            icon="create"
+                            alt="Graphic edition mode (Shift+G)"
+                        ></iron-icon>
+                        
+                    </div>
+                    <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top" animation-delay="0">
+                        <div
+                            class="tool-tip-area has-shadow-2"
+                            data-i18n="editionModeTooltip"
+                        >Modo Edição (Shift+G)</div>
+                    </paper-tooltip>    
+                    <div
+                         id="icon-code"  
+                         class="icon-container"
+                         ide-mode="code-edition"
+                         on-mouseenter="changeTooltipMargin"
+                    >
+                        <iron-icon
+                            icon="code"
+                            alt="Code edition mode (Shift+C)"
+                        ></iron-icon>
+                        
+                    </div>
+                    <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top" animation-delay="0">
+                        <div class="tool-tip-area has-shadow-2">Modo Código (Shift+C)</div>
+                    </paper-tooltip>
+                    <div
+                        id="icon-nav"   
+                        class="icon-container dropdown"
+                        ide-mode="navigation"
+                        on-mouseenter="changeTooltipMargin"
+                    >
+                        <iron-icon
+                            icon="visibility"
+                            alt="Navigation mode (Shift+N)"
+                        ></iron-icon>
+                        <iron-icon icon="arrow-drop-down"></iron-icon>
+                    </div>
+                    <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top" animation-delay="0">
+                            <div class="tool-tip-area has-shadow-2">Modo Navegação (Shift+N)</div>
+                    </paper-tooltip>
+                        
+
+                </iron-selector>
+-->
+                <!-- selector end -->
                 
 <!--
-                <svg height="40" width="17">
+                <svg height="48" width="17">
 
-                    <line x1="8" y1="6" x2="8" y2="34" style="stroke:#D2D2D2; stroke-width:1"/>
+                    <line x1="8" y1="0" x2="8" y2="48" style="stroke:#e0e0e0; stroke-width:1"/>
 
                 </svg>
 -->
@@ -99,11 +176,18 @@
                     <iron-icon icon="arrow-drop-down"></iron-icon>
                 </div>
  -->
-                <div id="canvas-panel-toggle" class="icon-container" on-tap="toggleCanvasPanel">
-                    <img src="../../img/icons/components_tree-06.svg">
+                <div id="canvas-panel-toggle" class="icon-container" 
+                     on-tap="toggleCanvasPanel"
+                     on-mouseenter="changeTooltipMargin">
+                    <img src="../../img/icons/components_tree-04.svg">
                 </div>
+                <paper-tooltip animation-config="{{animation}}" offset="0" for="canvas-panel-toggle" position="top" animation-delay="0">
+                    <div class="tool-tip-area has-shadow-2">Ver mapa do projeto</div>
+                </paper-tooltip>
 
             </div>
+
+
         </div>
     </template>
 

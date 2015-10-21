@@ -28,8 +28,6 @@ Polymer({
 
             event.stopPropagation();
 
-
-
             var closed = this.get('component.closed') || false;
 
             if (closed) {
@@ -60,10 +58,12 @@ Polymer({
     },
 
     properties: {
+
         component: {
             type: Object,
             notify: true,
         },
+
         closed: Boolean,
 
         mouseoverHandler: {
@@ -91,6 +91,7 @@ Polymer({
         Polymer.Base.toggleClass('closed', isClosed, this.$$('#component'));
     },
 
+
     /**
      * Handles mouseover
      * @param  {[type]} e [description]
@@ -105,6 +106,7 @@ Polymer({
     },
 
     _handleClick: function (e) {
+
         e.stopPropagation();
 
         this.fire('component-click', {

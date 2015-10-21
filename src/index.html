@@ -30,7 +30,15 @@
   <link rel="import" href="elements.html">
 
   <style is="custom-style">
-    --paper-tabs-selection-bar-color: blue;
+
+      paper-tabs {
+          --paper-tabs-selection-bar-color: #3f3f3f;
+      }
+
+      paper-tab {
+          --paper-tab-ink: #E0E0E3;
+      }
+      
   </style>
 </head>
 
@@ -52,12 +60,14 @@
 
       <!-- loading -->
       <div data-route="loading" id="loading">
-        <div>loading ...</div>
+          <div>loading ...</div>
       </div>
       <!-- loading -->
 
       <!-- project -->
       <div data-route="project" id="container">
+
+        <div id="ide-blocker"></div>
 
         <carbo-header
           sections="{{appsections}}"
@@ -127,15 +137,22 @@
             <carbo-canvas-bar
               ide-mode="{{ ideMode }}"
               body="{{ components.body }}"
-
+              code-machine="{{ services.codeMachine }}"
+              canvas="{{ components.canvas }}"
               i18n-service="{{ services.i18nService }}"
             >
             </carbo-canvas-bar>
 
           </div>
 
-          <div body-section="canvas">
-            <carbo-canvas
+          <div body-section="canvas" id="canvaswrapper">
+
+              <div id="loading">
+                  <div class="spinner"></div>
+                  <p>inserindo componente...</p>
+              </div>
+
+              <carbo-canvas
               id="canvas"
               project-url="{{ project.projectUrl }}"
               components="{{ components }}"
@@ -164,25 +181,26 @@
             >
             </carbo-components-tree-panel>
 
-<!--             <carbo-components-palette
-              id="components-palette"
+            <!--  <carbo-components-palette
+            id="components-palette"
 
-              components-registry="{{ services.componentsRegistry }}"
+            components-registry="{{ services.componentsRegistry }}"
 
-              components="{{ paletteComponents }}"
-              code-machine="{{ services.codeMachine }}"
-              canvas="{{ components.canvas }}"
+            components="{{ paletteComponents }}"
+            code-machine="{{ services.codeMachine }}"
+            canvas="{{ components.canvas }}"
 
-              focused-element-data="{{ focusedElementData }}"
+            focused-element-data="{{ focusedElementData }}"
             ></carbo-components-palette>
- -->
+            -->
+
           </iron-pages>
 
           <div id="edition-panel" body-section="right">
 
             <paper-tabs
-              attr-for-selected="data-section"
-              selected="{{ section }}"
+                attr-for-selected="data-section"
+                selected="{{ section }}"
             >
                 <paper-tab
                   link
@@ -233,7 +251,7 @@
                 data-section="data"
                 code-machine="{{ services.codeMachine }}"
                 canvas="{{ components.canvas }}"
-
+                                
                 i18n-service="{{ services.i18nService }}"
               >
               </carbo-data-panel>

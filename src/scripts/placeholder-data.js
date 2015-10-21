@@ -269,8 +269,8 @@ module.exports = function (carbo) {
     var entity1 = {
 
         properties: [
-            { name: 'Campo 1' },
-            { name: 'Campo 2' },
+            { name: 'Text-input 1', type: 'text'},
+            { name: 'Text-input 2', type: 'text' },
             // { name: 'Campo 3' },
             // { name: 'Campo 4' },
             // { name: 'Campo 5' }

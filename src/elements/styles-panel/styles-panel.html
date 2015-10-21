@@ -8,17 +8,20 @@
     <style include="styles-panel-styles"></style>
 
     <template>
-        <template is="dom-repeat" items="{{ editableRules }}" as="rule">
-            <carbo-styles-list
-                selector-string="{{ rule.selectorString }}"
-                selectors="{{ rule.selectors }}"
-                declarations="{{ rule.declarations }}"
-            ></carbo-styles-list>
-        </template>
+        
+        <div class="content-container">
+            <template is="dom-repeat" items="{{ editableRules }}" as="rule">
+                <carbo-styles-list
+                    selector-string="{{ rule.selectorString }}"
+                    selectors="{{ rule.selectors }}"
+                    declarations="{{ rule.declarations }}"
+                ></carbo-styles-list>
+            </template>
 
-        <div id="commands-container">
-<!--            <button on-tap="writeCSS" id="cancel-command">Cancel</button>-->
-            <button on-tap="writeCSS" id="save-command">Save</button>
+            <div id="commands-container">
+    <!--            <button on-tap="writeCSS" id="cancel-command">Cancel</button>-->
+                <button on-tap="writeCSS" id="save-command">Save</button>
+            </div>
         </div>
 
     </template>

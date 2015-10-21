@@ -11,9 +11,9 @@ module.exports = function (gulp, $) {
     gulp.task('iconsets', function () {
 
         var iconSets = {
-            'actions': 'src/assets/icons/actions/**/*',
-            'components': 'src/assets/icons/components/**/*',
-            'minicomponents': 'src/assets/icons/minicomponents/**/*'
+            'command': 'src/assets/icons/command/**/*',
+            'component': 'src/assets/icons/components/**/*',
+            'minicomponent': 'src/assets/icons/minicomponents/**/*'
         };
 
         var streams = [];

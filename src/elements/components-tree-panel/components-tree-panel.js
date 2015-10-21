@@ -6,6 +6,11 @@ function convertToComponentTree(data, parent) {
     // name
     tree.name = data.tagName;
 
+    //if page inside iron-pages set page atributte
+    if(data.tagName === 'PAGE' && parent.name == "IRON-PAGES"){
+        tree.page = data.attributes.page;
+    }
+
     tree.selected = false;
     tree.closed = true;
 
@@ -33,7 +38,9 @@ function convertToComponentTree(data, parent) {
         }
     });
 
+    
     return tree;
+
 }
 
 function searchTree(element, uuid){
@@ -112,12 +119,23 @@ Polymer({
 
     ready: function () {
 
-
         this.boxmenuitemComponents = {
             items: [
                 { icon: 'add', title: 'nova tela' },
             ]
         };
+        
+    },
+
+    update: function () {
+
+        if (this.activeElementTreeData) {
+
+            // parse the tree
+            var tree = convertToComponentTree(this.activeElementTreeData);
+
+            this.set('tree', tree);
+        }
     },
 
     _handleActiveElementTreeDataChange: function (activeElementTreeData, oldActiveElementTreeDataChange) {
@@ -169,6 +187,15 @@ Polymer({
         // console.log(hoveredElementData);
     },
 
+    
+    _changeProjectPage: function(page){
+        var canvas = this.get('canvas');
+        canvas.executeInspectorOperation('changeRoute' , [page]);
+    },
+
+    
+
+
     listeners: {
         'component-mouseover': 'handleComponentMouseover',
         'component-click': 'handleComponentClick'
@@ -191,6 +218,12 @@ Polymer({
         if (!canvas) {
             throw new Error('No canvas for <components-tree-panel>');
         }
+
+        if(typeof e.detail.componentData.page !== 'undefined'){
+            this._changeProjectPage(e.detail.componentData.page);
+        }
+
+
 
         // set focus
         canvas.focusElementForSelector(e.detail.componentData.uuidCSSSelector);

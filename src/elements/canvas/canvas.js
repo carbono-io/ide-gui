@@ -65,6 +65,10 @@ Polymer({
         'canvas.mouseleave': 'handleCanvasMouseleave',
     },
 
+    domChange:function(){
+        this.updateTreeData();
+    },
+
     activateLoading: function () {
         this.executeInspectorOperation('activateLoading');
     },
@@ -73,7 +77,13 @@ Polymer({
         this.executeInspectorOperation('deactivateLoading');
     },
 
-    
+    updateTreeData: function () {
+        this.getElementTreeData('body')
+        .then(function (bodyTreeData) {
+            this.set('activeElementTreeData', bodyTreeData);
+        }.bind(this))
+        .done();
+    },
     /**
      * Whenever the mouse enters the canva element area,
      * let the overlay handle keydown events for shortcut detection.
@@ -108,22 +118,35 @@ Polymer({
      */
     reload: function () {
 
+        // var defer = Q.defer();
+
+        // var iframe = this.$.iframe;
+
+        // iframe.src = iframe.src;
+
+        // // event handler for inspector ready
+        // function handleReloadFinished() {
+        //     // resolve deferred object
+        //     defer.resolve();
+
+        //     // remove listener
+        //     this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+        // }
+
+        // this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+
+        // // return a promise for whenever the reloading is done
+        // return defer.promise;
+
         var defer = Q.defer();
 
-        var iframe = this.$.iframe;
-
-        iframe.src = iframe.src;
-
-        // event handler for inspector ready
-        function handleReloadFinished() {
+        this.executeInspectorOperation('reloadFrame').then(function(){
+            
+            this.updateTreeData();
             // resolve deferred object
             defer.resolve();
 
-            // remove listener
-            this.removeEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
-        }
-
-        this.addEventListener(CONSTANTS.INSPECTOR_READY_EVENT, handleReloadFinished);
+        }.bind(this));
 
         // return a promise for whenever the reloading is done
         return defer.promise;

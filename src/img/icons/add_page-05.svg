@@ -3,17 +3,9 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="22px" height="22px" viewBox="0 0 22 22" enable-background="new 0 0 22 22" xml:space="preserve">
-<g>
-	<g>
-		<path d="M11,11.377c-4.971,0-9-1.453-9-3.244v2.791c0,1.792,4.029,3.244,9,3.244s9-1.452,9-3.244V8.133
-			C20,9.924,15.971,11.377,11,11.377z"/>
-	</g>
-	<g>
-		<path d="M11,16.209c-4.971,0-9-1.453-9-3.245v2.792C2,17.547,6.029,19,11,19s9-1.453,9-3.244v-2.792
-			C20,14.756,15.971,16.209,11,16.209z"/>
-	</g>
-	<g>
-		<ellipse cx="11" cy="6.245" rx="9" ry="3.245"/>
-	</g>
-</g>
+<path fill="#6C6C6C" d="M8,2v6H2V7v12h7c-0.163-0.316,0.1-1.651,0-2H4v-7h6V4h4v4c0.165-0.016,1.331-0.025,1.5-0.025
+	S15.835,7.984,16,8V2H8z"/>
+<rect x="1.578" y="4.432" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -2.2499 5.4316)" fill="#6C6C6C" width="7.706" height="2"/>
+<rect x="14" y="11" fill="#6C6C6C" width="2" height="8"/>
+<rect x="11" y="14" fill="#6C6C6C" width="8" height="2"/>
 </svg>

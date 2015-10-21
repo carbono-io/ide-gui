@@ -13,6 +13,7 @@ var I18N = require('../../scripts/global-behaviors/i18n');
 Polymer({
     is: "carbo-canvas-bar",
     properties: {
+
         ideMode: {
             type: String,
             value: CONSTANTS.ideModes.graphicalEdition,
@@ -27,12 +28,61 @@ Polymer({
             type: Object,
             notify: true,
             observer: '_handleBodyChange',
-        }
+        },
+
+        canvas: {
+            type: Object,
+            notify: true,
+        },
+
+        codeMachine: {
+            type: Object,
+            notify: true,
+        },
     },
 
     behaviors: [
         I18N,
     ],
+
+    addNewPage: function(){
+
+        var page        = _.uniqueId("PAGE_"), 
+            param       = _.uniqueId("PAGE_PARAM_"),
+            canvas      = this.get('canvas'),
+            codeMachine = this.get('codeMachine');
+
+
+        window.toggleLoadingComponent(true);
+        canvas.getElementsData("iron-pages")
+            .then(function(ironPagesData){
+            
+                var parentUuid    = ironPagesData[0].attributes['carbono-uuid'],
+                    html          ='<page page="'+page+'" param="'+param+'" page-title="Nova Página" ></page>';
+                   
+                return codeMachine.insertElement(
+                       {uuid:ironPagesData[0].attributes['carbono-uuid']} , {html:html});
+
+            })
+            .then(function(res){
+                
+                canvas.reload().then(function(){
+                    
+                    canvas.executeInspectorOperation('changeRoute' , [page]);
+
+                    setTimeout(function() {
+                        window.toggleLoadingComponent(false);
+                    }, 500);
+
+                }.bind(this));
+
+
+                canvas.executeInspectorOperation('changeRoute' , [page]);
+        
+
+            });
+
+    },
 
     animation:{ 
         "entry": [{"name": "fade-in-animation", "timing": {"delay": 0}}]
@@ -42,6 +92,15 @@ Polymer({
         '_handleCanvasPanelStateChange(canvasPanelState)'
     ],
 
+
+    
+    changeTooltipMargin: function(event){
+        var tooltip = event.target.parentElement.querySelector("[for='"+event.target.id+"']");
+        var btn = event.target;
+        setTimeout(function(){
+            tooltip.setAttribute("style", "left:"+btn.offsetLeft+"px;top:-32px;");
+        }, 1);
+    },
     /**
      * Function to be executed once the component is ready
      *

@@ -10,6 +10,8 @@ var registry = [];
 // PARAGRAFO
 registry.push({
     title: "Parágrafo",
+    tag: "<carbo-p>",
+    description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas.",
     context: {
         show: ['PAGE', 'BODY', 'FORM'],
         insertion: false
@@ -20,10 +22,14 @@ registry.push({
     img: "../../../img/icons/components/paragraph-41.svg",
     i18n: {
         en: {
-            title: 'Paragraph'
+            title: 'Paragraph',
+            description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas."
+
         },
         pt: {
-            title: 'Parágrafo'
+            title: 'Parágrafo',
+            description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas."
+
         }
     }
 });
@@ -42,7 +48,9 @@ registry.push({
 
 // TÍTULO 1
 registry.push({
-    title: "Título 1",
+    title: "Título principal",
+    tag: "<carbo-h1>",
+    description:"Título de maior nível hierárquico da aplicação.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false
@@ -55,16 +63,16 @@ registry.push({
 
 
 // TÍTULO 2
-//registry.push({
-//    title: "Título 2",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false
-//    },
-//    html: '<h2>Insira o conteúdo do seu título 2</h2>',
-//    icon: "text-format",
-//    img: "../../../img/icons/components/list-21.svg",
-//});
+registry.push({
+    title: "Título 2",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<h2>Insira o conteúdo do seu título 2</h2>',
+    icon: "text-format",
+    img: "../../../img/icons/components/list-21.svg",
+});
 
 
 // CARBO-FORM
@@ -75,47 +83,49 @@ registry.push(require('./components/paper-input'));
 
 
 // CARBO-GALERIA
-//registry.push({
-//    title: "Galeria",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false
-//    },
-//    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
-////    icon: "view-stream",
-//    icon: "view-module",
-//    img: "../../../img/icons/components/list-21.svg",
-//    components: [
-//        {
-//            name: 'paper-card',
-//            repository: 'PolymerElements/paper-card'
-//        }
-//    ]
-//});
+registry.push({
+    title: "Galeria",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false
+    },
+    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
+//    icon: "view-stream",
+    icon: "view-module",
+    img: "../../../img/icons/components/list-21.svg",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
 
 
 // CARBO-CAROUSEL
-//registry.push({
-//    title: "Carousel",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false,
-//    },
-//    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
-////    icon: "view-carousel",
-//    icon: "view-module",
-//    img: "../../../img/icons/components/list-21.svg",
-//    components: [
-//        {
-//            name: 'paper-card',
-//            repository: 'PolymerElements/paper-card'
-//        }
-//    ]
-//});
+registry.push({
+    title: "Carousel",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false,
+    },
+    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+//    icon: "view-carousel",
+    icon: "view-module",
+    img: "../../../img/icons/components/list-21.svg",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
 
 // CARBO-TABELA
 registry.push({
     title: "Tabela",
+    tag: "<carbo-table>",
+    description:"Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false,
@@ -137,6 +147,8 @@ registry.push({
 // CARBO-LISTA
 registry.push({
     title: "Lista",
+    tag: "<carbo-list>",
+    description:"Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false,
@@ -155,22 +167,22 @@ registry.push({
 });
 
 // CARBO-GRID
-//registry.push({
-//    title: "Grid",
-//    context: {
-//        show: ['PAGE', 'BODY'],
-//        insertion: false,
-//    },
-//    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
-//    icon: "view-module",
-//    img: "../../../img/icons/components/list-21.svg",
-//    components: [
-//        {
-//            name: 'paper-card',
-//            repository: 'PolymerElements/paper-card'
-//        }
-//    ]
-//});
+registry.push({
+    title: "Grid",
+    context: {
+        show: ['PAGE', 'BODY'],
+        insertion: false,
+    },
+    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
+    icon: "view-module",
+    img: "../../../img/icons/components/list-21.svg",
+    components: [
+        {
+            name: 'paper-card',
+            repository: 'PolymerElements/paper-card'
+        }
+    ]
+});
 
 // CARBO-SUBMIT-BUTTON
 registry.push({
@@ -276,7 +288,7 @@ registry.push({
     
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
     icon: "text-format",
-    html: '<div class="title">Title</div>',
+    html: '<div class="title">{{pageTitle}}</div>',
 });
 
 // PAPER-ICON-BUTTON
