@@ -10,38 +10,49 @@ module.exports = function (gulp, $) {
     // generate-iconset
     gulp.task('iconsets', function () {
 
-        var iconSets = {
-            'command-18': {
-                iconSize: 18,
-                src: 'src/assets/icons/command-18/**/*',
+        // the directory in which the source svg files of the icons are
+        var iconsDir = 'src/assets/icons';
+
+        // description of each of the iconsets
+        var iconsetDescriptions = [
+            {
+                name: 'command',
+                sizes: [18],
             },
-            'component-48': {
-                iconSize: 48,
-                src: 'src/assets/icons/component-48/**/*',
+            {
+                name: 'component',
+                sizes: [48],
             },
-            'minicomponent-18': {
-                iconSize: 18,
-                src: 'src/assets/icons/minicomponent-18/**/*',
+            {
+                name: 'minicomponent',
+                sizes: [18]
             }
-        };
+        ];
 
-        var streams = [];
+        // Array that contains all the streams that generate the iconsets
+        var iconsetGenerationStreams = [];
 
-        _.each(iconSets, function (setDescription, setName) {
-            var stream = gulp.src(setDescription.src)
-                .pipe(polymerIconset({
-                    iconsetName: setName,
-                    iconSize: setDescription.size,
-                    iconId: function (file) {
-                        return path.basename(file.path, '.svg');
-                    },
-                    ironIconsetSvgPath: '../../bower_components/iron-iconset-svg/iron-iconset-svg.html'
-                }))
-                .pipe(gulp.dest('src/elements/icons'));
+        iconsetDescriptions.forEach(function (description) {
 
-            streams.push(stream);
+            description.sizes.forEach(function (size) {
+                var iconsetName = description.name + '-' + size;
+                var iconsetSrc  = path.join(iconsDir, iconsetName, '**/*');
+
+                var stream = gulp.src(iconsetSrc)
+                    .pipe(polymerIconset({
+                        iconsetName: iconsetName,
+                        iconSize: size,
+                        iconId: function (file) {
+                            return path.basename(file.path, '.svg');
+                        },
+                        ironIconsetSvgPath: '../../bower_components/iron-iconset-svg/iron-iconset-svg.html'
+                    }))
+                    .pipe(gulp.dest('src/elements/icons'));
+
+                iconsetGenerationStreams.push(stream);
+            });
         });
 
-        return mergeStream(streams);
+        return mergeStream(iconsetGenerationStreams);
     });
 };
