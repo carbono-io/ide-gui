@@ -103,7 +103,7 @@ var HIGHLIGHTERS = [
     {
         id: FOCUS_ID,
         surfaceStyle: {
-            border: '2px solid #00FF00'
+            border: '2px solid #00dcff'
         }
     }
 ];
