@@ -97,12 +97,14 @@ var HIGHLIGHTERS = [
     {
         id: HOVER_ID,
         surfaceStyle: {
+            labelColor:'#FF00FF',
             border: '2px dashed #FF00FF',
         }
     },
     {
         id: FOCUS_ID,
         surfaceStyle: {
+            labelColor:'#00dcff',
             border: '2px solid #00dcff'
         }
     }
