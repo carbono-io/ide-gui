@@ -10,6 +10,9 @@
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 
+<link rel="import" href="../../elements/icons/component-48.html">
+<link rel="import" href="../../elements/icons/command-18.html">
+
 <link rel="import" href="header-styles.html">
 
 <dom-module id="carbo-header">
@@ -34,6 +37,7 @@
 
                 <div id="header-center">
 <!--                    <content select="nav"></content>-->
+<!--
                     <iron-selector
                         class="interaction-mode-toggle"
                         attr-for-selected="ide-mode"
@@ -46,8 +50,9 @@
                             on-mouseenter="changeTooltipMargin"
                         >
                             <iron-icon
-                                icon="create"
+                                icon="component-48:menu-65"
                                 alt="Graphic edition mode (Shift+G)"
+                                class="mode"
                             ></iron-icon>
                             <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top" animation-delay="0">
                                 <div
@@ -64,8 +69,9 @@
                              on-mouseenter="changeTooltipMargin"
                         >
                             <iron-icon
-                                icon="code"
+                                icon="component-48:menu-66"
                                 alt="Code edition mode (Shift+C)"
+                                class="mode"
                             ></iron-icon>
 
                             <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top" animation-delay="0">
@@ -80,16 +86,18 @@
                             on-mouseenter="changeTooltipMargin"
                         >
                             <iron-icon
-                                icon="visibility"
+                                icon="component-48:menu-67"
                                 alt="Navigation mode (Shift+N)"
+                                class="mode"
                             ></iron-icon>
                             <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top" animation-delay="0">
                                 <div class="tool-tip-area has-shadow-2">Modo Navegação (Shift+N)</div>
                             </paper-tooltip>
-                            <iron-icon icon="arrow-drop-down"></iron-icon>
+                            <iron-icon icon="arrow-drop-down" class="arrow"></iron-icon>
                         </div>
 
                     </iron-selector>
+-->
 
                 </div>
 

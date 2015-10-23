@@ -54,6 +54,7 @@
                 padding-right: 16px;
                 height: @header-height;
                 width: @header-height;
+
             }
 
             #header-left-section {
@@ -84,6 +85,11 @@
 
             }
 
+            .mode {
+                width: 6*@base-size;
+                height: 6*@base-size;
+            }
+
         }
 
 
@@ -101,18 +107,6 @@
                 color: @inactive-header-icon-color;
             }
 
-            &.iron-selected, &.active {
-
-                background-color: @canvas-header-selected;
-                border-bottom: 2px solid @dark-blue;
-                cursor: pointer;
-
-                iron-icon {
-                    color: @active-header-icon-color;
-                }
-
-
-            }
 
             &:hover {
                 background-color: @canvas-header-selected;
@@ -121,6 +115,19 @@
                 iron-icon {
                     color: #fff;
                 }
+
+            }
+
+            &.iron-selected, &.active {
+
+                background-color: @canvas-header-selected;
+                border-bottom: 2px solid @dark-blue;
+                cursor: pointer;
+
+                iron-icon {
+                    color: @dark-blue;
+                }
+
 
             }
 
