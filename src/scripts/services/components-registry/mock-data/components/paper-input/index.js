@@ -19,7 +19,7 @@ exports.postInsertion = {
     focus: 'paper-input',
 };
 
-exports.icon = "text-format";
+exports.icon = "component-48:inputtext";
 
 var template = _.template(fs.readFileSync(__dirname + '/template.html', 'utf-8'));
 
