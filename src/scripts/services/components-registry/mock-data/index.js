@@ -56,20 +56,20 @@ registry.push({
     },
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
     html: '<h1>Insira o conteúdo do seu título 1</h1>',
-    icon: "component-48:outputtitle1",
+    icon: "component-48:outputtitle",
 });
 
-
-// TÍTULO 2
-registry.push({
-    title: "Título 2",
-    context: {
-        show: ['PAGE', 'BODY'],
-        insertion: false
-    },
-    html: '<h2>Insira o conteúdo do seu título 2</h2>',
-    icon: "component-48:outputtitle2",
-});
+//
+//// TÍTULO 2
+//registry.push({
+//    title: "Título 2",
+//    context: {
+//        show: ['PAGE', 'BODY'],
+//        insertion: false
+//    },
+//    html: '<h2>Insira o conteúdo do seu título 2</h2>',
+//    icon: "component-48:outputtitle2",
+//});
 
 
 // CARBO-FORM

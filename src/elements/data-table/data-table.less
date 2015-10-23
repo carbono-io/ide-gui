@@ -51,6 +51,8 @@
 
 #entity {
 
+    border-bottom: solid 1px @border-bottom;
+
     .associate-button-area {
         display: none;
     }
@@ -100,6 +102,7 @@
             &#add-column {
                 text-align: center;
                 cursor: pointer;
+                color: @dark-blue;
             }
 
 
@@ -122,6 +125,7 @@
                 width: 100%;
                 border: none;
                 overflow: scroll;
+                color:@darkdark-blue;
 
             }
             
@@ -141,7 +145,7 @@
     }
     
     #entity-action-message {
-        padding: @base-size @base-size 0 @base-size;
+        padding: 0 @base-size 0 @base-size;
         font-size: @font-size-2;
         box-sizing: border-box;
 //        border-top: 1px solid @mediumgrey;
@@ -159,10 +163,11 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        height: 5 * @base-size;
+        height: 6 * @base-size;
         padding-left: @base-size;
         padding-right: @base-size;
-        font-size: 13px;
+        font-size: @font-size-5;
+//        color: @darkdark-blue;
 
         #arrow {
             width: 16px;
@@ -173,10 +178,9 @@
         }
 
         &:hover, &.active {
-            background-color: @item-panel-background-hover;
             transition: all ease 0.3s;
             cursor: pointer;
-            border-bottom: 1px solid white;
+
         }
     }
     
@@ -194,6 +198,7 @@
         visibility: visible;
         transition: visibility 0s linear 0s;
         border: 1px solid @border-bottom;
+        background-color:@table-background;
     }
 
     tbody {
@@ -225,6 +230,7 @@
                 iron-icon {
                     width: 18px;
                     height: 18px;
+                    color:@dark-blue;
                 }
                 
                 iron-autogrow-textarea {
