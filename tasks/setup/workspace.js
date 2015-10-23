@@ -22,7 +22,7 @@ module.exports = function (gulp, $) {
         $.util.log('cache:workspace removing files');
         del.sync(path.join(cachePath, 'workspace'));
 
-        var repo   = 'git@bitbucket.org:carbonoio/base-polymer-project.git';
+        var repo   = 'git@github.com:carbono-io/base-polymer-project.git';
         var knownOptions = {
             string: 'branch',
             default: { branch: 'develop' }

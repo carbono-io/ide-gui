@@ -20,6 +20,7 @@ of this project.
 Do not use `!` when selecting a version, you do not want to update the 
 `bower.json` file that way.
 
+
 ## gulp
 For help with gulp tasks, run `gulp` or `gulp help` in the terminal inside the project.
 A short description of tasks available will be shown.

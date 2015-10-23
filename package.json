@@ -50,7 +50,7 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
-    "carbono-json-messages": "git+https://bitbucket.org/carbonoio/carbono-json-messages.git",
+    "carbono-json-messages": "git+https://github.com/carbono-io/carbono-json-messages.git",
     "cheerio": "^0.19.0",
     "lodash": "^3.10.1",
     "node-uuid": "^1.4.3",
