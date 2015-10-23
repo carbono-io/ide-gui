@@ -14,36 +14,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-//
-//    span {
-//        margin-right: @base-size;
-//    }
-//
-//    iron-icon {
-//        color: @inactive-bar-icon-color;
-//
-//        &:hover {
-//            color: @active-bar-icon-color;
-//            cursor: pointer;
-//        }
-//    }
-//
-    .icon-container {
-        height: 48px;
-        width: 48px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
 
-
-        &:hover {
-
-            background-color: @canvas-bar-selected;
-            cursor: pointer;
+    #add-new-screen {
+        iron-icon {
+            color: @active-bar-icon-color;
         }
-
     }
+
 }
 
 #right, #center {
@@ -78,17 +55,18 @@
 }
 
 
+
 // this is generic enough for the whole bar, thus
 // it should not be inside any parent selector
 .icon-container {
-    height: 48px;
-    width: 48px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-//            box-sizing: border-box;
-//            border-bottom: solid @border-bottom 1px;
+        height: 48px;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0 @base-size*2;
+
     iron-icon {
 
         color: @inactive-bar-icon-color;
@@ -111,6 +89,21 @@
 
     
 }
+
+.icon-group {
+    padding: 0 @base-size/2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .icon-container {
+        padding: 0 @base-size;
+        width: auto;
+    }
+}
+
+
 paper-tooltip {
         --paper-tooltip-background:transparent;
         --paper-tooltip-opacity:1;

@@ -18,8 +18,7 @@ registry.push({
     },
     preview:'http://3.bp.blogspot.com/-nruVnUeHaDA/VQHyLOsVMII/AAAAAAAANPI/6JOOHH_NZqE/s1600/Pok%C3%A9mon%2B2.gif',
     html: '<p>Insira o conteúdo do seu parágrafo</p>',
-    icon: "text-format",
-    img: "../../../img/icons/components/paragraph-41.svg",
+    icon: "component-48:outputparagraph",
     i18n: {
         en: {
             title: 'Paragraph',
@@ -57,22 +56,20 @@ registry.push({
     },
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
     html: '<h1>Insira o conteúdo do seu título 1</h1>',
-    icon: "text-format",
-    img: "../../../img/icons/components/title-38.svg",
+    icon: "component-48:outputtitle",
 });
 
-
-// TÍTULO 2
-registry.push({
-    title: "Título 2",
-    context: {
-        show: ['PAGE', 'BODY'],
-        insertion: false
-    },
-    html: '<h2>Insira o conteúdo do seu título 2</h2>',
-    icon: "text-format",
-    img: "../../../img/icons/components/list-21.svg",
-});
+//
+//// TÍTULO 2
+//registry.push({
+//    title: "Título 2",
+//    context: {
+//        show: ['PAGE', 'BODY'],
+//        insertion: false
+//    },
+//    html: '<h2>Insira o conteúdo do seu título 2</h2>',
+//    icon: "component-48:outputtitle2",
+//});
 
 
 // CARBO-FORM
@@ -82,44 +79,43 @@ registry.push(require('./components/carbo-form'));
 registry.push(require('./components/paper-input'));
 
 
-// CARBO-GALERIA
-registry.push({
-    title: "Galeria",
-    context: {
-        show: ['PAGE', 'BODY'],
-        insertion: false
-    },
-    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
-//    icon: "view-stream",
-    icon: "view-module",
-    img: "../../../img/icons/components/list-21.svg",
-    components: [
-        {
-            name: 'paper-card',
-            repository: 'PolymerElements/paper-card'
-        }
-    ]
-});
+//// CARBO-GALERY
+//registry.push({
+//    title: "Lista",
+//    context: {
+//        show: ['PAGE', 'BODY'],
+//        insertion: false
+//    },
+//    html: '<div><paper-card heading="Conteúdo 1" class="pink"> <div class="card-content"> Conteúdo do item 1 </div></paper-card> <paper-card heading="Conteúdo 2" class="pink"> <div class="card-content"> Conteúdo do item 2 </div></paper-card></div>',
+////    icon: "view-stream",
+//    icon: "component-48:galery",
+//    components: [
+//        {
+//            name: 'paper-card',
+//            repository: 'PolymerElements/paper-card'
+//        }
+//    ]
+//});
 
 
-// CARBO-CAROUSEL
-registry.push({
-    title: "Carousel",
-    context: {
-        show: ['PAGE', 'BODY'],
-        insertion: false,
-    },
-    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
-//    icon: "view-carousel",
-    icon: "view-module",
-    img: "../../../img/icons/components/list-21.svg",
-    components: [
-        {
-            name: 'paper-card',
-            repository: 'PolymerElements/paper-card'
-        }
-    ]
-});
+//// CARBO-CAROUSEL
+//registry.push({
+//    title: "Carousel",
+//    context: {
+//        show: ['PAGE', 'BODY'],
+//        insertion: false,
+//    },
+//    html: '<paper-card heading="Carousel" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card> <paper-card heading="Actions can be stacked" class="pink"> <div class="card-content"> Lorem ipsum dolor sit amet, nec ad conceptam interpretaris, mea ne solet repudiandae. Laudem nostrud ei vim. Sapientem consequuntur usu ad, vel etiam philosophia ex, ad quidam option quo. Sed sale integre pericula ei, rebum adipiscing ius ea. </div></paper-card>',
+////    icon: "view-carousel",
+//    icon: "view-module",
+//    img: "../../../img/icons/components/list-21.svg",
+//    components: [
+//        {
+//            name: 'paper-card',
+//            repository: 'PolymerElements/paper-card'
+//        }
+//    ]
+//});
 
 // CARBO-TABELA
 registry.push({
@@ -134,8 +130,7 @@ registry.push({
 
     html: '<table> <tr> <th>Campo 1</th> <th>Campo 2</th> </tr> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr><tr>    <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr></table>',
 //    icon: "view-quilt",
-    icon: "view-module",
-    img: "../../../img/icons/components/table-29.svg",
+    icon: "component-48:table",
     components: [
         {
             name: 'paper-card',
@@ -156,8 +151,7 @@ registry.push({
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
     html: '<ul> <li>Conteúdo 1</li> <li>Conteúdo 2</li> <li>Conteúdo 3</li> </ul>',
 //    icon: "view-headline",
-    icon: "view-module",
-    img: "../../../img/icons/components/list-21.svg",
+    icon: "component-48:list",
     components: [
         {
             name: 'paper-card',
@@ -166,23 +160,23 @@ registry.push({
     ]
 });
 
-// CARBO-GRID
-registry.push({
-    title: "Grid",
-    context: {
-        show: ['PAGE', 'BODY'],
-        insertion: false,
-    },
-    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
-    icon: "view-module",
-    img: "../../../img/icons/components/list-21.svg",
-    components: [
-        {
-            name: 'paper-card',
-            repository: 'PolymerElements/paper-card'
-        }
-    ]
-});
+//// CARBO-GRID
+//registry.push({
+//    title: "Grid",
+//    context: {
+//        show: ['PAGE', 'BODY'],
+//        insertion: false,
+//    },
+//    html: '<table class="grid"> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> <td>Conteúdo 3</tr> <tr> <td> Conteúdo 4</td> <td>Conteúdo 5</td> <td>Conteúdo 6</td> </tr></table>',
+//    icon: "view-module",
+//    img: "../../../img/icons/components/list-21.svg",
+//    components: [
+//        {
+//            name: 'paper-card',
+//            repository: 'PolymerElements/paper-card'
+//        }
+//    ]
+//});
 
 // CARBO-SUBMIT-BUTTON
 registry.push({
@@ -199,8 +193,7 @@ registry.push({
     },
     
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
-    icon: "image:crop-7-5",
-    img: "../../../img/icons/components/list-21.svg",
+    icon: "component-48:buttonsubmit",
     html: '<paper-button class="purple" raised action="submit" >Enviar</paper-button>',
     components: [
         {
@@ -222,7 +215,7 @@ registry.push({
     },
     
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
-    icon: "image:crop-7-5",
+    icon: "component-48:buttoncancel",
     html: '<paper-button class="red" raised action="submit" >Cancelar</paper-button>',
     components: [
         {
@@ -245,8 +238,7 @@ registry.push({
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
     
     html: '<carbo-geo-test></carbo-geo-test>',
-    icon: 'communication:location-on',
-    img: "../../../img/icons/components/list-21.svg",
+    icon: "component-48:inputgps",
     components: [
         {
             name: 'carbo-geo',
@@ -266,7 +258,7 @@ registry.push({
     },
     
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
-    icon: "menu",
+    icon: "component-48:sidemenu",
     html: '<paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>',
     components: [
         {
@@ -302,7 +294,7 @@ registry.push({
     },
     
     preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
-    icon: "more-vert",
+    icon: "component-48:moreoptions",
     html: '<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>',
     components: [
         {

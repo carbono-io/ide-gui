@@ -2,13 +2,19 @@
 @import '../../bower_components/lesshat/build/lesshat.less';
 @import '../../less/polymer-resets/paper-tabs.less';
 
+.context {
+    font-size: @font-size-4;
+    margin-left: @base-size*2;
+    corlor: @dark-blue;
+}
+
 paper-input-container {
-    padding: 16px 0;
+    padding: 2*@base-size 0;
     font-size: 12px;
     font-family: "source sans pro";
     --default-primary-color: @text-color;
     --primary-text-color: @text-color;
-    --secondary-text-color: @placeholder-text-color;
+    --secondary-text-color: @secondarytext-color;
     --paper-input-container-input {
         line-height: 32px;
         font-size: 12px;
@@ -16,6 +22,8 @@ paper-input-container {
     --paper-input-container-label {
         font-size: 12px;
     }
+
+
 }
 
 .tab {
@@ -40,9 +48,15 @@ paper-input-container {
         height: 10 * @base-size;
 
         &:hover , &.mousehover{
-            background-color: @mediumgrey;
+            background-color: white;
             cursor: pointer;
             transition: background-color ease 0.3s;
+            color:@dark-blue;
+
+            iron-icon {
+            color:@dark-blue;
+
+            }
 
             &>.component-preview-on-hover {
                 visibility: visible;
@@ -53,9 +67,10 @@ paper-input-container {
 
 
         iron-icon {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             margin-bottom: @base-size;
+            color:@active-bar-icon-color;
         }
 
 

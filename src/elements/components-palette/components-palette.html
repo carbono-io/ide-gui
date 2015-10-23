@@ -9,6 +9,11 @@
 <link rel="import" href="../../bower_components/iron-icons/av-icons.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 
+<link rel="import" href="../../elements/icons/component-48.html">
+<link rel="import" href="../../elements/icons/command-18.html">
+
+
+
 <!-- internal -->
 <link rel="import" href="../panel-box/panel-box.html">
 
@@ -21,8 +26,9 @@
     <template>
 
         <carbo-panel-box
-            icon="command:library">
-        
+            icon="command-18:library"
+            carbotitle="biblioteca de componentes">
+
             <div id="wrapper" state$="{{ state }}">
 
 <!--
@@ -31,6 +37,7 @@
                     <paper-tab>Avançados</paper-tab>
                 </paper-tabs>
 -->
+
 
                 <paper-input-container no-label-float="true">
                     <div prefix id="prefix">
@@ -42,6 +49,9 @@
                     >Buscar elementos</label>
                     <input is="iron-input" id="input">
                 </paper-input-container>
+
+<!--                <p class="context">Inserir em body</p>-->
+
 
                 <div id="tabs-content">
                     <div class="tab">
@@ -56,7 +66,9 @@
                                 on-click="handleComponentClick"
                             >
                                 <div class="component-icon">
-<!--                                    <iron-icon icon="{{ item.icon }}"></iron-icon>-->                                      <img src="{{ item.img }}">
+                                    <iron-icon icon="{{ item.icon }}"></iron-icon>
+<!--                                    <iron-icon icon="component-48:outputparagraph"></iron-icon>                              -->
+
 
                                 </div>
                                 <div class="component-label">{{ getTranslatedValue(item, i18nService.language, 'title') }}</div>

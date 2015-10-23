@@ -8,18 +8,19 @@
 
 
 #component-class {
+
+
     #component-class-id {
 
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        height: 5 * @base-size;
+        height: 6 * @base-size;
         padding-left: @base-size;
-        background-color: @item-panel-background-hover;
-//        font-weight: 800;
-        border-bottom: 1px solid @border-bottom;
+        font-size: @font-size-5;
         cursor: pointer;
+//        color: @darkdark-blue;
 
         #arrow {
             width: 16px;
@@ -45,7 +46,7 @@
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
-            border-bottom: 1px solid @border-bottom-light;
+            border-bottom: 1px solid @border-bottom;
 
             &:last-child {
                 border-bottom: none;
@@ -94,6 +95,7 @@
                         }
                     }
 
+
                     input[type="color"] {
                         width:32px;
                         height:24px;
@@ -104,39 +106,18 @@
                         outline: none;
                     }
 
-                    input[type="text"] {
-                        width:40px;
-                        height: 24px;
-                        outline: none;
-                        box-sizing: border-box;
-                        padding: 0;
-                        background-color: #f8f8f8;
-                        border: none;
-                        padding-left: @base-size/2;
-                        box-sizing: border-box;
-
-
-                        &:focus, &:hover {
-                            border: 1px solid @border-bottom;
-                        }
-
-                    }
-
-                    input[type="range"] {
-                        width:100px;
-                        outline: none;
-                    }
 
                     select {
                         //colocar icones
                         height: 24px;
                         width: 104px;
-                        border: none;
+                        border: 1px solid @border-bottom;
                         cursor: pointer;
                         outline: none;
                         border-radius: 0;
-                        background-color: #f8f8f8;
-//                        appearance:none;
+                        background-color: white;
+                        appearance: none;
+                        -webkit-appearance: none;
 
                     }
 

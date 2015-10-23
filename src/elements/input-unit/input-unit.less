@@ -12,11 +12,11 @@
       //colocar icones
       height: 24px;
       width: 104px;
-      border: none;
+      border: 1px solid @border-bottom;
       cursor: pointer;
       outline: none;
       border-radius: 0;
-      background-color: #fff;
+      background-color: white;
       transition: width 0.3s ease;
       // appearance:none;
 
@@ -30,6 +30,7 @@
   }
   input[type="number"]:disabled{
     display: none;
+
   }
   input[type="number"] {
       width:40px;
@@ -37,8 +38,8 @@
       outline: none;
       box-sizing: border-box;
       padding: 0;
-      background-color: #fff;
-      border: none;
+      background-color: white;
+      border: 1px solid @border-bottom;
       padding-left: @base-size/2;
       box-sizing: border-box;
 
@@ -46,5 +47,10 @@
           border: 1px solid @border-bottom;
       }
   }
+
+    input[type="color"] {
+        border: 1px solid @border-bottom;
+
+    }
 
 }

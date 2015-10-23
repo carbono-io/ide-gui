@@ -22,7 +22,7 @@
             <div id="carbo-header">
                 <div id="header-left">
                     <img id="img-logo" src="../../img/logo-carbono.svg" alt="carbono logo">
-                    <span data-i18n="app">App</span><span>{{ app }}</span></span>
+                    <span data-i18n="app">Nome do aplicativo</span><span>{{ app }}</span></span>
 <!--
                     <iron-icon icon="hardware:keyboard-arrow-right"></iron-icon>
                     <div id="header-left-section" on-click="togglePanel">
@@ -33,7 +33,64 @@
                 </div>
 
                 <div id="header-center">
-                    <content select="nav"></content>
+<!--                    <content select="nav"></content>-->
+                    <iron-selector
+                        class="interaction-mode-toggle"
+                        attr-for-selected="ide-mode"
+                        selected="{{ ideMode }}"
+                    >
+                        <div
+                            id="icon-create"
+                            class="icon-container"
+                            ide-mode="graphical-edition"
+                            on-mouseenter="changeTooltipMargin"
+                        >
+                            <iron-icon
+                                icon="create"
+                                alt="Graphic edition mode (Shift+G)"
+                            ></iron-icon>
+                            <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-create" position="top" animation-delay="0">
+                                <div
+                                    class="tool-tip-area has-shadow-2"
+                                    data-i18n="editionModeTooltip"
+                                >Modo Edição (Shift+G)</div>
+                            </paper-tooltip>
+                        </div>
+
+                        <div
+                             id="icon-code"
+                             class="icon-container"
+                             ide-mode="code-edition"
+                             on-mouseenter="changeTooltipMargin"
+                        >
+                            <iron-icon
+                                icon="code"
+                                alt="Code edition mode (Shift+C)"
+                            ></iron-icon>
+
+                            <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-code" position="top" animation-delay="0">
+                                <div class="tool-tip-area has-shadow-2">Modo Código (Shift+C)</div>
+                            </paper-tooltip>
+                        </div>
+
+                        <div
+                            id="icon-nav"
+                            class="icon-container dropdown"
+                            ide-mode="navigation"
+                            on-mouseenter="changeTooltipMargin"
+                        >
+                            <iron-icon
+                                icon="visibility"
+                                alt="Navigation mode (Shift+N)"
+                            ></iron-icon>
+                            <paper-tooltip animation-config="{{animation}}" offset="0" for="icon-nav" position="top" animation-delay="0">
+                                <div class="tool-tip-area has-shadow-2">Modo Navegação (Shift+N)</div>
+                            </paper-tooltip>
+                            <iron-icon icon="arrow-drop-down"></iron-icon>
+                        </div>
+
+                    </iron-selector>
+
                 </div>
 
                 <div id="header-right">

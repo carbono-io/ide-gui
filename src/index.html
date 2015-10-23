@@ -32,7 +32,7 @@
   <style is="custom-style">
 
       paper-tabs {
-          --paper-tabs-selection-bar-color: #3f3f3f;
+          --paper-tabs-selection-bar-color: #0094fc;
       }
 
       paper-tab {
@@ -73,7 +73,7 @@
           sections="{{appsections}}"
           i18n-service="{{ services.i18nService }}"
         >
-          <!-- <nav>
+           <nav>
             <iron-selector
               id="header-nav"
               attr-for-selected="section"
@@ -97,7 +97,7 @@
                 <span>PUBLICAÇÃO</span>
               </a>
             </iron-selector>
-          </nav> -->
+          </nav>
 
         </carbo-header>
         <carbo-body
@@ -205,19 +205,19 @@
                 <paper-tab
                   link
                   data-section="configurations">
-                  <img src="img/icons/configure_cinza-c.svg">
+                  <iron-icon icon="command-18:configurations"></iron-icon>
                   <span data-i18n="configurations">Configurações</span>
                 </paper-tab>
                 <paper-tab
                   link
                   data-section="style">
-                  <img src="img/icons/style-16.svg">
+                  <iron-icon icon="command-18:style"></iron-icon>
                   <span data-i18n="styles">Estilos</span>
                 </paper-tab>
                 <paper-tab
                   link
                   data-section="data">
-                  <img src="img/icons/data_cinza-c.svg">
+                  <iron-icon icon="command-18:data"></iron-icon>
                   <span data-i18n="data">Dados</span>
                 </paper-tab>
             </paper-tabs>
