@@ -23,7 +23,7 @@ module.exports = function (gulp, $) {
         $.util.log('cache:code-machine deleting old cache');
         del.sync(path.join(cachePath, 'code-machine'));
 
-        var repo   = 'git@bitbucket.org:carbonoio/code-machine.git';
+        var repo   = 'git@github.com:carbono-io/code-machine.git';
         var knownOptions = {
             string: 'branch',
             default: { branch: 'develop' }
