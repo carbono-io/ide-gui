@@ -99,6 +99,7 @@ var HIGHLIGHTERS = [
         surfaceStyle: {
             labelColor:'#FF00FF',
             border: '2px dashed #FF00FF',
+            labelColor:'#FF00FF'
         }
     },
     {
