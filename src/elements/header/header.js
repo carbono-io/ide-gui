@@ -9,6 +9,15 @@ Polymer({
         I18NBehavior,
     ],
 
+    propieties:{
+
+        canvas: {
+            type: Object,
+            notify: true,
+            observer: '_handleCanvasChange',
+        }
+
+    },
     /**
      * Toggles the header panel open or close
      * Called both on the overlay click and the title click
