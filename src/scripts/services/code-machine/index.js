@@ -250,7 +250,7 @@ CodeMachineClient.prototype.getCSSJSON = function (stylesheetPath) {
 
     var defer = Q.defer();
 
-    var url = this.config.location + '/resources/marked/' + stylesheetPath + '.json';
+    var url = this.config.location + '/marked/' + stylesheetPath + '.json';
 
     request
         .get(url)

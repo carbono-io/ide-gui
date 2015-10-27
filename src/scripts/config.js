@@ -13,8 +13,7 @@ var Q = require('q');
 var _configs = {
     // development environment
     env: 'development',
-
-    codeMachineLocation: 'http://localhost:8000',
+    codeMachineWsLocation: 'http://hom.api.carbono.io/mc/cm-ws/57929f8d-f173-4197-a670-84563dbb856e/',
     componentsRegistryLocation: 'http://localhost:8001',
     userServiceLocation: 'http://localhost:8002',
     projectsServiceLocation: 'http://localhost:8003'

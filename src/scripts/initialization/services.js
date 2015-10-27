@@ -26,7 +26,7 @@ module.exports = function (carbo, config) {
     });
 
     var codeMachineService = new CodeMachineClient({
-        location: config.codeMachineLocation,
+        location: config.codeMachineWsLocation,
         userService: userService
     });
 

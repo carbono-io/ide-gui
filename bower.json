@@ -54,6 +54,7 @@
     "paper-item": "PolymerElements/paper-item#~1.0.5"
   },
   "resolutions": {
-    "iron-form": "~1.0.9"
+    "iron-form": "~1.0.9",
+    "polymer": "^1.1.0"
   }
 }
