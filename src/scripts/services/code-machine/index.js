@@ -35,9 +35,7 @@ function CodeMachineClient(config) {
 
     this.config = config;
 
-    this.socket = socketIo(config.location, {
-        path: config.socketIoPath || '/'
-    });
+    this.socket = socketIo('hom.api.carbono.io' + config.socketIoPath);
 
     // Instantiate socket request manager
     this.socketRequestManager = new SocketRequestManager(this.socket);
@@ -123,10 +121,16 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
 
     socket.emit('command:insertElement', request.toJSON());
 
-    socket.once('command:insertElement/success', function (res) {
+    socket.on('status:success', function (res) {
 
         // Parse if is a string, else use the value
         res = typeof res === 'string' ? JSON.parse(res) : res;
+
+        console.log('insert success', res.id, request.id);
+
+        if (res.id !== request.id) {
+            return;
+        }
 
         // Retrieve corresponding defer
         var requestData = _requestsStore[res.id];
@@ -138,8 +142,14 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
         }
     });
 
-    socket.once('command:insertElement/error', function (res) {
+    socket.on('status:failure', function (res) {
 
+        res = typeof res === 'string' ? JSON.parse(res) : res;
+        console.log('insert failure', res.id, request.id);
+
+        if (res.id !== request.id) {
+            return;
+        }
         /**
          * TODO: on error, original request id is not being returned.
          */
