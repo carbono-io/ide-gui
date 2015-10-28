@@ -7,6 +7,7 @@ var aux = require('../auxiliary');
 module.exports = function (gulp, $) {
 
     require('./serve')(gulp, $);
+    require('./proxy')(gulp, $);
     require('./watch')(gulp, $);
 
     /**

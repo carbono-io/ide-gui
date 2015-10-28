@@ -35,7 +35,9 @@ function CodeMachineClient(config) {
 
     this.config = config;
 
-    this.socket = socketIo(config.location);
+    this.socket = socketIo(config.location, {
+        path: config.socketIoPath || '/'
+    });
 
     // Instantiate socket request manager
     this.socketRequestManager = new SocketRequestManager(this.socket);
@@ -250,7 +252,7 @@ CodeMachineClient.prototype.getCSSJSON = function (stylesheetPath) {
 
     var defer = Q.defer();
 
-    var url = this.config.location + '/resources/marked/' + stylesheetPath + '.json';
+    var url = this.resourcesLocation + '/' + stylesheetPath + '.json';
 
     request
         .get(url)
@@ -319,7 +321,10 @@ CodeMachineClient.prototype.removeElement = function (editionPath) {
     });
 
     return defer.promise;
-}
+};
+
+// Define properties
+require('./lib/properties')(CodeMachineClient);
 
 // export the class
 module.exports = CodeMachineClient;

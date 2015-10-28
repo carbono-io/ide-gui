@@ -30,7 +30,7 @@ module.exports = function (gulp, $) {
 
         return gulp.src(stageFiles, { baseDir: config.stageDir })
             // remove debugging (debugger, console.*, alert)
-            .pipe($.if(aux.isJs, $.stripDebug()))
+            // .pipe($.if(aux.isJs, $.stripDebug()))
             .pipe($.size({
                 title: 'build',
                 showFiles: true,
