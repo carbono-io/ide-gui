@@ -69,28 +69,6 @@ module.exports = function (gulp, $) {
     /**
      * Serves the application client
      */
-    gulp.task('serve:hom', 'Serve the source code (for development)', function () {
-
-        var bs = browserSync({
-            ghostMode: false,
-            port: 4000,
-            server: {
-                baseDir: '.',
-            },
-            open: true,
-            // tunnel: true
-        });
-
-        function notifyIsSrcServer() {
-            bs.notify('<b>/src</b>', 3000);
-        }
-
-        // bs.emitter.on('client:connected', notifyIsSrcServer);
-    });
-
-    /**
-     * Serves the application client
-     */
     gulp.task('serve:stage', 'Serve the staging environment', ['serve:code-machine'], function () {
 
         var bs = browserSync({
