@@ -43,7 +43,7 @@ module.exports = function (carbo, config, services, components) {
         // instantiate new code machine client
         var codeMachineService = new CodeMachineClient({
             location: CONFIG.codeMachine.getBaseLocation(projectId),
-            socketIoPath: '/mc/cm/' + projectId,
+            socketIoPath: '/mc/cm-ws/' + projectId + '/',
             userService: services.userService,
         });
 

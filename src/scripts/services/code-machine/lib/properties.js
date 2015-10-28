@@ -29,7 +29,7 @@ module.exports = function (CodeMachineClient) {
      */
     Object.defineProperty(CodeMachineClient.prototype, 'resourcesLocation', {
         get: function () {
-            return this.config.location + '/resources/marked';
+            return this.config.location + '/marked';
         },
 
         set: _setProhibited('resourcesLocation'),
@@ -48,7 +48,7 @@ module.exports = function (CodeMachineClient) {
      */
     Object.defineProperty(CodeMachineClient.prototype, 'cleanResourcesLocation', {
         get: function () {
-            return this.config.location + '/resources/clean';
+            return this.config.location + '/clean';
         },
 
         set: _setProhibited('cleanResourcesLocation'),

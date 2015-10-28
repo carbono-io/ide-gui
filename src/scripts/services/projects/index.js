@@ -15,6 +15,15 @@ var Message = require('carbono-json-messages');
 // array of required configurations for the service
 var REQUIRED_CONFIGS = ['location', 'userService'];
 
+var project = {
+    containerId: '666',
+    host: 'carbonohost',
+    ports: {
+        '8000': '32772'
+    }};
+var urlPrefix = 'http://hom.api.carbono.io/mc/cm/';
+var urlSufix  = '/marked/index.html#home';
+
 //////////
 // Mock //
 //////////
@@ -22,9 +31,18 @@ var REQUIRED_CONFIGS = ['location', 'userService'];
 var mockData = require('./mock-data');
 
 var PROJECT_LOADED = false;
+var MOCKED         = false;
 
-function _loadProjectData(cb) {
-
+function _loadProjectData(_id, cb) {
+    
+    if(!MOCKED){
+        project.projectId = _id; 
+        project.projectUrl = urlPrefix + _id + urlSufix;
+        PROJECT_LOADED = true;
+        cb(project);
+        return;
+    }
+    
     if (PROJECT_LOADED) {
         cb(mockData.project);
     } else {
@@ -87,10 +105,10 @@ ProjectsServiceClient.prototype.read = function (query) {
  * Reads a single entry by id
  * @return {Promise -> POJO} 
  */
-ProjectsServiceClient.prototype.readById = function (id) {
+ProjectsServiceClient.prototype.readById = function (_id) {
     var defer = Q.defer();
 
-    _loadProjectData(defer.resolve);
+    _loadProjectData(_id, defer.resolve);
 
     return defer.promise;
 };
