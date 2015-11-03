@@ -2,7 +2,7 @@
     "styles": "styles",
     "configurations": "configurations",
     "searchElements": "search elements",
-    "editionModeTooltip": "Edition Mode (Shift+G)",
+    "editionModeTooltip": "Toggle graphical mode (Shift+G)",
     "form": "Form",
     "app": "App"
 }
