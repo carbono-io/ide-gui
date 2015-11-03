@@ -15,7 +15,7 @@ function buildFirebaseLocation() {
 }
 
 // title of the component, to be shown at the palette
-exports.title = "Formulário";
+exports.title = "Form";
 
 // context within which the html should be inserted
 exports.context =  {
