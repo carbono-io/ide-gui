@@ -121,7 +121,7 @@ Polymer({
 
         this.boxmenuitemComponents = {
             items: [
-                { icon: 'add', title: 'nova tela' },
+                { icon: 'add', title: 'Add new screen' },
             ]
         };
         
