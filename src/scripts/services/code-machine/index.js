@@ -121,7 +121,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
 
     socket.emit('command:insertElement', request.toJSON());
 
-    socket.on('status:success', function (res) {
+    socket.on('command:insertElement/success', function (res) {
 
         // Parse if is a string, else use the value
         res = typeof res === 'string' ? JSON.parse(res) : res;
@@ -142,7 +142,7 @@ CodeMachineClient.prototype.insertElement = function (path, element) {
         }
     });
 
-    socket.on('status:failure', function (res) {
+    socket.on('command:insertElement/error', function (res) {
 
         res = typeof res === 'string' ? JSON.parse(res) : res;
         console.log('insert failure', res.id, request.id);
