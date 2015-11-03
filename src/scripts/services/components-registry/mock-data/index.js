@@ -11,18 +11,18 @@ var registry = [];
 registry.push({
     title: "Parágrafo",
     tag: "<carbo-p>",
-    description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas.",
+    description: "A paragraph consists of one or more sentences. Can be dynamic or static.",
     context: {
         show: ['PAGE', 'BODY', 'FORM'],
         insertion: false
     },
-    preview:'http://3.bp.blogspot.com/-nruVnUeHaDA/VQHyLOsVMII/AAAAAAAANPI/6JOOHH_NZqE/s1600/Pok%C3%A9mon%2B2.gif',
-    html: '<p>Insira o conteúdo do seu parágrafo</p>',
+    preview:'',
+    html: '<p>Please insert <p> content</p>',
     icon: "component-48:outputparagraph",
     i18n: {
         en: {
             title: 'Paragraph',
-            description:"Parágrafo de texto dinâmico ou estático, contém uma ou mais linhas."
+            description: "A paragraph consists of one or more sentences. Can be dynamic or static."
 
         },
         pt: {
@@ -49,14 +49,26 @@ registry.push({
 registry.push({
     title: "Título principal",
     tag: "<carbo-h1>",
-    description:"Título de maior nível hierárquico da aplicação.",
+    description: "Html h1 title.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false
     },
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
-    html: '<h1>Insira o conteúdo do seu título 1</h1>',
+    preview:'',
+    html: '<h1>Please insert title</h1>',
     icon: "component-48:outputtitle",
+    i18n: {
+        en: {
+            title: 'Title',
+            description: "Html h1 title."
+
+        },
+        pt: {
+            title: 'Título',
+            description: "Título de maior nível hierárquico da aplicação."
+
+        }
+    }
 });
 
 //
@@ -119,18 +131,30 @@ registry.push(require('./components/paper-input'));
 
 // CARBO-TABELA
 registry.push({
-    title: "Tabela",
+    title: "Table",
     tag: "<carbo-table>",
-    description:"Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos.",
+    description: "A list of elements semanticaly grouped. Can be dynamic or static.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
 
-    html: '<table> <tr> <th>Campo 1</th> <th>Campo 2</th> </tr> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr> <tr> <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr><tr>    <td>Conteúdo 1</td> <td>Conteúdo 2</td> </tr></table>',
+    html: '<table> <tr> <th>Field 1</th> <th>Field 2</th> </tr> <tr> <td>Content 1</td> <td>Content 2</td> </tr> <tr> <td>Content 1</td> <td>Content 2</td> </tr><tr>    <td>Content 1</td> <td>Content 2</td> </tr></table>',
 //    icon: "view-quilt",
     icon: "component-48:table",
+    i18n: {
+        en: {
+            title: 'Table',
+            description: "A list of elements semanticaly grouped. Can be dynamic or static."
+
+        },
+        pt: {
+            title: 'Tabela',
+            description: "Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos."
+
+        }
+    },
     components: [
         {
             name: 'paper-card',
@@ -141,17 +165,29 @@ registry.push({
 
 // CARBO-LISTA
 registry.push({
-    title: "Lista",
+    title: "List",
     tag: "<carbo-list>",
-    description:"Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos.",
+    description: "A list of elements from the same nature. Can be dynamic or static.",
     context: {
         show: ['PAGE', 'BODY'],
         insertion: false,
     },
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
-    html: '<ul> <li>Conteúdo 1</li> <li>Conteúdo 2</li> <li>Conteúdo 3</li> </ul>',
+    preview:'',
+    html: '<ul> <li>Content 1</li> <li>Content 2</li> <li>Content 3</li> </ul>',
 //    icon: "view-headline",
     icon: "component-48:list",
+    i18n: {
+        en: {
+            title: 'Table',
+            description: "A list of elements from the same nature. Can be dynamic or static."
+
+        },
+        pt: {
+            title: 'Tabela',
+            description: "Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos."
+
+        }
+    },
     components: [
         {
             name: 'paper-card',
@@ -180,7 +216,7 @@ registry.push({
 
 // CARBO-SUBMIT-BUTTON
 registry.push({
-    title: "Botão de submit",
+    title: "Submit Button",
     context: {
         show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
         insertion: {
@@ -192,9 +228,21 @@ registry.push({
         focus: 'paper-button',
     },
     
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
     icon: "component-48:buttonsubmit",
-    html: '<paper-button class="purple" raised action="submit" >Enviar</paper-button>',
+    i18n: {
+        en: {
+            title: 'Submit Button',
+            description: "A button that submits the form it is inserted to the server."
+
+        },
+        pt: {
+            title: 'Botão Enviar',
+            description: "Botão que envia dados de um formulário ao servidor."
+
+        }
+    },
+    html: '<paper-button class="purple" raised action="submit" >Submit</paper-button>',
     components: [
         {
             name: 'paper-button',
@@ -205,7 +253,7 @@ registry.push({
 
 // CARBO-CANCEL-BUTTON
 registry.push({
-    title: "Botão de cancelar",
+    title: "Cancel Button",
     context: {
         show: ['CARBO-FORM-CONTROL', 'CARBO-FORM'],
         insertion: {
@@ -214,9 +262,21 @@ registry.push({
         }
     },
     
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
     icon: "component-48:buttoncancel",
-    html: '<paper-button class="red" raised action="submit" >Cancelar</paper-button>',
+    i18n: {
+        en: {
+            title: 'Cancel Button',
+            description: "A button that cancels the form it is inserted into."
+
+        },
+        pt: {
+            title: 'Botão Cancelar',
+            description: "Botão que cancela o envio de dados."
+
+        }
+    },
+    html: '<paper-button class="red" raised action="submit" >Cancel</paper-button>',
     components: [
         {
             name: 'paper-button',
@@ -227,7 +287,7 @@ registry.push({
 
 // CARBO-GEO
 registry.push({
-    title: "Input de localização",
+    title: "Geolocalization Input",
     context: {
         show: ['FORM', 'CARBO-FORM'],
         insertion: {
@@ -235,9 +295,21 @@ registry.push({
             'CARBO-FORM': 'form',
         }
     },
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
     
     html: '<carbo-geo-test></carbo-geo-test>',
+    i18n: {
+        en: {
+            title: 'Geolocalization Input',
+            description: "Retrieves geolocalization data."
+
+        },
+        pt: {
+            title: 'Geolocalização',
+            description: ""
+
+        }
+    },
     icon: "component-48:inputgps",
     components: [
         {
@@ -249,7 +321,7 @@ registry.push({
 
 // PAPER-ICON-BUTTON
 registry.push({
-    title: "Botão de menu",
+    title: "Menu Button",
     context: {
         show: ['PAPER-TOOLBAR'],
         insertion: {
@@ -257,8 +329,20 @@ registry.push({
         },
     },
     
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
     icon: "component-48:sidemenu",
+    i18n: {
+        en: {
+            title: 'Menu Button',
+            description: "A button that drops a menu."
+
+        },
+        pt: {
+            title: 'Botão Menu',
+            description: "Botão que exibe menu."
+
+        }
+    },
     html: '<paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>',
     components: [
         {
@@ -270,7 +354,7 @@ registry.push({
 
 // PAPER-ICON-BUTTON
 registry.push({
-    title: "Título",
+    title: "Page Title",
     context: {
         show: ['PAPER-TOOLBAR'],
         insertion: {
@@ -278,14 +362,26 @@ registry.push({
         },
     },
     
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
+    i18n: {
+        en: {
+            title: 'Page Title',
+            description: "Sets the page title."
+
+        },
+        pt: {
+            title: 'Títula da página',
+            description: "Coloca um títula na tela.."
+
+        }
+    },
     icon: "text-format",
     html: '<div class="title">{{pageTitle}}</div>',
 });
 
 // PAPER-ICON-BUTTON
 registry.push({
-    title: "Botão de opções",
+    title: "Options Button",
     context: {
         show: ['PAPER-TOOLBAR'],
         insertion: {
@@ -293,8 +389,20 @@ registry.push({
         },
     },
     
-    preview:'http://38.media.tumblr.com/334c4d276811c9b8d60cf97712c980bc/tumblr_n8m8eljeUN1t8ssqqo1_500.gif',
+    preview:'',
     icon: "component-48:moreoptions",
+    i18n: {
+        en: {
+            title: 'Options Button',
+            description: "A button that slides a side menu."
+
+        },
+        pt: {
+            title: 'Botão Opções',
+            description: "Botão que mostra um menu lateral."
+
+        }
+    },
     html: '<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>',
     components: [
         {
