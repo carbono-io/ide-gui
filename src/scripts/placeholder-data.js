@@ -56,29 +56,29 @@ module.exports = function (carbo) {
 
     var menuComponentsTree = {
         items: [
-            { icon: 'add', title: 'nova tela' },
+            { icon: 'add', title: 'add screen' },
         ]
     };
 
     var menuSettings = {
         items: [
-            { icon: 'code', title: 'editar código' },
+            { icon: 'code', title: 'toggle code' },
         ]
     };
 
     var menuStyle = {
         items: [
-            { icon: 'code', title: 'editar código' },
+            { icon: 'code', title: 'toggle code' },
         ]
     };
 
     var verde = {
-        name: 'Verde',
+        name: 'Green',
         icon: 'verde'
     };
 
     var cinza = {
-        name: 'Cinza',
+        name: 'Gray',
         icon: 'cinza'
     };
 
@@ -92,7 +92,7 @@ module.exports = function (carbo) {
             title: "Header",
             styles: [
                 {
-                    name: "Fundo azul",
+                    name: "Gray background",
                     icon: "cinza"
                 },
                 // {
@@ -118,16 +118,16 @@ module.exports = function (carbo) {
 
     var components = [
         {
-            title: "Formulário cujo nome é bem grande mesmo",
+            title: "Big form name",
             icon: "assignment",
             screens: [
                 {
                     url: "https://placehold.it/200x500",
-                    screensCaption: "tela1"
+                    screensCaption: "screen1"
                 }
             ],
 
-            html: '<carbo-form id="test"> <form is="iron-form" action="/demo/data.json" method="get"> <paper-input name="test0" label="Campo 1" required error-message="Por favor, preencha esse campo" ></paper-input> <paper-input name="test0" label="Campo 2" required error-message="Campo obrigatório" ></paper-input> </form> <div form-control> <div class="form-commands"> <paper-button raised action="reset" >Cancelar</paper-button> <paper-button class="purple" raised action="submit" >Enviar</paper-button> </div></div><div state="invalid"> <paper-toast text="Por favor, corrija os campos inválidos" show="show"> </paper-toast> </div><div state="loading"> <div id="formloading"> <paper-spinner alt="Loading form" active></paper-spinner> <p>Carregando</p></div></div><div state="error"> <paper-toast text="Erro de envio" show="show"> <span raised action="click:submit">Tentar novamente</span> </paper-toast> </div><div state="success"> <paper-toast text="Formulário enviado com sucesso!" show="show"> </paper-toast> </div></carbo-form>',
+            html: '<carbo-form id="test"> <form is="iron-form" action="/demo/data.json" method="get"> <paper-input name="test0" label="Field 1" required error-message="Required field" ></paper-input> <paper-input name="test0" label="Field 2" required error-message="Required field" ></paper-input> </form> <div form-control> <div class="form-commands"> <paper-button raised action="reset" >Cancel</paper-button> <paper-button class="purple" raised action="submit" >Submit</paper-button> </div></div><div state="invalid"> <paper-toast text="Invalid fields" show="show"> </paper-toast> </div><div state="loading"> <div id="formloading"> <paper-spinner alt="Loading form" active></paper-spinner> <p>Carregando</p></div></div><div state="error"> <paper-toast text="Error trying to send, please try again." show="show"> <span raised action="click:submit">Please try againd</span> </paper-toast> </div><div state="success"> <paper-toast text="Done!" show="show"> </paper-toast> </div></carbo-form>',
 
             // Compliant with code machine API
             // html: [
@@ -163,42 +163,42 @@ module.exports = function (carbo) {
             ],
         },
         {
-            title: "Galeria",
+            title: "Gallery",
             icon: "view-agenda",
             screens: [
                 {
                     url: "https://bttgeraes.files.wordpress.com/2006/08/paisage-perdidos.jpg",
-                    screensCaption: "tela1"
+                    screensCaption: "screen1"
                 },
                 {
                     url: "https://images.tcdn.com.br/img/img_prod/210907/havaianas_slim_paisage_fever_1324_1_20140724125126.jpg",
-                    screensCaption: "tela2"
+                    screensCaption: "screen2"
                 },
 
             ],
         },
         {
-            title: "Gráfico 1",
+            title: "Chart 1",
             icon: "editor:insert-chart",
             screens: [
                 {
                     url: "http://artistsinspireartists.com/wp-content/uploads/2011/04/Dance-Photography-14.png",
-                    screensCaption: "tela1"
+                    screensCaption: "screen1"
                 },
                 {
                     url: "http://wikidanca.net/wiki/images/7/7d/Grupo_corpo.jpg",
-                    screensCaption: "tela2"
+                    screensCaption: "screen2"
                 },
 
             ],
         },
         {
-            title: "Gráfico 2",
+            title: "Chart 2",
             icon: "editor:insert-chart",
             screens: [
                 {
                     url: "http://artistsinspireartists.com/wp-content/uploads/2011/04/Dance-Photography-14.png",
-                    screensCaption: "tela1"
+                    screensCaption: "screen1"
                 },
             ],
         },
@@ -206,19 +206,19 @@ module.exports = function (carbo) {
     ];
 
     var section1 = {
-        title: 'SEÇÃO 1',
+        title: 'SECTION 1',
         screens: [
-            { title: 'Tela 1' },
+            { title: 'Screen 1' },
             // { title: 'Tela 2' }
         ]
     };
 
     var section2 = {
-        title: 'SEÇÃO 2',
+        title: 'SECTION 2',
         screens: [
-            { title: 'Tela 1' },
-            { title: 'Tela 2' },
-            { title: 'Tela 3' }
+            { title: 'Screen 1' },
+            { title: 'Screen 2' },
+            { title: 'Screen 3' }
         ]
     };
 
@@ -231,10 +231,10 @@ module.exports = function (carbo) {
     };
 
     var categorie = {
-        name: 'Texto',
+        name: 'Text',
         children: [
-            { name: 'Título 1' },
-            { name: 'Título 2' }
+            { name: 'Title 1' },
+            { name: 'Title 2' }
         ]
 
     };
@@ -242,8 +242,8 @@ module.exports = function (carbo) {
     var item1 = {
 
         properties: [
-            { content: 'bla 1' },
-            { content: 'bla 2' },
+            { content: 'example 1' },
+            { content: 'example 2' },
     //        { content: 'bla 3' },
     //        { content: 'bla 4' },
     //        { content: 'bla 5' },
@@ -253,8 +253,8 @@ module.exports = function (carbo) {
     var item2 = {
 
         properties: [
-            { content: 'bla 1' },
-            { content: 'bla 2' },
+            { content: 'example 1' },
+            { content: 'example 2' },
         ]
     };
 
