@@ -5,7 +5,7 @@ var fs = require('fs');
 var _ = require('lodash');
 var uuid = require('node-uuid');
 
-exports.title = 'Input de texto';
+exports.title = 'Text input';
 
 exports.context = {
     show: ['FORM', 'CARBO-FORM'],
