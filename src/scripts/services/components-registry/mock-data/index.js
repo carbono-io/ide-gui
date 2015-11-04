@@ -178,12 +178,12 @@ registry.push({
     icon: "component-48:list",
     i18n: {
         en: {
-            title: 'Table',
+            title: 'List',
             description: "A list of elements from the same nature. Can be dynamic or static."
 
         },
         pt: {
-            title: 'Tabela',
+            title: 'Lista',
             description: "Listagem de elementos de mesma natureza, que podem ser dinâmicos ou estáticos."
 
         }
